@@ -21,20 +21,20 @@ class ControlMainPaneView extends PaneView
 		element.append(box);
 
 		var box = DisplayBox.create("y");
-		box.addItem("Count").itemContext.append(FontIcon.createSmall("ok"));
+		box.addItem("Count").itemContext.append(FontIcon.createSmall("comment-alt"));
 		element.append(box);
 
 		var box = DisplayBox.create("color");
-		box.addItem("Browser").itemContext.append(FontIcon.createSmall("ok"));
+		box.addItem("Browser").itemContext.append(FontIcon.createSmall("bell"));
 		element.append(box);
 
 		box = DisplayBox.create("...");
-		box.addItem("&nbsp;").itemContext.append(FontIcon.createSmall("ok"));
+		box.addItem("&nbsp;").itemContext.append(FontIcon.createSmall("globe"));
 		element.append(box);
 
 		box = DisplayBox.create("dimensions");
 		box.addItem("Browser").itemContext.append(FontIcon.createSmall("ok"));
-		box.addItem("OS").itemContext.append(FontIcon.createSmall("ok"));
+		box.addItem("OS").itemContext.append(FontIcon.createSmall("undo"));
 		box.addItem("CPM").itemContext.append(FontIcon.createSmall("ok"));
 		box.addItem("TimeStamp").itemContext.append(FontIcon.createSmall("ok"));
 		element.append(box);

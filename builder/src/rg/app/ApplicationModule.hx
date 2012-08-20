@@ -1,8 +1,8 @@
 package rg.app;
 
 import mmvc.impl.Context;
-import rg.app.model.ApplicationSize;
 import rg.core.IModule;
+import rg.app.view.ApplicationSize;
 import rg.app.view.ApplicationView;
 import rg.app.view.ApplicationViewMediator;
 

@@ -2,7 +2,7 @@ package rg.app.view;
 
 import mmvc.impl.Mediator;
 import rg.layout.view.LayoutView;
-import rg.app.model.ApplicationSize;
+import rg.app.view.ApplicationSize;
 
 class ApplicationViewMediator extends Mediator<ApplicationView>
 {

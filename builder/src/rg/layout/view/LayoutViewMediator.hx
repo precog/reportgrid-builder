@@ -3,10 +3,11 @@ package rg.layout.view;
 import jQuery.JQuery;
 using jQuery.plugins.jQuerypp.JQuerypp;
 import mmvc.impl.Mediator;
+import rg.app.view.ApplicationSize;
 
 class LayoutViewMediator extends Mediator<LayoutView>
 {
-	var applicationSize : rg.app.model.ApplicationSize;
+	var applicationSize : ApplicationSize;
 	var controlMainPaneView : ControlMainPaneView;
 	var controlSecondaryPaneView : ControlSecondaryPaneView;
 	var menuPaneView : MenuPaneView;
@@ -14,7 +15,7 @@ class LayoutViewMediator extends Mediator<LayoutView>
 
 	@:keep
 	@inject
-	public function new(size : rg.app.model.ApplicationSize)
+	public function new(size : ApplicationSize)
 	{
 		applicationSize = size;
 		super();

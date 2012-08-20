@@ -3851,13 +3851,13 @@ rg.app.ApplicationModule.__name__ = ["rg","app","ApplicationModule"];
 rg.app.ApplicationModule.__interfaces__ = [rg.core.IModule];
 rg.app.ApplicationModule.prototype = {
 	register: function(context) {
-		context.get_injector().mapValue(rg.app.model.ApplicationSize,new rg.app.model.ApplicationSize());
+		context.get_injector().mapValue(rg.app.view.ApplicationSize,new rg.app.view.ApplicationSize());
 		context.get_mediatorMap().mapView(rg.app.view.ApplicationView,rg.app.view.ApplicationViewMediator);
 	}
 	,__class__: rg.app.ApplicationModule
 }
-rg.app.model = {}
-rg.app.model.ApplicationSize = function() {
+rg.app.view = {}
+rg.app.view.ApplicationSize = function() {
 	var _g = this;
 	this.width = 0;
 	this.height = 0;
@@ -3868,14 +3868,14 @@ rg.app.model.ApplicationSize = function() {
 	});
 	mmvc.impl.Actor.call(this);
 };
-$hxClasses["rg.app.model.ApplicationSize"] = rg.app.model.ApplicationSize;
-rg.app.model.ApplicationSize.__name__ = ["rg","app","model","ApplicationSize"];
-rg.app.model.ApplicationSize.__super__ = mmvc.impl.Actor;
-rg.app.model.ApplicationSize.prototype = $extend(mmvc.impl.Actor.prototype,{
+$hxClasses["rg.app.view.ApplicationSize"] = rg.app.view.ApplicationSize;
+rg.app.view.ApplicationSize.__name__ = ["rg","app","view","ApplicationSize"];
+rg.app.view.ApplicationSize.__super__ = mmvc.impl.Actor;
+rg.app.view.ApplicationSize.prototype = $extend(mmvc.impl.Actor.prototype,{
 	resize: null
 	,height: null
 	,width: null
-	,__class__: rg.app.model.ApplicationSize
+	,__class__: rg.app.view.ApplicationSize
 });
 rg.core.View = function() {
 	this.signal = new msignal.Signal2();
@@ -3916,7 +3916,6 @@ rg.core.View.prototype = {
 	,parent: null
 	,__class__: rg.core.View
 }
-rg.app.view = {}
 rg.app.view.ApplicationView = function(el) {
 	this.resize = new msignal.Signal2();
 	this.element = el;
@@ -4188,12 +4187,12 @@ rg.layout.view.ControlMainPaneView = function() {
 		var $r;
 		var icon = (function($this) {
 			var $r;
-			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "ok" + "\"></" + "i" + ">");
+			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "comment-alt" + "\"></" + "i" + ">");
 			w.hxw = { };
 			$r = w;
 			return $r;
 		}($this));
-		icon.hxw.type = "ok";
+		icon.hxw.type = "comment-alt";
 		$r = icon;
 		return $r;
 	}(this)));
@@ -4243,12 +4242,12 @@ rg.layout.view.ControlMainPaneView = function() {
 		var $r;
 		var icon = (function($this) {
 			var $r;
-			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "ok" + "\"></" + "i" + ">");
+			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "bell" + "\"></" + "i" + ">");
 			w.hxw = { };
 			$r = w;
 			return $r;
 		}($this));
-		icon.hxw.type = "ok";
+		icon.hxw.type = "bell";
 		$r = icon;
 		return $r;
 	}(this)));
@@ -4298,12 +4297,12 @@ rg.layout.view.ControlMainPaneView = function() {
 		var $r;
 		var icon = (function($this) {
 			var $r;
-			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "ok" + "\"></" + "i" + ">");
+			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "globe" + "\"></" + "i" + ">");
 			w.hxw = { };
 			$r = w;
 			return $r;
 		}($this));
-		icon.hxw.type = "ok";
+		icon.hxw.type = "globe";
 		$r = icon;
 		return $r;
 	}(this)));
@@ -4388,12 +4387,12 @@ rg.layout.view.ControlMainPaneView = function() {
 		var $r;
 		var icon = (function($this) {
 			var $r;
-			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "ok" + "\"></" + "i" + ">");
+			var w = new $("<" + "i" + " class=\"icon-size" + "-small" + " icon-" + "undo" + "\"></" + "i" + ">");
 			w.hxw = { };
 			$r = w;
 			return $r;
 		}($this));
-		icon.hxw.type = "ok";
+		icon.hxw.type = "undo";
 		$r = icon;
 		return $r;
 	}(this)));
@@ -4905,8 +4904,8 @@ msignal.Signal.__meta__ = { fields : { createSlot : { IgnoreCover : null}}};
 rg.core.IModule.__meta__ = { obj : { 'interface' : null}};
 rg.core.View.ADDED = "added";
 rg.core.View.REMOVED = "removed";
-rg.app.view.ApplicationViewMediator.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.app.model.ApplicationSize", opt : false}], inject : null}}};
-rg.layout.view.LayoutViewMediator.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.app.model.ApplicationSize", opt : false}], inject : null}}};
+rg.app.view.ApplicationViewMediator.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.app.view.ApplicationSize", opt : false}], inject : null}}};
+rg.layout.view.LayoutViewMediator.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.app.view.ApplicationSize", opt : false}], inject : null}}};
 Main.main();
 })();
 

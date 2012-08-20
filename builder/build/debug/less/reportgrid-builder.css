@@ -4793,11 +4793,14 @@ a.badge:hover {
   box-shadow: 2px 2px 2px rgba(1, 1, 1, 0.075);
   -moz-box-shadow: 2px 2px 2px rgba(1, 1, 1, 0.075);
   -webkit-box-shadow: 2px 2px 2px rgba(1, 1, 1, 0.075);
-  min-height: 32px;
+  min-height: 20px;
 }
 .rg-builder .navbar .divider-vertical {
   background-color: rgba(1, 1, 1, 0.1);
   border-right: 1px solid rgba(1, 1, 1, 0.15);
+}
+.rg-builder .navbar .brand {
+  padding: 4px 10px;
 }
 .rg-builder div {
   position: relative;

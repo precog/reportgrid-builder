@@ -1,4 +1,4 @@
-package rg.app.model;
+package rg.app.view;
 
 import mmvc.impl.Actor;
 import msignal.Signal;
