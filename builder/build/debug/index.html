@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReportGrid Builder</title>
+<link rel="stylesheet" href="css/reportgrid-builder.css">
+<link rel="stylesheet" href="http://localhost/rg/css/rg-charts.css">
+<script src="http://localhost/rg/js/reportgrid-charts.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquerypp.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/reportgrid-builder.js"></script>
+<style>
+.builder {
+/*
+	border: 1px solid #ccc;
+*/
+}
+
+.large {
+	float: left;
+	height: 500px;
+	width: 960px;
+}
+
+.small {
+	float: left;
+	height: 200px;
+	width: 576px;
+}
+</style>
+<script>
+ReportGrid.builder(".builder");
+</script>
+</head>
+<body>
+	<div class="large builder"></div>
+	<div class="small builder"></div>
+</body>
+</html>

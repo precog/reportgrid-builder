@@ -1,0 +1,51 @@
+@tiny   :  8px;
+@small  : 12px;
+@normal : 16px;
+@large  : 24px;
+@huge   : 32px;
+
+.icon-size-tiny,
+.icon-size-small,
+.icon-size,
+.icon-size-large,
+.icon-size-huge {
+	text-decoration: none;
+	font-weight: normal;
+	font-style: normal;
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	vertical-align: baseline;
+}
+
+.icon-size-tiny:before,
+.icon-size-small:before,
+.icon-size:before,
+.icon-size-large:before,
+.icon-size-huge:before {
+	text-decoration: none;
+	text-align: center;
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+.icon-set-size(@size) {
+	line-height: @size;
+	width: @size;
+	height: @size;
+	font-size: @size;
+}
+
+.icon-size-tiny,
+.icon-size-tiny:before { .icon-set-size(@tiny); }
+
+.icon-size-small,
+.icon-size-small:before { .icon-set-size(@small); }
+
+.icon-size,
+.icon-size:before { .icon-set-size(@normal); }
+
+.icon-size-large,
+.icon-size-large:before { .icon-set-size(@large); }
+
+.icon-size-huge,
+.icon-size-huge:before { .icon-set-size(@huge); }

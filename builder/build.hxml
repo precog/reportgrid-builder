@@ -1,0 +1,13 @@
+# JavaScript
+-main Main
+-D haxe3
+-lib mmvc
+-lib mconsole
+-lib jQueryExtern
+-cp src
+-cp ext
+-cp /Users/francoponticelli/Projects/thx.core/src/
+-js build/debug/js/reportgrid-builder.js
+--js-modern
+-debug
+#--dead-code-elimination
