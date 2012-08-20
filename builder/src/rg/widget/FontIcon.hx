@@ -2,7 +2,7 @@ package rg.widget;
 
 import rg.widget.Widget;
 
-extern class FontIcon extends Widget2
+extern class FontIcon extends Widget
 {
 	public var type(get_type, set_type) : String;
 	inline private function get_type() : String
@@ -32,7 +32,7 @@ extern class FontIcon extends Widget2
 
 	inline private static function createIcon(type : String, version : String, tag : String) : FontIcon
 	{
-		var icon : FontIcon = cast Widget2.create(Std.format('<$tag class="icon-size$version icon-$type"></$tag>'));
+		var icon : FontIcon = cast Widget.create(Std.format('<$tag class="icon-size$version icon-$type"></$tag>'));
 		icon.hxw.type = type;
 		return icon;
 	}
