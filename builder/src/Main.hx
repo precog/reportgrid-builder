@@ -25,7 +25,10 @@ class Main
 							, new rg.layout.LayoutModule()
 							, new rg.builder.BuilderModule()
 							, new rg.app.ApplicationModule()
-						]);
+							, new rg.datasource.StaticDataSourceModule(function() return [
+
+								])
+							]);
 
 trace("================");
 				});

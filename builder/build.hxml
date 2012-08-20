@@ -7,6 +7,7 @@
 -cp src
 -cp ext
 -cp /Users/francoponticelli/Projects/thx.core/src/
+-cp /Users/francoponticelli/Projects/thx.text/src/
 -js build/debug/js/reportgrid-builder.js
 --js-modern
 -debug

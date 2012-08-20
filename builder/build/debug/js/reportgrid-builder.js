@@ -456,8 +456,10 @@ Main.main = function() {
 	ReportGridAPI.builder = function(selector) {
 		new $(js.Lib.window).ready(function(_) {
 			new $(selector).each(function(index,container) {
-				var debug = new rg.core.DebugModule(), view = new rg.app.view.ApplicationView(new $(container)), context = new rg.app.ApplicationContext(view,[debug,new rg.layout.LayoutModule(),new rg.builder.BuilderModule(),new rg.app.ApplicationModule()]);
-				haxe.Log.trace("================",{ fileName : "Main.hx", lineNumber : 30, className : "Main", methodName : "main"});
+				var debug = new rg.core.DebugModule(), view = new rg.app.view.ApplicationView(new $(container)), context = new rg.app.ApplicationContext(view,[debug,new rg.layout.LayoutModule(),new rg.builder.BuilderModule(),new rg.app.ApplicationModule(),new rg.datasource.StaticDataSourceModule(function() {
+					return [];
+				})]);
+				haxe.Log.trace("================",{ fileName : "Main.hx", lineNumber : 33, className : "Main", methodName : "main"});
 			});
 		});
 	};
@@ -3988,6 +3990,17 @@ rg.core.DebugModule.prototype = {
 	register: function(context) {
 	}
 	,__class__: rg.core.DebugModule
+}
+rg.datasource = {}
+rg.datasource.StaticDataSourceModule = function(data,models) {
+};
+$hxClasses["rg.datasource.StaticDataSourceModule"] = rg.datasource.StaticDataSourceModule;
+rg.datasource.StaticDataSourceModule.__name__ = ["rg","datasource","StaticDataSourceModule"];
+rg.datasource.StaticDataSourceModule.__interfaces__ = [rg.core.IModule];
+rg.datasource.StaticDataSourceModule.prototype = {
+	register: function(context) {
+	}
+	,__class__: rg.datasource.StaticDataSourceModule
 }
 rg.layout = {}
 rg.layout.LayoutModule = function() {
