@@ -4032,8 +4032,49 @@ rg.layout.view.ChartPaneView.prototype = $extend(rg.layout.view.PaneView.prototy
 rg.layout.view.ControlMainPaneView = function() {
 	this.cls = "rgb-pane-controls-main";
 	rg.layout.view.PaneView.call(this);
-	var box = new rg.widget.DisplayBox("type");
-	((function($this) {
+	var box = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "type" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
+	var item = (function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "Bar Chart" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this));
+	item.hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4045,10 +4086,50 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box.addItem("Bar Chart").context);
-	this.element.append(box.element);
-	var box1 = new rg.widget.DisplayBox("x");
+	}(this)));
+	this.element.append(box);
+	var box1 = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "x" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "Timestamp" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box1.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4060,10 +4141,50 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box1.addItem("Timestamp").context);
-	this.element.append(box1.element);
-	var box2 = new rg.widget.DisplayBox("y");
+	}(this)));
+	this.element.append(box1);
+	var box2 = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "y" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "Count" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box2.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4075,10 +4196,50 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box2.addItem("Count").context);
-	this.element.append(box2.element);
-	var box3 = new rg.widget.DisplayBox("color");
+	}(this)));
+	this.element.append(box2);
+	var box3 = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "color" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "Browser" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box3.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4090,10 +4251,50 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box3.addItem("Browser").context);
-	this.element.append(box3.element);
-	box3 = new rg.widget.DisplayBox("...");
+	}(this)));
+	this.element.append(box3);
+	box3 = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "..." + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "&nbsp;" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box3.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4105,10 +4306,50 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box3.addItem("&nbsp;").context);
-	this.element.append(box3.element);
-	box3 = new rg.widget.DisplayBox("dimensions");
+	}(this)));
+	this.element.append(box3);
+	box3 = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "dimensions" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "Browser" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box3.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4120,8 +4361,30 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box3.addItem("Browser").context);
+	}(this)));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "OS" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box3.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4133,8 +4396,30 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box3.addItem("OS").context);
+	}(this)));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "CPM" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box3.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4146,8 +4431,30 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box3.addItem("CPM").context);
+	}(this)));
 	((function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "TimeStamp" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box3.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4159,8 +4466,8 @@ rg.layout.view.ControlMainPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box3.addItem("TimeStamp").context);
-	this.element.append(box3.element);
+	}(this)));
+	this.element.append(box3);
 };
 $hxClasses["rg.layout.view.ControlMainPaneView"] = rg.layout.view.ControlMainPaneView;
 rg.layout.view.ControlMainPaneView.__name__ = ["rg","layout","view","ControlMainPaneView"];
@@ -4172,8 +4479,48 @@ rg.layout.view.ControlSecondaryPaneView = function() {
 	this.cls = "rgb-pane-controls-secondary";
 	rg.layout.view.PaneView.call(this);
 	this.element.append("<p class=\"rgb-header rgb-display-box-title\">General Options</p>");
-	var box = new rg.widget.DisplayBox("size");
+	var box = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "size" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
 	((function($this) {
+		var $r;
+		var item = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "480x240" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box.hxw.boxBox.append(item);
+		$r = item;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4185,11 +4532,51 @@ rg.layout.view.ControlSecondaryPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box.addItem("480x240").context);
-	this.element.append(box.element);
+	}(this)));
+	this.element.append(box);
 	this.element.append("<p class=\"rgb-header rgb-display-box-title\">Chart Options</p>");
-	var box1 = new rg.widget.DisplayBox("effect");
+	var box1 = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "effect" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
 	((function($this) {
+		var $r;
+		var item = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "gradient 1.1" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box1.hxw.boxBox.append(item);
+		$r = item;
+		return $r;
+	}(this))).hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4201,11 +4588,51 @@ rg.layout.view.ControlSecondaryPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(box1.addItem("gradient 1.1").context);
-	this.element.append(box1.element);
-	var box2 = new rg.widget.DisplayBox("stacked");
-	var item = box2.addItem();
-	((function($this) {
+	}(this)));
+	this.element.append(box1);
+	var box2 = (function($this) {
+		var $r;
+		var widget = (function($this) {
+			var $r;
+			var w = new $("<div></div>");
+			w.hxw = { };
+			$r = w;
+			return $r;
+		}($this));
+		widget.addClass("rgb-display-box");
+		widget.hxw.boxLabel = new $("<div class=\"rgb-label\">" + "stacked" + "</div>");
+		widget.hxw.boxDivider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
+		widget.hxw.boxBox = new $("<div class=\"rgb-box\"></div>");
+		widget.append(widget.hxw.boxLabel);
+		widget.append(widget.hxw.boxDivider);
+		widget.append(widget.hxw.boxBox);
+		$r = widget;
+		return $r;
+	}(this));
+	var item = (function($this) {
+		var $r;
+		var item1 = (function($this) {
+			var $r;
+			var widget = (function($this) {
+				var $r;
+				var w = new $("<div></div>");
+				w.hxw = { };
+				$r = w;
+				return $r;
+			}($this));
+			widget.addClass("rgb-display-item");
+			widget.hxw.itemContext = new $("<div class=\"rgb-item-context\"></div>");
+			widget.hxw.itemDisplay = new $("<div class=\"rgb-item-display\">" + "" + "</div>");
+			widget.append(widget.hxw.itemContext);
+			widget.append(widget.hxw.itemDisplay);
+			$r = widget;
+			return $r;
+		}($this));
+		box2.hxw.boxBox.append(item1);
+		$r = item1;
+		return $r;
+	}(this));
+	item.hxw.itemContext.append((function($this) {
 		var $r;
 		var icon = (function($this) {
 			var $r;
@@ -4217,7 +4644,7 @@ rg.layout.view.ControlSecondaryPaneView = function() {
 		icon.hxw.type = "ok";
 		$r = icon;
 		return $r;
-	}(this))).appendTo(item.context);
+	}(this)));
 	var icon1 = (function($this) {
 		var $r;
 		var icon = (function($this) {
@@ -4249,8 +4676,8 @@ rg.layout.view.ControlSecondaryPaneView = function() {
 			icon1.hxw.type;
 		}
 	});
-	item.element.append(icon1);
-	this.element.append(box2.element);
+	item.append(icon1);
+	this.element.append(box2);
 };
 $hxClasses["rg.layout.view.ControlSecondaryPaneView"] = rg.layout.view.ControlSecondaryPaneView;
 rg.layout.view.ControlSecondaryPaneView.__name__ = ["rg","layout","view","ControlSecondaryPaneView"];
@@ -4337,69 +4764,6 @@ rg.layout.view.MenuPaneView.prototype = $extend(rg.layout.view.PaneView.prototyp
 	,brand: null
 	,bar: null
 	,__class__: rg.layout.view.MenuPaneView
-});
-rg.widget = {}
-rg.widget.Widget = function() {
-	this.init();
-};
-$hxClasses["rg.widget.Widget"] = rg.widget.Widget;
-rg.widget.Widget.__name__ = ["rg","widget","Widget"];
-rg.widget.Widget.prototype = {
-	on: function(type,handler) {
-		this.element.on(type,handler);
-	}
-	,appendTo: function(container) {
-		container.append(this.element);
-	}
-	,remove: function() {
-		this.element.remove();
-	}
-	,init: function() {
-		this.element = new $("<div></div>");
-	}
-	,element: null
-	,__class__: rg.widget.Widget
-}
-rg.widget.DisplayBox = function(content) {
-	rg.widget.Widget.call(this);
-	this.element.addClass("rgb-display-box");
-	this.label = new $("<div class=\"rgb-label\">" + content + "</div>");
-	this.divider = new $("<div class=\"rgb-divider\"><div class=\"rgb-divider-top\"></div><div class=\"rgb-divider-bottom\"></div></div>");
-	this.box = new $("<div class=\"rgb-box\"></div>");
-	this.element.append(this.label);
-	this.element.append(this.divider);
-	this.element.append(this.box);
-};
-$hxClasses["rg.widget.DisplayBox"] = rg.widget.DisplayBox;
-rg.widget.DisplayBox.__name__ = ["rg","widget","DisplayBox"];
-rg.widget.DisplayBox.__super__ = rg.widget.Widget;
-rg.widget.DisplayBox.prototype = $extend(rg.widget.Widget.prototype,{
-	addItem: function(content) {
-		if(content == null) content = "";
-		var item = new rg.widget.DisplayItem(content);
-		this.box.append(item.element);
-		return item;
-	}
-	,box: null
-	,divider: null
-	,label: null
-	,__class__: rg.widget.DisplayBox
-});
-rg.widget.DisplayItem = function(content) {
-	rg.widget.Widget.call(this);
-	this.element.addClass("rgb-display-item");
-	this.context = new $("<div class=\"rgb-item-context\"></div>");
-	this.display = new $("<div class=\"rgb-item-display\">" + content + "</div>");
-	this.element.append(this.context);
-	this.element.append(this.display);
-};
-$hxClasses["rg.widget.DisplayItem"] = rg.widget.DisplayItem;
-rg.widget.DisplayItem.__name__ = ["rg","widget","DisplayItem"];
-rg.widget.DisplayItem.__super__ = rg.widget.Widget;
-rg.widget.DisplayItem.prototype = $extend(rg.widget.Widget.prototype,{
-	context: null
-	,display: null
-	,__class__: rg.widget.DisplayItem
 });
 var thx = {}
 thx.core = {}
