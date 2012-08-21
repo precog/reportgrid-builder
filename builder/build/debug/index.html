@@ -28,13 +28,24 @@
 	height: 200px;
 	width: 576px;
 }
+
+.dimensions {
+	float: left;
+	width: 200px;
+	height: 300px;
+	border: 1px solid red;
+}
 </style>
 <script>
-ReportGrid.builder(".builder");
+ReportGrid.builder(".large.builder");
+ReportGrid.builder(".small.builder", {
+	dimensionsContainer : ".dimensions"
+});
 </script>
 </head>
 <body>
 	<div class="large builder"></div>
+	<div class="dimensions"></div>
 	<div class="small builder"></div>
 </body>
 </html>

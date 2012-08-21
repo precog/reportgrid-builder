@@ -1,10 +1,14 @@
 package rg.layout.view;
 
+import jQuery.JQuery;
 import rg.widget.DisplayBox;
 import rg.widget.FontIcon;
+import rg.widget.Widget;
+import rg.widget.JQueryRef;
 
 class ControlMainPaneView extends PaneView
 {
+	public var dimensionsContainer : JQuery;
 	@:keep
 	public function new()
 	{
@@ -32,11 +36,19 @@ class ControlMainPaneView extends PaneView
 		box.addItem("&nbsp;").itemContext.append(FontIcon.createSmall("globe"));
 		element.append(box);
 
-		box = DisplayBox.create("dimensions");
+
+	}
+
+	override function init() {
+		super.init();
+	}
+
+	public function fakeDimensions() {
+		var box = DisplayBox.create("dimensions");
 		box.addItem("Browser").itemContext.append(FontIcon.createSmall("ok"));
 		box.addItem("OS").itemContext.append(FontIcon.createSmall("undo"));
 		box.addItem("CPM").itemContext.append(FontIcon.createSmall("ok"));
 		box.addItem("TimeStamp").itemContext.append(FontIcon.createSmall("ok"));
-		element.append(box);
+		dimensionsContainer.append(box);
 	}
 }
