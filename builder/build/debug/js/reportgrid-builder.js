@@ -4576,7 +4576,7 @@ rg.layout.view.ControlMainPaneViewMediator.prototype = $extend(mmvc.impl.Mediato
 	}
 	,onRegister: function() {
 		mmvc.impl.Mediator.prototype.onRegister.call(this);
-		if(null != this.dimensionsContainer) this.view.dimensionsContainer = this.dimensionsContainer.getRef(); else this.view.element.append(this.view.dimensionsContainer = (function($this) {
+		if(null != this.dimensionsContainer) this.view.dimensionsContainer = this.dimensionsContainer.ref; else this.view.element.append(this.view.dimensionsContainer = (function($this) {
 			var $r;
 			var w = new $("<div></div>");
 			w.hxw = { };
@@ -4885,10 +4885,7 @@ rg.widget.JQueryRef = function(ref) {
 $hxClasses["rg.widget.JQueryRef"] = rg.widget.JQueryRef;
 rg.widget.JQueryRef.__name__ = ["rg","widget","JQueryRef"];
 rg.widget.JQueryRef.prototype = {
-	getRef: function() {
-		return this.ref;
-	}
-	,ref: null
+	ref: null
 	,__class__: rg.widget.JQueryRef
 }
 var thx = {}

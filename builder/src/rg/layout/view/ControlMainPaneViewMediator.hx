@@ -23,7 +23,7 @@ class ControlMainPaneViewMediator extends Mediator<ControlMainPaneView>
 		super.onRegister();
  		if(null != dimensionsContainer)
  		{
- 			view.dimensionsContainer = dimensionsContainer.getRef();
+ 			view.dimensionsContainer = dimensionsContainer.ref;
 		} else {
 			view.element.append(view.dimensionsContainer = Widget.create());
 		}
