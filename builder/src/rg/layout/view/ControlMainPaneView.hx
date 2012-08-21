@@ -8,13 +8,19 @@ import rg.widget.JQueryRef;
 
 class ControlMainPaneView extends PaneView
 {
-	public var dimensionsContainer : JQuery;
+	public var dimensionsContainer(default, null) : JQuery;
+	@inject("dimensionsContainer")
 	@:keep
-	public function new()
+	public function new(?dimensionsContainer : JQueryRef)
 	{
 		cls = "rgb-pane-controls-main";
+		if(null != dimensionsContainer)
+			this.dimensionsContainer = dimensionsContainer.ref;
 		super();
+	}
 
+	override function init() {
+		super.init();
 		var box = DisplayBox.create("type");
 		var item = box.addItem("Bar Chart");
 		item.itemContext.append(FontIcon.createSmall("ok"));
@@ -36,19 +42,14 @@ class ControlMainPaneView extends PaneView
 		box.addItem("&nbsp;").itemContext.append(FontIcon.createSmall("globe"));
 		element.append(box);
 
-
-	}
-
-	override function init() {
-		super.init();
-	}
-
-	public function fakeDimensions() {
+		if(null == dimensionsContainer)
+		{
+			element.append(dimensionsContainer = Widget.create());
+		}
 		var box = DisplayBox.create("dimensions");
 		box.addItem("Browser").itemContext.append(FontIcon.createSmall("ok"));
 		box.addItem("OS").itemContext.append(FontIcon.createSmall("undo"));
 		box.addItem("CPM").itemContext.append(FontIcon.createSmall("ok"));
 		box.addItem("TimeStamp").itemContext.append(FontIcon.createSmall("ok"));
 		dimensionsContainer.append(box);
-	}
-}
+	}}

@@ -9,26 +9,17 @@ import rg.widget.Widget;
 
 class ControlMainPaneViewMediator extends Mediator<ControlMainPaneView>
 {
-	var dimensionsContainer : JQueryRef;
-	@inject("dimensionsContainer")
 	@:keep
-	public function new(?dimensionsContainer : JQueryRef)
+	public function new()
 	{
-		this.dimensionsContainer = dimensionsContainer;
 		super();
 	}
 
 	override function onRegister()
 	{
 		super.onRegister();
- 		if(null != dimensionsContainer)
- 		{
- 			view.dimensionsContainer = dimensionsContainer.ref;
-		} else {
-			view.element.append(view.dimensionsContainer = Widget.create());
-		}
 
-		view.fakeDimensions();
+//		view.fakeDimensions();
 	}
 
 	override public function onRemove():Void
