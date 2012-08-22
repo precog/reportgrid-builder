@@ -511,9 +511,11 @@ Main.main = function() {
 		if(null == options) options = { }; else options;
 		new $(js.Lib.window).ready(function(_) {
 			new $(selector).each(function(index,container) {
-				var debug = new rg.core.DebugModule(), view = new rg.app.view.ApplicationView(new $(container)), context = new rg.app.ApplicationContext(view,[debug,new rg.layout.LayoutModule(options.dimensionsContainer),new rg.builder.BuilderModule(),new rg.app.ApplicationModule(),new rg.datasource.StaticDataSourceModule(function() {
-					return [{ name : "Franco", age : 40},{ name : "Sergio", age : 44},{ name : "Sandro", age : 43},{ name : "Cristina", age : 38},{ name : "Gabriel", age : 7},{ name : "Matilde", age : 5}];
-				},[new rg.app.model.Dimension("name"),new rg.app.model.Dimension("age")])]);
+				var debug = new rg.core.DebugModule(), view = new rg.app.view.ApplicationView(new $(container)), context = new rg.app.ApplicationContext(view,[debug,new rg.layout.LayoutModule(options.dimensionsContainer),new rg.builder.BuilderModule(),new rg.app.ApplicationModule(),new rg.datasource.StaticDataSourceModule(function(handler) {
+					handler([{ name : "Franco", age : 40},{ name : "Sergio", age : 44},{ name : "Sandro", age : 43},{ name : "Cristina", age : 38},{ name : "Gabriel", age : 7},{ name : "Matilde", age : 5}]);
+				},function(handler) {
+					handler([new rg.app.model.Dimension("name"),new rg.app.model.Dimension("age")]);
+				})]);
 			});
 		});
 	};
@@ -4058,14 +4060,21 @@ rg.core.DebugModule.prototype = {
 	,__class__: rg.core.DebugModule
 }
 rg.datasource = {}
-rg.datasource.StaticDataSourceModule = function(data,models) {
+rg.datasource.StaticDataSourceModule = function(loader,models) {
+	this.loader = loader;
+	this.models = models;
 };
 $hxClasses["rg.datasource.StaticDataSourceModule"] = rg.datasource.StaticDataSourceModule;
 rg.datasource.StaticDataSourceModule.__name__ = ["rg","datasource","StaticDataSourceModule"];
 rg.datasource.StaticDataSourceModule.__interfaces__ = [rg.core.IModule];
 rg.datasource.StaticDataSourceModule.prototype = {
 	register: function(context) {
+		this.loader(function(data) {
+			haxe.Log.trace(data,{ fileName : "StaticDataSourceModule.hx", lineNumber : 18, className : "rg.datasource.StaticDataSourceModule", methodName : "register"});
+		});
 	}
+	,models: null
+	,loader: null
 	,__class__: rg.datasource.StaticDataSourceModule
 }
 rg.layout = {}
@@ -4077,7 +4086,7 @@ rg.layout.LayoutModule.__name__ = ["rg","layout","LayoutModule"];
 rg.layout.LayoutModule.__interfaces__ = [rg.core.IModule];
 rg.layout.LayoutModule.prototype = {
 	register: function(context) {
-		if(null != this.dimensionsContainer) context.get_injector().mapValue(rg.widget.JQueryRef,new rg.widget.JQueryRef(this.dimensionsContainer),"dimensionsContainer");
+		if(null != this.dimensionsContainer) context.get_injector().mapValue(rg.widget.JQueryRef,new rg.widget.JQueryRef(this.dimensionsContainer),"dimensions-container");
 		context.get_mediatorMap().mapView(rg.layout.view.LayoutView,rg.layout.view.LayoutViewMediator);
 		context.get_mediatorMap().mapView(rg.layout.view.ControlMainPaneView,rg.layout.view.ControlMainPaneViewMediator);
 	}
@@ -5087,7 +5096,7 @@ rg.core.IModule.__meta__ = { obj : { 'interface' : null}};
 rg.core.View.ADDED = "added";
 rg.core.View.REMOVED = "removed";
 rg.app.view.ApplicationViewMediator.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.app.view.ApplicationSize", opt : false}], inject : null}}};
-rg.layout.view.ControlMainPaneView.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.widget.JQueryRef", opt : true}], inject : ["dimensionsContainer"]}}};
+rg.layout.view.ControlMainPaneView.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.widget.JQueryRef", opt : true}], inject : ["dimensions-container"]}}};
 rg.layout.view.LayoutViewMediator.__meta__ = { fields : { _ : { name : ["new"], args : [{ type : "rg.app.view.ApplicationSize", opt : false}], inject : null}}};
 thx.text.Transform._reCollapse = new EReg("\\s+","g");
 thx.text.Transform._ucwordsPattern = new EReg("[^a-zA-Z]([a-z])","");

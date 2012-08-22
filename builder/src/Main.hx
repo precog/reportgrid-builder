@@ -28,18 +28,19 @@ class Main
 							, new rg.layout.LayoutModule(options.dimensionsContainer)
 							, new rg.builder.BuilderModule()
 							, new rg.app.ApplicationModule()
-							, new rg.datasource.StaticDataSourceModule(function() return [
+							, new rg.datasource.StaticDataSourceModule(
+								function(handler) handler([
 									  { name : "Franco",   age : 40 }
 									, { name : "Sergio",   age : 44 }
 									, { name : "Sandro",   age : 43 }
 									, { name : "Cristina", age : 38 }
 									, { name : "Gabriel",  age : 7 }
 									, { name : "Matilde",  age : 5 }
-								],
-								[
+								]),
+								function(handler) handler([
 									  new rg.app.model.Dimension("name")
 									, new rg.app.model.Dimension("age")
-								])
+								]))
 						]);
 				});
 			});

@@ -9,7 +9,7 @@ import rg.widget.JQueryRef;
 class ControlMainPaneView extends PaneView
 {
 	public var dimensionsContainer(default, null) : JQuery;
-	@inject("dimensionsContainer")
+	@inject("dimensions-container")
 	@:keep
 	public function new(?dimensionsContainer : JQueryRef)
 	{

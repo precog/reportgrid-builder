@@ -4864,15 +4864,6 @@ a.badge:hover {
   left: 76px;
   width: 106px;
 }
-.rg-builder .rgb-display-box .rgb-box .rgb-display-item {
-  clear: left;
-}
-.rg-builder .rgb-display-box .rgb-box .rgb-display-item .rgb-item-context {
-  float: right;
-  z-index: 100;
-  color: #cccccc;
-  font-weight: normal;
-}
 .rg-builder p.rgb-header {
   color: #cccccc;
   padding: 0;
@@ -4881,6 +4872,18 @@ a.badge:hover {
 .rg-builder p.rgb-display-box-title {
   padding-left: 76px;
   margin-bottom: 5px;
+}
+.rgb-display-box .rgb-divider {
+  display: none;
+}
+.rgb-display-box .rgb-box .rgb-display-item {
+  clear: left;
+}
+.rgb-display-box .rgb-box .rgb-display-item .rgb-item-context {
+  float: right;
+  z-index: 100;
+  color: #cccccc;
+  font-weight: normal;
 }
 /*
 lighten(@color, 10%);     // return a color which is 10% *lighter* than @color

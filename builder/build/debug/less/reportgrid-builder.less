@@ -143,17 +143,6 @@
 		.rgb-box {
 			left: @display-label-width + @display-padding * 2 + @display-divider-width + @display-divider-weight;
 			width: @side-width - (@display-label-width + @display-padding * 2 + @display-divider-width + @display-divider-weight + @side-padding-right);
-			.rgb-display-item {
-				clear: left;
-				.rgb-item-display {
-				}
-				.rgb-item-context {
-					float: right;
-					z-index: 100;
-					color: @secondary-label-color;
-					font-weight: normal;
-				}
-			}
 		}
 	}
 
@@ -169,6 +158,24 @@
 	}
 }
 
+.rgb-display-box {
+	.rgb-divider {
+		display: none;
+	}
+	.rgb-box {
+		.rgb-display-item {
+			clear: left;
+			.rgb-item-display {
+			}
+			.rgb-item-context {
+				float: right;
+				z-index: 100;
+				color: @secondary-label-color;
+				font-weight: normal;
+			}
+		}
+	}
+}
 
 /*
 lighten(@color, 10%);     // return a color which is 10% *lighter* than @color

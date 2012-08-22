@@ -20,7 +20,7 @@ class LayoutModule implements IModule
 	public function register(context : Context)
 	{
 		if(null != dimensionsContainer)
-			context.injector.mapValue(JQueryRef, new JQueryRef(dimensionsContainer),  "dimensionsContainer");
+			context.injector.mapValue(JQueryRef, new JQueryRef(dimensionsContainer),  "dimensions-container");
 		context.mediatorMap.mapView(LayoutView, LayoutViewMediator);
 		context.mediatorMap.mapView(ControlMainPaneView, ControlMainPaneViewMediator);
 	}
