@@ -54,10 +54,10 @@ function ($, themes) {
 
   return function(ctx) {
     var current;
-    ctx.on("view.theme.change", function(e, theme) {
+    ctx.on("theme.change", function(e, theme) {
       if(current === theme) return;
       current = theme;
-      ctx.trigger("view.theme.changing", theme);
+      ctx.trigger("theme.changing", theme);
       setUITheme(map[theme].ui, function() {
         ctx.trigger('view.theme.changed', theme);
       });

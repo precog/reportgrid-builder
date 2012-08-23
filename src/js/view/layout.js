@@ -8,19 +8,11 @@ define([
 
 function($, tplLayout) {
   var toolbarMainHeight = 38,
-      toolbarHeight = 36,
-      doubleBar = 50,
-      statusbarHeight = 24,
-      defaults = {
-          initClosed : false
-        , resizable : true
-        , slidable : true
-      },
       toolbar = {
           resizable : false
         , closable : false
         , slidable : false
-        , size: toolbarHeight
+        , size: 36
         , spacing_open: 0
         , spacing_closed: 0
       },
@@ -28,7 +20,7 @@ function($, tplLayout) {
           resizable : false
         , closable : false
         , slidable : false
-        , size: doubleBar
+        , size: 50
         , spacing_open: 0
         , spacing_closed: 0
       };
@@ -39,8 +31,18 @@ function($, tplLayout) {
 
     function create(el, o) {
       layouts.push(el.layout(o, {
-        defaults : defaults
+        defaults : {
+            initClosed : false
+          , resizable : true
+          , slidable : true
+        }
       }));
+    }
+
+    function fixbar() {
+      var res = $container.find(".builder .ui-layout-resizer.ui-layout-resizer-south.ui-layout-resizer-open.ui-layout-resizer-south-open.ui-widget-shadow");
+      if(!this.bottom) this.bottom = parseInt(res.css("bottom"));
+      res.css("bottom", (this.bottom + 2) + "px");
     }
 
     function resize() {
@@ -50,13 +52,21 @@ function($, tplLayout) {
         width : $parent.innerWidth() + "px",
         height : $parent.innerHeight() + "px"
       });
-//      refresh();
     }
 
     function refresh() {
       for(var i = 0; i < layouts.length; i++) {
         layouts[i].resizeAll();
       }
+    }
+
+    function themechanged() {
+      if(!$container) {
+        clearInterval(this.killTimer);
+        killTimer = setTimeout(init, 20);
+        return;
+      }
+      refresh();
     }
 
     function init(e, el) {
@@ -123,9 +133,7 @@ function($, tplLayout) {
           , resizable : false
         },
         onresize : function() {
-          var res = $container.find(".builder .ui-layout-resizer.ui-layout-resizer-south.ui-layout-resizer-open.ui-layout-resizer-south-open.ui-widget-shadow");
-          if(!this.bottom) this.bottom = parseInt(res.css("bottom"));
-          res.css("bottom", (this.bottom + 2) + "px");
+          fixbar();
         }
       });
 
@@ -142,20 +150,30 @@ function($, tplLayout) {
         .addClass("ui-state-hover")
       ;
 
-      refresh();
-      $(window).resize(resize);
-    }
+      // trigger events
+      ctx.trigger("view.main.toolbar-main", $container.find(".mainbar .toolbar-main"));
+      ctx.trigger("view.main.toolbar-context", $container.find(".mainbar .toolbar-context"));
 
-    function themechanged() {
-      if(!$container) {
-        clearInterval(this.killTimer);
-        killTimer = setTimeout(init, 20);
-        return;
-      }
-      refresh();
+      ctx.trigger("view.data", $container.find(".data"));
+      ctx.trigger("view.data.toolbar-description", $container.find(".data .toolbar-description"));
+      ctx.trigger("view.data.toolbar-main", $container.find(".data .toolbar-main"));
+      ctx.trigger("view.data.toolbar-context", $container.find(".data .toolbar-context"));
+
+      ctx.trigger("view.reports", $container.find(".reports"));
+      ctx.trigger("view.reports.toolbar-description", $container.find(".reports .toolbar-description"));
+      ctx.trigger("view.reports.toolbar-main", $container.find(".reports .toolbar-main"));
+      ctx.trigger("view.reports.toolbar-context", $container.find(".reports .toolbar-context"));
+
+      ctx.trigger("view.support", $container.find(".main .support"));
+      ctx.trigger("view.chart", $container.find(".builder .chart"));
+      ctx.trigger("view.options", $container.find(".builder .options"));
+
+      $(window).resize(resize);
+
+      setTimeout(refresh, 100);
     }
 
     ctx.on("view.container.ready", init);
-    ctx.on("view.theme.changed", themechanged);
+    ctx.on("theme.changed", themechanged);
   };
 });

@@ -9,8 +9,9 @@ require([
   , "model/config"
   , "view/theme"
   , "view/layout"
+  , "view/actions"
 ],
-function($, config, theme, layout) {
+function($, config, theme, layout, actions) {
   var modules = $(arguments).slice(1);
 
   function createContext() {
