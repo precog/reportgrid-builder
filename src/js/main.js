@@ -1,3 +1,9 @@
+requirejs.config({
+  shim : {
+      'lib/jquery-ui/jquery.ui'         : ['jquery']
+    , 'lib/jquery-layout/jquery.layout' : ['lib/jquery-ui/jquery.ui']
+  }
+});
 require([
     "jquery"
   , "model/config"

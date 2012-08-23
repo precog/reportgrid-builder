@@ -1,6 +1,8 @@
 define([
     "jquery"
   , "text!templates/layout.full.html"
+
+  , 'lib/jquery-ui/jquery.ui'
   , "lib/jquery-layout/jquery.layout"
 ],
 
@@ -48,16 +50,13 @@ function($, tplLayout) {
         width : $parent.innerWidth() + "px",
         height : $parent.innerHeight() + "px"
       });
-      refresh();
+//      refresh();
     }
 
     function refresh() {
       for(var i = 0; i < layouts.length; i++) {
         layouts[i].resizeAll();
       }
-      var res = $container.find(".builder .ui-layout-resizer.ui-layout-resizer-south.ui-layout-resizer-open.ui-layout-resizer-south-open.ui-widget-shadow");
-      if(!this.bottom) this.bottom = parseInt(res.css("bottom"));
-      res.css("bottom", (this.bottom + 2) + "px");
     }
 
     function init(e, el) {
@@ -121,6 +120,12 @@ function($, tplLayout) {
         south : {
             size : 200
           , closable : false
+          , resizable : false
+        },
+        onresize : function() {
+          var res = $container.find(".builder .ui-layout-resizer.ui-layout-resizer-south.ui-layout-resizer-open.ui-layout-resizer-south-open.ui-widget-shadow");
+          if(!this.bottom) this.bottom = parseInt(res.css("bottom"));
+          res.css("bottom", (this.bottom + 2) + "px");
         }
       });
 
