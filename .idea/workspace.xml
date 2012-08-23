@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66403c07-6d74-46c0-aa65-9f48e9595f67" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/view/actions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/lib/jquery-pnotify/jquery.pnotify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/util/dom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/util/notification.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/util/ui.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/css/main.less" afterPath="$PROJECT_DIR$/src/css/main.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/main.js" afterPath="$PROJECT_DIR$/src/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/model/config.js" afterPath="$PROJECT_DIR$/src/js/model/config.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/templates/layout.full.html" afterPath="$PROJECT_DIR$/src/js/templates/layout.full.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/view/actions.js" afterPath="$PROJECT_DIR$/src/js/view/actions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/view/layout.js" afterPath="$PROJECT_DIR$/src/js/view/layout.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/view/theme.js" afterPath="$PROJECT_DIR$/src/js/view/theme.js" />
     </list>
     <ignored path="reportgrid-builder.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="layout.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/view/layout.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="30" selection-start="1947" selection-end="1947" vertical-scroll-proportion="0.35977858">
+            <state line="125" column="9" selection-start="2886" selection-end="2886" vertical-scroll-proportion="-8.807693">
               <folding />
             </state>
           </provider>
@@ -52,16 +53,52 @@
       <file leaf-file-name="actions.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/view/actions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="244" selection-end="244" vertical-scroll-proportion="0.0">
+            <state line="38" column="30" selection-start="894" selection-end="894" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.less" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/css/main.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="534" selection-end="534" vertical-scroll-proportion="-9.307693">
+            <state line="87" column="14" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.33214605">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ui.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/util/ui.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="150" column="64" selection-start="5327" selection-end="5327" vertical-scroll-proportion="-18.461538">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dom.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/util/dom.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notification.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/util/notification.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="25" selection-start="37" selection-end="51" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery.pnotify.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/lib/jquery-pnotify/jquery.pnotify.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="27" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -70,16 +107,7 @@
       <file leaf-file-name="layout.full.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/templates/layout.full.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="49" selection-start="529" selection-end="529" vertical-scroll-proportion="-6.25">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="storagemonitor.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/util/storagemonitor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="47" selection-start="3333" selection-end="3333" vertical-scroll-proportion="-27.76923">
+            <state line="32" column="6" selection-start="1331" selection-end="1331" vertical-scroll-proportion="-20.0">
               <folding />
             </state>
           </provider>
@@ -89,33 +117,6 @@
         <entry file="file://$PROJECT_DIR$/src/js/model/config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="18" column="11" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="themes.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/config/themes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="5" selection-start="367" selection-end="367" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="theme.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/view/theme.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="18" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jquery.layout.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/lib/jquery-layout/jquery.layout.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2869" column="10" selection-start="138456" selection-end="138456" vertical-scroll-proportion="-22.538462">
               <folding />
             </state>
           </provider>
@@ -134,8 +135,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/css/less.js" />
-        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/js/libs/jquery-layout/jquery.layout.js" />
         <option value="$PROJECT_DIR$/src/js/text.js" />
         <option value="$PROJECT_DIR$/src/config/config.js" />
@@ -143,13 +142,15 @@
         <option value="$PROJECT_DIR$/src/js/util/storage.js" />
         <option value="$PROJECT_DIR$/src/js/util/storagemonitor.js" />
         <option value="$PROJECT_DIR$/src/js/lib/jquery-layout/jquery.layout.js" />
-        <option value="$PROJECT_DIR$/src/js/templates/layout.full.html" />
-        <option value="$PROJECT_DIR$/src/css/main.less" />
         <option value="$PROJECT_DIR$/src/js/model/config.js" />
         <option value="$PROJECT_DIR$/src/js/view/theme.js" />
         <option value="$PROJECT_DIR$/src/js/main.js" />
-        <option value="$PROJECT_DIR$/src/js/view/actions.js" />
+        <option value="$PROJECT_DIR$/src/js/util/ui.js" />
+        <option value="$PROJECT_DIR$/src/js/util/notification.js" />
         <option value="$PROJECT_DIR$/src/js/view/layout.js" />
+        <option value="$PROJECT_DIR$/src/js/view/actions.js" />
+        <option value="$PROJECT_DIR$/src/js/templates/layout.full.html" />
+        <option value="$PROJECT_DIR$/src/css/main.less" />
       </list>
     </option>
   </component>
@@ -385,6 +386,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="jquery-pnotify" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reportgrid-builder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reportgrid-builder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="jquery-layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -506,11 +533,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/js/lib/jquery-pnotify" />
+      <recent name="$PROJECT_DIR$/src/js/util" />
       <recent name="$PROJECT_DIR$/src/js/lib/jquery-jstorage" />
       <recent name="$PROJECT_DIR$/src/js/lib" />
-      <recent name="$PROJECT_DIR$/src/js/util" />
       <recent name="$PROJECT_DIR$/src/css/jquery-ui" />
-      <recent name="$PROJECT_DIR$/scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/js/lib/jquery-ui" />
@@ -632,34 +659,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/app.build.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="32" selection-start="98" selection-end="98" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/require-jquery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/util/arrays.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="3" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/lib/jquery-jstorage/jstorage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="25" selection-start="1977" selection-end="1977" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/util/storage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="9" selection-start="1254" selection-end="1254" vertical-scroll-proportion="0.0">
@@ -697,20 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/templates/layout.full.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="49" selection-start="529" selection-end="529" vertical-scroll-proportion="-6.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/main.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="534" selection-end="534" vertical-scroll-proportion="-9.307693">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/view/theme.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="18" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.0">
@@ -725,13 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/view/actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="244" selection-end="244" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="17" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0">
@@ -739,9 +717,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/util/ui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="150" column="64" selection-start="5327" selection-end="5327" vertical-scroll-proportion="-18.461538">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/util/dom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/util/notification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="25" selection-start="37" selection-end="51" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/lib/jquery-pnotify/jquery.pnotify.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="27" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/view/layout.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="30" selection-start="1947" selection-end="1947" vertical-scroll-proportion="0.35977858">
+        <state line="125" column="9" selection-start="2886" selection-end="2886" vertical-scroll-proportion="-8.807693">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/view/actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="30" selection-start="894" selection-end="894" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/templates/layout.full.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="6" selection-start="1331" selection-end="1331" vertical-scroll-proportion="-20.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/main.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="14" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.33214605">
           <folding />
         </state>
       </provider>

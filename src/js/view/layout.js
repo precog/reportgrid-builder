@@ -38,13 +38,13 @@ function($, tplLayout) {
         }
       }));
     }
-
+/*
     function fixbar() {
       var res = $container.find(".builder .ui-layout-resizer.ui-layout-resizer-south.ui-layout-resizer-open.ui-layout-resizer-south-open.ui-widget-shadow");
       if(!this.bottom) this.bottom = parseInt(res.css("bottom"));
       res.css("bottom", (this.bottom + 2) + "px");
     }
-
+*/
     function resize() {
       var $parent = $container.parent();
       $container.css({
@@ -125,7 +125,7 @@ function($, tplLayout) {
           , maskIframesOnResize : true
         }
       });
-
+/*
       create($container.find('.builder'), {
         south : {
             size : 200
@@ -136,7 +136,7 @@ function($, tplLayout) {
           fixbar();
         }
       });
-
+*/
       $container.addClass("ui-widget-content")
         .find(".pane")
         .addClass("ui-widget-content");
@@ -153,21 +153,19 @@ function($, tplLayout) {
       // trigger events
       ctx.trigger("view.main.toolbar-main", $container.find(".mainbar .toolbar-main"));
       ctx.trigger("view.main.toolbar-context", $container.find(".mainbar .toolbar-context"));
-
-      ctx.trigger("view.data", $container.find(".data"));
+      ctx.trigger("view.data.pane", $container.find(".data"));
       ctx.trigger("view.data.toolbar-description", $container.find(".data .toolbar-description"));
       ctx.trigger("view.data.toolbar-main", $container.find(".data .toolbar-main"));
       ctx.trigger("view.data.toolbar-context", $container.find(".data .toolbar-context"));
 
-      ctx.trigger("view.reports", $container.find(".reports"));
+      ctx.trigger("view.reports.pane", $container.find(".reports"));
       ctx.trigger("view.reports.toolbar-description", $container.find(".reports .toolbar-description"));
       ctx.trigger("view.reports.toolbar-main", $container.find(".reports .toolbar-main"));
       ctx.trigger("view.reports.toolbar-context", $container.find(".reports .toolbar-context"));
 
-      ctx.trigger("view.support", $container.find(".main .support"));
-      ctx.trigger("view.chart", $container.find(".builder .chart"));
-      ctx.trigger("view.options", $container.find(".builder .options"));
-
+      ctx.trigger("view.support.pane", $container.find(".main .support"));
+      ctx.trigger("view.chart.pane", $container.find(".builder .chart"));
+//      ctx.trigger("view.options", $container.find(".builder .options"));
       $(window).resize(resize);
 
       setTimeout(refresh, 100);

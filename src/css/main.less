@@ -3,26 +3,45 @@
 }
 
 .rg-builder {
+    font-size: 73%;
+    font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+
     .mainbar {
 //        height: 38px;
     }
 
     .system,
     .main,
-    .builder,
+//    .builder,
     .data,
     .reports {
         border:0 !important;
     }
 
+    .builder {
+        border-top: 0;
+        border-bottom: 0;
+    }
+
+    .reports {
+        .tree {
+            border-bottom: 0;
+        }
+    }
+
+    .support {
+        border-bottom: 0;
+    }
+/*
     .builder .ui-layout-resizer-open {
         padding-bottom: 1px !important;
     }
-
+*/
+/*
     .chart {
         border-top: 0;
     }
-
+*/
     .ui-layout-resizer-east,
     .ui-layout-resizer-west {
 //        border:0 !important;
@@ -85,5 +104,30 @@
         top: 0;
     }
 
+    .toolbar-description {
+        margin: 4px 5px;
+    }
 
+    .toolbar-main {
+        float: left;
+        margin-left: 5px;
+    }
+
+    .toolbar-context {
+        position: relative;
+        float: right;
+        margin-right: 5px;
+    }
+
+    .system {
+        .toolbar-context {
+            margin-top: 0;
+        }
+    }
+
+    .toolbar-main button,
+    .toolbar-context button {
+        width: 2.4em;
+        height: 24px;
+    }
 }
