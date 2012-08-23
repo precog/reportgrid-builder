@@ -13,7 +13,6 @@ function ($, themes) {
     groups[this.group] = groups[this.group] || {};
     groups[this.group][this.token] = this;
   });
-console.log(map);
   function themeUrl(name) {
     return UI_BASE_THEME_URL + name + "/jquery-ui.css";
   }
@@ -56,7 +55,6 @@ console.log(map);
   return function(ctx) {
     var current;
     ctx.on("view.theme.change", function(e, theme) {
-console.log()
       if(current === theme) return;
       current = theme;
       ctx.trigger("view.theme.changing", theme);

@@ -8,7 +8,6 @@ function(createStore) {
         theme : "gray"
       },
       config = createStore(CONFIG_KEY, defaults);
-console.log(config);
   return function(ctx) {
     config.monitor.bind("theme", function(theme) {
       ctx.trigger("view.theme.change", theme);

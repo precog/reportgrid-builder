@@ -48,15 +48,16 @@ function($, tplLayout) {
         width : $parent.innerWidth() + "px",
         height : $parent.innerHeight() + "px"
       });
-console.log("RESIZE");
-
+      refresh();
     }
 
     function refresh() {
-console.log("...REFRESH");
       for(var i = 0; i < layouts.length; i++) {
         layouts[i].resizeAll();
       }
+      var res = $container.find(".builder .ui-layout-resizer.ui-layout-resizer-south.ui-layout-resizer-open.ui-layout-resizer-south-open.ui-widget-shadow");
+      if(!this.bottom) this.bottom = parseInt(res.css("bottom"));
+      res.css("bottom", (this.bottom + 2) + "px");
     }
 
     function init(e, el) {
@@ -64,9 +65,7 @@ console.log("...REFRESH");
       $el.css({
         position : "relative",
         padding  : 0
-      })
-//        .addClass("ui-layout-container ui-widget-content")
-      ;
+      });
       if($el.is("body")) {
         $el.css({
           margin   : 0,
@@ -82,7 +81,6 @@ console.log("...REFRESH");
       }
       $container = $(tplLayout);
 
-console.log("build layout");
       $el.append($container);
 
       resize();
@@ -102,62 +100,41 @@ console.log("build layout");
       });
 
       create($container.find('.data'), {
-        south : {
-          north : toolbarDouble
-        }
+        north : toolbarDouble
       });
 
       create($container.find('.reports'), {
-        south : {
-          north : toolbarDouble
-        }
+        north : toolbarDouble
       });
 
       create($container.find('.main'), {
         east : {
-            size : "15%"
+            size : "20%"
           , initClosed : false
+          , minSize : 200
+          , maxSize : 600
+          , maskIframesOnResize : true
         }
       });
 
       create($container.find('.builder'), {
         south : {
-            size : "40%"
-          , maxSize : 800
-          , minSize : 305 // "240px"
-          , initClosed : false
-          , maskIframesOnResize : true
+            size : 200
+          , closable : false
         }
       });
 
-      /*
-
-       // editor-support separation
-       layouts.push($container.find('.builder').layout({
-       defaults : defaults,
-       east : {
-       size : "40%"
-       , maxSize : 800
-       , minSize : 305 // "240px"
-       , initClosed : false
-       , maskIframesOnResize : true
-       }
-       }));
-
-       // editor separation
-       layouts.push($container.find('.editor').layout({
-       defaults : defaults,
-       south : statusbar
-       }));
-       */
-
       $container.addClass("ui-widget-content")
         .find(".pane")
-        .addClass("ui-widget-content")
-        .find(".ui-layout-toggler")
+        .addClass("ui-widget-content");
+      $container.find(".ui-layout-toggler")
         .mouseenter(function() { $(this).addClass("ui-state-hover"); })
         .mouseleave(function() { $(this).removeClass("ui-state-hover"); })
-        .addClass("ui-widget-header")
+        .addClass("ui-widget-header");
+      $container.find(".ui-layout-resizer")
+        .addClass("ui-widget-shadow");
+      $container.find(".ui-layout-resizer-dragging")
+        .addClass("ui-state-hover")
       ;
 
       refresh();
