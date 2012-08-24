@@ -22,13 +22,12 @@ function($, ui) {
           editors.activate(index);
         }
       }, 'li a');
-
+/*
       ui.button(context, {
         icon : "ui-icon-disk"
       });
-
+*/
       // fake
-      tabs.tabs("add", "#pg-editor-tab", "hello world");
       tabs.tabs("add", "#pg-editor-tab", "hello world");
     }
 
