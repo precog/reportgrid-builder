@@ -1,0 +1,114 @@
+.rg-builder.ui-widget-content {
+  border: 0;
+}
+.rg-builder {
+  font-size: 73%;
+  font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+  
+  
+}
+.rg-builder .system,
+.rg-builder .main,
+.rg-builder .data,
+.rg-builder .reports {
+  border: 0;
+}
+.rg-builder .builder {
+  border-top: 0;
+  border-bottom: 0;
+}
+.rg-builder .reports .tree {
+  border-bottom: 0;
+}
+.rg-builder .editor.pane {
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+.rg-builder .support {
+  border-bottom: 0;
+}
+.rg-builder .ui-layout-resizer {
+  border-radius: 0;
+}
+.rg-builder .data .toolbar {
+  border-top: 0;
+}
+.rg-builder .builder .toolbar {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.rg-builder .toolbar {
+  border-bottom: 0;
+  vertical-align: baseline;
+}
+.rg-builder .toolbar-actions,
+.rg-builder .toolbar-context {
+  margin: 5px;
+  line-height: 24px;
+}
+.rg-builder .mainbar .toolbar-actions,
+.rg-builder .mainbar .toolbar-context {
+  position: absolute;
+  line-height: 36px;
+}
+.rg-builder .mainbar {
+  height: 38px;
+}
+.rg-builder .ui-widget-content.support {
+  border-top: 0;
+}
+.rg-builder .toolbar-actions button,
+.rg-builder .toolbar-context button {
+  height: 24px;
+}
+.rg-builder .toolbar-context {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.rg-builder .toolbar-description {
+  margin: 4px 5px;
+}
+.rg-builder .toolbar-main {
+  float: left;
+  margin-left: 5px;
+}
+.rg-builder .toolbar-context {
+  float: right;
+  margin-right: 5px;
+}
+.rg-builder .system .toolbar-context {
+  position: relative;
+  margin-top: 0;
+}
+.rg-builder .toolbar-main button,
+.rg-builder .toolbar-context button {
+  width: 2.4em;
+  height: 24px;
+}
+.rg-builder .tabs-container.ui-tabs {
+  border: 0;
+  margin-top: 4px;
+  margin-left: 3px;
+  background-color: transparent;
+  background-image: none;
+}
+.rg-builder .tabs-container.ui-tabs .ui-tabs-nav {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  background-image: none;
+}
+.rg-widget {
+  font-size: 73%;
+  font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+  
+}
+.rg-widget.context-menu {
+  z-index: 10000;
+  position: absolute;
+  display: none;
+}

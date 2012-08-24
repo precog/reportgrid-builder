@@ -1,20 +1,10 @@
 ({
-    appDir: "../src",
-    baseUrl: "js/",
-    dir: "../build",
-    //Comment out the optimize line if you want
-    //the code minified by UglifyJS
-    optimize: "none",
 
-    paths: {
-        "jquery": "empty:"
-    },
-
-    modules: [
-        //Optimize the application files. jQuery is not 
-        //included since it is already in require-jquery.js
-        {
-            name: "main"
-        }
-    ]
+    baseUrl: "../src/js"
+  , out: "../build/js/reportgrid-builder.js"
+  , mainConfigFile: '../src/js/main.js'
+  , paths : {
+    'jquery' : 'empty:'
+  }
+  , name: "main"
 })

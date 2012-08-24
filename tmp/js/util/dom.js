@@ -1,0 +1,1 @@
+define([],function(){return{selectText:function(e,t,n){t=t||0,n=n||$(e).text().length;if(e.setSelectionRange)e.focus(),e.setSelectionRange(t,n);else if(e.createTextRange){var r=e.createTextRange();r.collapse(!0),r.moveEnd("character",n),r.moveStart("character",t),r.select()}},canSelect:function(e){return!!e.setSelectionRange||!!e.createTextRange}}})
