@@ -16,8 +16,8 @@ function(createStore) {
       var theme = config.get("theme");
       ctx.trigger("theme.change", theme);
     });
-    ctx.on("theme.changed", function(e, theme) {
-      config.set("theme", theme);
+    ctx.on("theme.changing", function(e, theme) {
+      config.set("theme", theme, true);
     });
   };
 });

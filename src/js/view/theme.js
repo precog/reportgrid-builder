@@ -4,15 +4,8 @@ define([
 ],
 
 function ($, themes) {
-  var UI_BASE_THEME_URL = "css/jquery-ui/",
-      map = {},
-      groups = {};
+  var UI_BASE_THEME_URL = "css/jquery-ui/";
 
-  $.each(themes, function() {
-    map[this.token] = this;
-    groups[this.group] = groups[this.group] || {};
-    groups[this.group][this.token] = this;
-  });
   function themeUrl(name) {
     return UI_BASE_THEME_URL + name + "/jquery-ui.css";
   }
@@ -58,7 +51,7 @@ function ($, themes) {
       if(current === theme) return;
       current = theme;
       ctx.trigger("theme.changing", theme);
-      setUITheme(map[theme].ui, function() {
+      setUITheme(themes.map[theme].ui, function() {
         ctx.trigger('view.theme.changed', theme);
       });
     });

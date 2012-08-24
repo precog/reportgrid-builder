@@ -15,7 +15,7 @@
 //    .builder,
     .data,
     .reports {
-        border:0 !important;
+        border: 0;
     }
 
     .builder {
@@ -27,6 +27,12 @@
         .tree {
             border-bottom: 0;
         }
+    }
+
+    .editor.pane {
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
     }
 
     .support {
@@ -67,10 +73,17 @@
         }
     }
 
+    .builder {
+        .toolbar {
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+    }
+
     .toolbar {
-//        border-top: 0 !important;
-        border-bottom: 0 !important;
-        vertical-align: baseline !important;
+        border-bottom: 0;
+        vertical-align: baseline;
     }
 
     .toolbar-actions,
@@ -114,13 +127,13 @@
     }
 
     .toolbar-context {
-        position: relative;
         float: right;
         margin-right: 5px;
     }
 
     .system {
         .toolbar-context {
+            position: relative;
             margin-top: 0;
         }
     }
@@ -130,4 +143,45 @@
         width: 2.4em;
         height: 24px;
     }
+
+    .tabs-container.ui-tabs {
+        border: 0;
+        margin-top: 4px;
+        margin-left: 3px;
+        background-color: transparent;
+        background-image: none;
+
+        .ui-tabs-nav {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background-color: transparent;
+            background-image: none;
+        }
+    }
+}
+
+.rg-widget {
+    font-size: 73%;
+    font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+    /*
+    ul.menu-items {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li > a {
+            display: block;
+            left: 0;
+            right: 0;
+            position: relative;
+        }
+    }
+    */
+}
+
+.rg-widget.context-menu {
+    z-index: 10000;
+    position : absolute;
+    display: none;
 }

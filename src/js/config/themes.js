@@ -1,5 +1,9 @@
-define([], function() {
-  return [{
+define([
+  "jquery"
+],
+
+function($) {
+  var themes = [{
     token : "gray",
     name : "gray",
     ui : "gray",
@@ -20,4 +24,17 @@ define([], function() {
     ui : "black",
     group : "dark"
   }];
+
+  var map = {},
+      groups = {};
+  $.each(themes, function() {
+    map[this.token] = this;
+    groups[this.group] = groups[this.group] || {};
+    groups[this.group][this.token] = this;
+  });
+
+  return {
+    map : map,
+    groups : groups
+  }
 });

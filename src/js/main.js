@@ -8,10 +8,11 @@ require([
     "jquery"
   , "model/config"
   , "view/theme"
+  , "view/thememenu"
   , "view/layout"
-  , "view/actions"
+  , "view/editor/tabs"
 ],
-function($, config, theme, layout, actions) {
+function($) {
   var modules = $(arguments).slice(1);
 
   function createContext() {

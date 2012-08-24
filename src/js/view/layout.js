@@ -125,18 +125,13 @@ function($, tplLayout) {
           , maskIframesOnResize : true
         }
       });
-/*
+
+
+
       create($container.find('.builder'), {
-        south : {
-            size : 200
-          , closable : false
-          , resizable : false
-        },
-        onresize : function() {
-          fixbar();
-        }
+        north : toolbar
       });
-*/
+
       $container.addClass("ui-widget-content")
         .find(".pane")
         .addClass("ui-widget-content");
@@ -164,7 +159,9 @@ function($, tplLayout) {
       ctx.trigger("view.reports.toolbar-context", $container.find(".reports .toolbar-context"));
 
       ctx.trigger("view.support.pane", $container.find(".main .support"));
-      ctx.trigger("view.chart.pane", $container.find(".builder .chart"));
+
+      ctx.trigger("view.editor.tabs", $container.find(".builder .tabs-container"));
+      ctx.trigger("view.editor.toolbar-context", $container.find(".builder .toolbar-context:first"));
 //      ctx.trigger("view.options", $container.find(".builder .options"));
       $(window).resize(resize);
 
