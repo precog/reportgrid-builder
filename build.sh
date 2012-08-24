@@ -17,8 +17,8 @@ lessc src/css/main.less build/css/reportgrid-builder.css
 node tools/r.js -o cssIn=build/css/reportgrid-builder.css out=build/css/reportgrid-builder.css
 
 # MINIFY JS
-#~/bin/uglifyjs -o build/js/require-jquery.js require-jquery.js
-#node tools/r.js -o scripts/app.build.js
+#~/bin/uglifyjs -o src/js/require-jquery.js require-jquery.js
+node tools/r.js -o scripts/app.build.js
 
 
 
