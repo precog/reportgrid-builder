@@ -1,1 +1,0 @@
-define([],function(){return{diff:function(e,t){return e.filter(function(e){return!(t.indexOf(e)>-1)})},remove:function(e,t){var n=e.indexOf(t);return n<0?e:(e.splice(n,1),e)}}})

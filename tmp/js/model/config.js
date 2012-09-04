@@ -1,1 +1,0 @@
-define(["util/storagemonitor"],function(e){var t="rg-builder-config",n={theme:"gray"},r=e(t,n);return function(e){r.monitor.bind("theme",function(t){e.trigger("theme.change",t)}),e.on("modules.loaded",function(){var t=r.get("theme");e.trigger("theme.change",t)}),e.on("theme.changing",function(e,t){r.set("theme",t,!0)})}})
