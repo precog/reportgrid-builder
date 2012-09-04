@@ -1,6 +1,8 @@
 define([
     "jquery"
   , "test/model/test-filesystem"
+  , "test/model/test-datasource"
+  , "test/model/test-datamodel"
 ],
 
 function($) {
