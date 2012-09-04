@@ -6,18 +6,17 @@ requirejs.config({
 });
 require([
     "jquery"
+  , "model/context"
   , "model/config"
+  , "model/datatree"
   , "view/theme"
   , "view/thememenu"
   , "view/layout"
   , "view/editor/tabs"
+  , "view/datapane"
 ],
-function($) {
-  var modules = $(arguments).slice(1);
-
-  function createContext() {
-    return $({});
-  }
+function($, createContext) {
+  var modules = $(arguments).slice(2);
 
   function builder() {
     var ctx = createContext();

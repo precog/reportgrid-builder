@@ -13,7 +13,6 @@ function(create, arrays) {
       ok(!dm.column("fake"));
     });
 
-
     test("Column Added Event", function() {
       var dm = create(),
           column = {},
@@ -49,6 +48,5 @@ function(create, arrays) {
       equal(names.length, 1, "one column in the model");
       equal(names[0], "name", "column name is 'name'");
     });
-
   };
 });
