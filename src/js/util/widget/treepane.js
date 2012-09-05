@@ -77,7 +77,9 @@ function($) {
     }
 
     function initFileSystem() {
-      var children = fs.list("/", "folder");
+      var children = fs.all();
+      // wire events
+      // build tree using children
 console.log(JSON.stringify(children));
     }
 
@@ -92,5 +94,19 @@ console.log(JSON.stringify(children));
       createNode("[d]", "/d", "folder", a);
       */
     }
+
+    // TODO
+    // - iterate all nodes
+    // - build tree
+    // - differentiate node types
+    // - pair fs create / node create
+    // - pair fs remove / node remove
+    // - manage node type
+    // - event: select node
+    // - event: select node -> select container
+    // - event: unselect node
+    // - event: unselect container
+    // - event: activate (dblclick) nodes
+    // - listen: activate folder to toggle
   };
 });
