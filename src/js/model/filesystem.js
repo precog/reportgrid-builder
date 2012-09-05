@@ -3,6 +3,13 @@ define([
 ],
 
 function($) {
+  var SPLITTER = ":",
+      PATTERN_NAME = /^[a-z]+[a-z0-9 _-]*$/i;
+
+  function validateName(name) {
+    return PATTERN_NAME.test(name);
+  }
+
   function normalize(node) {
     node = node.substr(0, 1) == "/" ? node.substr(1) : node;
     node = node.substr(-1) == "/" ? node.substr(0, node.length - 1) : node;
@@ -10,18 +17,38 @@ function($) {
   }
   
   function key(node, type) {
-    return type + "::" + node;
+    return type + SPLITTER + node;
   }
 
   function extractNode(key, type) {
-    return key.substr(type.length + 2);
+    return key.substr(type.length + SPLITTER.length);
+  }
+
+  function extractPathType(key) {
+    var parts = key.split(SPLITTER);
+    return { path : parts[1], type : parts[0] };
   }
 
   return function(o) {
     o = o || { };
-    var types    = o.types || { "folder" : { "container" : ["folder"] } },
+    var types       = o.types || { "folder" : { "container" : ["folder"] } },
         defaultType = o.defaultType || "folder", 
-        map      = { };
+        map         = { },
+        containers  = { };
+
+    for(var type in types) {
+      if(types.hasOwnProperty(type)) {
+        var contents = types[type].container;
+        if(contents) {
+          for(var i = 0; i < contents.length; i++) {
+            var content = contents[i];
+            if(!containers[content]) {
+              containers[content] = type;
+            }
+          }
+        }
+      }
+    }
 
     function _isRoot(node, type) {
       return type === defaultType && "/" === node;
@@ -51,20 +78,24 @@ function($) {
         type = type || defaultType;
         return _has(node = normalize(node), type) || _isRoot(node, type);
       },
-      add : function(node, type, parentType) {
+      add : function(node, type, recursive) {
         type = type || defaultType;
+        recursive = !!recursive;
         if(_has(node = normalize(node)) || _isRoot(node, type))
             return false;
         var parts = node.substr(1).split("/"),
             path = "",
-            added = false;
-        if(parentType) {
+            added = false,
+            name = parts[parts.length-1];
+        if(!validateName(name)) throw "invalid path name '"+name+"'";
+        if(recursive) {
           for(var i = 0; i < parts.length - 1; i++) {
             path += "/" + parts[i];
             if(_has(path))
               continue;
-            map[key(path, parentType)] = true;
-            $(fs).trigger("added", [path, parentType]);
+            this.add(path, this.typeContainerFor(type), false);
+//            map[key(path, parentType)] = true;
+//            $(fs).trigger("added", [path, parentType]);
           }
         } else {
           path = "/" + parts.slice(0, parts.length - 1).join("/");
@@ -90,12 +121,21 @@ function($) {
         }
         return true;
       },
+      typeIsContainer : function(type) {
+        return !!(types[type] && types[type].container);
+      },
+      typeCanContain : function(parent, child) {
+        return (types[parent] && types[parent].indexOf(child) >= 0);
+      },
+      typeContainerFor : function(type) {
+        return containers[type];
+      },
       list : function(node, type) {
         type = type || defaultType;
         if(!_has(node = normalize(node), type) && !_isRoot(node, type))
           return [];
         var r = [],
-            len = node.length;
+          len = node.length;
         applyToSub(node, function(cnode, ctype) {
           // skip nested paths
           var path = cnode.substr(len+(node === "/" ? 0 : 1));
@@ -104,11 +144,13 @@ function($) {
         });
         return r;
       },
-      typeIsContainer : function(type) {
-        return !!(types[type] && types[type].container);
-      },
-      typeCanContain : function(parent, child) {
-        return (types[parent] && types[parent].indexOf(child) >= 0);
+      all : function() {
+        type = type || defaultType;
+        var r = [];
+        for(var key in map) {
+          r.push(extractPathType(key));
+        }
+        return r;
       }
     };
     return fs;

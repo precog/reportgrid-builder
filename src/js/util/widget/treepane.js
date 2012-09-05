@@ -36,7 +36,7 @@ function($) {
       init();
     }
 
-    setTimeout(init, 200);
+    pollInit();
 
     function createNode(title, path, type, parent, callback)
     {

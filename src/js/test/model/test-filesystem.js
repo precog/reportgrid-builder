@@ -1,9 +1,10 @@
 define([
-  "model/filesystem",
-  "util/arrays"
+    "model/filesystem"
+  , "util/arrays"
+  , "util/assert"
 ],
 
-function(filesystem, arrays) {
+function(filesystem, arrays, assert) {
   return function() {
     module("File System");
 
@@ -14,7 +15,7 @@ function(filesystem, arrays) {
       ok(!fs.has("/fake", "folder"), "doesn't have fake path /fake");
 
       ok(!fs.add("/my/nested/path", "folder"), "cannot create path in folder that is not defined");
-      ok(fs.add("/my/nested/path", "folder", "folder"));
+      ok(fs.add("/my/nested/path", "folder", true), "create recursive path");
       ok(fs.has("/my", "folder"), "has path /my");
       ok(fs.has("/my/nested", "folder"), "has path /my/nested");
       ok(fs.has("/my/nested/path", "folder"), "has path /my/nested/path");
@@ -27,7 +28,7 @@ function(filesystem, arrays) {
 
     test("Naming", function() {
       var fs = filesystem();
-      fs.add("a/b", "folder", "folder");
+      fs.add("a/b", "folder", true);
       ok(fs.has(""), "empty / no slashes");
       ok(fs.has("a"), "no slashes");
       ok(fs.has("/a"), "leading slash");
@@ -42,9 +43,9 @@ function(filesystem, arrays) {
 
     test("Removal", function() {
       var fs = filesystem();
-      fs.add("a/b/c", "folder", "folder");
-      fs.add("a/b/d", "folder", "folder");
-      fs.add("a/e", "folder", "folder");
+      fs.add("a/b/c", "folder", true);
+      fs.add("a/b/d", "folder", false);
+      fs.add("a/e", "folder", false);
 
       ok(fs.remove("a", "folder"), "remove must return true when succeeds");
       ok(!fs.remove("a", "folder"), "remove must return false when fails");
@@ -87,11 +88,19 @@ function(filesystem, arrays) {
         removed.push(path);
       });
 
-      fs.add("a/b/c", "folder", "folder");
+      fs.add("a/b/c", "folder", true);
       equal(arrays.diff(expected, added).length, 0, "added elements should match expected");
 
       fs.remove("a");
       equal(arrays.diff(expected, removed).length, 0, "removed elements should match expected");
+    });
+
+    test("Name Validation", function() {
+      // assert.throws(function() { fs.add("/name:"); }, "invalid name raises exception");
+    });
+
+    test("Mixed Contents", function() {
+      // try the datasource structure (folder/datasource/column)
     });
   }
 });
