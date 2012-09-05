@@ -19,7 +19,7 @@ function($) {
 
   return function(o) {
     o = o || { };
-    var types    = o.types || { "folder" : { "container" : true } },
+    var types    = o.types || { "folder" : { "container" : ["folder"] } },
         defaultType = o.defaultType || "folder", 
         map      = { };
 
@@ -68,7 +68,7 @@ function($) {
           }
         } else {
           path = "/" + parts.slice(0, parts.length - 1).join("/");
-          if(!_has(path))
+          if(!this.has(path))
             return false;
         }
         map[key(node, type)] = true;
@@ -103,6 +103,12 @@ function($) {
             r.push({ path : path, type : ctype });
         });
         return r;
+      },
+      typeIsContainer : function(type) {
+        return !!(types[type] && types[type].container);
+      },
+      typeCanContain : function(parent, child) {
+        return (types[parent] && types[parent].indexOf(child) >= 0);
       }
     };
     return fs;

@@ -69,7 +69,7 @@ function($, tplLayout) {
       refresh();
     }
 
-    function init(e, el) {
+    function init(el) {
       var $el = $(el);
       $el.css({
         position : "relative",

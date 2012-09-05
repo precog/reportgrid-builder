@@ -31,7 +31,7 @@ function($, ui) {
       tabs.tabs("add", "#pg-editor-tab", "hello world");
     }
 
-    ctx.on("view.editor.tabs", function(e, el) {
+    ctx.on("view.editor.tabs", function(el) {
       tabs = ui.tabs($(el), {
         tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close pg-tab-close'>Remove Tab</span></li>",
         add: function(event, ui) {
@@ -39,9 +39,9 @@ function($, ui) {
         }
       });
     });
-    ctx.on("view.editor.toolbar-context", function(e, el) {
+    ctx.on("view.editor.toolbar-context", function(el) {
       context = $(el);
     });
-    ctx.on("view.editor.tabs,view.editor.toolbar-context", init);
+    $.when(ctx.on("view.editor.tabs"), ctx.on("view.editor.toolbar-context")).then(init);
   };
 });

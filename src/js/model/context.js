@@ -5,7 +5,7 @@ function($) {
 
   function applyon(ctx, handler) {
     handler.handler = handler.handler || function() {
-      handler.apply(ctx, arguments);
+      handler.apply(ctx, $(arguments).slice(1));
     };
     return handler.handler;
   }
@@ -17,7 +17,7 @@ function($) {
     } else {
       return $.Deferred(function(dfd) {
         $(ctx)[method](type, function() {
-          dfd.resolve(arguments);
+          dfd.resolve($(arguments).slice(1));
         });
       }).promise();
     }

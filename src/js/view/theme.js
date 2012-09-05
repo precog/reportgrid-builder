@@ -47,7 +47,7 @@ function ($, themes) {
 
   return function(ctx) {
     var current;
-    ctx.on("theme.change", function(e, theme) {
+    ctx.on("theme.change", function(theme) {
       if(current === theme) return;
       current = theme;
       ctx.trigger("theme.changing", theme);

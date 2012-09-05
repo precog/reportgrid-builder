@@ -25,7 +25,7 @@ function($, themes, ui) {
     var menu = ui.contextmenu('<div class="rg-widget settings-menu"></div>');
     buildItems(ctx, menu.find("ul:first"), themes.groups);
 
-    ctx.on("view.main.toolbar-context", function(e, el) {
+    ctx.on("view.main.toolbar-context", function(el) {
       ui.button(el, {
         icon : "ui-icon-gear",
         description : "about me"
@@ -41,7 +41,7 @@ function($, themes, ui) {
       });
     });
 
-    ctx.on("theme.changing", function(e, theme) {
+    ctx.on("theme.changing", function(theme) {
       menu.find('li[data-theme]').each(function() {
         if($(this).attr("data-theme") === theme) {
           $(this).addClass('ui-state-active');
