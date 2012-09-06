@@ -63,11 +63,13 @@ function($, compare) {
     }
 
     function applyToSub(path, f) {
-      for(var mkey in map) {
-        if(map.hasOwnProperty(mkey)) {
-          for(var type in types) {
-            if(types.hasOwnProperty(type)) {
+      for(var type in types) {
+        if(types.hasOwnProperty(type)) {
+          for(var mkey in map) {
+            if(map.hasOwnProperty(mkey)) {
               var npath = key(path, type);
+              if(path != '/')
+                npath += '/';
               if(mkey.substr(0, npath.length) === npath) {
                 f(extractNode(mkey, type), type);
               }
@@ -111,10 +113,9 @@ function($, compare) {
             delete map[key(cpath, ctype)];
             $(fs).trigger("removed", [cpath, ctype]);
           });
-        } else {
-          delete map[key(path, type)];
-          $(fs).trigger("removed", [path, type]);
         }
+        delete map[key(path, type)];
+        $(fs).trigger("removed", [path, type]);
         return true;
       },
       typeIsContainer : function(type) {

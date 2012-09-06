@@ -176,5 +176,13 @@ function(filesystem, arrays, assert) {
       ok(fs.has("/f/s/c", "column"), "column exists");
     });
 
+    test("Remove Must Not Remove Non-Children", function() {
+      var fs = filesystem();
+
+      fs.add("/a");
+      fs.add("/ab");
+      fs.remove("/a");
+      ok(fs.has("/ab"));
+    })
   }
 });

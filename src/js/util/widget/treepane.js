@@ -14,8 +14,15 @@ function($, compare) {
   return function(el, fs, o) {
     o = o || {};
     o.icons = o.icons || {};
-    var types = { };
-    var names = fs.typeNames();
+    var types = { },
+        treepane = {
+          toggle : function(node) {
+            var node = findNode(node.path, node.type);
+            if(!node) return;
+            tree.jstree("toggle_node", node);
+          }
+        },
+        names = fs.typeNames();
     for(var i = 0; i < names.length; i++) {
       var name = names[i],
           children = fs.typeChildren(name);
@@ -56,6 +63,26 @@ function($, compare) {
     }
     tree.bind("create_node.jstree", updateIcon);
 
+    var selected;
+    tree.bind("click.jstree", function() {
+      var el = tree.jstree("get_selected"),
+          current = { type : el.attr("rel"), path : el.attr("data-path") };
+      if(selected && selected.type === current.type && selected.path === current.path)
+        return;
+      if(selected)
+        $(treepane).trigger("node.deactivated", selected);
+      selected = current;
+      $(treepane).trigger("node.activated", selected);
+    });
+    tree.bind("create_node.jstree", function(e, data) {
+      var el = $(data.rslt.obj[0]);
+      el.dblclick(function(e) {
+        var node = { type : el.attr("rel"), path : el.attr("data-path") };
+        $(treepane).trigger("node.trigger", node);
+        e.preventDefault(); return false;
+      });
+    });
+
     function pollInit() {
       if(!el.find("ul").length) {
         setTimeout(pollInit, 15);
@@ -92,12 +119,15 @@ function($, compare) {
               el.children("ins").hide();
               initFileSystem();
             }, 0);
-          } else if(fs.typeIsContainer(type)) {
+          }
+          /*
+          else if(fs.typeIsContainer(type)) {
             el.find("a:first").dblclick(function(e) {
               tree.jstree("toggle_node", el);
               e.preventDefault(); return false;
             });
           }
+          */
           if(callback)
             callback(el);
         }
@@ -146,10 +176,17 @@ function($, compare) {
       dequeue();
     }
 
+    $(treepane).on("node.trigger", function(e, node) {
+      if(fs.typeIsContainer(node.type))
+        treepane.toggle(node);
+    });
+
     function init()
     {
       root = createNode("/", "/", "folder");
     }
+    
+    return treepane;
 
     // TODO
     // + iterate all nodes
@@ -159,10 +196,9 @@ function($, compare) {
     // + pair fs remove / node remove
     // + manage node type
     // - event: select node
-    // - event: select node -> select container
     // - event: unselect node
-    // - event: unselect container
     // - event: activate (dblclick) nodes
     // - listen: activate folder to toggle
+    // - filesystem check existance should be case insensitive
   };
 });
