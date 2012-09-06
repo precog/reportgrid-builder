@@ -5,6 +5,23 @@ define([
 ],
 
 function(filesystem, arrays, assert) {
+  function createComplexFS() {
+    return filesystem({
+      types : {
+        folder : {
+          container : ["folder", "datasource"]
+        },
+        datasource : {
+          container : ["column"]
+        },
+        column : {
+          container : false
+        }
+      },
+      defaultType : "folder"
+    });
+  }
+
   return function() {
     module("File System");
 
@@ -96,11 +113,68 @@ function(filesystem, arrays, assert) {
     });
 
     test("Name Validation", function() {
-      // assert.throws(function() { fs.add("/name:"); }, "invalid name raises exception");
+      var fs = filesystem();
+      throws(function() { fs.add("/name:"); }, "invalid name raises exception");
+    });
+
+    test("Type Is Container", function() {
+      var fs = createComplexFS();
+
+      ok(fs.typeIsContainer("folder"));
+      ok(fs.typeIsContainer("datasource"));
+      ok(!fs.typeIsContainer("column"));
+    });
+
+    test("Type Can Contain", function() {
+      var fs = createComplexFS();
+
+      ok(fs.typeCanContain("folder", "folder"));
+      ok(fs.typeCanContain("folder", "datasource"));
+      ok(!fs.typeCanContain("folder", "column"));
+
+      ok(!fs.typeCanContain("datasource", "folder"));
+      ok(!fs.typeCanContain("datasource", "datasource"));
+      ok(fs.typeCanContain("datasource", "column"));
+
+      ok(!fs.typeCanContain("column", "folder"));
+      ok(!fs.typeCanContain("column", "datasource"));
+      ok(!fs.typeCanContain("column", "column"));
+    });
+
+    test("Type Can Contain", function() {
+      var fs = createComplexFS();
+
+      equal(fs.typeContainerFor("folder"), "folder");
+      equal(fs.typeContainerFor("datasource"), "folder");
+      equal(fs.typeContainerFor("column"), "datasource");
     });
 
     test("Mixed Contents", function() {
-      // try the datasource structure (folder/datasource/column)
+      var fs = createComplexFS();
+
+      ok(fs.add("/f",      "folder"), "add folder to folder");
+      ok(fs.add("/s",      "datasource"), "add datasource to root");
+      ok(fs.has("/s",      "datasource"), "check datasource");
+      ok(fs.add("/s/c",    "column"), "add column to datasource");
+      ok(fs.add("/f/s",    "datasource"), "add datasource to folder");
+      ok(fs.add("/f/s/c",  "column"), "add column to sub datasource");
+      ok(!fs.add("/c",     "column"), "don't add column to root");
+      ok(!fs.add("/f/c",   "column"), "don't add column to folder");
+      ok(!fs.add("/s/c/c", "column"), "don't add column to column");
+      ok(!fs.add("/s/c/f", "column"), "don't add folder to column");
+      ok(!fs.add("/s/c/s", "datasource"), "don't add datasource to column");
+      ok(!fs.add("/s/s",   "datasource"), "don't add datasource to datasource");
+      ok(!fs.add("/s/f",   "folder"), "don't add folder to datasource");
     });
+
+    test("Deep Recursive Creation", function() {
+      var fs = createComplexFS();
+
+      ok(fs.add("/f/s/c", "column", true), "add column and containers");
+      ok(fs.has("/f", "folder"), "folder exists");
+      ok(fs.has("/f/s", "datasource"), "datasource exists");
+      ok(fs.has("/f/s/c", "column"), "column exists");
+    });
+
   }
 });

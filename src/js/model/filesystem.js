@@ -10,14 +10,14 @@ function($) {
     return PATTERN_NAME.test(name);
   }
 
-  function normalize(node) {
-    node = node.substr(0, 1) == "/" ? node.substr(1) : node;
-    node = node.substr(-1) == "/" ? node.substr(0, node.length - 1) : node;
-    return "/" + node;
+  function normalize(path) {
+    path = path.substr(0, 1) == "/" ? path.substr(1) : path;
+    path = path.substr(-1) == "/" ? path.substr(0, path.length - 1) : path;
+    return "/" + path;
   }
-  
-  function key(node, type) {
-    return type + SPLITTER + node;
+
+  function key(path, type) {
+    return type + SPLITTER + path;
   }
 
   function extractNode(key, type) {
@@ -32,7 +32,7 @@ function($) {
   return function(o) {
     o = o || { };
     var types       = o.types || { "folder" : { "container" : ["folder"] } },
-        defaultType = o.defaultType || "folder", 
+        defaultType = o.defaultType || "folder",
         map         = { },
         containers  = { };
 
@@ -50,21 +50,21 @@ function($) {
       }
     }
 
-    function _isRoot(node, type) {
-      return type === defaultType && "/" === node;
-    }
-    
-    function _has(node, type) {
-      return !!map[key(node, type)];
+    function _isRoot(path, type) {
+      return type === defaultType && "/" === path;
     }
 
-    function applyToSub(node, f) {
+    function _has(path, type) {
+      return !!map[key(path, type)];
+    }
+
+    function applyToSub(path, f) {
       for(var mkey in map) {
         if(map.hasOwnProperty(mkey)) {
           for(var type in types) {
             if(types.hasOwnProperty(type)) {
-              var nnode = key(node, type);
-              if(mkey.substr(0, nnode.length) === nnode) {
+              var npath = key(path, type);
+              if(mkey.substr(0, npath.length) === npath) {
                 f(extractNode(mkey, type), type);
               }
             }
@@ -74,50 +74,42 @@ function($) {
     }
 
     var fs = {
-      has : function(node, type) {
+      has : function(path, type) {
         type = type || defaultType;
-        return _has(node = normalize(node), type) || _isRoot(node, type);
+        return _has(path = normalize(path), type) || _isRoot(path, type);
       },
-      add : function(node, type, recursive) {
+      add : function(path, type, recursive) {
         type = type || defaultType;
         recursive = !!recursive;
-        if(_has(node = normalize(node)) || _isRoot(node, type))
+        if(_has(path = normalize(path)) || _isRoot(path, type))
             return false;
-        var parts = node.substr(1).split("/"),
-            path = "",
-            added = false,
+        var parts = path.substr(1).split("/"),
             name = parts[parts.length-1];
         if(!validateName(name)) throw "invalid path name '"+name+"'";
+        var parentPath = "/" + parts.slice(0, parts.length - 1).join("/"),
+            parentType = this.typeContainerFor(type);
         if(recursive) {
-          for(var i = 0; i < parts.length - 1; i++) {
-            path += "/" + parts[i];
-            if(_has(path))
-              continue;
-            this.add(path, this.typeContainerFor(type), false);
-//            map[key(path, parentType)] = true;
-//            $(fs).trigger("added", [path, parentType]);
-          }
+          this.add(parentPath, parentType, true);
         } else {
-          path = "/" + parts.slice(0, parts.length - 1).join("/");
-          if(!this.has(path))
+          if(!this.has(parentPath, parentType))
             return false;
         }
-        map[key(node, type)] = true;
-        $(fs).trigger("added", [node, type]);
+        map[key(path, type)] = true;
+        $(fs).trigger("added", [path, type]);
         return true;
       },
-      remove : function(node, type) {
+      remove : function(path, type) {
         type = type || defaultType;
-        if(!_has(node = normalize(node), type) || _isRoot(node, type))
+        if(!_has(path = normalize(path), type) || _isRoot(path, type))
           return false;
         if(types[type].container) {
-          applyToSub(node, function(cnode, ctype) {
-            delete map[key(cnode, ctype)];
-            $(fs).trigger("removed", [cnode, ctype]);
+          applyToSub(path, function(cpath, ctype) {
+            delete map[key(cpath, ctype)];
+            $(fs).trigger("removed", [cpath, ctype]);
           });
         } else {
-          delete map[key(node, type)];
-          $(fs).trigger("removed", [node, type]);
+          delete map[key(path, type)];
+          $(fs).trigger("removed", [path, type]);
         }
         return true;
       },
@@ -125,22 +117,23 @@ function($) {
         return !!(types[type] && types[type].container);
       },
       typeCanContain : function(parent, child) {
-        return (types[parent] && types[parent].indexOf(child) >= 0);
+        var t = types[parent];
+        return (t && t.container && t.container.indexOf(child) >= 0);
       },
       typeContainerFor : function(type) {
         return containers[type];
       },
-      list : function(node, type) {
+      list : function(path, type) {
         type = type || defaultType;
-        if(!_has(node = normalize(node), type) && !_isRoot(node, type))
+        if(!_has(path = normalize(path), type) && !_isRoot(path, type))
           return [];
         var r = [],
-          len = node.length;
-        applyToSub(node, function(cnode, ctype) {
+          len = path.length;
+        applyToSub(path, function(cpath, ctype) {
           // skip nested paths
-          var path = cnode.substr(len+(node === "/" ? 0 : 1));
-          if(path !== "" && (path.indexOf("/") < 0))
-            r.push({ path : path, type : ctype });
+          var p = cpath.substr(len+(path === "/" ? 0 : 1));
+          if(p !== "" && (p.indexOf("/") < 0))
+            r.push({ path : p, type : ctype });
         });
         return r;
       },
