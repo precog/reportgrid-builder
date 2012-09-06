@@ -1,32 +1,60 @@
 define([
     "jquery"
+  , "util/compare"
   , 'lib/jstree/vakata'
   , 'lib/jstree/jstree'
   , 'lib/jstree/jstree.sort'
   , 'lib/jstree/jstree.ui'
   , 'lib/jstree/jstree.themes'
+  , 'lib/jstree/jstree.dnd'
 ],
 
-function($) {
+function($, compare) {
 
-  return function(el, fs) {
+  return function(el, fs, o) {
+    o = o || {};
+    o.icons = o.icons || {};
+    var types = { };
+    var names = fs.typeNames();
+    for(var i = 0; i < names.length; i++) {
+      var name = names[i],
+          children = fs.typeChildren(name);
+      types[name] = { valid_children : children ? children : "none" };
+      if(o.icons[name])
+        types[name].icon = o.icons[name];
+      else
+        types[name].icon = 'tree-icon tree-icon-' + name;
+    }
+
     var tree = el
-          .bind("after.jstree", function() { console.log("CREATED"); })
           .jstree({
             plugins : [
-              "themes", "sort", "ui"
+              "themes", "ui", "sort"
             ],
+            sort : function (a, b) {
+              var comp = compare(fs.typeOrder($(a).attr("rel")), fs.typeOrder($(b).attr("rel")));
+              return comp !== 0 ? comp : compare($(a).attr("data-path").toLowerCase(), $(b).attr("data-path").toLowerCase());
+            },
             ui : {
                 select_limit : 1
               , selected_parent_close : "deselect"
               , select_multiple_modifier : false
               , select_range_modifier : false
-              , initially_open : true
-            }
+            },
+            types : types
           })
           .addClass("ui-widget-content"),
         root
       ;
+
+    function updateIcon(e, data) {
+      var r = data.rslt,
+          el = $(r.obj[0]),
+          type = $(el).attr("rel");
+      if(type !== "folder")
+        result = tree.jstree("set_icon", el, types[type].icon);
+    }
+    tree.bind("create_node.jstree", updateIcon);
 
     function pollInit() {
       if(!el.find("ul").length) {
@@ -44,13 +72,13 @@ function($) {
         , parent || -1
         , {
             title : title
-          , data  : path
-          , attr : {
-            rel : type
-          }
+//          , data  : path
+//          , attr : {
+//            rel : type
+//          }
           , li_attr : {
               rel : type
-            , data  : path
+            , "data-path"  : path
           }
         }
         , "last"
@@ -71,7 +99,7 @@ function($) {
             });
           }
           if(callback)
-            setTimeout(function() { callback(el); }, 0);
+            callback(el);
         }
       )
     }
@@ -91,7 +119,7 @@ function($) {
     }
 
     function findNode(path, type) {
-      return tree.find('li[data="'+path+'"][rel="'+type+'"]');
+      return tree.find('li[data-path="'+path+'"][rel="'+type+'"]');
     }
 
     function initFileSystem() {
@@ -126,10 +154,10 @@ function($) {
     // TODO
     // + iterate all nodes
     // + build tree
-    // - differentiate node types
-    // - pair fs create / node create
-    // - pair fs remove / node remove
-    // - manage node type
+    // + differentiate node types
+    // + pair fs create / node create
+    // + pair fs remove / node remove
+    // + manage node type
     // - event: select node
     // - event: select node -> select container
     // - event: unselect node

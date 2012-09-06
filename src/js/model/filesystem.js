@@ -127,6 +127,21 @@ function($, compare) {
       typeContainerFor : function(type) {
         return containers[type];
       },
+      typeOrder : function(type) {
+        return types[type].order;
+      },
+      typeNames : function() {
+        var r = [];
+        for(var key in types) {
+          if(types.hasOwnProperty(key)) {
+            r.push(key);
+          }
+        }
+        return r;
+      },
+      typeChildren : function(type) {
+        return types[type].container;
+      },
       list : function(path, type) {
         type = type || defaultType;
         if(!_has(path = normalize(path), type) && !_isRoot(path, type))
@@ -145,7 +160,9 @@ function($, compare) {
         type = type || defaultType;
         var r = [];
         for(var key in map) {
-          r.push(extractPathType(key));
+          if(map.hasOwnProperty(key)) {
+            r.push(extractPathType(key));
+          }
         }
         r.sort(function(a, b) {
           var comp = compare(types[a.type].order, types[b.type].order);

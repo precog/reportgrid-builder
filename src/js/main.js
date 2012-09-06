@@ -2,12 +2,11 @@ requirejs.config({
   shim : {
       'lib/jquery-ui/jquery.ui'         : ['jquery']
     , 'lib/jquery-layout/jquery.layout' : ['lib/jquery-ui/jquery.ui']
-
     , 'lib/jstree/jstree' : ['lib/jstree/vakata']
     , 'lib/jstree/jstree.sort' : ['lib/jstree/jstree']
-    , 'lib/jstree/jstree.types' : ['lib/jstree/jstree']
     , 'lib/jstree/jstree.themes' : ['lib/jstree/jstree']
     , 'lib/jstree/jstree.ui' : ['lib/jstree/jstree']
+    , 'lib/jstree/jstree.dnd' : ['lib/jstree/jstree']
   }
 });
 require([
