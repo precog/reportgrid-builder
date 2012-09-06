@@ -1,8 +1,9 @@
 define([
-  "jquery"
+    "jquery"
+  , "util/compare"
 ],
 
-function($) {
+function($, compare) {
   var SPLITTER = ":",
       PATTERN_NAME = /^[a-z]+[a-z0-9 _-]*$/i;
 
@@ -36,6 +37,7 @@ function($) {
         map         = { },
         containers  = { };
 
+    var order = 0;
     for(var type in types) {
       if(types.hasOwnProperty(type)) {
         var contents = types[type].container;
@@ -47,6 +49,8 @@ function($) {
             }
           }
         }
+        if("undefined" === typeof types[type].order)
+          types[type].order = order++;
       }
     }
 
@@ -143,6 +147,10 @@ function($) {
         for(var key in map) {
           r.push(extractPathType(key));
         }
+        r.sort(function(a, b) {
+          var comp = compare(types[a.type].order, types[b.type].order);
+          return comp !== 0 ? comp : compare(a.path, b.path);
+        });
         return r;
       }
     };

@@ -48,6 +48,10 @@ function($) {
           , attr : {
             rel : type
           }
+          , li_attr : {
+              rel : type
+            , data  : path
+          }
         }
         , "last"
         , function(el) {
@@ -67,37 +71,61 @@ function($) {
             });
           }
           if(callback)
-            callback(el);
+            setTimeout(function() { callback(el); }, 0);
         }
       )
     }
 
+    function createNodeByPath(path, type, callback) {
+      var parts = path.substr(1).split("/"),
+          name = parts.pop(),
+          parent = parts.length === 0 ? -1 : findNode("/" + parts.join("/"), fs.typeContainerFor(type));
+      createNode(name, path, type, parent, callback);
+    }
+
+    function removeNodeByPath(path, type) {
+      var node = findNode(path, type);
+      if(node === null)
+        return;
+      tree.jstree("delete_node", node);
+    }
+
     function findNode(path, type) {
-      throw "to implement";
+      return tree.find('li[data="'+path+'"][rel="'+type+'"]');
     }
 
     function initFileSystem() {
-      var children = fs.all();
+      var queue = fs.all();
+
+      function dequeue() {
+        if(queue.length === 0)
+          return;
+        var next = queue.shift();
+        createNodeByPath(next.path, next.type, dequeue);
+      }
+
       // wire events
-      // build tree using children
-console.log(JSON.stringify(children));
+      $(fs).on("added", function(e, path, type) {
+        queue.push({ path : path, type : type });
+        if(queue.length > 1) return;
+        dequeue()
+      });
+
+      $(fs).on("removed", function(e, path, type) {
+        removeNodeByPath(path, type);
+      });
+
+      dequeue();
     }
 
     function init()
     {
       root = createNode("/", "/", "folder");
-      /*
-      tree.jstree("open_node", "folder", root);
-      createNode("[a]", "/a", "file", root);
-      var a = createNode("[b]", "/b", "folder", root);
-      createNode("[c]", "/c", "folder", a);
-      createNode("[d]", "/d", "folder", a);
-      */
     }
 
     // TODO
-    // - iterate all nodes
-    // - build tree
+    // + iterate all nodes
+    // + build tree
     // - differentiate node types
     // - pair fs create / node create
     // - pair fs remove / node remove
