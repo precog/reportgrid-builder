@@ -99,10 +99,6 @@ function($, compare) {
         , parent || -1
         , {
             title : title
-//          , data  : path
-//          , attr : {
-//            rel : type
-//          }
           , li_attr : {
               rel : type
             , "data-path"  : path
@@ -120,14 +116,6 @@ function($, compare) {
               initFileSystem();
             }, 0);
           }
-          /*
-          else if(fs.typeIsContainer(type)) {
-            el.find("a:first").dblclick(function(e) {
-              tree.jstree("toggle_node", el);
-              e.preventDefault(); return false;
-            });
-          }
-          */
           if(callback)
             callback(el);
         }
@@ -187,18 +175,5 @@ function($, compare) {
     }
     
     return treepane;
-
-    // TODO
-    // + iterate all nodes
-    // + build tree
-    // + differentiate node types
-    // + pair fs create / node create
-    // + pair fs remove / node remove
-    // + manage node type
-    // - event: select node
-    // - event: unselect node
-    // - event: activate (dblclick) nodes
-    // - listen: activate folder to toggle
-    // - filesystem check existance should be case insensitive
   };
 });
