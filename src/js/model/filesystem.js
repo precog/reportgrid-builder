@@ -5,7 +5,7 @@ define([
 
 function($, compare) {
   var SPLITTER = ":",
-      PATTERN_NAME = /^[a-z]+[a-z0-9 _-]*$/i;
+      PATTERN_NAME = /^[a-z]+[a-z0-9 _.-]*$/i;
 
   function validateName(name) {
     return PATTERN_NAME.test(name);
@@ -32,10 +32,12 @@ function($, compare) {
 
   return function(o) {
     o = o || { };
-    var types       = o.types || { "folder" : { "container" : ["folder"] } },
-        defaultType = o.defaultType || "folder",
-        map         = { },
-        containers  = { };
+    var types         = o.types || { "folder" : { "container" : ["folder"] } },
+        defaultType   = o.defaultType || "folder",
+        caseSensitive = "undefined" !== typeof o.caseSensitive ? !!o.caseSensitive : false;
+        map           = { },
+        cimap         = { }, // case insensitive
+        containers    = { };
 
     var order = 0;
     for(var type in types) {
@@ -59,7 +61,10 @@ function($, compare) {
     }
 
     function _has(path, type) {
-      return !!map[key(path, type)];
+      if(caseSensitive)
+        return !!map[key(path, type)];
+      else
+        return !!cimap[key(path, type).toLowerCase()];
     }
 
     function applyToSub(path, f) {
@@ -87,7 +92,7 @@ function($, compare) {
       add : function(path, type, recursive) {
         type = type || defaultType;
         recursive = !!recursive;
-        if(_has(path = normalize(path)) || _isRoot(path, type))
+        if(_has(path = normalize(path), type) || _isRoot(path, type))
             return false;
         var parts = path.substr(1).split("/"),
             name = parts[parts.length-1];
@@ -101,20 +106,26 @@ function($, compare) {
             return false;
         }
         map[key(path, type)] = true;
+        cimap[key(path, type).toLowerCase()] = true;
         $(fs).trigger("added", [path, type]);
         return true;
       },
       remove : function(path, type) {
+        var k;
         type = type || defaultType;
         if(!_has(path = normalize(path), type) || _isRoot(path, type))
           return false;
         if(types[type].container) {
           applyToSub(path, function(cpath, ctype) {
-            delete map[key(cpath, ctype)];
+            k = key(cpath, ctype);
+            delete map[k];
+            delete cimap[k.toLowerCase()];
             $(fs).trigger("removed", [cpath, ctype]);
           });
         }
-        delete map[key(path, type)];
+        k = key(path, type);
+        delete map[k];
+        delete cimap[k.toLowerCase()];
         $(fs).trigger("removed", [path, type]);
         return true;
       },

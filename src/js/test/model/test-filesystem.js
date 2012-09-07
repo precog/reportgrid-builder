@@ -141,7 +141,7 @@ function(filesystem, arrays, assert) {
       ok(!fs.typeCanContain("column", "column"));
     });
 
-    test("Type Can Contain", function() {
+    test("Type Container For", function() {
       var fs = createComplexFS();
 
       equal(fs.typeContainerFor("folder"), "folder");
@@ -183,6 +183,22 @@ function(filesystem, arrays, assert) {
       fs.add("/ab");
       fs.remove("/a");
       ok(fs.has("/ab"));
-    })
+    });
+
+    test("Test Case Insensitivty", function() {
+      var fs = filesystem({ caseSensitive : false });
+
+      fs.add("/a");
+      ok(fs.has("/a"));
+      ok(fs.has("/A"));
+    });
+
+    test("Test Case Sensitivty", function() {
+      var fs = filesystem({ caseSensitive : true });
+
+      fs.add("/a");
+      ok(fs.has("/a"));
+      ok(!fs.has("/A"));
+    });
   }
 });
