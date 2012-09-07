@@ -22,9 +22,8 @@ function(createFileSystem) {
       ctx.trigger("data.system.ready", fs);
       fs.add("/ds2", "datasource");
       fs.add("/a/e", "folder");
-      setTimeout(function() { fs.remove("/a"); }, 4000);
-      setTimeout(function() { fs.add("/ds-slow/col", "column", true); }, 2000);
-      setTimeout(function() { fs.add("/average/child", "folder", true); }, 1000);
+      setTimeout(function() { fs.add("/ds-slow/col", "column", true); }, 500);
+      setTimeout(function() { fs.add("/average/child", "folder", true); }, 250);
       setTimeout(function() { fs.add("/fast/sub/ds3", "datasource", true); }, 0);
     });
   };

@@ -54,14 +54,16 @@ function($, compare) {
         root
       ;
 
-    function updateIcon(e, data) {
+    tree.bind("create_node.jstree", function(e, data) {
       var r = data.rslt,
           el = $(r.obj[0]),
-          type = $(el).attr("rel");
+          path = el.attr("data-path"),
+          type = el.attr("rel");
+
       if(type !== "folder")
         result = tree.jstree("set_icon", el, types[type].icon);
-    }
-    tree.bind("create_node.jstree", updateIcon);
+      $(treepane).trigger("node.created", [el, { type : type, path : path }]);
+    });
 
     var selected;
     tree.bind("click.jstree", function() {
