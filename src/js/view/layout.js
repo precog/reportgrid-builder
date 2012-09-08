@@ -160,6 +160,7 @@ function($, tplLayout) {
 
       ctx.trigger("view.support.pane", $container.find(".main .support"));
 
+      ctx.trigger("view.editor.pane", $container.find(".main .editor"));
       ctx.trigger("view.editor.tabs", $container.find(".builder .tabs-container"));
       ctx.trigger("view.editor.toolbar-context", $container.find(".builder .toolbar-context:first"));
 //      ctx.trigger("view.options", $container.find(".builder .options"));

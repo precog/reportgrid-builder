@@ -14,29 +14,32 @@ function($, createTree) {
             }
           });
       $(tree).on("node.created", function(e, el, node) {
-        if(node.type !== "column") {
-          $(el).bind('dragstart', function(e){
-            if(el.children("a")[0] === e.target) e.preventDefault();
-          });
-        } else {
+//        if(node.type !== "column") {
+//          $(el).bind('dragstart', function(e){
+//            if(el.children("a")[0] === e.target) e.preventDefault();
+//          });
+//        } else {
           $(el).find("a").draggable({
-            delay : 200
+              delay : 200
             , revert : true
             , revertDuration : 0
 
 
             , helper : function (e,ui) {
               var $this = $(this),
-                builder = $this.closest(".rg-builder"),
-                clone = $this.clone(),
-                container = $('<div class="jstree jstree-default"></div>');
+                  builder = $this.closest(".rg-builder"),
+                  clone = $this.clone(),
+                  container = $('<div class="jstree jstree-default"></div>');
               container.append(clone);
               builder.append(container);
               return clone;
             }
-            , scope : "arbitrary"
+//            , stop : function(e, ui) {
+//              console.log(e, ui);
+//            }
+//            , scope : node.type
           });
-        }
+//        }
       });
     }
 

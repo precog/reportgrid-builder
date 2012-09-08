@@ -19,6 +19,7 @@ require([
   , "view/layout"
   , "view/editor/tabs"
   , "view/datapane"
+  , "view/editorpane"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);

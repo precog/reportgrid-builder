@@ -101,9 +101,13 @@ function($, compare) {
         , parent || -1
         , {
             title : title
+          , a_attr : {
+              rel : type
+            , "data-path" : path
+          }
           , li_attr : {
               rel : type
-            , "data-path"  : path
+            , "data-path" : path
           }
         }
         , "last"
