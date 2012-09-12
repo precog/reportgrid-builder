@@ -173,16 +173,28 @@
     }
 
     .dimension {
-        border: 1px solid red;
-        padding: 2px;
-        margin: 2px;
+//        background-color: #eee;
+        padding: 0px;
+        margin-top: 5px;
+        margin-left: 5px;
         width: 200px;
         .receptor {
-            border: 1px solid blue;
+//            border: 1px solid #e9e9e9;
             padding: 2px;
-            margin: 2px;
+            margin: 1px;
+        }
+      .dimension-receptor {
+        min-height: 20px;
+      }
+        .ui-state-hover,
+        .ui-state-active {
+            display : block; // !important;
         }
     }
+}
+
+.rg-remove-draggable {
+  border: 8px solid red !important;
 }
 
 .rg-widget {

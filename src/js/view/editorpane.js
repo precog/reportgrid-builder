@@ -43,6 +43,7 @@ function($, createDrop) {
     function init(el) {
 
       for(var i = 0; i < dimensions.length; i++) {
+        $(el).append('<div>dimension</div>');
         var drop = createDrop(el, dimensions[i]);
         map[dimensions[i].dimension] = drop;
         $(drop).on("view.dimension.setrequest", function(e, info, pos) {
@@ -55,3 +56,11 @@ function($, createDrop) {
     ctx.on("view.editor.pane", init);
   }
 });
+
+/* TODO
+
+- remove dimension
+- deal with uniqueness
+- drag and drop dimension from inside dimension drop area
+
+*/

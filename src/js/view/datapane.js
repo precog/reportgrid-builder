@@ -13,33 +13,24 @@ function($, createTree) {
               , column : "images/column.png"
             }
           });
-      $(tree).on("node.created", function(e, el, node) {
-//        if(node.type !== "column") {
-//          $(el).bind('dragstart', function(e){
-//            if(el.children("a")[0] === e.target) e.preventDefault();
-//          });
-//        } else {
+      $(tree).on("node.created", function(e, el, node) {{
           $(el).find("a").draggable({
               delay : 200
-            , revert : true
-            , revertDuration : 0
-
+            , revert : "invalid"
 
             , helper : function (e,ui) {
-              var $this = $(this),
-                  builder = $this.closest(".rg-builder"),
-                  clone = $this.clone(),
-                  container = $('<div class="jstree jstree-default"></div>');
-              container.append(clone);
-              builder.append(container);
+                var $this = $(this),
+                    builder = $this.closest(".rg-builder"),
+                    clone = $this.clone(),
+                    container = $('<li class="jstree jstree-default"></li>');
+                container.append(clone);
+                builder.append(container);
               return clone;
             }
-//            , stop : function(e, ui) {
-//              console.log(e, ui);
-//            }
+            , connectToSortable : ".dimension-receptor"
 //            , scope : node.type
           });
-//        }
+        }
       });
     }
 
