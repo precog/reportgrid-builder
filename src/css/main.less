@@ -1,223 +1,247 @@
 .rg-builder.ui-widget-content {
-    border: 0;
+  border: 0;
 }
 
 .rg-builder {
-    font-size: 73%;
-    font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+  font-size: 73%;
+  font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
 
-    .mainbar {
+  .mainbar {
 //        height: 38px;
-    }
+  }
 
-    .system,
-    .main,
+  .system,
+  .main,
 //    .builder,
-    .data,
-    .reports {
-        border: 0;
-    }
+  .data,
+  .reports {
+    border: 0;
+  }
 
-    .builder {
-        border-top: 0;
-        border-bottom: 0;
-    }
+  .builder {
+    border-top: 0;
+    border-bottom: 0;
+  }
 
-    .reports {
-        .tree {
-            border-bottom: 0;
-        }
+  .reports {
+    .tree {
+      border-bottom: 0;
     }
+  }
 
-    .editor.pane {
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-    }
+  .editor.pane {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
 
-    .support {
-        border-bottom: 0;
-    }
+  .support {
+    border-bottom: 0;
+  }
 /*
-    .builder .ui-layout-resizer-open {
-        padding-bottom: 1px !important;
-    }
+  .builder .ui-layout-resizer-open {
+      padding-bottom: 1px !important;
+  }
 */
 /*
-    .chart {
-        border-top: 0;
-    }
+  .chart {
+      border-top: 0;
+  }
 */
-    .ui-layout-resizer-east,
-    .ui-layout-resizer-west {
+  .ui-layout-resizer-east,
+  .ui-layout-resizer-west {
 //        border:0 !important;
-    }
+  }
 
-    .ui-layout-resizer-north,
-    .ui-layout-resizer-south {
+  .ui-layout-resizer-north,
+  .ui-layout-resizer-south {
 //        border:0 !important;
-    }
+  }
 
-    .ui-layout-toggler {
+  .ui-layout-toggler {
 //        border: 0;
-    }
+  }
 
-    .ui-layout-resizer {
-        border-radius: 0;
-    }
+  .ui-layout-resizer {
+    border-radius: 0;
+  }
 
-    .data {
-        .toolbar {
-            border-top: 0;
-        //        line-height: 17px;
-        }
-    }
-
-    .builder {
-        .toolbar {
-            border-top: 0;
-            border-left: 0;
-            border-right: 0;
-        }
-    }
-
+  .data {
     .toolbar {
-        border-bottom: 0;
-        vertical-align: baseline;
+      border-top: 0;
+    //        line-height: 17px;
     }
+  }
 
-    .toolbar-actions,
+  .builder {
+    .toolbar {
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+
+  .toolbar {
+    border-bottom: 0;
+    vertical-align: baseline;
+  }
+
+  .toolbar-actions,
+  .toolbar-context {
+    margin: 5px;
+    line-height: 24px;
+  }
+
+  .mainbar .toolbar-actions,
+  .mainbar .toolbar-context {
+    position: absolute;
+    line-height: 36px;
+  }
+
+  .mainbar {
+    height: 38px;
+  }
+
+  .ui-widget-content.support {
+    border-top: 0;
+  }
+
+  .toolbar-actions button,
+  .toolbar-context button {
+    height: 24px;
+  }
+
+  .toolbar-context {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .toolbar-description {
+    margin: 4px 5px;
+  }
+
+  .toolbar-main {
+    float: left;
+    margin-left: 5px;
+  }
+
+  .toolbar-context {
+    float: right;
+    margin-right: 5px;
+  }
+
+  .system {
     .toolbar-context {
-        margin: 5px;
-        line-height: 24px;
+      position: relative;
+      margin-top: 0;
     }
+  }
 
-    .mainbar .toolbar-actions,
-    .mainbar .toolbar-context {
-        position: absolute;
-        line-height: 36px;
+  .toolbar-main button,
+  .toolbar-context button {
+    width: 2.4em;
+    height: 24px;
+  }
+
+  .tabs-container.ui-tabs {
+    border: 0;
+    margin-top: 4px;
+    margin-left: 3px;
+    background-color: transparent;
+    background-image: none;
+
+    .ui-tabs-nav {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      background-image: none;
     }
+  }
 
-    .mainbar {
-        height: 38px;
-    }
+  .jstree li.root-node > ul > li {
+    margin-left: 0;
+  }
 
-    .ui-widget-content.support {
-        border-top: 0;
-    }
+  .jstree {
+    overflow : auto;
+  }
 
-    .toolbar-actions button,
-    .toolbar-context button {
-        height: 24px;
-    }
+  .jstree.jstree-default.jstree-focused {
+    background-color: transparent;
+  }
 
-    .toolbar-context {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
-    .toolbar-description {
-        margin: 4px 5px;
-    }
-
-    .toolbar-main {
-        float: left;
-        margin-left: 5px;
-    }
-
-    .toolbar-context {
-        float: right;
-        margin-right: 5px;
-    }
-
-    .system {
-        .toolbar-context {
-            position: relative;
-            margin-top: 0;
-        }
-    }
-
-    .toolbar-main button,
-    .toolbar-context button {
-        width: 2.4em;
-        height: 24px;
-    }
-
-    .tabs-container.ui-tabs {
-        border: 0;
-        margin-top: 4px;
-        margin-left: 3px;
-        background-color: transparent;
-        background-image: none;
-
-        .ui-tabs-nav {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            background-color: transparent;
-            background-image: none;
-        }
-    }
-
-    .jstree li.root-node > ul > li {
-        margin-left: 0;
-    }
-
-    .jstree {
-        overflow : auto;
-    }
-
-    .jstree.jstree-default.jstree-focused {
-        background-color: transparent;
-    }
-
-    .dimension {
+  .dimension {
 //        background-color: #eee;
-        padding: 0px;
-        margin-top: 5px;
-        margin-left: 5px;
-        width: 200px;
-        .receptor {
+    padding: 0px;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 200px;
+    .receptor {
 //            border: 1px solid #e9e9e9;
-            padding: 2px;
-            margin: 1px;
-        }
-      .dimension-receptor {
-        min-height: 20px;
-      }
-        .ui-state-hover,
-        .ui-state-active {
-            display : block; // !important;
-        }
+      padding: 2px;
+      margin: 1px;
     }
+    .dimension-receptor {
+      min-height: 20px;
+    }
+    .ui-state-hover,
+    .ui-state-active {
+      display : block; // !important;
+    }
+    ul.dimension-receptor,
+    ul.dimension-receptor li {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+  }
 }
 
+.rg-dimension-dragger {
+  overflow: visible !important;
+}
+
+.rg-dimension-trashbin {
+  border: 2px solid red;
+  position: absolute;
+  ul {
+    width: 80px;
+    height: 20px;
+  }
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}
 .rg-remove-draggable {
   border: 8px solid red !important;
 }
 
 .rg-widget {
-    font-size: 73%;
-    font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
-    /*
-    ul.menu-items {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+  font-size: 73%;
+  font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+  /*
+  ul.menu-items {
+      margin: 0;
+      padding: 0;
+      list-style: none;
 
-        li > a {
-            display: block;
-            left: 0;
-            right: 0;
-            position: relative;
-        }
-    }
-    */
+      li > a {
+          display: block;
+          left: 0;
+          right: 0;
+          position: relative;
+      }
+  }
+  */
 }
 
 .rg-widget.context-menu {
-    z-index: 10000;
-    position : absolute;
-    display: none;
+  z-index: 10000;
+  position : absolute;
+  display: none;
 }

@@ -22,10 +22,10 @@ function($, createTree) {
                 var $this = $(this),
                     builder = $this.closest(".rg-builder"),
                     clone = $this.clone(),
-                    container = $('<li class="jstree jstree-default"></li>');
+                    container = $('<div class="rg-dimension-dragger jstree jstree-default" data-drag=\''+JSON.stringify(node)+'\'></div>');
                 container.append(clone);
                 builder.append(container);
-              return clone;
+              return container;
             }
             , connectToSortable : ".dimension-receptor"
 //            , scope : node.type

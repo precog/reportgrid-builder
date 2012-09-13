@@ -12,54 +12,97 @@ function($) {
     return $('<div>'+info.path+'</div>');
   }
 
+   var trashbin = (function() {
+     var bin, el, trash, visible, context;
+
+     function init(target) {
+       if(el) return;
+       el = $('<div class="rg-dimension-trashbin"><ul class="dimension-receptor ui-state-default"></ul></div>');
+       trash = el.find("ul").sortable({
+         connectWith : ".dimension-receptor",
+         stop : function(e, ui) {
+           var data = $(ui.item).attr("data-drag");
+           if(data)
+             data = JSON.parse(data);
+console.log("remove dimension", data, ui);
+         }
+       });
+       el.css("visibility", "hidden");
+       target.closest(".editor").append(el);
+     }
+
+     return bin = {
+       associateTo : function($target) {
+         console.log("appending", el);
+         var pos   = $target.position(),
+         width = $target.outerWidth();
+         el.css({
+           left : (pos.left + 10 + width) +"px",
+           top  : pos.top + "px"//,
+           //            zIndex : 10000
+         });
+         el.css("visibility", "visible");
+         visible = true;
+         //          $el.parent().append(el);
+       },
+       remove : function() {
+         if(!visible) return;
+         console.log("removing");
+           visible = false;
+         el.css("visibility", "hidden");
+//         setTimeout(function() {
+ //        }, 500);
+       },
+       init : function(el) {
+         init(el);
+       }
+     };
+   })();
+
   return function (el, o) {
+    trashbin.init(el);
+
     o = $.extend({
       accept   : [],
       maxitems : 1
     }, o);
 
     var $dimension = $('<div class="dimension ui-widget"><ul class="dimension-receptor ui-state-default"></ul></div>'),
-        $receptor  = $dimension.find(".dimension-receptor"),
-        firstout = true,
-        isout = false;
+        $receptor  = $dimension.find(".dimension-receptor");
         $receptor.sortable({
           placeholder: "ui-state-highlight"
         , revert : false
         , stop : function(e, ui) {
-          var helper = $('<li>'+ui.item.text()+'</li>');
+//            el.append($(e.srcElement).clone());
+console.log(e, ui);
+console.log(e.srcElement.parentNode, ui.item);
+            var data = $(ui.item).attr("data-drag") || $(e.srcElement.parentNode).attr("data-drag");
+console.log("set dimension", data);
+          var helper = $('<li data-drag=\''+data+'\'>'+ui.item.text()+'</li>');
           ui.item.replaceWith(helper);
         }
+        , helper : function(e, ui) {
+            console.log("SORTABLE HELPER", ui);
+            return ui;
+        }
         , over: function(e, ui) {
-          isout = false;
         }
         , out: function(e, ui) {
-          if(firstout) {
-            $receptor.sortable("option", "connectWith", ".dimension-receptor");
-            firstout = false;
-          }
-          isout = true;
         }
         , update: function(e, ui) {
-
         }
         , remove: function(e, ui) {
-          isout = false;
         }
         , receive: function(e, ui) {
-          isout = false;
         }
         , activate: function(e, ui) {
-          isout = false;
+          if(ui.placeholder)
+            trashbin.associateTo($receptor);
         }
         , deactivate: function(e, ui) {
-          $receptor.sortable("option", "connectWith", false);
+          trashbin.remove();
         }
         , beforeStop: function(e, ui) {
-            firstout = true;
-            if (isout) {
-              isout = false;
-              ui.item.remove();
-            }
         }
         , connectWith : ".dimension-receptor"
       });
