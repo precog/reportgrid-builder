@@ -12,28 +12,35 @@ function($) {
     return $('<div>'+info.path+'</div>');
   }
 
+  function extractData(e, ui) {
+    var data = $(ui.item).attr("data-drag") || $(e.srcElement).closest("[data-drag]").attr("data-drag");
+    return JSON.parse(data);
+  }
+
    var trashbin = (function() {
-     var bin, el, trash, visible, context;
+     var bin, el, $trash, visible, context;
 
      function init(target) {
        if(el) return;
-       el = $('<div class="rg-dimension-trashbin"><ul class="dimension-receptor ui-state-default"></ul></div>');
-       trash = el.find("ul").sortable({
-         connectWith : ".dimension-receptor",
-         stop : function(e, ui) {
-           var data = $(ui.item).attr("data-drag");
-           if(data)
-             data = JSON.parse(data);
-console.log("remove dimension", data, ui);
+       el = $('<div class="rg-dimension-trashbin"><ul style="background-color: transparent; border: 0;" class="dimension-receptor dimension-trash ui-state-default"></ul></div>');
+       $trash = el.find("ul").sortable({
+           placeholder: "dimension-placeholder ui-state-error"
+         , connectWith : ".dimension-receptor"
+         , receive: function(e, ui) {
+           var data = extractData(e, ui);
+           console.log("receive delete", JSON.stringify(data));
+           setTimeout(function() {
+             $trash.children("li").remove();
+           }, 0);
          }
        });
+       $trash.disableSelection();
        el.css("visibility", "hidden");
        target.closest(".editor").append(el);
      }
 
      return bin = {
        associateTo : function($target) {
-         console.log("appending", el);
          var pos   = $target.position(),
          width = $target.outerWidth();
          el.css({
@@ -44,14 +51,12 @@ console.log("remove dimension", data, ui);
          el.css("visibility", "visible");
          visible = true;
          //          $el.parent().append(el);
+         $trash.sortable("refresh");
        },
        remove : function() {
          if(!visible) return;
-         console.log("removing");
            visible = false;
          el.css("visibility", "hidden");
-//         setTimeout(function() {
- //        }, 500);
        },
        init : function(el) {
          init(el);
@@ -70,44 +75,34 @@ console.log("remove dimension", data, ui);
     var $dimension = $('<div class="dimension ui-widget"><ul class="dimension-receptor ui-state-default"></ul></div>'),
         $receptor  = $dimension.find(".dimension-receptor");
         $receptor.sortable({
-          placeholder: "ui-state-highlight"
+          placeholder: "dimension-placeholder ui-state-focus"
         , revert : false
         , stop : function(e, ui) {
-//            el.append($(e.srcElement).clone());
-console.log(e, ui);
-console.log(e.srcElement.parentNode, ui.item);
-            var data = $(ui.item).attr("data-drag") || $(e.srcElement.parentNode).attr("data-drag");
-console.log("set dimension", data);
-          var helper = $('<li data-drag=\''+data+'\'>'+ui.item.text()+'</li>');
+          var data = extractData(e, ui);
+          var helper = $('<li data-drag=\''+JSON.stringify(data)+'\'>'+ui.item.text()+'</li>');
           ui.item.replaceWith(helper);
         }
-        , helper : function(e, ui) {
-            console.log("SORTABLE HELPER", ui);
-            return ui;
-        }
-        , over: function(e, ui) {
-        }
-        , out: function(e, ui) {
-        }
-        , update: function(e, ui) {
-        }
         , remove: function(e, ui) {
+            var data = extractData(e, ui);
+            console.log("remove dimension", JSON.stringify(data));
         }
         , receive: function(e, ui) {
+            var data = extractData(e, ui);
+            console.log("receive dimension", JSON.stringify(data));
         }
         , activate: function(e, ui) {
           if(ui.placeholder)
+          {
             trashbin.associateTo($receptor);
+          }
         }
         , deactivate: function(e, ui) {
           trashbin.remove();
         }
-        , beforeStop: function(e, ui) {
-        }
         , connectWith : ".dimension-receptor"
       });
       $dimension.appendTo(el);
-
+    $receptor.disableSelection();
     var receptor = {
 
     };
