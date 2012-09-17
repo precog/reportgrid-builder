@@ -1,15 +1,24 @@
 define([
-  "jquery"
+    "jquery"
+  , "util/same"
 ],
 
-function($) {
-  function extractData(e, ui) {
-    var data = $(ui.item).attr("data-drag") || $(e.srcElement).closest("[data-drag]").attr("data-drag");
-    return JSON.parse(data);
+function($, same) {
+  function extractNodeData(node)
+  {
+    var data = $(node).attr("data-drag");
+    if(!data)
+      return null;
+    else
+      return JSON.parse(data);
   }
 
-   var trashbin = (function() {
-     var bin, el, $trash, visible, context;
+  function extractDragData(e, ui) {
+    return ($(ui.item).attr("data-drag") && extractNodeData($(ui.item))) || ($(e.srcElement).closest("[data-drag]") && extractNodeData($(e.srcElement).closest("[data-drag]")));
+  }
+
+  var trashbin = (function() {
+    var bin, el, $trash, visible, context;
 
      function init(target) {
        if(el) return;
@@ -17,13 +26,6 @@ function($) {
        $trash = el.find("ul").sortable({
            placeholder: "dimension-placeholder ui-state-error"
          , connectWith : ".dimension-receptor"
-         , receive: function(e, ui) {
-           var data = extractData(e, ui);
-           console.log("receive delete", JSON.stringify(data));
-           setTimeout(function() {
-             $trash.children("li").remove();
-           }, 0);
-         }
        });
        $trash.disableSelection();
        el.css("visibility", "hidden");
@@ -58,7 +60,8 @@ function($) {
 
     o = $.extend({
       accept   : function(data) { return true },
-      maxitems : 1
+      multiple : false,
+      compare  : same
     }, o);
 
     var receptor,
@@ -68,17 +71,25 @@ function($) {
           placeholder: "dimension-placeholder ui-state-focus"
         , revert : false
         , stop : function(e, ui) {
-          var data = extractData(e, ui);
+          var data;
+          if(!o.multiple) {
+            $(ui.placeholder).parent().children("li").each(function() {
+              data = extractDragData($(this));
+              $(receptor).trigger("remove", data);
+              $(this).remove();
+            });
+          }
+          data = extractDragData(e, ui);
           var helper = $('<li data-drag=\''+JSON.stringify(data)+'\'>'+ui.item.text()+'</li>');
           ui.item.replaceWith(helper);
         }
         , remove: function(e, ui) {
-            var data = extractData(e, ui);
-            console.log("remove dimension", JSON.stringify(data));
+            var data = extractDragData(e, ui);
+            $(receptor).trigger("remove", data);
         }
         , receive: function(e, ui) {
-            var data = extractData(e, ui);
-            console.log("receive dimension", JSON.stringify(data));
+            var data = extractDragData(e, ui);
+            $(receptor).trigger("add", data);
         }
         , activate: function(e, ui) {
           if(ui.placeholder)
@@ -89,9 +100,48 @@ function($) {
         , deactivate: function(e, ui) {
           trashbin.remove();
         }
-        , connectWith : ".dimension-receptor"
+        , sort: function(e, ui) {
+          if(!o.multiple) {
+            var sibblings = $(ui.placeholder).parent().children("li");
+            sibblings.each(function() {
+ //             console.log(this, ui);
+              if(ui.placeholder[0] !== this)
+                $(this).hide();
+            });
+          }
+        }
+  //        , stop : function() {
+  //          console.log("stop");
+  //        }
+        , out: function(e, ui) {
+          if(!o.multiple) {
+            $(ui.placeholder).parent().children("li").show();
+          }
+        }
+        , connectWith : ".dimension-trash"
       });
-      $dimension.appendTo(el);
+
+    $(el).closest(".rg-builder").on("view.ui.node.beforedrag", function(e, ndata) {
+      if(!o.accept(ndata)) {
+        $receptor.sortable("disable");
+      } else {
+        var sibblings = $receptor.find("li");
+        sibblings.each(function() {
+          var data = extractNodeData(this);
+          if(o.compare(ndata, data)) {
+            $receptor.sortable("disable");
+            return false;
+          }
+        });
+      }
+      $(this).mouseup(function() {
+        setTimeout(function() {
+          $receptor.sortable("enable");
+        }, 20);
+      });
+    });
+
+    $dimension.appendTo(el);
     $receptor.disableSelection();
     return receptor = {
 
@@ -99,13 +149,11 @@ function($) {
   };
 });
 
-// - replace existing
-// - limit number
-// - uniqueness
+// + replace existing
+// + limit number
+// + uniqueness
 // - pass template function
-// - pass identification
-// - discriminate drop using a function
+// + discriminate drop using a function
 // - method add
 // - method remove
-// - events trigger
-// - respond to events
+// + events trigger

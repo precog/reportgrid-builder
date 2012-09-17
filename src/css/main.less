@@ -1,3 +1,4 @@
+@import "elements";
 @dimensionWidget: 200px;
 
 .rg-builder.ui-widget-content {
@@ -203,6 +204,9 @@
       margin: 0;
       list-style: none;
     }
+    .ui-sortable-disabled {
+      .opacity(0.5);
+    }
   }
 }
 
@@ -234,6 +238,10 @@
     padding: 0;
     margin: 0;
     list-style: none;
+  }
+  li,
+  a {
+    visibility: hidden;
   }
 }
 .rg-remove-draggable {

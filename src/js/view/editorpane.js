@@ -5,52 +5,53 @@ define([
 
 function($, createDrop) {
   var dimensions = [{
-    accept    : ["folder", "datasource"],
-    maxitems  : 0,
-    dimension : "/a/d1"
+    multiple  : true,
+    dimension : "/a/d1",
+    name : "x"
   }, {
-    accept    : ["column"],
-    maxitems  : 0,
-    dimension : "/a/d2"
+    multiple  : false,
+    dimension : "/a/d2",
+    name : "y"
   }, {
-    accept    : ["folder", "datasource"],
-    maxitems  : 0,
-    dimension : "/a/d3"
+    multiple  : true,
+    dimension : "/a/d3",
+    name : "segment-on"
   }, {
-    accept    : ["folder"],
-    maxitems  : 0,
-    dimension : "/a/d4"
+    multiple  : true,
+    dimension : "/a/d3",
+    name : "line-color"
   }, {
-    accept    : ["datasource"],
-    maxitems  : 0,
-    dimension : "/a/d5"
-  }, {
-    accept    : ["false"],
-    maxitems  : 0,
-    dimension : "/a/d6"
-  }, {
-    accept    : ["datasource"],
-    maxitems  : 0,
-    dimension : "/a/d7"
-  }, {
-    accept    : ["column"],
-    maxitems  : 0,
-    dimension : "/a/d8"
+    multiple  : false,
+    dimension : "/a/d4",
+    name : "something-else"
   }];
 
   return function(ctx) {
     var map = {};
     function init(el) {
 
-      for(var i = 0; i < dimensions.length; i++) {
-        $(el).append('<div>dimension</div>');
-        var drop = createDrop(el, dimensions[i]);
-        map[dimensions[i].dimension] = drop;
-        $(drop).on("view.dimension.setrequest", function(e, info, pos) {
-          console.log(info, pos);
-          map[info.dimension].set(pos, info);
+      $(dimensions).each(function() {
+        var dimension = this;
+        $(el).append('<div>'+dimension.name+'</div>');
+        var drop = createDrop(el, dimension);
+//        map[dimension.dimension] = drop;
+        $(drop).on("add", function(e, data) {
+          var event = {
+            dimension : dimension.name,
+            data : data
+          };
+          console.log("add", JSON.stringify(event));
+//          map[info.dimension].set(pos, info);
         });
-      }
+        $(drop).on("remove", function(e, data) {
+          var event = {
+            dimension : dimension.name,
+            data : data
+          };
+          console.log("remove", JSON.stringify(event));
+//          map[info.dimension].set(pos, info);
+        });
+      });
     }
 
     ctx.on("view.editor.pane", init);
