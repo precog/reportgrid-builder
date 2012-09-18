@@ -1,9 +1,10 @@
 define([
     "jquery"
   , "util/widget/dropdimension"
+  , "util/ui"
 ],
 
-function($, createDrop) {
+function($, createDrop, ui) {
   var dimensions = [{
     multiple  : true,
     dimension : "/a/d1",
@@ -24,6 +25,17 @@ function($, createDrop) {
     multiple  : false,
     dimension : "/a/d4",
     name : "something-else"
+  }];
+
+  var charts = [{
+      type : "piechart"
+    , label : "Pie Chart"
+  }, {
+      type : "barchart"
+    , label : "Bar Chart"
+  }, {
+      type : "linechart"
+    , label : "Line Chart"
   }];
 
   return function(ctx) {
@@ -51,6 +63,14 @@ function($, createDrop) {
           console.log("remove", JSON.stringify(event));
 //          map[info.dimension].set(pos, info);
         });
+      });
+
+      ui.selectmenu(el, {
+        data : charts,
+        format : function(item) {
+          return '<span class="chart-icon icon-'+item.type+'"></span><span class="text">'+item.label+'</span>';
+        },
+        width : 200
       });
     }
 

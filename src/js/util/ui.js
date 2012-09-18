@@ -2,12 +2,13 @@ define([
     'jquery'
   , 'util/dom'
   , 'util/notification'
+  , 'util/uid'
   , 'util/widget/menu'
   , 'lib/jquery-ui/jquery.ui'
 ],
 
-function($, dom, notification) {
-  var wrapper, uid = 0;
+function($, dom, notification, uid) {
+  var wrapper;
 
   $.fn.outerHTML = function(){
     // IE, Chrome & Safari will comply with the non-standard outerHTML, all others (FF) will have a fall-back for cloning
@@ -107,10 +108,9 @@ function($, dom, notification) {
       el = $(el);
       if(actions) {
         el.find("*").remove();
-        uid++;
         $(actions).each(function(i, action) {
           var name = action.group,
-              id = "pg-buttonset-" + uid + "-" + i,
+              id = "buttonset-" + uid() + "-" + i,
               label = action.label;
           action.btn = el.append('<input type="radio" id="'+id+'" name="'+name+'" '+(action.checked ? 'checked="checked" ' : '')+'/><label for="'+id+'">'+label+'</label>').find("#"+id);
           action.btn.click(function() {
@@ -137,11 +137,10 @@ function($, dom, notification) {
       el = $(el);
       if(actions) {
         el.find("*").remove();
-        uid++;
         $(actions).each(function(i, action) {
           var name = action.name || "",
               checked = action.checked || false,
-              id = "pg-buttonset-" + uid + "-" + i,
+              id = "buttonset-" + uid() + "-" + i,
               label = action.label;
           var btn = el.append('<input type="checkbox" id="'+id+'" name="'+name+'" '+(checked ? 'checked="checked" ' : "")+'/><label for="'+id+'">'+label+'</label>').find("#"+id);
           btn.click(function(e) {
@@ -176,7 +175,7 @@ function($, dom, notification) {
       }, options);
       var text = options.text || el.text().trim(),
         html = el.html(),
-        edit = el.html('<input type="text" name="pg-editable" id="pg-editable" value="'+text+'" />').find("#pg-editable"),
+        edit = el.html('<input type="text" name="editable" id="editable" value="'+text+'" />').find("#editable"),
         tip;
 
       function exit() {
@@ -221,6 +220,120 @@ function($, dom, notification) {
       if(!dom.canSelect(selectable))  // firefox doesn't like selecting text this way
         selectable = edit.get(0);
       dom.selectText(selectable, 0, text.length);
+    },
+    selectmenu : function(el, o) {
+      o = $.extend({
+        format : function(d) { return JSON.stringify(d); }
+      }, o);
+      var trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
+//          dropdown = trigger.find("button.dropdown"),
+          triggerLabel = trigger.find(".label span.text"),
+          index   = ("undefined" !== typeof o.selectedIndex && o.selectedIndex) || -1;
+//console.log(dropdown);
+      function selectMessage()
+      {
+        return o.selectMessage || "select an option";
+      }
+/*
+      trigger.find("button > span").css({
+          display : "inline-block"
+        , verticalAlign : "middle"
+      });
+     */
+//      trigger.find("button").css("margin-top", "0").css("float", "left");
+//      dropdown.css("border-left", "0");
+
+      function selectIndex(i, force) {
+        if(!force && index === i) return;
+        index = i;
+        var content = i < 0 ? selectMessage() : o.selectedFormat ? o.selectedFormat(o.data[index]) : o.format(o.data[index]);
+        triggerLabel.html(content);
+        var height = triggerLabel.innerHeight();
+        if(height < 25)
+          height = 25;
+//        dropdown.css("height", (height+2)+"px");
+        console.log(height);
+      }
+
+      el.append(trigger);
+
+      selectIndex(index, true);
+
+
+      trigger.find("button")
+        .mouseover(function() { $(this).addClass("ui-state-hover"); })
+        .mouseout(function() { $(this).removeClass("ui-state-hover"); })
+      ;
+
+      var moptions = {
+        target : triggerLabel,
+        items  : o.data.map(function(item) {
+          return {
+            content : o.format(item),
+            data    : item
+          }
+        })
+      };
+      if(o.width)
+        moptions.width = o.width + "px";
+      var menu = notification.menu(moptions);
+      menu.hide();
+      $(menu).on("select", function(e, item, i) {
+console.log("select", item, i);
+        selectIndex(i);
+      });
+
+      trigger.click(function() {
+        menu.show();
+      });
+
+
+      /*
+console.log(uid);
+      var id = o.id || "sel-" + uid();
+      var data  = o.data,
+          icons = [],
+          buf   = '<select name="'+id+'" id="'+id+'">';
+      for(var i = 0; i < data.length; i++) {
+        var item = data[i];
+        buf += '<option value="'+item.value+'"';
+        if(item.className)
+          buf += ' class="'+item.className+'"';
+        buf += '>' + item.label + '</option>';
+        if(item.icon) {
+          icons.push({
+            find : item.icon.selector,
+            icon : item.icon.className
+          });
+        }
+      }
+      buf += '</select>';
+      var select = $(buf);
+      if(o.selectclass)
+        select.addClass(o.selectclass);
+      $(el).append(select);
+
+      var options = {};
+      if(o.maxHeight)
+        options.maxHeight = o.maxHeight;
+      if(o.width)
+        options.width = o.width;
+      if(o.format)
+        options.format = o.format;
+      if(o.menuWidth)
+        options.menuWidth = o.menuWidth;
+      if(o.style)
+        options.style = o.style;
+      if(icons.length > 0)
+        options.icons = icons;
+
+      select.selectmenu(options);
+      */
+      return {
+          select : function(index) { selectIndex(index); }
+        , getSelected : function() { return index; }
+        , reset : function() { selectIndex(-1); }
+      };
     }
   };
 });

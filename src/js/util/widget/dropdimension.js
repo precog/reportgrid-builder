@@ -144,7 +144,6 @@ function($, same) {
     $dimension.appendTo(el);
     $receptor.disableSelection();
     return receptor = {
-
     };
   };
 });

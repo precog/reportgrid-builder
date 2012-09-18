@@ -1,5 +1,161 @@
 @import "elements";
+@import "css/jquery-pnotify/jquery.pnotify.default.css";
 @dimensionWidget: 200px;
+@chartIconSize: 24px;
+
+.ui-pnotify, .ui-pnotify-history-container {
+  font-size: 73%;
+  font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+}
+
+.ui-pnotify > .ui-widget.ui-pnotify-shadow {
+  position: relative;
+}
+
+.ui-pnotify h4, .ui-pnotify h5, .ui-pnotify h6 {
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+.ui-pnotify .actions {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+}
+
+.ui-pnotify .actions label {
+  font-size: 83%;
+  font-style: italic;
+}
+
+.ui-pnotify .actions input[type="checkbox"] {
+  margin: 0 6px;
+}
+
+.ui-pnotify .textarea {
+  margin: 8px 4px 0 0;
+}
+
+.ui-pnotify .textarea textarea {
+  resize: none;
+  font-family: monospace;
+  font-size: 13px;
+  outline: 0;
+  width: 100%;
+  height: 7.4em;
+}
+
+.ui-pnotify .footer {
+  font-size: 83%;
+  font-style: italic;
+  text-align: right;
+}
+
+.ui-pnotify ul.menu {
+  max-height: 420px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.ui-pnotify ul.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ui-pnotify ul.menu > li {
+  padding: 4px 8px 6px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.ui-pnotify ul.menu > li:last-child {
+  margin-bottom: 0;
+}
+
+
+.ui-pnotify .history {
+  max-height: 420px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.ui-pnotify .history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ui-pnotify .history-item {
+  padding: 4px 8px 6px;
+  position: relative;
+}
+
+.ui-pnotify .history ul li {
+  margin-bottom: 4px;
+}
+
+.ui-pnotify .history ul li:last-child {
+  margin-bottom: 0;
+}
+
+.ui-pnotify .history pre {
+  white-space: pre;
+  margin: 0;
+  padding: 0;
+  font-size: 130%;
+  float:left;
+}
+
+.ui-pnotify .history .header {
+  font-weight: bold;
+  font-size: 83%;
+  float: left;
+  width: 6em;
+  clear: left;
+}
+
+.ui-pnotify .history .info {
+  font-style: italic;
+  font-size: 83%;
+  padding-top: 8px;
+  clear: left;
+}
+
+.ui-pnotify .history .toolbar {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+}
+
+.ui-pnotify .clear {
+  clear: both;
+}
+
+.ui-pnotify span.label {
+  display: block;
+  float: left;
+  width: 100px;
+}
+
+.ui-pnotify .selection input[type="number"] {
+  width: 5em;
+}
+
+.ui-pnotify .selection.ui-content {
+  margin-bottom: 4px;
+  width: 240px;
+  line-height: 2em;
+  padding: 0 0.2em;
+}
+
+.ui-pnotify .selection.ui-content select {
+  width: 138px;
+}
+
+.ui-pnotify .selection.ui-content:last-child {
+  margin-bottom: 0;
+}
 
 .rg-builder.ui-widget-content {
   border: 0;
@@ -207,6 +363,91 @@
     .ui-sortable-disabled {
       .opacity(0.5);
     }
+  }
+
+  .selectmenu {
+    .dropdown {
+      margin: 0 0.5em;
+    }
+
+    button span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    button span.text {
+      margin-left: 0.5em;
+    }
+  }
+}
+
+.rg-builder,
+.ui-pnotify-text
+{
+  .chart-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../images/sprites-chart.png");
+  }
+  .chart-icon.icon-sankey {
+    background-position: 0 @chartIconSize * 0;
+  }
+  .chart-icon.icon-linechart {
+    background-position: 0 @chartIconSize * 1;
+  }
+  .chart-icon.icon-areachart {
+    background-position: 0 @chartIconSize * 2;
+  }
+  .chart-icon.icon-stacked-percent-areachart {
+    background-position: 0 @chartIconSize * 3;
+  }
+  .chart-icon.icon-stacked-areachart {
+    background-position: 0 @chartIconSize * 4;
+  }
+  .chart-icon.icon-barchart {
+    background-position: 0 @chartIconSize * 5;
+  }
+  .chart-icon.icon-stacked-barchart {
+    background-position: 0 @chartIconSize * 6;
+  }
+  .chart-icon.icon-piechart {
+    background-position: 0 @chartIconSize * 7;
+  }
+  .chart-icon.icon-donutchart {
+    background-position: 0 @chartIconSize * 8;
+  }
+  .chart-icon.icon-leaderboard {
+    background-position: 0 @chartIconSize * 9;
+  }
+  .chart-icon.icon-funnelchart {
+    background-position: 0 @chartIconSize * 10;
+  }
+  .chart-icon.icon-streamgraph {
+    background-position: 0 @chartIconSize * 11;
+  }
+  .chart-icon.icon-heatmap {
+    background-position: 0 @chartIconSize * 12;
+  }
+  .chart-icon.icon-pivottable {
+    background-position: 0 @chartIconSize * 13;
+  }
+  .chart-icon.icon-geochart {
+    background-position: 0 @chartIconSize * 14;
+  }
+}
+
+.ui-pnotify-text {
+  .menu {
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    span.text {
+      margin-left: 0.5em;
+    }
+    cursor: pointer;
   }
 }
 

@@ -55,7 +55,7 @@ function(dom) {
             applyOptions(o, options, map);
 
             if(!options.text) options.text = "";
-            options.text += '\n<div class="pg-clear"></div>';
+            options.text += '\n<div class="clear"></div>';
 
             return $.pnotify(options);
         },
@@ -93,7 +93,7 @@ function(dom) {
             o = o || {};
 
             var keycombo = navigator.userAgent.indexOf("Mac OS X") != -1 ? "CMD+C" : "CTRL+C";
-            o.text = '<div class="pg-message">'+ o.text+'</div><div class="pg-textarea"><textarea>'+ o.copy+'</textarea></div><div class="pg-footer">'+keycombo+' to copy the link</div>';
+            o.text = '<div class="message">'+ o.text+'</div><div class="textarea"><textarea>'+ o.copy+'</textarea></div><div class="footer">'+keycombo+' to copy the link</div>';
 
             var n = this.context(title, o),
                 area = n.find("textarea");
@@ -107,6 +107,34 @@ function(dom) {
             }, 500);
 
             return n;
+        },
+
+        menu : function(o) {
+          var noty,
+              items = o.items || [];
+          function closeMenu() {
+            noty.hide();
+          }
+
+          $("body").on("mouseup", closeMenu);
+          o.voffset = 0;
+          o.before_close = function() {
+            $("body").off("mouseup", closeMenu);
+          };
+          o.text = '<ul class="menu"></ul>';
+          noty = this.tip("something", o);
+          noty.find(".ui-pnotify-icon,.ui-pnotify-closer,.ui-pnotify-sticker,.ui-pnotify-title").hide();
+
+          var ul = noty.find("ul.menu");
+          $(items).each(function(index, item) {
+            var li = $('<li>'+item.content+'</li>');
+            ul.append(li);
+            li.click(function() {
+              $(noty).trigger("select", [item.data, index]);
+            });
+          });
+
+          return noty;
         },
 
         tip : function(title, o) {
@@ -216,11 +244,11 @@ function(dom) {
             var k;
 
             o.hide = false;
-            o.text = '<div class="pg-message">'+text+'</div><div class="pg-progress-bar"></div>';
+            o.text = '<div class="message">'+text+'</div><div class="progress-bar"></div>';
             o.before_open = function(pn) {
                 pnotify = pn;
-                $progress = pn.find("div.pg-progress-bar");
-                $message = pn.find("div.pg-message");
+                $progress = pn.find("div.progress-bar");
+                $message = pn.find("div.message");
             };
 
             o.progressStart = function(message) {
