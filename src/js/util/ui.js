@@ -223,7 +223,11 @@ function($, dom, notification, uid) {
     },
     selectmenu : function(el, o) {
       o = $.extend({
-        format : function(d) { return JSON.stringify(d); }
+        format : function(d) { return JSON.stringify(d); },
+        position : {
+          menu : "right top",
+          at : "right top"
+        }
       }, o);
       var trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
 //          dropdown = trigger.find("button.dropdown"),
@@ -259,7 +263,6 @@ function($, dom, notification, uid) {
 
       selectIndex(index, true);
 
-
       trigger.find("button")
         .mouseover(function() { $(this).addClass("ui-state-hover"); })
         .mouseout(function() { $(this).removeClass("ui-state-hover"); })
@@ -285,8 +288,13 @@ console.log("select", item, i);
 
       trigger.click(function() {
         menu.show();
+        menu.position({
+          my : o.position.menu,
+          at : o.position.at,
+          of : trigger.find("button:first")
+        });
       });
-
+console.log(trigger.find("button:first"));
 
       /*
 console.log(uid);
