@@ -230,33 +230,18 @@ function($, dom, notification, uid) {
         }
       }, o);
       var trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
-//          dropdown = trigger.find("button.dropdown"),
           triggerLabel = trigger.find(".label span.text"),
           index   = ("undefined" !== typeof o.selectedIndex && o.selectedIndex) || -1;
-//console.log(dropdown);
       function selectMessage()
       {
         return o.selectMessage || "select an option";
       }
-/*
-      trigger.find("button > span").css({
-          display : "inline-block"
-        , verticalAlign : "middle"
-      });
-     */
-//      trigger.find("button").css("margin-top", "0").css("float", "left");
-//      dropdown.css("border-left", "0");
 
       function selectIndex(i, force) {
         if(!force && index === i) return;
         index = i;
         var content = i < 0 ? selectMessage() : o.selectedFormat ? o.selectedFormat(o.data[index]) : o.format(o.data[index]);
         triggerLabel.html(content);
-        var height = triggerLabel.innerHeight();
-        if(height < 25)
-          height = 25;
-//        dropdown.css("height", (height+2)+"px");
-        console.log(height);
       }
 
       el.append(trigger);
@@ -294,49 +279,7 @@ console.log("select", item, i);
           of : trigger.find("button:first")
         });
       });
-console.log(trigger.find("button:first"));
 
-      /*
-console.log(uid);
-      var id = o.id || "sel-" + uid();
-      var data  = o.data,
-          icons = [],
-          buf   = '<select name="'+id+'" id="'+id+'">';
-      for(var i = 0; i < data.length; i++) {
-        var item = data[i];
-        buf += '<option value="'+item.value+'"';
-        if(item.className)
-          buf += ' class="'+item.className+'"';
-        buf += '>' + item.label + '</option>';
-        if(item.icon) {
-          icons.push({
-            find : item.icon.selector,
-            icon : item.icon.className
-          });
-        }
-      }
-      buf += '</select>';
-      var select = $(buf);
-      if(o.selectclass)
-        select.addClass(o.selectclass);
-      $(el).append(select);
-
-      var options = {};
-      if(o.maxHeight)
-        options.maxHeight = o.maxHeight;
-      if(o.width)
-        options.width = o.width;
-      if(o.format)
-        options.format = o.format;
-      if(o.menuWidth)
-        options.menuWidth = o.menuWidth;
-      if(o.style)
-        options.style = o.style;
-      if(icons.length > 0)
-        options.icons = icons;
-
-      select.selectmenu(options);
-      */
       return {
           select : function(index) { selectIndex(index); }
         , getSelected : function() { return index; }
