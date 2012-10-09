@@ -176,7 +176,6 @@ function(dom) {
 
             var old = o.before_close;
             o.before_close = function(e) {
-                console.log(old);
                 if(old)
                     old.apply(this, e);
                 remove_resize(this, e);

@@ -20,6 +20,7 @@ require([
   , "view/editor/tabs"
   , "view/datapane"
   , "view/editorpane"
+  , "view/chartselector"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);
@@ -34,6 +35,9 @@ function($, createContext) {
     ctx.trigger("modules.loaded");
     ctx.trigger("view.container.ready", $(this));
     ctx.trigger("app.ready");
+
+    // DEBUG
+    window.ctx = ctx;
   }
 
   $(function() {

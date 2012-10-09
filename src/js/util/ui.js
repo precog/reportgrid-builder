@@ -229,7 +229,8 @@ function($, dom, notification, uid) {
           at : "right top"
         }
       }, o);
-      var trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
+      var widget,
+          trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
           triggerLabel = trigger.find(".label span.text"),
           index   = ("undefined" !== typeof o.selectedIndex && o.selectedIndex) || -1;
       function selectMessage()
@@ -267,8 +268,8 @@ function($, dom, notification, uid) {
       var menu = notification.menu(moptions);
       menu.hide();
       $(menu).on("select", function(e, item, i) {
-console.log("select", item, i);
         selectIndex(i);
+        $(widget).trigger("select", [item, i]);
       });
 
       trigger.click(function() {
@@ -280,10 +281,14 @@ console.log("select", item, i);
         });
       });
 
-      return {
-          select : function(index) { selectIndex(index); }
+      return widget = {
+          selectIndex : function(index) {
+            selectIndex(index);
+          }
         , getSelected : function() { return index; }
-        , reset : function() { selectIndex(-1); }
+        , reset : function() {
+          selectIndex(-1);
+        }
       };
     }
   };
