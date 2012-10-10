@@ -1,6 +1,6 @@
 define([
     "jquery"
-  , "util/same"
+  , "lib/util/same"
 ],
 
 function($, same) {

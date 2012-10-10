@@ -1,6 +1,6 @@
 define([
-      "util/traverse"
-    , "lib/jquery-jstorage/jstorage"
+      "lib/util/traverse"
+    , "ext/jquery-jstorage/jstorage"
 ],
 
 function(traverse) {

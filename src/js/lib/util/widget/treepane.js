@@ -1,12 +1,12 @@
 define([
     "jquery"
-  , "util/compare"
-  , 'lib/jstree/vakata'
-  , 'lib/jstree/jstree'
-  , 'lib/jstree/jstree.sort'
-  , 'lib/jstree/jstree.ui'
-  , 'lib/jstree/jstree.themes'
-  , 'lib/jstree/jstree.dnd'
+  , "lib/util/compare"
+  , 'ext/jstree/vakata'
+  , 'ext/jstree/jstree'
+  , 'ext/jstree/jstree.sort'
+  , 'ext/jstree/jstree.ui'
+  , 'ext/jstree/jstree.themes'
+  , 'ext/jstree/jstree.dnd'
 ],
 
 function($, compare) {

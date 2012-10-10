@@ -1,7 +1,7 @@
 define([
-      "util/traverse"
-    , "util/storage"
-    , "util/arrays"
+      "lib/util/traverse"
+    , "lib/util/storage"
+    , "lib/util/arrays"
 ],
 
 function(traverse, buildStorage, arrays) {

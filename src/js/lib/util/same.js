@@ -1,5 +1,5 @@
 define([
-  "util/fields"
+  "lib/util/fields"
 ],
 
 function(fields) {

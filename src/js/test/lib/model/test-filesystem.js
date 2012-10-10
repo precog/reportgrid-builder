@@ -1,7 +1,7 @@
 define([
-    "model/filesystem"
-  , "util/arrays"
-  , "util/assert"
+    "lib/model/filesystem"
+  , "lib/util/arrays"
+  , "lib/util/assert"
 ],
 
 function(filesystem, arrays, assert) {

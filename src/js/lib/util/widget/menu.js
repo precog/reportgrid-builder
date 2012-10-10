@@ -1,6 +1,6 @@
 define([
   "jquery",
-  "lib/jquery-ui/jquery.ui"
+  "ext/jquery-ui/jquery.ui"
 ],
 function($) {
   $.widget("custom.menu", {

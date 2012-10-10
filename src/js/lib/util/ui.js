@@ -1,10 +1,10 @@
 define([
     'jquery'
-  , 'util/dom'
-  , 'util/notification'
-  , 'util/uid'
-  , 'util/widget/menu'
-  , 'lib/jquery-ui/jquery.ui'
+  , 'lib/util/dom'
+  , 'lib/util/notification'
+  , 'lib/util/uid'
+  , 'lib/util/widget/menu'
+  , 'ext/jquery-ui/jquery.ui'
 ],
 
 function($, dom, notification, uid) {
