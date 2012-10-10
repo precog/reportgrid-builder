@@ -4,10 +4,9 @@ define([
 function($) {
 
   function applyon(dispatcher, handler) {
-    handler.handler = handler.handler || function() {
+    return handler.__handler || (handler.__handler = function() {
       handler.apply(dispatcher, $(arguments).slice(1));
-    };
-    return handler.handler;
+    });
   }
 
   function bind(dispatcher, method, type, handler) {
@@ -32,7 +31,7 @@ function($) {
         return bind(this, "one", type, handler);
       },
       off : function(type, handler) {
-        $(dispatcher).off(type, handler && (handler.hanlder || handler));
+        $(dispatcher).off(type, handler && (handler.__handler || handler));
         return dispatcher;
       },
       trigger : function(type) {

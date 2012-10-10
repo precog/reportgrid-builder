@@ -1,7 +1,8 @@
 define([
     "jquery"
-  , "test/lib/model/test-object"
+  , "test/lib/util/test-dispatcher"
   , "test/lib/model/test-value"
+  , "test/lib/model/test-object"
   , "test/lib/model/test-filesystem"
   , "test/lib/model/test-datasource"
 ],
@@ -16,5 +17,5 @@ function($) {
         }
       });
     }
-  }
+  };
 });
