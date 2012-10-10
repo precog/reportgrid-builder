@@ -1,8 +1,9 @@
 define([
     "jquery"
+  , "test/lib/model/test-object"
+  , "test/lib/model/test-value"
   , "test/lib/model/test-filesystem"
   , "test/lib/model/test-datasource"
-  , "test/lib/model/test-datamodel"
 ],
 
 function($) {
@@ -11,11 +12,9 @@ function($) {
     run : function() {
       $(function() {
         for(var i = 0; i < modules.length; i++) {
-          var module = modules[i];
-          module();
+          modules[i]();
         }
-
-      })
+      });
     }
   }
 });

@@ -11,7 +11,7 @@ requirejs.config({
 });
 require([
     "jquery"
-  , "modules/model/context"
+  , "modules/context"
   , "modules/model/config"
   , "modules/model/datatree"
   , "modules/view/theme"
