@@ -1,6 +1,6 @@
 define([
       "lib/util/dom"
-    , "lib/ext/jquery-pnotify/jquery.pnotify"
+    , "ext/jquery-pnotify/jquery.pnotify"
 ],
 
 function(dom) {

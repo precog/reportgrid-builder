@@ -1,6 +1,6 @@
 define([
-    "model/datamodel"
-  , "util/arrays"
+    "lib/model/datamodel"
+  , "lib/util/arrays"
 ],
 
 function(create, arrays) {

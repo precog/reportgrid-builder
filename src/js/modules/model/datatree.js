@@ -1,5 +1,5 @@
 define([
-    "model/filesystem"
+    "lib/model/filesystem"
 ],
 
 function(createFileSystem) {

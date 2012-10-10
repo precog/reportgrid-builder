@@ -5,7 +5,7 @@ requirejs.config({
 require([
     "jquery"
   , "test/test-suite"
-  , "test/lib/qunit"
+  , "test/ext/qunit"
 ],
 function($, suite) {
   $(suite.run);

@@ -1,7 +1,7 @@
 define([
     "jquery"
-  , "util/widget/dropdimension"
-  , "util/ui"
+  , "lib/util/widget/dropdimension"
+  , "lib/util/ui"
 ],
 
 function($, createDrop, ui) {

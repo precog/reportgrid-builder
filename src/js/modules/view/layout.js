@@ -2,8 +2,8 @@ define([
     "jquery"
   , "text!templates/layout.full.html"
 
-  , 'lib/jquery-ui/jquery.ui'
-  , "lib/jquery-layout/jquery.layout"
+  , 'ext/jquery-ui/jquery.ui'
+  , "ext/jquery-layout/jquery.layout"
 ],
 
 function($, tplLayout) {

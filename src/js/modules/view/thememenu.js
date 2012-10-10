@@ -1,7 +1,7 @@
 define([
     "jquery"
   , "config/themes"
-  , "util/ui"
+  , "lib/util/ui"
 ],
 
 function($, themes, ui) {

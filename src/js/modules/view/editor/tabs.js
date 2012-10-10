@@ -1,6 +1,6 @@
 define([
     "jquery"
-  , "util/ui"
+  , "lib/util/ui"
 ],
 
 function($, ui) {

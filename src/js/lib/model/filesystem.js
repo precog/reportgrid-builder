@@ -1,6 +1,6 @@
 define([
     "jquery"
-  , "util/compare"
+  , "lib/util/compare"
 ],
 
 function($, compare) {

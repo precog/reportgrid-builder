@@ -1,6 +1,6 @@
 define([
-    "model/datasource"
-  , "util/arrays"
+    "lib/model/datasource"
+  , "lib/util/arrays"
 ],
 
   function(create, arrays) {

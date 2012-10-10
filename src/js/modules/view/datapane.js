@@ -1,7 +1,7 @@
 define([
     "jquery"
-  , "util/widget/treepane"
-  , "lib/jquery-ui/jquery.ui"
+  , "lib/util/widget/treepane"
+  , "ext/jquery-ui/jquery.ui"
 ],
 
 function($, createTree) {
