@@ -50,17 +50,3 @@ function($, createTree) {
     });
   };
 });
-
-/*
-TODO
-
-+ don't drag the hierarchy arrow
-+ drag outside the pane
-- limit to type (column)
-- events:
-  - start drag
-  - drop
-- transition back if dropped on invalid areas
-- disappear if dropped on valid areas
-
-*/

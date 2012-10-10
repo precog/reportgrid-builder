@@ -11,16 +11,16 @@ requirejs.config({
 });
 require([
     "jquery"
-  , "model/context"
-  , "model/config"
-  , "model/datatree"
-  , "view/theme"
-  , "view/thememenu"
-  , "view/layout"
-  , "view/editor/tabs"
-  , "view/datapane"
-  , "view/editorpane"
-  , "view/chartselector"
+  , "modules/model/context"
+  , "modules/model/config"
+  , "modules/model/datatree"
+  , "modules/view/theme"
+  , "modules/view/thememenu"
+  , "modules/view/layout"
+  , "modules/view/editor/tabs"
+  , "modules/view/datapane"
+  , "modules/view/editorpane"
+  , "modules/view/chartselector"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);
