@@ -30,6 +30,13 @@ function($) {
       one : function(type, handler) {
         return bind(this, "one", type, handler);
       },
+      when : function() {
+        var types = [];
+        for(var i = 0; i < arguments.length; i++) {
+          types.push(this.on(arguments[i]));
+        }
+        return $.when.apply($, types);
+      },
       off : function(type, handler) {
         $(dispatcher).off(type, handler && (handler.__handler || handler));
         return dispatcher;

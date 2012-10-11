@@ -1,8 +1,9 @@
 define([
-  "lib/util/dispatcher"
+    "jquery"
+  , "lib/util/dispatcher"
 ],
 
-function(createDispatcher) {
+function($, createDispatcher) {
 
   return function() {
     module("Dispatcher");
@@ -42,7 +43,19 @@ function(createDispatcher) {
     });
 
     test("When", function() {
-      // see datapane for implementation
+      var dispatcher = createDispatcher(),
+          executions = 0,
+          expected   = 1;
+      function handler(a, b) {
+        equal(a[0], "a");
+        equal(b[0], "b");
+        executions++;
+      }
+
+      dispatcher.when("A", "B").then(handler);
+      dispatcher.trigger("B", "b");
+      dispatcher.trigger("A", "a");
+      equal(executions, expected);
     });
   };
 });

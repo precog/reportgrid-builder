@@ -15,7 +15,7 @@ function(createDispatcher) {
     return model = {
       set : function(newvalue) {
         if((lastError = validator(newvalue)) !== null) {
-          dispatcher.trigger("validation.error", lastError, newvalue);
+          dispatcher.trigger("value.validationError", lastError, newvalue);
           return false;
         }
         var oldvalue = value;
@@ -53,6 +53,9 @@ function(createDispatcher) {
       },
       on : function(type, handler) {
         dispatcher.on(type, handler);
+      },
+      one : function(type, handler) {
+        dispatcher.one(type, handler);
       },
       off : function(type, handler) {
         dispatcher.off(type, handler);

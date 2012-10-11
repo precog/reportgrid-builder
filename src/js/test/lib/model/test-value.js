@@ -70,27 +70,57 @@ function(createValue) {
           expected = 1;
 
       function setValue(newvalue, oldvalue) {
-console.log("set value", counter);
         counter++;
         equal(newvalue, 2);
         equal(oldvalue, 1);
       }
       value.on("value.change", setValue);
-console.log("before 1");
       value.set(2);
-console.log("after 1");
       value.off("value.change", setValue);
-console.log("before 2");
       value.reset(); // should not trigger anything
-console.log("after 2");
 
-      //on,off
-      //value.validationError
-      //value.change
-      //default.change
-      //value.reset
-      //validator.change
-      //filter.change
+      var triggered = false;
+      value.one("value.validationError", function(error, invalidvalue) {
+        ok("string" === typeof error);
+        equal(invalidvalue, -1);
+        triggered = true;
+      });
+      value.set(-1);
+      ok(triggered);
+
+      value.set(2);
+      triggered = false;
+      value.one("value.reset", function(resetvalue) {
+        equal(resetvalue, 1);
+        triggered = true;
+      });
+      value.reset();
+      ok(triggered);
+
+      triggered = false;
+      value.one("default.change", function(defaultvalue) {
+        equal(defaultvalue, 0);
+        triggered = true;
+      });
+      value.setDefault(0);
+      ok(triggered);
+
+      triggered = false;
+      value.one("validator.change", function(v) {
+        equal(validator, v);
+        triggered = true;
+      });
+      value.setValidator(validator);
+      ok(triggered);
+
+      triggered = false;
+      value.one("filter.change", function(f) {
+        equal(filter, f);
+        triggered = true;
+      });
+      value.setFilter(filter);
+      ok(triggered);
+ 
       equal(counter, expected, "not all the expected events have been executed, expected " + expected + ", processed " + counter);
     });
 
