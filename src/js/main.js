@@ -14,6 +14,7 @@ require([
   , "modules/context"
   , "modules/model/config"
   , "modules/model/datatree"
+  , "modules/model/examples"
   , "modules/view/theme"
   , "modules/view/thememenu"
   , "modules/view/layout"

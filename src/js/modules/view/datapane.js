@@ -10,7 +10,11 @@ function($, createTree) {
       var tree = createTree(container, datasources, {
             icons : {
                 datasource : "images/datasource.png"
-              , column : "images/column.png"
+              , category   : "images/category.png"
+              , continuous : "images/continuous.png"
+              , discrete   : "images/discrete.png"
+              , time       : "images/time.png"
+              , ordinal    : "images/ordinal.png"
             }
           });
       $(tree).on("node.created", function(e, el, node) {{

@@ -5,8 +5,9 @@ define([
 
   function(create, arrays) {
     var loaderSucceeds = true,
-        loader = function(success, error) {
+        loader = function(success, error, progress) {
           if(loaderSucceeds) {
+            progress(1, 2);
             success([1, 2, 3]);
           } else {
             error("error message");
@@ -16,55 +17,50 @@ define([
     return function() {
       module("Data Source");
 
-      test("Constructor", function() {
-        var ds = create(loader, [{ name : "name", column : {} }]);
-        ok(!!ds.loader());
-      });
-
-      test("Data Loading with Direct Callbacks", function() {
+      test("Data Loading Success", function() {
         var ds = create(loader);
-        loaderSucceeds = true;
-        ds.load(
-          function(result) {
-            ok(true, "success handler executed on success");
-            equal(arrays.diff(result, [1 ,2 ,3]).length, 0, "expected and result match");
-          },
-          function(error) {
-            ok(false, "error handler executed on success");
-          });
-        loaderSucceeds = false;
-        ds.load(
-          function(result) {
-            ok(false, "success handler executed on error");
-          },
-          function(error) {
-            ok(true, "error handler executed on error");
-            equal(error, "error message", "expected and result match");
-          });
-      });
 
-      test("Data Loading with Events", function() {
-        var ds = create(loader);
         loaderSucceeds = true;
-        $(ds).on("data", function(e, data, d) {
-          equal(arrays.diff(data, [1 ,2 ,3]).length, 0, "expected and result match");
-          equal(d, ds, "same datasource is passed as the third argument");
+        var triggered = 0;
+        ds.one("success", function(result) {
+          triggered++;
+          deepEqual(result, [1,2,3]);
         });
-        $(ds).on("error", function(e, error, d) {
-          ok(false, "error handler executed on success");
-          equal(d, ds, "same datasource is passed as the third argument");
+        ds.one("progress", function(current, total) {
+          triggered++;
+          equal(current, 1);
+          equal(total, 2);
+        });
+        ds.one("error", function() {
+          ok(false, "error invoked on success");
         });
         ds.load();
+        ok(triggered === 2, "success handler executed on success");
 
+      });
+
+      test("Data Loading Error", function() {
         var ds = create(loader);
+
+        var triggered = 0;
         loaderSucceeds = false;
-        $(ds).on("data", function(e, data, d) {
+        triggered = 0;
+        ds.one("success", function() {
           ok(false, "success handler executed on error");
-          equal(d, ds, "same datasource is passed as the third argument");
         });
-        $(ds).on("error", function(e, error, d) {
+        ds.one("error", function(error) {
           equal(error, "error message", "expected and result match");
-          equal(d, ds, "same datasource is passed as the third argument");
+          triggered++;
+        });
+        ds.load();
+        ok(triggered, "error handler executed on error");
+      });
+
+      asyncTest("Data Loading from String", function() {
+        var ds = create("data/iris.json");
+        ds.one("success", function(data) {
+          ok(data.length > 0);
+          start();
         });
         ds.load();
       });

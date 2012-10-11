@@ -1,35 +1,62 @@
 define([
+    "jquery"
+  , "lib/util/dispatcher"
 ],
 
-function() {
+function($, createDispatcher) {
 
   return function(loader) {
-    var ds;
-    return ds = {
-      loader : function(handler) {
-        if("undefined" === typeof handler) {
-          return loader;
-        }  else {
-          loader = handler;
-          return this;
-        }
-      },
-      load : function(callback, callbackError) {
-        $(ds).trigger("loading", [ds]);
-        loader(
-          function(data) {
-            if(callback) callback(data);
-            $(ds).trigger("data", [data, ds]);
-            $(ds).trigger("complete", [ds]);
-          },
-          function(error) {
-            if(callbackError) callbackError(error);
-            $(ds).trigger("error", [error, ds]);
-            $(ds).trigger("complete", [ds]);
-          }
-        );
-      }
-      // events: data, error, loading, complete
+    var ds = createDispatcher();
+
+    ds.setLoader = function(handler) {
+      loader = handler;
+      return this;
     };
+
+    ds.load = function() {
+      ds.trigger("loading", [ds]);
+      loader(
+        function(data) {
+          ds.trigger("success", data);
+          ds.trigger("complete");
+        },
+        function(error) {
+          ds.trigger("error", error);
+          ds.trigger("complete");
+        },
+        function(current, total) {
+          ds.trigger("progress", current, total)
+        }
+      );
+    };
+
+    if("string" === typeof loader) {
+      var path = loader;
+      ds.setLoader(loader = function(success, error, progress) {
+        $.ajax({
+            url : path,
+            beforeSend : function(xhr) {
+              if(xhr.addEventListener && progress) {
+                xhr.addEventListener("progress", function(evt) {
+                  if(evt.lengthComputable) {
+                    progress(evt.loaded, evt.total);
+                  }
+                });
+              }
+            },
+            success : function(data, textStatus, xhr) {
+              success(data);
+            },
+            error : function(xhr, textStatus, errorThrown) {
+              success(data);
+            }
+          })
+        ;
+      });
+    } else if(loader) {
+      ds.setLoader(loader);
+    }
+
+    return ds;
   };
 });

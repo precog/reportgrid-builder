@@ -4,13 +4,13 @@ define([
 
 function($) {
   var charts = [{
-      type : "piechart"
+      type  : "piechart"
     , label : "Pie Chart"
   }, {
-      type : "barchart"
+      type  : "barchart"
     , label : "Bar Chart"
   }, {
-      type : "linechart"
+      type  : "linechart"
     , label : "Line Chart"
   }];
 
