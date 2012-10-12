@@ -13,7 +13,7 @@ function(createStore) {
     config.monitor.bind("theme", function(theme) {
       ctx.trigger("theme.change", theme);
     });
-    ctx.on("modules.loaded", function() {
+    ctx.on("modules.ready", function() {
       var theme = config.get("theme");
       ctx.trigger("theme.change", theme);
     });

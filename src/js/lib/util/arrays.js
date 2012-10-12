@@ -9,9 +9,9 @@ function() {
     },
     remove : function(arr, el) {
       var index = arr.indexOf(el);
-      if(index < 0) return arr;
+      if(index < 0) return false;
       arr.splice(index, 1);
-      return arr;
+      return true;
     }
   }
 });

@@ -15,6 +15,7 @@ require([
   , "modules/model/config"
   , "modules/model/datatree"
   , "modules/model/examples"
+  , "modules/model/datasourcebroker"
   , "modules/view/theme"
   , "modules/view/thememenu"
   , "modules/view/layout"
@@ -33,7 +34,7 @@ function($, createContext) {
       this(ctx);
     });
 
-    ctx.trigger("modules.loaded");
+    ctx.trigger("modules.ready");
     ctx.trigger("view.container.ready", $(this));
     ctx.trigger("app.ready");
 

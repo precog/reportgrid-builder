@@ -72,7 +72,8 @@ function(traverse, buildStorage, arrays) {
     }
 
     function addStorageMonitor(storage) {
-        arrays.remove(monitors, storage).push(storage);
+        arrays.remove(monitors, storage);
+        monitors.push(storage);
         // if first start the loop
         if(monitors.length === 1)
             setInterval(loop, 5000);

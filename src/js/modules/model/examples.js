@@ -54,24 +54,11 @@ function($, datasource) {
   }
 
   return function(ctx) {
-    ctx.on("data.system.ready", function(fs) {
-      fs.add(root, "folder");
+    ctx.on("modules.ready", function() {
       $(examples).each(function(i, example) {
-        var ds = datasource(datapath+"/"+example.src);
-//        ds.one("success", function(data) {
-          fs.add(path(root, example.name), "datasource");
-//        });
-        if(example.fields) {
-          $(example.fields).each(function(i, field) {
-            fs.add(path(root, example.name, field.name), field.type);
-          });
-        }
-//        ds.load();
-        // add model
-        // define datasource loader
-        // wire request datasource loading
-        // wire response datasource loading
-        // add fields
+        example.datasource = datasource(path(datapath,example.src));
+        example.name = path(root, example.name);
+        ctx.trigger("data.source.add", example);
       });
     });
   };
