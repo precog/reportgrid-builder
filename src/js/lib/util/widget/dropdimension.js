@@ -140,7 +140,6 @@ function($, same) {
         }, 20);
       });
     });
-
     $dimension.appendTo(el);
     $receptor.disableSelection();
     return receptor = {

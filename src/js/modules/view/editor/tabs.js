@@ -12,14 +12,14 @@ function($, ui) {
       tabs.on({
         click : function(){
           var index = $("li", tabs).index($(this).parent());
-          editors.remove(index);
+//          editors.remove(index);
         }
       }, '.ui-icon-close');
 
       tabs.on({
         click : function() {
           var index = $("li", tabs).index($(this).parent());
-          editors.activate(index);
+//          editors.activate(index);
         }
       }, 'li a');
 /*

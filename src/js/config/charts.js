@@ -1,18 +1,12 @@
 define([
-  "jquery"
+    "jquery"
+  , "config/chart/barchart"
+  , "config/chart/linechart"
+  , "config/chart/piechart"
 ],
 
 function($) {
-  var charts = [{
-      type  : "piechart"
-    , label : "Pie Chart"
-  }, {
-      type  : "barchart"
-    , label : "Bar Chart"
-  }, {
-      type  : "linechart"
-    , label : "Line Chart"
-  }];
+  var charts = $.makeArray(arguments).slice(1);
 
   var map = {},
       groups = {},
@@ -21,7 +15,7 @@ function($) {
     map[this.type] = this;
     this.index = counter++;
   });
-
+console.log(charts);
   return {
     map : map,
     list : charts

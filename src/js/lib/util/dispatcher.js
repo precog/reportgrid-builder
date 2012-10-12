@@ -5,7 +5,7 @@ function($) {
 
   function applyon(dispatcher, handler) {
     return handler.__handler || (handler.__handler = function() {
-      handler.apply(dispatcher, $(arguments).slice(1));
+      handler.apply(dispatcher, $.makeArray(arguments).slice(1));
     });
   }
 
@@ -16,7 +16,7 @@ function($) {
     } else {
       return $.Deferred(function(dfd) {
         $(dispatcher)[method](type, function() {
-          dfd.resolve($(arguments).slice(1));
+          dfd.resolve($.makeArray(arguments).slice(1));
         });
       }).promise();
     }
@@ -42,7 +42,7 @@ function($) {
         return dispatcher;
       },
       trigger : function(type) {
-        var args = $(arguments).slice(1);
+        var args = $.makeArray(arguments).slice(1);
         $(dispatcher).trigger(type, args);
         return dispatcher;
       }

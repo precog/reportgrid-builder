@@ -8,7 +8,7 @@ define([
 ],
 
 function($) {
-  var modules = $(arguments).slice(1);
+  var modules = $.makeArray(arguments).slice(1);
   return {
     run : function() {
       $(function() {

@@ -1,31 +1,8 @@
 define([
     "jquery"
-  , "lib/util/widget/dropdimension"
-  , "lib/util/ui"
 ],
 
-function($, createDrop, ui) {
-  var dimensions = [{
-    multiple  : true,
-    dimension : "/a/d1",
-    name : "x"
-  }, {
-    multiple  : false,
-    dimension : "/a/d2",
-    name : "y"
-  }, {
-    multiple  : true,
-    dimension : "/a/d3",
-    name : "segment-on"
-  }, {
-    multiple  : true,
-    dimension : "/a/d3",
-    name : "line-color"
-  }, {
-    multiple  : false,
-    dimension : "/a/d4",
-    name : "something-else"
-  }];
+function($) {
 
   return function(ctx) {
     var map = {};
@@ -44,29 +21,6 @@ function($, createDrop, ui) {
       el.append($dimensions);
       el.append($options);
       el.append($chart);
-
-/*
-      $(dimensions).each(function() {
-        var dimension = this;
-        $(el).append('<div>'+dimension.name+'</div>');
-        var drop = createDrop(el, dimension);
-        $(drop).on("add", function(e, data) {
-          var event = {
-            dimension : dimension.name,
-            data : data
-          };
-          console.log("add", JSON.stringify(event));
-        });
-
-        $(drop).on("remove", function(e, data) {
-          var event = {
-            dimension : dimension.name,
-            data : data
-          };
-          console.log("remove", JSON.stringify(event));
-        });
-      });
-*/
       ctx.trigger("view.editor.chartselector", $chartSelection);
       ctx.trigger("view.editor.dimensions", $dimensions);
       ctx.trigger("view.editor.options", $options);
