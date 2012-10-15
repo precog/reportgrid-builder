@@ -10,8 +10,6 @@ function($, createDrop, ui) {
     var el;
     function init(container) {
       el = container;
-      console.log("INIT");
-//      update(type);
       ctx.on("chart.type.change", update);
       ctx.on("chart.dimension.add", appendDimension);
     };

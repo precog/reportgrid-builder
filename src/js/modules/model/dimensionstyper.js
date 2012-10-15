@@ -14,8 +14,6 @@ function($, charts) {
     function signalDimensions(type) {
       // TODO, this highlights a problem with event handling priority
       setTimeout(function() {
-        console.log("GO SIGNAL MAN", type, charts);
-
         $(charts.map[type].dimensions).each(function(i, info) {
           ctx.trigger("chart.dimension.add", info);
         });

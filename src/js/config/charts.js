@@ -15,7 +15,7 @@ function($) {
     map[this.type] = this;
     this.index = counter++;
   });
-console.log(charts);
+
   return {
     map : map,
     list : charts
