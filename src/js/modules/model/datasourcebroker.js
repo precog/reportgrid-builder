@@ -30,7 +30,7 @@ function(arrays) {
       dequeue();
     });
 
-    ctx.on("datas.ource.remove", function(item) {
+    ctx.on("data.source.remove", function(item) {
       if(arrays.remove(queue))
         return;
       removeItem(item);

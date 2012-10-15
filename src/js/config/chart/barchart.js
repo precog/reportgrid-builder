@@ -5,7 +5,7 @@ define([
   function() {
 
     return {
-      type  : "barchart"
+        type  : "barchart"
       , label : "Bar Chart"
       , dimensions : [{
         name : "x",

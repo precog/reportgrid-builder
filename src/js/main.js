@@ -17,6 +17,7 @@ require([
   , "modules/model/examples"
   , "modules/model/datasourcebroker"
   , "modules/model/dimensionstyper"
+  , "modules/model/chartbuilder"
   , "modules/view/theme"
   , "modules/view/thememenu"
   , "modules/view/layout"
@@ -25,6 +26,7 @@ require([
   , "modules/view/editorpane"
   , "modules/view/chartselector"
   , "modules/view/dimensionspane"
+  , "modules/view/chartpane"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);

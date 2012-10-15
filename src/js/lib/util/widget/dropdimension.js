@@ -14,7 +14,15 @@ function($, same) {
   }
 
   function extractDragData(e, ui) {
-    return ($(ui.item).attr("data-drag") && extractNodeData($(ui.item))) || ($(e.srcElement).closest("[data-drag]") && extractNodeData($(e.srcElement).closest("[data-drag]")));
+    var el = ui && $(ui.helper);
+    if(el && el.length === 0 && ui) {
+      el = $(ui.item).find("*").andSelf().filter('[data-drag]');
+    }
+    if(el && el.length === 0){
+      el = $(e.srcElement).find('a[data-drag]');
+    }
+    var data = extractNodeData(el);
+    return data;
   }
 
   var trashbin = (function() {
@@ -49,9 +57,7 @@ function($, same) {
            visible = false;
          el.css("visibility", "hidden");
        },
-       init : function(el) {
-         init(el);
-       }
+       init : init
      };
    })();
 
@@ -61,8 +67,24 @@ function($, same) {
     o = $.extend({
       accept   : function(data) { return true },
       multiple : false,
-      compare  : same
+      compare  : same,
+      format   : function(data) { return JSON.stringify(data); }
     }, o);
+
+    function createDimension(data, placeholder) {
+      if(!o.multiple) {
+        $receptor.find("li").each(function() {
+          var d = extractNodeData($(this));
+          $(receptor).trigger("removed", d);
+          $(this).remove();
+        });
+      }
+      var helper = $('<li data-drag=\''+JSON.stringify(data)+'\'>'+ o.format(data)+'</li>');
+      if(placeholder)
+        placeholder.replaceWith(helper);
+      else
+        $receptor.append(helper);
+    }
 
     var receptor,
         $dimension = $('<div class="dimension ui-widget"><ul class="dimension-receptor ui-state-default"></ul></div>'),
@@ -71,25 +93,13 @@ function($, same) {
           placeholder: "dimension-placeholder ui-state-focus"
         , revert : false
         , stop : function(e, ui) {
-          var data;
-          if(!o.multiple) {
-            $(ui.placeholder).parent().children("li").each(function() {
-              data = extractDragData($(this));
-              $(receptor).trigger("remove", data);
-              $(this).remove();
-            });
-          }
-          data = extractDragData(e, ui);
-          var helper = $('<li data-drag=\''+JSON.stringify(data)+'\'>'+ui.item.text()+'</li>');
-          ui.item.replaceWith(helper);
+          var data = extractDragData(e, ui);
+          createDimension(data, ui.item);
+          $(receptor).trigger("added", data);
         }
         , remove: function(e, ui) {
             var data = extractDragData(e, ui);
-            $(receptor).trigger("remove", data);
-        }
-        , receive: function(e, ui) {
-            var data = extractDragData(e, ui);
-            $(receptor).trigger("add", data);
+            $(receptor).trigger("removed", data);
         }
         , activate: function(e, ui) {
           if(ui.placeholder)
@@ -104,15 +114,11 @@ function($, same) {
           if(!o.multiple) {
             var sibblings = $(ui.placeholder).parent().children("li");
             sibblings.each(function() {
- //             console.log(this, ui);
-              if(ui.placeholder[0] !== this)
-                $(this).hide();
+//              if(ui.placeholder[0] !== this)
+//                $(this).hide();
             });
           }
         }
-  //        , stop : function() {
-  //          console.log("stop");
-  //        }
         , out: function(e, ui) {
           if(!o.multiple) {
             $(ui.placeholder).parent().children("li").show();
@@ -121,7 +127,13 @@ function($, same) {
         , connectWith : ".dimension-trash"
       });
 
-    $(el).closest(".rg-builder").on("view.ui.node.beforedrag", function(e, ndata) {
+    function receptorMouseUp() {
+      setTimeout(function() {
+        $receptor.sortable("enable");
+      }, 20);
+    }
+
+    function beforeDrag(e, ndata) {
       if(!o.accept(ndata)) {
         $receptor.sortable("disable");
       } else {
@@ -134,15 +146,24 @@ function($, same) {
           }
         });
       }
-      $(this).mouseup(function() {
-        setTimeout(function() {
-          $receptor.sortable("enable");
-        }, 20);
-      });
-    });
+      $(this).on("mouseup", receptorMouseUp);
+    }
+
+    $(el).closest(".rg-builder").on("view.ui.node.beforedrag", beforeDrag);
+
     $dimension.appendTo(el);
     $receptor.disableSelection();
     return receptor = {
+      destroy : function() {
+        $(el).closest(".rg-builder")
+          .off("view.ui.node.beforedrag", beforeDrag)
+          .off("mouseup", receptorMouseUp);
+        $receptor.sortable("destroy");
+        $dimension.remove();
+      },
+      add : function(data) {
+        createDimension(data);
+      }
     };
   };
 });

@@ -37,7 +37,7 @@ function($, datasource) {
           ]
         }, {
           name : "Iris",
-          srs : "iris.json",
+          src : "iris.json",
           fields : [
               { name : "sepalLength", type : "continuous" }
             , { name : "sepalWidth", type : "continuous" }

@@ -17,35 +17,35 @@ function($, createTree) {
               , category   : "images/category.png"
             }
           });
-      $(tree).on("node.created", function(e, el, node) {{
-          $(el).find("a")
-            .mousedown(function() {
-              $(el).closest(".rg-builder").trigger("view.ui.node.beforedrag", node);
-            })
-            .draggable({
-                delay : 200
-              , revert : "invalid"
+      $(tree).on("node.created", function(e, el, node) {
+        var a = $(el).find("a").first()
+          .attr("data-drag", JSON.stringify(node))
+          .mousedown(function() {
+            $(el).closest(".rg-builder").trigger("view.ui.node.beforedrag", node);
+          })
+          .draggable({
+              delay : 200
+            , revert : "invalid"
 
-              , helper : function (e,ui) {
-                  var $this = $(this),
-                      builder = $this.closest(".rg-builder"),
-                      clone = $this.clone(),
-                      container = $('<div class="rg-dimension-dragger jstree jstree-default" data-drag=\''+JSON.stringify(node)+'\'></div>');
-                  container.append(clone);
-                  builder.append(container);
-                return container;
-              }
-              /*
-              , start : function(e, ui) {
-                console.log("start dragging");
-                $(document).trigger("view.ui.node.startdrag", [e, ui]); // dirty hack
-                //this._contactContainers(event);
-              }
-              */
-              , connectToSortable : ".dimension-receptor"
-  //            , scope : node.type
-            });
-        }
+            , helper : function (e,ui) {
+                var $this = $(this),
+                    builder = $this.closest(".rg-builder"),
+                    clone = $this.clone(),
+                    container = $('<div class="rg-dimension-dragger jstree jstree-default" data-drag=\''+JSON.stringify(node)+'\'></div>');
+                container.append(clone);
+                builder.append(container);
+              return container;
+            }
+            /*
+            , start : function(e, ui) {
+              console.log("start dragging");
+              $(document).trigger("view.ui.node.startdrag", [e, ui]); // dirty hack
+              //this._contactContainers(event);
+            }
+            */
+            , connectToSortable : ".dimension-receptor"
+//            , scope : node.type
+          });
       });
     }
 

@@ -7,7 +7,7 @@ define([
 function($, createDrop, ui) {
 
   return function(ctx) {
-    var el;
+    var el, dimensions = [];
     function init(container) {
       el = container;
       ctx.on("chart.type.change", update);
@@ -15,83 +15,40 @@ function($, createDrop, ui) {
     };
 
     function update(type) {
-      console.log("update " + type);
-      // cleanup pane
-      // request dimensions
+      while(dimensions.length > 0)
+      {
+        var dimension = dimensions.pop();
+
+        $(dimension.drop).off("add", dimension.add);
+        $(dimension.drop).off("remove", dimension.remove);
+
+        dimension.drop.destroy();
+      }
+
       el.children("*").remove()
     }
 
     function appendDimension(info) {
       $(el).append('<div>'+info.name+'</div>');
-      var drop = createDrop(el, info);
-      $(drop).on("add", function(e, data) {
-        var event = {
-          dimension : info.name,
-          data : data
-        };
-        console.log("add", JSON.stringify(event));
+      var options = {
+          accept   : function(data) { return true }
+        , multiple : info.max !== 1
+        , format   : function(data) {
+          return data.path.split("/").pop();
+        }
+      };
+      var drop = createDrop(el, options), add, remove;
+      $(drop).on("added", add = function(e, data) {
+        ctx.trigger("chart.field.add", data, info);
+      });
+      $(drop).on("removed", remove = function(e, data) {
+        ctx.trigger("chart.field.remove", data, info);
       });
 
-      $(drop).on("remove", function(e, data) {
-        var event = {
-          dimension : info.name,
-          data : data
-        };
-        console.log("remove", JSON.stringify(event));
-      });
-
+      dimensions.push({ drop : drop, add : add, remove : remove });
 //      el.append(drop);
     }
 
     ctx.on("view.editor.dimensions", init);
   };
 });
-/*
-
- var dimensions = [{
- multiple  : true,
- dimension : "/a/d1",
- name : "x"
- }, {
- multiple  : false,
- dimension : "/a/d2",
- name : "y"
- }, {
- multiple  : true,
- dimension : "/a/d3",
- name : "segment-on"
- }, {
- multiple  : true,
- dimension : "/a/d3",
- name : "line-color"
- }, {
- multiple  : false,
- dimension : "/a/d4",
- name : "something-else"
- }];
-
- */
-
-
-/*
- $(dimensions).each(function() {
- var dimension = this;
- $(el).append('<div>'+dimension.name+'</div>');
- var drop = createDrop(el, dimension);
- $(drop).on("add", function(e, data) {
- var event = {
- dimension : dimension.name,
- data : data
- };
- console.log("add", JSON.stringify(event));
- });
-
- $(drop).on("remove", function(e, data) {
- var event = {
- dimension : dimension.name,
- data : data
- };
- console.log("remove", JSON.stringify(event));
- });
- });
- */
