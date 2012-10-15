@@ -1,11 +1,10 @@
 define([
   "jquery",
-  "config/charts",
 //  "http://api.reportgrid.com/js/reportgrid-charts.js"
   "http://localhost/rg/js/reportgrid-charts.js"
 ],
 
-function($, charts) {
+function($) {
   return function(ctx) {
     function init(el) {
       $(el).css({ width : "600px", height : "400px", backgroundColor : "#f0f0f0" });
@@ -13,15 +12,8 @@ function($, charts) {
       function execute(info) { //{ type : current.type, dimensions : current.dimensions, datasource : datasources[path] }
 console.log("EXECUTE CHART", info);
         ReportGrid.chart(el.get(0),  {
-            axes  : ["country", "count"],
-            load  : function(handler) {
-console.log(info.data.datasource);
-              info.data.datasource.on("success", function(data) {
-console.log("DATA LOADED", data);
-                handler(data);
-              });
-              info.data.datasource.load();
-            }
+            axes  : info.axes,
+            load  : info.loader
           },
           info.type
         );

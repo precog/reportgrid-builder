@@ -1,5 +1,5 @@
 define([
-  "config/charts"
+    "config/charts"
 ],
 
 function(charts) {
@@ -10,27 +10,48 @@ function(charts) {
         },
         datasources = {};
 
-    function validate() {
-      var path = getDataSourceName();
-      return !!path;
-    }
-
     function getDataSourceName() {
       for(var dimension in current.dimensions) {
         if(current.dimensions.hasOwnProperty(dimension)) {
-console.log(dimension, current.dimensions);
           return current.dimensions[dimension][0].path.split("/").slice(0, -1).join("/");
         }
       }
       return null;
     }
 
+    function extractAxes(type) {
+      var axes = [], chartDimensions = charts.map[type].dimensions;
+      for(var i = 0; i < chartDimensions.length; i++) {
+        var dimension = chartDimensions[i];
+        for(var j = 0; j < dimension.min; j++) {
+          axes.push({
+            type : current.dimensions[dimension][j]
+          });
+        }
+        for(var j = dimension.min; j < dimension.max; j++) {
+          if(current.dimensions[dimension][j]) {
+            axes.push({
+              type : current.dimensions[dimension][j]
+            });
+          }
+        }
+      }
+      return axes;
+    }
+
     function triggerChart() {
-      if(validate()) {
-        var path = getDataSourceName();
-console.log(path, datasources);
-        ctx.trigger("chart.render.execute", { type : current.type, dimensions : current.dimensions, data : datasources[path] });
-      } else {
+      try {
+        var path = getDataSourceName(),
+            datasource = datasources[path].datasource;
+        var loader = function(handler) {
+          datasource.on("success", handler);
+          datasource.load();
+        };
+        var axes = extractAxes(current.type);
+console.log(axes);
+        ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : ["country", "count"] });
+      } catch(e) {
+console.log(e.message, e.stack);
         ctx.trigger("chart.render.clear");
       }
     }
