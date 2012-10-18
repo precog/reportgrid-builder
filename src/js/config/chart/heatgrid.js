@@ -3,8 +3,8 @@ define([],
 function() {
 
   return {
-      type  : "barchart"
-    , label : "Bar Chart"
+      type  : "heatgrid"
+    , label : "Heat Map"
     , requiredAxes : 2
     , dimensions : [{
       name : "x",
@@ -13,7 +13,7 @@ function() {
     }, {
       name : "y",
       min  : 1,
-      max  : null
+      max  : 1
     }]
   }
 });

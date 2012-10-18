@@ -66,7 +66,7 @@
 .ui-pnotify ul.menu > li {
   padding: 4px 8px 6px;
   position: relative;
-  margin-bottom: 4px;
+  margin: 0;
 }
 
 .ui-pnotify ul.menu > li:last-child {
@@ -359,6 +359,8 @@
       padding: 0;
       margin: 0;
       list-style: none;
+      cursor: pointer;
+
     }
     .ui-sortable-disabled {
       .opacity(0.5);
@@ -379,6 +381,30 @@
       margin-left: 0.5em;
     }
   }
+
+  .dimensions-container {
+    .name {
+      float: left;
+      width: 5em;
+      clear: left;
+      text-align: right;
+      vertical-align: baseline;
+      padding: 0.4em 0.2em 0.3em 0.2em;
+      font-size: 93%;
+    }
+    .name:after {
+      content: ": "
+    }
+
+    .dimension {
+      float: left;
+      margin: 0;
+    }
+  }
+
+  .chart-container {
+    clear: both;
+  }
 }
 
 .rg-builder,
@@ -386,54 +412,54 @@
 {
   .chart-icon {
     display: inline-block;
-    width: 24px;
+    width: 26px;
     height: 24px;
     background-image: url("../images/sprites-chart.png");
   }
   .chart-icon.icon-sankey {
-    background-position: 0 @chartIconSize * 0;
+    background-position: 0 @chartIconSize * -0;
   }
   .chart-icon.icon-linechart {
-    background-position: 0 @chartIconSize * 1;
+    background-position: 0 @chartIconSize * -1;
   }
   .chart-icon.icon-areachart {
-    background-position: 0 @chartIconSize * 2;
+    background-position: 0 @chartIconSize * -2;
   }
   .chart-icon.icon-stacked-percent-areachart {
-    background-position: 0 @chartIconSize * 3;
+    background-position: 0 @chartIconSize * -3;
   }
   .chart-icon.icon-stacked-areachart {
-    background-position: 0 @chartIconSize * 4;
+    background-position: 0 @chartIconSize * -4;
   }
   .chart-icon.icon-barchart {
-    background-position: 0 @chartIconSize * 5;
+    background-position: 0 @chartIconSize * -5;
   }
   .chart-icon.icon-stacked-barchart {
-    background-position: 0 @chartIconSize * 6;
+    background-position: 0 @chartIconSize * -6;
   }
   .chart-icon.icon-piechart {
-    background-position: 0 @chartIconSize * 7;
+    background-position: 0 @chartIconSize * -7;
   }
   .chart-icon.icon-donutchart {
-    background-position: 0 @chartIconSize * 8;
+    background-position: 0 @chartIconSize * -8;
   }
   .chart-icon.icon-leaderboard {
-    background-position: 0 @chartIconSize * 9;
+    background-position: 0 @chartIconSize * -9;
   }
   .chart-icon.icon-funnelchart {
-    background-position: 0 @chartIconSize * 10;
+    background-position: 0 @chartIconSize * -10;
   }
   .chart-icon.icon-streamgraph {
-    background-position: 0 @chartIconSize * 11;
+    background-position: 0 @chartIconSize * -11;
   }
-  .chart-icon.icon-heatmap {
-    background-position: 0 @chartIconSize * 12;
+  .chart-icon.icon-heatgrid {
+    background-position: 0 @chartIconSize * -12;
   }
   .chart-icon.icon-pivottable {
-    background-position: 0 @chartIconSize * 13;
+    background-position: 0 @chartIconSize * -13;
   }
   .chart-icon.icon-geochart {
-    background-position: 0 @chartIconSize * 14;
+    background-position: 0 @chartIconSize * -14;
   }
 }
 

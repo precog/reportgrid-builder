@@ -23,6 +23,8 @@ function($, ui, charts) {
       ctx.on("chart.type.change", function(type) {
         menu.selectIndex(charts.map[type].index);
       });
+
+      ctx.trigger("chart.type.change", "barchart");
     }
 
     ctx.on("view.editor.chartselector", init);

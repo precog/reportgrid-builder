@@ -19,6 +19,8 @@ function($) {
       }
 
       function clear() {
+        if(ReportGrid.tooltip)
+          ReportGrid.tooltip.hide();
         el.children("*").remove();
       }
 

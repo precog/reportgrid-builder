@@ -3,17 +3,17 @@ define([],
 function() {
 
   return {
-      type  : "barchart"
-    , label : "Bar Chart"
+      type  : "funnelchart"
+    , label : "Funnel Chart"
     , requiredAxes : 2
     , dimensions : [{
-      name : "x",
+      name : "label",
       min  : 1,
       max  : 1
     }, {
-      name : "y",
+      name : "slice",
       min  : 1,
-      max  : null
+      max  : 1
     }]
   }
 });

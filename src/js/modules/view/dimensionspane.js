@@ -29,7 +29,7 @@ function($, createDrop, ui) {
     }
 
     function appendDimension(info) {
-      $(el).append('<div>'+info.name+'</div>');
+      $(el).append('<div class="name">'+info.name+'</div>');
       var options = {
           accept   : function(data) { return true }
         , multiple : info.max !== 1

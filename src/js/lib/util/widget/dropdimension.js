@@ -99,9 +99,12 @@ function($, same) {
         }
         , receive: function(e, ui) {
             var data = extractDragData(e, ui);
+//            $(receptor).trigger("added", data);
 //            console.log(data, e, ui);
 //            createDimension(data, ui.item);
-            $(receptor).trigger("added", data);
+            setTimeout(function() { // dirty trick to make remove happen before add
+              $(receptor).trigger("added", data);
+            }, 0);
         }
         , remove: function(e, ui) {
             var data = extractDragData(e, ui);
@@ -174,11 +177,6 @@ function($, same) {
   };
 });
 
-// + replace existing
-// + limit number
-// + uniqueness
-// - pass template function
-// + discriminate drop using a function
-// - method add
-// - method remove
-// + events trigger
+// TODO
+// + remove should occur before add when replacing an existing value
+// - hide current value when dragging on a non multiple dimension

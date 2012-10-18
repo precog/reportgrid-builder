@@ -69,14 +69,15 @@ function(charts) {
 
     function fieldRemove(data, info) {
       var arr = current.dimensions[info.name];
+console.log("BEFORE", arr);
       if(arr) {
         arr.splice(arr.indexOf(data), 1);
+console.log("AFTER", arr);
       }
       triggerChart();
     }
 
     function chartType(type) {
-      if(current.type === type) return
       current.type = type;
       current.dimensions = {};
       triggerChart();

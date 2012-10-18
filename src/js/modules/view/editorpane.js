@@ -25,6 +25,8 @@ function($) {
       ctx.trigger("view.editor.dimensions", $dimensions);
       ctx.trigger("view.editor.options", $options);
       ctx.trigger("view.editor.chart", $chart);
+
+      el.mousedown(function() { if(ReportGrid.tooltip) ReportGrid.tooltip.hide(); });
     }
 
     ctx.on("view.editor.pane", init);

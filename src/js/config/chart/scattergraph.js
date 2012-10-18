@@ -3,8 +3,8 @@ define([],
 function() {
 
   return {
-      type  : "barchart"
-    , label : "Bar Chart"
+      type  : "scattergraph"
+    , label : "Scatter Graph"
     , requiredAxes : 2
     , dimensions : [{
       name : "x",
@@ -13,7 +13,9 @@ function() {
     }, {
       name : "y",
       min  : 1,
-      max  : null
+      max  : 1
     }]
   }
 });
+
+// missing icon

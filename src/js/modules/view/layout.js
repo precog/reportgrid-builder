@@ -75,6 +75,7 @@ function($, tplLayout) {
         position : "relative",
         padding  : 0
       });
+
       if($el.is("body")) {
         $el.css({
           margin   : 0,
@@ -96,14 +97,14 @@ function($, tplLayout) {
       create($container, {
         north : $.extend({}, toolbar, { size : toolbarMainHeight }),
         west : {
-            size : 200
+            size : 280
           , initClosed : false
         }
       });
 
       create($container.find('.system'), {
         south : {
-            size : "50%"
+            size : "25%"
           , initClosed : false
         }
       });
@@ -167,6 +168,20 @@ function($, tplLayout) {
       $(window).resize(resize);
 
       setTimeout(refresh, 100);
+
+      var $overlay = $('<div class="overlay"></div>');
+      $el.append($overlay);
+      $overlay.css({
+        display : "block",
+        position : "absolute",
+        width : $el.outerWidth() + "px",
+        height : $el.outerHeight() + "px",
+        backgroundColor : "rgba(100,100,100,0.9)",
+        zIndex : 100000
+      });
+      setTimeout(function() {
+        $overlay.remove();
+      }, 1000);
     }
 
     ctx.on("view.container.ready", init);
