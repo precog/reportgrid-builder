@@ -11,8 +11,9 @@ function($) {
 
       function execute(info) { //{ type : current.type, dimensions : current.dimensions, datasource : datasources[path] }
         ReportGrid.chart(el.get(0),  {
-            axes  : info.axes,
-            load  : info.loader
+            axes    : info.axes,
+            load    : info.loader,
+            options : info.options
           },
           info.type
         );

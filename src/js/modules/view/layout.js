@@ -176,7 +176,7 @@ function($, tplLayout) {
         position : "absolute",
         width : $el.outerWidth() + "px",
         height : $el.outerHeight() + "px",
-        backgroundColor : "rgba(100,100,100,0.9)",
+        backgroundColor : "rgba(50,50,50,0.75)",
         zIndex : 100000
       });
       setTimeout(function() {

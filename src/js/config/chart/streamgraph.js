@@ -1,21 +1,29 @@
 define([
-
+  "config/chart/extract/extractsegment"
 ],
 
-  function() {
+function(esegment) {
 
-    return {
-      type  : "streamgraph"
-      , label : "Stream Graph"
-      , requiredAxes : 2
-      , dimensions : [{
-        name : "x",
-        min  : 1,
-        max  : 1
-      }, {
-        name : "y",
-        min  : 1,
-        max  : null
-      }]
+  return {
+    type  : "streamgraph"
+    , label : "Stream Graph"
+    , extractOptions : function(o, dimensions) {
+      esegment(o, dimensions);
     }
-  });
+    , dimensions : [{
+      name : "x",
+      isaxis : true,
+      min  : 1,
+      max  : 1
+    }, {
+      name : "y",
+      isaxis : true,
+      min  : 1,
+      max  : null
+    }, {
+      name : "segment",
+      min  : 0,
+      max  : 1
+    }]
+  }
+});

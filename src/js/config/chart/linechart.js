@@ -1,21 +1,29 @@
 define([
-
+    "config/chart/extract/extractsegment"
 ],
 
-  function() {
+  function(esegment) {
 
     return {
-      type  : "linechart"
+        type  : "linechart"
       , label : "Line Chart"
-      , requiredAxes : 2
+      , extractOptions : function(o, dimensions) {
+        esegment(o, dimensions);
+      }
       , dimensions : [{
         name : "x",
+        isaxis : true,
         min  : 1,
         max  : 1
       }, {
         name : "y",
+        isaxis : true,
         min  : 1,
         max  : null
+      }, {
+        name : "segment",
+        min  : 0,
+        max  : 1
       }]
     }
   });

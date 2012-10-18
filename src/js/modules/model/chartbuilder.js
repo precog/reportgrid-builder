@@ -6,79 +6,74 @@ function(charts) {
   return function(ctx) {
     var current = {
           type : null,
+          dataPath : null,
           dimensions : {}
         },
         datasources = {};
-
-    function getDataSourceName() {
-      for(var dimension in current.dimensions) {
-        if(current.dimensions.hasOwnProperty(dimension)) {
-          return current.dimensions[dimension][0].path.split("/").slice(0, -1).join("/");
-        }
-      }
-      return null;
-    }
 
     function extractAxes(type) {
       var axes = [],
           chartDimensions = charts.map[type].dimensions;
       for(var i = 0; i < chartDimensions.length; i++) {
-        var dimension = chartDimensions[i];
+        var dimension = chartDimensions[i],
+            counter   = 0;
+        if(!dimension.isaxis) continue;
         for(var j = 0; j < (dimension.max || current.dimensions[dimension.name].length); j++) {
           var o = current.dimensions[dimension.name][j];
           if(!o) break;
-          var field = datasources[getDataSourceName()].fields.map[o.path.split("/").pop()];
           axes.push({
-            type : field.field || field.name //o.path.split("/").pop()
+            type : o.field.field || o.field.name
           });
+          counter++;
         }
-        /*
-        for(var j = dimension.min; j < dimension.max; j++) {
-          if(current.dimensions[dimension][j]) {
-            axes.push({
-              type : current.dimensions[dimension][j]
-            });
-          }
-        }
-        */
+        if(counter < dimension.min)
+          return null;
       }
       return axes;
     }
 
     function triggerChart() {
       try {
-        var path = getDataSourceName(),
-            datasource = datasources[path].datasource;
-        var loader = function(handler) {
-          datasource.on("success", handler);
-          datasource.load();
-        };
+        var datasource = datasources[current.dataPath].datasource,
+            options    = { },
+            loader = function(handler) {
+              datasource.on("success", handler);
+              datasource.load();
+            };
         var axes = extractAxes(current.type);
-        if(charts.map[current.type].requiredAxes > axes.length)
+        if(axes === null)
           throw "not enough axes to feed the chart";
-        ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes });
+        charts.map[current.type].extractOptions(options, current.dimensions);
+        ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
       } catch(e) {
         ctx.trigger("chart.render.clear");
       }
     }
 
     function fieldAdd(data, info) {
-      (current.dimensions[info.name] || (current.dimensions[info.name] = [])).push(data);
+      if(!current.dataPath) {
+        current.dataPath = data.path.split("/").slice(0, -1).join("/");
+      }
+      var name = data.path.split("/").pop();
+      (current.dimensions[info.name] || (current.dimensions[info.name] = [])).push({
+        name     : name,
+        category : data.type,
+        field    : datasources[current.dataPath].fields.map[name]
+      });
       triggerChart();
     }
 
     function fieldRemove(data, info) {
       var arr = current.dimensions[info.name];
-console.log("BEFORE", arr);
       if(arr) {
         arr.splice(arr.indexOf(data), 1);
-console.log("AFTER", arr);
       }
       triggerChart();
     }
 
     function chartType(type) {
       current.type = type;
+      current.dataPath = null;
       current.dimensions = {};
       triggerChart();
     }
