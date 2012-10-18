@@ -7,6 +7,7 @@ define([
     return {
         type  : "barchart"
       , label : "Bar Chart"
+      , requiredAxes : 2
       , dimensions : [{
         name : "x",
         min  : 1,

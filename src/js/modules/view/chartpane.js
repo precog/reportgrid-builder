@@ -1,16 +1,15 @@
 define([
   "jquery",
-//  "http://api.reportgrid.com/js/reportgrid-charts.js"
-  "http://localhost/rg/js/reportgrid-charts.js"
+//  "http://api.reportgrid.com/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
+  "http://localhost/rg/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
 ],
 
 function($) {
   return function(ctx) {
     function init(el) {
-      $(el).css({ width : "600px", height : "400px", backgroundColor : "#f0f0f0" });
+      $(el).css({ width : "600px", height : "400px" });
 
       function execute(info) { //{ type : current.type, dimensions : current.dimensions, datasource : datasources[path] }
-console.log("EXECUTE CHART", info);
         ReportGrid.chart(el.get(0),  {
             axes  : info.axes,
             load  : info.loader
@@ -20,7 +19,6 @@ console.log("EXECUTE CHART", info);
       }
 
       function clear() {
-console.log("CHART CLEAR");
         el.children("*").remove();
       }
 

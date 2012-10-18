@@ -20,14 +20,19 @@ function(charts) {
     }
 
     function extractAxes(type) {
-      var axes = [], chartDimensions = charts.map[type].dimensions;
+      var axes = [],
+          chartDimensions = charts.map[type].dimensions;
       for(var i = 0; i < chartDimensions.length; i++) {
         var dimension = chartDimensions[i];
-        for(var j = 0; j < dimension.min; j++) {
+        for(var j = 0; j < (dimension.max || current.dimensions[dimension.name].length); j++) {
+          var o = current.dimensions[dimension.name][j];
+          if(!o) break;
+          var field = datasources[getDataSourceName()].fields.map[o.path.split("/").pop()];
           axes.push({
-            type : current.dimensions[dimension][j]
+            type : field.field || field.name //o.path.split("/").pop()
           });
         }
+        /*
         for(var j = dimension.min; j < dimension.max; j++) {
           if(current.dimensions[dimension][j]) {
             axes.push({
@@ -35,6 +40,7 @@ function(charts) {
             });
           }
         }
+        */
       }
       return axes;
     }
@@ -48,33 +54,31 @@ function(charts) {
           datasource.load();
         };
         var axes = extractAxes(current.type);
-console.log(axes);
-        ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : ["country", "count"] });
+        if(charts.map[current.type].requiredAxes > axes.length)
+          throw "not enough axes to feed the chart";
+        ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes });
       } catch(e) {
-console.log(e.message, e.stack);
         ctx.trigger("chart.render.clear");
       }
     }
 
     function fieldAdd(data, info) {
       (current.dimensions[info.name] || (current.dimensions[info.name] = [])).push(data);
-      console.log("!!! fieldAdd", data, info);
       triggerChart();
     }
 
     function fieldRemove(data, info) {
       var arr = current.dimensions[info.name];
       if(arr) {
-        arr.splice(arr.indexof(data), 1);
+        arr.splice(arr.indexOf(data), 1);
       }
-      console.log("!!! fieldRemove", data, info);
       triggerChart();
     }
 
     function chartType(type) {
       if(current.type === type) return
       current.type = type;
-      console.log("!!! chartType", type);
+      current.dimensions = {};
       triggerChart();
     }
 

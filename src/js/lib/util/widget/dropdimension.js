@@ -93,9 +93,15 @@ function($, same) {
           placeholder: "dimension-placeholder ui-state-focus"
         , revert : false
         , stop : function(e, ui) {
-          var data = extractDragData(e, ui);
-          createDimension(data, ui.item);
-          $(receptor).trigger("added", data);
+            var data = extractDragData(e, ui);
+  //            console.log(data, e, ui);
+            createDimension(data, ui.item);
+        }
+        , receive: function(e, ui) {
+            var data = extractDragData(e, ui);
+//            console.log(data, e, ui);
+//            createDimension(data, ui.item);
+            $(receptor).trigger("added", data);
         }
         , remove: function(e, ui) {
             var data = extractDragData(e, ui);

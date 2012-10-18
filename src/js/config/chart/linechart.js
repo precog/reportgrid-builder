@@ -7,6 +7,7 @@ define([
     return {
       type  : "linechart"
       , label : "Line Chart"
+      , requiredAxes : 2
       , dimensions : [{
         name : "x",
         min  : 1,

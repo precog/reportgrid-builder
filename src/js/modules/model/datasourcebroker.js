@@ -16,9 +16,9 @@ function(arrays) {
 
     function addItem(item) {
       filesystem.add(item.name, "datasource");
-        for(var i = 0; i < item.fields.length; i++) {
-          filesystem.add(item.name+"/"+item.fields[i].name, item.fields[i].type);
-        }
+      for(var i = 0; i < item.fields.list.length; i++) {
+        filesystem.add(item.name+"/"+item.fields.list[i].name, item.fields.list[i].type);
+      }
     }
 
     function removeItem(item) {
