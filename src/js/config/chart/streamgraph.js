@@ -1,10 +1,10 @@
 define([
-  "config/chart/extract/extractsegment"
+    "config/chart/extract/extractsegment"
+  , "config/chart/options/svgoptions"
 ],
 
-function(esegment) {
-
-  return {
+function(esegment, osvg) {
+  var chart = {
     type  : "streamgraph"
     , label : "Stream Graph"
     , extractOptions : function(o, dimensions) {
@@ -24,6 +24,11 @@ function(esegment) {
       name : "segment",
       min  : 0,
       max  : 1
-    }]
-  }
+    }],
+    options : []
+  };
+
+  osvg(chart.options);
+
+  return chart;
 });

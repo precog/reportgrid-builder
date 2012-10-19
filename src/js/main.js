@@ -26,6 +26,7 @@ require([
   , "modules/view/editorpane"
   , "modules/view/chartselector"
   , "modules/view/dimensionspane"
+  , "modules/view/optionspane"
   , "modules/view/chartpane"
 ],
 function($, createContext) {

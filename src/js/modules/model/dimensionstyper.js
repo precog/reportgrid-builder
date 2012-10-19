@@ -17,6 +17,9 @@ function($, charts) {
         $(charts.map[type].dimensions).each(function(i, info) {
           ctx.trigger("chart.dimension.add", info);
         });
+        $(charts.map[type].options).each(function(i, info) {
+          ctx.trigger("chart.option.add", info);
+        });
       }, 0);
     }
 

@@ -97,7 +97,7 @@ function($, tplLayout) {
       create($container, {
         north : $.extend({}, toolbar, { size : toolbarMainHeight }),
         west : {
-            size : 280
+            size : 290
           , initClosed : false
         }
       });
@@ -105,7 +105,7 @@ function($, tplLayout) {
       create($container.find('.system'), {
         south : {
             size : "25%"
-          , initClosed : false
+          , initClosed : true
         }
       });
 
