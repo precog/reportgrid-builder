@@ -4,9 +4,7 @@ define([
 
 function(createEditor) {
   return function(el, options) {
-    var defaults = {
-      default : false
-    };
+    options = $.extend({ default : false }, options);
 
     var $input = $('<input type="checkbox" value="true">');
     var params = {
@@ -33,9 +31,6 @@ function(createEditor) {
         return v === "true" || v === "on" || v === 1 || !!v;
       }
     };
-    $input.on("change", function() {
-      params.onchange();
-    });
 
     return createEditor(el, options, params);
   };

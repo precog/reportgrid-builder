@@ -16,7 +16,7 @@ function($, createValue) {
     }
 
     if(!params.validate) {
-      params.validate = function() { return true; };
+      params.validate = function() { return null; };
     }
 
     if(!params.filter) {
@@ -26,6 +26,14 @@ function($, createValue) {
     if(!params.destroy) {
       params.input.off("change", params.onchange);
       params.onchange = null;
+    }
+
+    if(!params.wireChange) {
+      params.wireChange = function() {
+        params.input.on("change", function() {
+          params.onchange();
+        });
+      }
     }
 
     $('<div></dvi><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
@@ -53,6 +61,8 @@ function($, createValue) {
     params.onchange = input_change;
     value.on("value.change", value_change);
     value.on("value.validationError", value_validationError);
+
+    params.wireChange();
 
     params.set(options.default);
 

@@ -22,7 +22,7 @@ function($, editors) {
     }
 
     function appendOption(info) {
-      $(el).append('<div class="name">'+info.name+'</div>');
+      $(el).append('<div class="name">'+(info.label || info.name)+'</div>');
       var $option = $('<div class="option"></div>');
       $(el).append($option);
       var editor = editors(info.type, $option, info.options);

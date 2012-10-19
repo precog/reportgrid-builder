@@ -4,9 +4,7 @@ define([
 
 function(createEditor) {
   return function(el, options) {
-    var defaults = {
-      default : 0
-    };
+    options = $.extend({default : 0 }, options);
 
     var $input = $('<input type="number" step="1">');
     var params = {
@@ -26,17 +24,12 @@ function(createEditor) {
       }
     };
 
-    $input.val(options.default);
     if("undefined" !== typeof options.min) {
       $input.attr("min", options.min);
     }
     if("undefined" !== typeof options.max) {
       $input.attr("max", options.max);
     }
-
-    $input.on("change", function() {
-      params.onchange();
-    });
 
     return createEditor(el, options, params);
   };

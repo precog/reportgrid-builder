@@ -1,18 +1,13 @@
 define([
-    "config/chart/extract/segmentextract"
-  , "config/chart/extract/barchartextract"
-  , "config/chart/options/svgoptions"
-  , "config/chart/options/barchartoptions"
+    "config/chart/barchartextractor"
+  , "config/chart/barchartoptions"
 ],
 
-function(esegment, ebarchart, osvg, obarchart) {
+function(extractor, applyOptions) {
   var chart = {
       type  : "barchart"
     , label : "Bar Chart"
-    , extractOptions : function(o, dimensions, options) {
-      esegment(o, dimensions);
-      ebarchart(o, options);
-    }
+    , extractOptions : extractor
     , dimensions : [{
       name : "x",
       isaxis : true,
@@ -30,9 +25,12 @@ function(esegment, ebarchart, osvg, obarchart) {
     }],
     options : []
   };
-
-  osvg(chart.options);
-  obarchart(chart.options);
-
+console.log(applyOptions);
+  applyOptions(chart.options);
+  /*
+  $.each($.makeArray(arguments).slice(0), function() {
+    this(chart.options);
+  });
+*/
   return chart;
 });
