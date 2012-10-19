@@ -1,33 +1,17 @@
 define([
-  "jquery",
-  "lib/model/value"
+  "lib/util/widget/values/editor"
 ],
 
-function($, createValue) {
+function(createEditor) {
   return function(el, options) {
-    var editor;
-
-    options = $.extend({
+    var defaults = {
       default : 0
-    }, options);
+    };
 
-
-    $('<div></dvi><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
-    var input = $('<input type="number" step="1">').appendTo(el.find(".control")),
-        error = el.find(".error");
-    input.val(options.default);
-    if("undefined" !== typeof options.min) {
-      input.attr("min", options.min);
-    }
-    if("undefined" !== typeof options.max) {
-      input.attr("max", options.max);
-    }
-    if(options.unit) {
-      el.find(".unit").html(options.unit);
-    }
-
-    var value = createValue(options.default,
-      function(v) {
+    var $input = $('<input type="number" step="1">');
+    var params = {
+      input : $input,
+      validate : function(v) {
         if(""+parseInt(v) !== ""+v)
           return "must be an integer value";
         v = parseInt(v);
@@ -37,39 +21,23 @@ function($, createValue) {
           return "must be no more than " + options.max;
         return null;
       },
-      function(v) {
+      filter : function(v) {
         return parseInt(v);
       }
-    );
-
-    function input_change() {
-      value.set(input.val());
-    }
-
-    function value_change(value) {
-      input.val(value);
-      error.hide();
-    }
-
-    function value_validationError(err) {
-      error.html(err);
-      error.show();
-    }
-
-    input.on("change", input_change);
-    value.on("value.change", value_change);
-    value.on("value.validationError", value_validationError);
-
-    return editor = {
-      value : value,
-      el    : el,
-      input : input,
-      destroy : function() {
-        input.off("change", input_change);
-        value.off("value.change", value_change);
-        value.off("value.validationError", value_validationError);
-        el.children("*").remove();
-      }
     };
+
+    $input.val(options.default);
+    if("undefined" !== typeof options.min) {
+      $input.attr("min", options.min);
+    }
+    if("undefined" !== typeof options.max) {
+      $input.attr("max", options.max);
+    }
+
+    $input.on("change", function() {
+      params.onchange();
+    });
+
+    return createEditor(el, options, params);
   };
 });

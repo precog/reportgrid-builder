@@ -23,6 +23,11 @@ function($, createValue) {
       params.filter = function(v) { return v; };
     }
 
+    if(!params.destroy) {
+      params.input.off("change", params.onchange);
+      params.onchange = null;
+    }
+
     $('<div></dvi><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
     params.input.appendTo(el.find(".control"));
     var error = el.find(".error");
@@ -48,6 +53,8 @@ function($, createValue) {
     params.onchange = input_change;
     value.on("value.change", value_change);
     value.on("value.validationError", value_validationError);
+
+    params.set(options.default);
 
     return editor = {
       value   : value,

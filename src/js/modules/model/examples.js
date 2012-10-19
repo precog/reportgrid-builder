@@ -55,7 +55,7 @@ function($, datasource) {
             , { name : "tAverage", type : "continuous" }
             , { name : "precipitation", type : "continuous" }
             , { name : "snow", type : "continuous" }
-            , { name : "SnowCover", type : "continuous" }
+            , { name : "snowCover", type : "continuous" }
           ]
         }, {
           name : "Boulder Weather 2011 - Q1",

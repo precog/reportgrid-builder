@@ -31,18 +31,11 @@ function(createEditor) {
       },
       filter : function(v) {
         return v === "true" || v === "on" || v === 1 || !!v;
-      },
-      onchange : null,
-      destroy : function() {
-        $input.off("change", params.onchange);
-        params.onchange = null;
       }
     };
     $input.on("change", function() {
       params.onchange();
     });
-
-    params.set(options.default);
 
     return createEditor(el, options, params);
   };
