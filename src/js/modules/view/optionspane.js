@@ -22,7 +22,6 @@ function($, editors) {
     }
 
     function appendOption(info) {
-console.log("APPEND OPTION", info);
       $(el).append('<div class="name">'+info.name+'</div>');
       var $option = $('<div class="option"></div>');
       $(el).append($option);
@@ -35,6 +34,7 @@ console.log("APPEND OPTION", info);
 
       function ctx_trigger_handler(v) {
         ctx.trigger(info.event, v);
+        ctx.trigger("chart.option.set", info.event.split(".").slice(2).join("."), v);
       }
 
       editor.value.on("value.change", ctx_trigger_handler);

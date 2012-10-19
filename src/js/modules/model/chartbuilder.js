@@ -7,7 +7,8 @@ function(charts) {
     var current = {
           type : null,
           dataPath : null,
-          dimensions : {}
+          dimensions : {},
+          options : {}
         },
         datasources = {};
 
@@ -43,7 +44,7 @@ function(charts) {
         var axes = extractAxes(current.type);
         if(axes === null)
           throw "not enough axes to feed the chart";
-        charts.map[current.type].extractOptions(options, current.dimensions);
+        charts.map[current.type].extractOptions(options, current.dimensions, current.options);
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
       } catch(e) {
         ctx.trigger("chart.render.clear");
@@ -75,6 +76,12 @@ function(charts) {
       current.type = type;
       current.dataPath = null;
       current.dimensions = {};
+      current.options = {};
+      triggerChart();
+    }
+
+    function chartOptionSet(key, value) {
+      current.options[key] = value;
       triggerChart();
     }
 
@@ -84,6 +91,7 @@ function(charts) {
     ctx.on("data.source.add", function(item) {
       datasources[item.name] = item;
     });
+    ctx.on("chart.option.set", chartOptionSet);
 
     ctx.on("data.source.remove", function(item) {
       delete datasources[item.name];

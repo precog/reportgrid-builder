@@ -21,7 +21,6 @@ function($) {
       }
 
       function reducedRender() {
-console.log("RENDER", !!info);
         if(!info) return;
         ReportGrid.chart(el.get(0),  {
             axes    : info.axes,
@@ -43,6 +42,7 @@ console.log("RENDER", !!info);
       }
 
       function clear() {
+        clearInterval(timer);
         if(ReportGrid.tooltip)
           ReportGrid.tooltip.hide();
         el.children("*").remove();

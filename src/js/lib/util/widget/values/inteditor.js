@@ -7,11 +7,9 @@ function($, createValue) {
   return function(el, options) {
     var editor;
 
-console.log(JSON.stringify(options));
     options = $.extend({
       default : 0
     }, options);
-console.log(JSON.stringify(options));
 
 
     $('<div></dvi><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
@@ -30,7 +28,6 @@ console.log(JSON.stringify(options));
 
     var value = createValue(options.default,
       function(v) {
-console.log("VALIDATE", v, options.min, ("undefined" !== typeof options.min), options.min > v);
         if(""+parseInt(v) !== ""+v)
           return "must be an integer value";
         v = parseInt(v);
@@ -41,8 +38,6 @@ console.log("VALIDATE", v, options.min, ("undefined" !== typeof options.min), op
         return null;
       },
       function(v) {
-
-console.log("FILTER", v);
         return parseInt(v);
       }
     );
@@ -57,7 +52,6 @@ console.log("FILTER", v);
     }
 
     function value_validationError(err) {
-console.log("VALIDATION ERROR", err);
       error.html(err);
       error.show();
     }

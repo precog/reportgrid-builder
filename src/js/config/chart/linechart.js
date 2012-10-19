@@ -1,5 +1,5 @@
 define([
-    "config/chart/extract/extractsegment"
+    "config/chart/extract/segmentextract"
   , "config/chart/options/svgoptions"
 ],
 

@@ -14,9 +14,7 @@ function(createDispatcher) {
 
     return model = {
       set : function(newvalue) {
-console.log("SET", newvalue, validator(newvalue));
         if((lastError = validator(newvalue)) != null) {
-console.log("TRIGGERS ERROR", lastError);
           dispatcher.trigger("value.validationError", lastError, newvalue);
           return false;
         }
@@ -40,8 +38,8 @@ console.log("TRIGGERS ERROR", lastError);
         }
         return false;
       },
-      get : function(alt) {
-        return value !== null && typeof value !== "undefined" && value || alt;
+      get : function() {
+        return value !== null && typeof value !== "undefined" && value;
       },
       getDefault : function() {
         return defaultValue;
