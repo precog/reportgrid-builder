@@ -21,5 +21,14 @@ function() {
         default : true
       }
     });
+    options.push({
+      name  : "labelhorizontal",
+      label : "horizontal labels",
+      type  : "bool",
+      event : "options.chart.barchart.labelhorizontal",
+      options : {
+        default : true
+      }
+    });
   }
 });

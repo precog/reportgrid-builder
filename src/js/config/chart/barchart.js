@@ -7,7 +7,7 @@ function(extractor, applyOptions) {
   var chart = {
       type  : "barchart"
     , label : "Bar Chart"
-    , extractOptions : extractor
+    , extractOptions : extractor()
     , dimensions : [{
       name : "x",
       isaxis : true,
@@ -25,12 +25,6 @@ function(extractor, applyOptions) {
     }],
     options : []
   };
-console.log(applyOptions);
   applyOptions(chart.options);
-  /*
-  $.each($.makeArray(arguments).slice(0), function() {
-    this(chart.options);
-  });
-*/
   return chart;
 });

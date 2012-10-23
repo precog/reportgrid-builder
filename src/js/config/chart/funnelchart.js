@@ -1,14 +1,13 @@
 define([
-  "config/chart/options/svgoptions"
+    "config/chart/funnelchartextractor"
+  , "config/chart/funnelchartoptions"
 ],
 
-function(osvg) {
+function(extractor, applyOptions) {
   var chart = {
       type  : "funnelchart"
     , label : "Funnel Chart"
-    , extractOptions : function(o, dimensions) {
-
-    }
+    , extractOptions : extractor()
     , dimensions : [{
       name : "label",
       isaxis : true,
@@ -22,8 +21,6 @@ function(osvg) {
     }],
     options : []
   };
-
-  osvg(chart.options);
-
+  applyOptions(chart.options);
   return chart;
 });

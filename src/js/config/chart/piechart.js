@@ -1,14 +1,13 @@
 define([
-  "config/chart/options/svgoptions"
+    "config/chart/piechartextractor"
+  , "config/chart/piechartoptions"
 ],
 
-function(osvg) {
+function(extractor, applyOptions) {
   var chart = {
       type  : "piechart"
     , label : "Pie Chart"
-    , extractOptions : function(o, dimensions) {
-
-    }
+    , extractOptions : extractor()
     , dimensions : [{
       name : "label",
       isaxis : true,
@@ -22,8 +21,6 @@ function(osvg) {
     }],
     options : []
   };
-
-  osvg(chart.options);
-
+  applyOptions(chart.options);
   return chart;
 });

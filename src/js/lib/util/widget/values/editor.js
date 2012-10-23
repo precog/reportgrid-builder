@@ -24,8 +24,10 @@ function($, createValue) {
     }
 
     if(!params.destroy) {
-      params.input.off("change", params.onchange);
-      params.onchange = null;
+      params.destroy = function() {
+        params.input.off("change", params.onchange);
+        params.onchange = null;
+      };
     }
 
     if(!params.wireChange) {
@@ -33,7 +35,7 @@ function($, createValue) {
         params.input.on("change", function() {
           params.onchange();
         });
-      }
+      };
     }
 
     $('<div></dvi><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);

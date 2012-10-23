@@ -1,15 +1,13 @@
 define([
-    "config/chart/extract/segmentextract"
-  , "config/chart/options/svgoptions"
+    "config/chart/linechartextractor"
+  , "config/chart/linechartoptions"
 ],
 
-function(esegment, osvg) {
+function(extractor, applyOptions) {
   var chart = {
       type  : "linechart"
     , label : "Line Chart"
-    , extractOptions : function(o, dimensions) {
-      esegment(o, dimensions);
-    }
+    , extractOptions : extractor()
     , dimensions : [{
       name : "x",
       isaxis : true,
@@ -27,8 +25,6 @@ function(esegment, osvg) {
     }],
     options : []
   };
-
-  osvg(chart.options);
-
+  applyOptions(chart.options);
   return chart;
 });

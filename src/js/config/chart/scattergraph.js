@@ -1,14 +1,13 @@
 define([
-  "config/chart/options/svgoptions"
+    "config/chart/scattergraphextractor"
+  , "config/chart/scattergraphoptions"
 ],
 
-function(osvg) {
+function(extractor, applyOptions) {
   var chart = {
       type  : "scattergraph"
     , label : "Scatter Graph"
-    , extractOptions : function(o, dimensions) {
-
-    }
+    , extractOptions : extractor()
     , dimensions : [{
       name : "x",
       isaxis : true,
@@ -22,9 +21,7 @@ function(osvg) {
     }],
     options : []
   };
-
-  osvg(chart.options);
-
+  applyOptions(chart.options);
   return chart;
 });
 

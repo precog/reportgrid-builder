@@ -1,8 +1,6 @@
 define([
     "config/chart/extract/extractor"
   , "config/chart/extract/allextract"
-  , "config/chart/extract/segmentextract"
-  , "config/chart/extract/barchartextract"
 ],
 
 function(extractor) {

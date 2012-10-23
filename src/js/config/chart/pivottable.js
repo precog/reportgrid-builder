@@ -1,14 +1,13 @@
 define([
-  "config/chart/options/svgoptions"
+    "config/chart/pivottableextractor"
+  , "config/chart/pivottableoptions"
 ],
 
-function() {
+function(extractor, applyOptions) {
   var chart = {
       type  : "pivottable"
     , label : "Pivot Table"
-    , extractOptions : function(o, dimensions) {
-
-    }
+    , extractOptions : extractor()
     , dimensions : [{
       name : "columns",
       isaxis : true,
@@ -27,7 +26,7 @@ function() {
     }],
     options : []
   };
-
+  applyOptions(chart.options);
   return chart;
 });
 

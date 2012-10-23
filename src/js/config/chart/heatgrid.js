@@ -1,14 +1,13 @@
 define([
-  "config/chart/options/svgoptions"
+    "config/chart/heatgridextractor"
+  , "config/chart/heatgridoptions"
 ],
 
-function(osvg) {
+function(extractor, applyOptions) {
   var chart = {
       type  : "heatgrid"
     , label : "Heat Map"
-    , extractOptions : function(o, dimensions) {
-
-    }
+    , extractOptions : extractor()
     , dimensions : [{
       name : "x",
       isaxis : true,
@@ -22,8 +21,6 @@ function(osvg) {
     }],
     options : []
   };
-
-  osvg(chart.options);
-
+  applyOptions(chart.options);
   return chart;
 });

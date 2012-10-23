@@ -1,14 +1,13 @@
 define([
-
+    "config/chart/leaderboardextractor"
+  , "config/chart/leaderboardoptions"
 ],
 
-function() {
+function(extractor, applyOptions) {
   var chart = {
       type  : "leaderboard"
     , label : "Leaderboard"
-    , extractOptions : function(o, dimensions) {
-
-    }
+    , extractOptions : extractor()
     , dimensions : [{
       name : "label",
       isaxis : true,
@@ -22,6 +21,6 @@ function() {
     }],
     options : []
   };
-
+  applyOptions(chart.options);
   return chart;
 });
