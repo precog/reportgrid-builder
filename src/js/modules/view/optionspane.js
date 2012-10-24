@@ -2,15 +2,25 @@ define([
     "jquery"
   , "lib/util/ui"
   , "lib/util/widget/values/editors"
+  , "config/optiongroups"
 ],
 
-function($, ui, editors) {
+function($, ui, editors, optiongroups) {
 
   return function(ctx) {
     var el,
-        options = [];
+        options = [],
+        groups = {},
+        defaultGroup;
     function init(container) {
       el = container;
+
+      $(optiongroups).each(function() {
+        var $ogroup = $('<fieldset><legend>'+this.label+'</legend><div class="fields"></div></fieldset>');
+        el.append($ogroup);
+        groups[this.group] = $ogroup;
+      });
+      defaultGroup = groups[optiongroups[optiongroups.length - 1].group];
       ctx.on("chart.type.change", update);
       ctx.on("chart.option.add", appendOption);
     };
@@ -20,13 +30,20 @@ function($, ui, editors) {
         options.pop()();
       }
 
-      el.children("*").remove()
+
+      el.find('fieldset').hide().find('div.fields').children("*").remove();
     }
 
     function appendOption(info) {
       var editor,
           index = 0,
-          $container = $('<div class="option-editor"></div>').appendTo(el);
+          $fieldset = (groups[info.group] || defaultGroup).show(),
+          $container = $('<div class="option-editor"></div>').appendTo($fieldset.find(".fields:first"));
+
+      if(!groups[info.group]) {
+        console.warn("UNMATCHED GROUP " + info.group + " for " + info.name);
+      }
+
       $container.append('<div class="name">'+(info.label || info.name)+'</div>');
       var $option = $('<div class="option"></div>');
       $container.append($option);

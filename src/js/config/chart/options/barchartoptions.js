@@ -7,6 +7,7 @@ function() {
     preferences = preferences || {};
     options.push({
       name  : "horizontal",
+      group : "barchart",
       event : "options.chart.barchart.horizontal",
       editors : [{
         type  : "bool",
@@ -17,6 +18,7 @@ function() {
     });
     options.push({
       name  : "stacked",
+      group : "barchart",
       event : "options.chart.barchart.stacked",
       editors : [{
         type  : "bool",
@@ -27,6 +29,7 @@ function() {
     });
     options.push({
       name  : "labelhorizontal",
+      group : "label",
       label : "horizontal labels",
       event : "options.chart.barchart.labelhorizontal",
       editors : [{
