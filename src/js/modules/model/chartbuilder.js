@@ -44,11 +44,7 @@ function(charts) {
         var axes = extractAxes(current.type);
         if(axes === null)
           throw "not enough axes to feed the chart";
-console.log("OPTIONS BEFORE", JSON.stringify(options));
-console.log("OPTIONS BEFORE", JSON.stringify(current.options));
         charts.map[current.type].extractOptions(options, current.dimensions, current.options);
-console.log("OPTIONS AFTER", JSON.stringify(options));
-console.log("OPTIONS BEFORE", JSON.stringify(current.options));
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
       } catch(e) {
         ctx.trigger("chart.render.clear");
