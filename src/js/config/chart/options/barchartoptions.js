@@ -19,6 +19,7 @@ function() {
     options.push({
       name  : "stacked",
       group : "barchart",
+      weight : -10,
       event : "options.chart.barchart.stacked",
       editors : [{
         type  : "bool",

@@ -7,6 +7,7 @@ function() {
       name  : "title",
       event : "options.chart.title",
       group : "general",
+      weight : -10,
       editors : [{
         type  : "string",
         options : {
@@ -35,6 +36,7 @@ function() {
     options.push({
       name  : "width",
       group : "general",
+      weight : 10,
       event : "options.chart.width",
       editors : [{
         type  : "int",
@@ -48,6 +50,7 @@ function() {
     }, {
       name  : "height",
       group : "general",
+      weight : 11,
       event : "options.chart.height",
       editors : [{
         type  : "int",

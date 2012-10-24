@@ -34,11 +34,37 @@ function($, ui, editors, optiongroups) {
       el.find('fieldset').hide().find('div.fields').children("*").remove();
     }
 
+    function findRef(container, weight, name) {
+      var list = container.find(".option-editor"), t;
+      for(var i = 0; i < list.length; i++) {
+        var el = $(list[i]);
+        t = parseInt(el.attr("data-weight"));
+        if(weight < t)
+          return el;
+        if(weight > t)
+          continue;
+
+        t = el.attr("data-name");
+        if(name < t)
+          return el;
+      }
+      return null;
+    }
+
     function appendOption(info) {
       var editor,
           index = 0,
           $fieldset = (groups[info.group] || defaultGroup).show(),
-          $container = $('<div class="option-editor"></div>').appendTo($fieldset.find(".fields:first"));
+          $fields = $fieldset.find(".fields:first"),
+          weight = info.weight || 0,
+          $ref = findRef($fields, weight, info.name),
+          $container = $('<div class="option-editor" data-weight="'+weight+'" data-name="'+info.name+'"></div>');
+
+      if($ref) {
+        $container.insertBefore($ref);
+      } else {
+        $fields.append($container);
+      }
 
       if(!groups[info.group]) {
         console.warn("UNMATCHED GROUP " + info.group + " for " + info.name);
