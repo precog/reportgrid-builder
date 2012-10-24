@@ -69,6 +69,12 @@ function(createDispatcher) {
       },
       isDefault : function() {
         return value === defaultValue;
+      },
+      destroy : function() {
+        $(["value.validationError", "value.change", "default.change", "value.reset", "validator.change", "filter.change"]).each(function(){
+          dispatcher.off(this);
+        });
+        lastError = value = defaultValue = filter = validator = dispatcher = null;
       }
     }
   }

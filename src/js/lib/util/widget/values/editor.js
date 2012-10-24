@@ -32,9 +32,7 @@ function($, createValue) {
 
     if(!params.wireChange) {
       params.wireChange = function() {
-        params.input.on("change", function() {
-          params.onchange();
-        });
+        params.input.on("change", params.onchange);
       };
     }
 
@@ -74,8 +72,9 @@ function($, createValue) {
       params  : params,
       destroy : function() {
         params.destroy();
-        value.off("value.change", value_change);
-        value.off("value.validationError", value_validationError);
+        value.destroy();
+//        value.off("value.change", value_change);
+//        value.off("value.validationError", value_validationError);
         el.children("*").remove();
       }
     };

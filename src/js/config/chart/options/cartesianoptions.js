@@ -13,6 +13,11 @@ function() {
         options : {
           default : false
         }
+      }, {
+        type  : "expression",
+        options : {
+          default : ""
+        }
       }]
     });
   }

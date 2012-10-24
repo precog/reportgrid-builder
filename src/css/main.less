@@ -403,29 +403,42 @@
   }
 
   .options-container {
-    .name {
-      float: left;
-      width: 6em;
+    .option-editor {
       clear: left;
-      text-align: right;
-      vertical-align: baseline;
-      padding: 0.4em 0.2em 0.3em 0.2em;
-      font-size: 93%;
-    }
-    .name:after {
-      content: ": "
-    }
 
-    .option {
-      float: left;
-      margin: 0;
-      min-width: 2em;
-      min-height: 1.6em;
+      .name {
+        float: left;
+        width: 6em;
+        clear: left;
+        text-align: right;
+        vertical-align: baseline;
+        padding: 0.4em 0.2em 0.3em 0.2em;
+        font-size: 93%;
+      }
+      .name:after {
+        content: ": "
+      }
+
+      .option {
+        float: left;
+        margin: 0;
+        min-width: 2em;
+        min-height: 1.6em;
+      }
+
+      .multi {
+        background-color: #ee5757;
+        float: left;
+      }
     }
   }
 
   .chart-container {
     clear: both;
+  }
+
+  .clr {
+    clear : left;
   }
 }
 
