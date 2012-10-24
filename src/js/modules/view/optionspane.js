@@ -16,7 +16,7 @@ function($, ui, editors, optiongroups) {
       el = container;
 
       $(optiongroups).each(function() {
-        var $ogroup = $('<fieldset><legend>'+this.label+'</legend><div class="fields"></div></fieldset>');
+        var $ogroup = $('<fieldset class="ui-widget-content ui-corner-all"><div class="options-group-header ui-widget-content ui-widget-header">'+this.label+'</div><div class="fields"></div></fieldset>');
         el.append($ogroup);
         groups[this.group] = $ogroup;
       });
