@@ -22,9 +22,10 @@ function($, editors) {
     }
 
     function appendOption(info) {
-      $(el).append('<div class="name">'+(info.label || info.name)+'</div>');
+      var $container = $('<div></div>').appendTo(el);
+      $container.append('<div class="name">'+(info.label || info.name)+'</div>');
       var $option = $('<div class="option"></div>');
-      $(el).append($option);
+      $container.append($option);
       // TODO switch to multiples
 
       var editor = editors(info.editors[0].type, $option, info.editors[0].options);
@@ -42,11 +43,28 @@ function($, editors) {
       editor.value.on("value.change", ctx_trigger_handler);
       ctx.on(info.event, ctx_on_handler);
 
+
+      function visible() {
+        if(info.condition.visible.apply(info, arguments))
+          $container.show();
+        else
+          $container.hide();
+      }
+
+      if(info.condition) {
+        ctx.on(info.condition.event, visible);
+        $container.hide();
+      }
+
       options.push(function() {
+        if(info.condition) {
+          ctx.off(info.condition.event, visible);
+        }
         editor.value.off("value.change", ctx_trigger_handler);
         ctx.off(info.event, ctx_on_handler);
         editor.destroy();
       });
+
 
       setTimeout(function() {
         ctx_trigger_handler(editor.value.get());

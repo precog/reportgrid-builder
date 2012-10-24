@@ -22,7 +22,13 @@ function() {
         options : {
           default : true
         }
-      }]
+      }],
+      condition : {
+        event   : "options.chart.title",
+        visible : function(value) {
+          return value !== '';
+        }
+      }
     });
     options.push({
       name  : "width",
