@@ -7,9 +7,18 @@ define([
 function($, createDrop, ui) {
 
   return function(ctx) {
-    var el, dimensions = [];
+    var el,
+        $container,
+        $fields,
+        dimensions = [];
     function init(container) {
       el = container;
+
+      $container = $('<fieldset class="ui-widget-content ui-corner-all"><div class="group-header ui-widget-content ui-widget-header">dimensions</div><div class="fields"></div></div>');
+      $fields = $container.find(".fields:first");
+
+      $container.appendTo(el);
+
       ctx.on("chart.type.change", update);
       ctx.on("chart.dimension.add", appendDimension);
     };
@@ -25,11 +34,11 @@ function($, createDrop, ui) {
         dimension.drop.destroy();
       }
 
-      el.children("*").remove()
+      $fields.children("*").remove()
     }
 
     function appendDimension(info) {
-      $(el).append('<div class="name">'+(info.label || info.name)+'</div>');
+      $fields.append('<div class="name">'+(info.label || info.name)+'</div>');
       var options = {
           accept   : function(data) { return true }
         , multiple : info.max !== 1
@@ -37,7 +46,7 @@ function($, createDrop, ui) {
           return data.path.split("/").pop();
         }
       };
-      var drop = createDrop(el, options), add, remove;
+      var drop = createDrop($fields, options), add, remove;
       $(drop).on("added", add = function(e, data) {
         ctx.trigger("chart.field.add", data, info);
       });

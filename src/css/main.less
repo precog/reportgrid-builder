@@ -1,6 +1,6 @@
 @import "elements";
 @import "css/jquery-pnotify/jquery.pnotify.default.css";
-@dimensionWidget: 120px;
+@dimensionWidget: 155px;
 @chartIconSize: 24px;
 
 .ui-pnotify, .ui-pnotify-history-container {
@@ -384,7 +384,7 @@
 
   .dimensions-container {
     float: left;
-    margin: 0 0.5em 0.5em 0;
+    margin: 0;
 
     .name {
       float: left;
@@ -401,7 +401,11 @@
 
     .dimension {
       float: left;
-      margin: 0;
+      margin: 5px 0 0 0;
+    }
+
+    .dimension:last-child {
+      margin-bottom: 5px;
     }
   }
 
@@ -427,6 +431,20 @@
         margin: 0;
         min-width: 2em;
         min-height: 1.6em;
+
+        input[type="text"] {
+          width: 10em;
+        }
+        input[type="number"] {
+          text-align: right;
+          width: 4em;
+        }
+        input[type="text"],
+        input[type="number"] {
+          border-top: none;
+          border-left: none;
+          border-right: none;
+        }
       }
 
       .multi {
@@ -437,13 +455,18 @@
   }
 
   fieldset {
-    margin: 0 0.5em 0.5em 0;
+    margin: 0 0 5px 5px;
     padding: 0;
     float: left;
     width: 230px;
+
+    .fields {
+      max-height: 100px;
+      overflow: auto;
+    }
   }
 
-  .options-group-header {
+  .group-header {
     margin: 0;
     padding: 0.2em 0.5em;
     border-top: 0;
