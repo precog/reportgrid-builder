@@ -25,7 +25,9 @@ function($, editors) {
       $(el).append('<div class="name">'+(info.label || info.name)+'</div>');
       var $option = $('<div class="option"></div>');
       $(el).append($option);
-      var editor = editors(info.type, $option, info.options);
+      // TODO switch to multiples
+
+      var editor = editors(info.editors[0].type, $option, info.editors[0].options);
 
       function ctx_on_handler(v) {
         if(v !== editor.value.get())
