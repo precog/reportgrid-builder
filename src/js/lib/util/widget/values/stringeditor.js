@@ -4,7 +4,7 @@ define([
 
 function(createEditor) {
   return function(el, options) {
-    options = $.extend({default : "hello" }, options);
+    options = $.extend({default : "" }, options);
 
     var $input = $('<input type="text">');
     var params = {

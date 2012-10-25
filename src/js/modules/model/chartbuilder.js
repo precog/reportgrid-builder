@@ -22,9 +22,12 @@ function(charts) {
         for(var j = 0; j < (dimension.max || current.dimensions[dimension.name].length); j++) {
           var o = current.dimensions[dimension.name][j];
           if(!o) break;
-          axes.push({
-            type : o.field.field || o.field.name
-          });
+          var axis = {
+                type : o.field.field || o.field.name
+              };
+          if(i > 0)
+            axis.variable = "dependent";
+          axes.push(axis);
           counter++;
         }
         if(counter < dimension.min)
