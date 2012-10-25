@@ -16,6 +16,7 @@ function() {
         }
       }]
     });
+
     options.push({
       name  : "stacked",
       group : "barchart",
@@ -28,15 +29,21 @@ function() {
         }
       }]
     });
+
     options.push({
-      name  : "labelhorizontal",
-      group : "label",
-      label : "horizontal labels",
-      event : "options.chart.barchart.labelhorizontal",
+      name  : "effect",
+      group : "barchart",
+      weight : 0,
+      event : "options.chart.barchart.effect",
       editors : [{
-        type  : "bool",
+        type  : "selection",
         options : {
-          default : true
+          default : "gradient",
+          values : [
+              { value : "noeffect", label : "none" }
+            , { value : "gradient", label : "gradient" }
+            , { value : "gradient:1.25", label : "custom gradient", editor : { type : "float", options : { default : 1.25, min : -10, max : 10 } } }
+          ]
         }
       }]
     });

@@ -6,7 +6,7 @@ function(createEditor) {
   return function(el, options) {
     options = $.extend({default : "" }, options);
 
-    var $input = $('<input type="text">');
+    var $input = $('<input type="text" class="expression">');
     var params = {
       input : $input,
       validate : options.validate || function(v) {

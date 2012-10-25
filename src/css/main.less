@@ -412,6 +412,7 @@
   .options-container {
     .option-editor {
       clear: left;
+      position: relative;
 
       .name {
         float: left;
@@ -433,7 +434,7 @@
         min-height: 1.6em;
 
         input[type="text"] {
-          width: 10em;
+          width: @dimensionWidget;
         }
         input[type="number"] {
           text-align: right;
@@ -464,6 +465,19 @@
         margin-top: -9px;
         margin-left: -9px;
       }
+
+      input.template,
+      input.expression {
+        font-family: monospace;
+      }
+
+      select {
+        max-width: @dimensionWidget;
+      }
+
+      select.with-editor {
+        max-width: @dimensionWidget - 30px;
+      }
     }
   }
 
@@ -474,7 +488,7 @@
     width: 230px;
 
     .fields {
-      max-height: 100px;
+//      max-height: 100px;
       overflow: auto;
     }
   }

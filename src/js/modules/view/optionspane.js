@@ -114,14 +114,14 @@ function($, ui, editors, optiongroups) {
               $option.children("*").remove();
             }
             // create new
-            editor = editors(info.editors[index].type, $option, info.editors[index].options);
+            editor = editors.create($option, info.editors[index].type, info.editors[index].options);
             editor.value.on("value.change", ctx_trigger_handler);
           });
           $ul.append($li);
         }
       }
 
-      editor = editors(info.editors[index].type, $option, info.editors[index].options);
+      editor = editors.create($option, info.editors[index].type, info.editors[index].options);
       editor.value.on("value.change", ctx_trigger_handler);
 
       ctx.on(info.event, ctx_on_handler);

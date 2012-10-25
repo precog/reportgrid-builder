@@ -33,7 +33,7 @@ function($, createContext) {
   var modules = $(arguments).slice(2);
 
   function builder() {
-    var ctx = createContext();
+    var ctx = createContext(true);
 
     $(modules).each(function() {
       this(ctx);

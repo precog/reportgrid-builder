@@ -1,6 +1,7 @@
 define([
     "config/chart/extract/extractor"
   , "config/chart/extract/allextract"
+  , "config/chart/extract/cartesianextract"
   , "config/chart/extract/svgextract"
 ],
 

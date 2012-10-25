@@ -15,6 +15,25 @@ function() {
         }
       }]
     });
+
+    options.push({
+      name  : "tooltip",
+      event : "options.chart.datapointover",
+      group : "label",
+      weight : -10,
+      editors : [{
+        type  : "bool",
+        options : {
+          default : true
+        }
+      }, {
+        type  : "template",
+        options : {
+          default : ""
+        }
+      }]
+    });
+
     options.push({
       name  : "titleontop",
       label : "title on top",

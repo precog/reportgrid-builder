@@ -1,16 +1,20 @@
 define([
-    "lib/util/widget/values/inteditor"
+    "lib/util/widget/values/floateditor"
+  , "lib/util/widget/values/inteditor"
   , "lib/util/widget/values/booleditor"
   , "lib/util/widget/values/expressioneditor"
   , "lib/util/widget/values/stringeditor"
   , "lib/util/widget/values/selectioneditor"
+  , "lib/util/widget/values/templateeditor"
 ],
 
 function() {
   var editors = $.makeArray(arguments),
-      types   = ["int", "bool", "expression", "string", "selection"];
+      types   = ["float", "int", "bool", "expression", "string", "selection", "template"];
 
-  return function(type, el, options) {
-    return editors[types.indexOf(type)](el, options);
+  return {
+    create : function(el, type, options){
+      return editors[types.indexOf(type)](el, options);
+    }
   };
 });
