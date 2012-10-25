@@ -9,7 +9,7 @@ function() {
       group : "general",
       weight : -10,
       editors : [{
-        type  : "string",
+        type  : "template",
         options : {
           default : ""
         }
