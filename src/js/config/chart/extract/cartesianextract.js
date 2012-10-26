@@ -1,11 +1,8 @@
-define([],
+define([
+  "config/chart/extract/ensure"
+],
 
-function() {
-
-  function ensureLabel(o) {
-    return o.label || (o.label = {});
-  }
-
+function(ensure) {
   return function(o, dimensions, options) {
     if("undefined" !== typeof options["cartesian.displayrules"] && options["cartesian.displayrules"]) {
       o.displayrules = options["cartesian.displayrules"];

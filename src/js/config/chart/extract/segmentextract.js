@@ -1,6 +1,8 @@
-define([],
+define([
+  "config/chart/extract/ensure"
+],
 
-function() {
+function(ensure) {
 
   return function(o, dimensions, options) {
     if(dimensions.segment) {

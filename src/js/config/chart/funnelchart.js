@@ -9,12 +9,12 @@ function(extractor, applyOptions) {
     , label : "Funnel Chart"
     , extractOptions : extractor()
     , dimensions : [{
-      name : "label",
+      name : "slice",
       isaxis : true,
       min  : 1,
       max  : 1
     }, {
-      name : "slice",
+      name : "value",
       isaxis : true,
       min  : 1,
       max  : 1

@@ -3,6 +3,7 @@ define([
   , "config/chart/options/alloptions"
   , "config/chart/options/svgoptions"
   , "config/chart/options/funnelchartoptions"
+
 ],
 
 function(applier) {

@@ -50,7 +50,7 @@ function(charts) {
           throw "not enough axes to feed the chart";
         charts.map[current.type].extractOptions(options, current.dimensions, current.options);
 
-//        if(ctx.debug)
+        if(ctx.debug)
           console.info("CHART OPTIONS", JSON.stringify(options));
 
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
