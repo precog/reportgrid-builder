@@ -1,6 +1,6 @@
 @import "elements";
 @import "css/jquery-pnotify/jquery.pnotify.default.css";
-@dimensionWidget: 140px;
+@dimensionWidget: 136px;
 @chartIconSize: 24px;
 
 .ui-pnotify, .ui-pnotify-history-container {
@@ -416,8 +416,7 @@
 
       .name {
         float: left;
-        width: 6em;
-        clear: left;
+        width: 5em;
         text-align: right;
         vertical-align: baseline;
         padding: 0.4em 0.2em 0.3em 0.2em;
@@ -425,6 +424,11 @@
       }
       .name:after {
         content: ": "
+      }
+
+      .control-container {
+        float: left;
+        line-height: 2em;
       }
 
       .option {
@@ -445,6 +449,21 @@
           border-top: none;
           border-left: none;
           border-right: none;
+        }
+
+        .subeditor {
+          input {
+            width: 3em;
+          }
+        }
+
+        .unit {
+          padding-left: 1px;
+          font-size: 93%;
+        }
+
+        .subeditor {
+          float: left;
         }
       }
 
@@ -469,6 +488,7 @@
       input.template,
       input.expression {
         font-family: Menlo, monospace;
+        font-size: 85%;
       }
 
       select {
@@ -476,7 +496,7 @@
       }
 
       select.with-editor {
-        max-width: @dimensionWidget - 30px;
+        max-width: @dimensionWidget - 40px;
       }
     }
   }

@@ -36,7 +36,7 @@ function($, createValue) {
       };
     }
 
-    $('<div></dvi><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
+    $('<div class="control-container"><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
     params.input.appendTo(el.find(".control"));
     var error = el.find(".error");
     if(options.unit) {

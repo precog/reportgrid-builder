@@ -26,7 +26,7 @@ function($, createEditor) {
     options = $.extend({ default : null, selectiontext : false, values : [] }, options);
 
     var subeditor,
-        $subeditor = $('<div style="position:absolute;right:0;top:0"></div>'),
+        $subeditor = $('<div class="subeditor"></div>'),
         $input = $('<select></select>'),
         params = {
       input : $input,
@@ -68,13 +68,17 @@ function($, createEditor) {
         }
         $input.addClass("with-editor");
         subeditor = editors.create($subeditor, einfo.type, einfo.options);
-        subeditor.value.on("value.change", function() {
+
+        function setSubValue() {
           var $o = $input.find('option[data-index="'+index+'"]'),
-              value = $o.attr("value");
+            value = $o.attr("value");
           value = value.substr(0, value.lastIndexOf(":")+1);
           $o.attr("value", value + subeditor.value.get());
           $input.trigger("change");
-        });
+        }
+
+        subeditor.value.on("value.change", setSubValue);
+        setSubValue();
       });
     });
 
@@ -101,6 +105,7 @@ function($, createEditor) {
 
     var ed = createEditor(el, options, params);
     el.append($subeditor);
+    $input.trigger("change");
     return ed;
   };
 });

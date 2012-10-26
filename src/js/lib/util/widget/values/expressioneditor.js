@@ -1,5 +1,5 @@
 define([
-  "lib/util/widget/values/editor"
+    "lib/util/widget/values/editor"
 ],
 
 function(createEditor) {
@@ -7,6 +7,7 @@ function(createEditor) {
     options = $.extend({default : "" }, options);
 
     var $input = $('<input type="text" class="expression">');
+
     var params = {
       input : $input,
       validate : options.validate || function(v) {

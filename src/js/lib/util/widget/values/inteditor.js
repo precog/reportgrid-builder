@@ -1,5 +1,5 @@
 define([
-  "lib/util/widget/values/editor"
+    "lib/util/widget/values/editor"
 ],
 
 function(createEditor) {
@@ -7,6 +7,7 @@ function(createEditor) {
     options = $.extend({default : 0 }, options);
 
     var $input = $('<input type="number" step="'+(options.step || '1')+'" class="int">');
+
     var params = {
       input : $input,
       validate : function(v) {

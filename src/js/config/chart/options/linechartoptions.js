@@ -17,5 +17,50 @@ function() {
         }
       }]
     });
+
+    var sizeeditor = { type : "expression", options : { default : "=64", unit : "px²", className : "small" }};
+    options.push({
+      name : "symbol",
+      label : "shape",
+      group : "symbol",
+      event : "options.chart.linechart.symbol",
+      editors : [{
+        type : "selection",
+        options : {
+          default : "",
+          values : [
+              { value : "",               label : "[no symbol]" }
+            , { value : "circle:",        label : "circle",          editor : sizeeditor }
+            , { value : "square:",        label : "square",          editor : sizeeditor }
+            , { value : "diamond:",       label : "diamond",         editor : sizeeditor }
+            , { value : "cross:",         label : "cross",           editor : sizeeditor }
+            , { value : "star:",          label : "star",            editor : sizeeditor }
+            , { value : "triangleDown:",  label : "triangle down",   editor : sizeeditor }
+            , { value : "triangleUp:",    label : "triangle up",     editor : sizeeditor }
+            , { value : "arrowUp:",       label : "arrow up",        editor : sizeeditor }
+            , { value : "arrowDown:",     label : "arrow down",      editor : sizeeditor }
+            , { value : "arrowRight:",    label : "arrow right",     editor : sizeeditor }
+            , { value : "arrowLeft:",     label : "arrow left",      editor : sizeeditor }
+            , { value : "arrowDownWide:", label : "arrow down wide", editor : sizeeditor }
+          ]
+        }
+      }, {
+        type  : "expression",
+        options : {
+          default : "=symbol('circle',64)"
+        }
+      }]
+    });
+
+    options.push({
+      name : "symbolstyle",
+      label : "style",
+      group : "symbol",
+      event : "options.chart.linechart.symbolstyle",
+      editors : [{
+        type : "template",
+        default : ""
+      }]
+    });
   }
 });

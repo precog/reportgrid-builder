@@ -7,6 +7,8 @@ function(createEditor) {
     options = $.extend({default : "" }, options);
 
     var $input = $('<input type="text" class="string">');
+    if(options.className)
+      $input.addClass(options.className);
     var params = {
       input : $input,
       validate : options.validate || function(v) { return null; },
