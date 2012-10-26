@@ -1,6 +1,7 @@
 define([
     "config/chart/options/applier"
   , "config/chart/options/alloptions"
+  , "config/chart/options/leaderboardoptions"
 ],
 
 function(applier) {

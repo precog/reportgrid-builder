@@ -5,7 +5,7 @@ function() {
     preferences = preferences || {};
     options.push({
       name  : "title",
-      event : "options.chart.title",
+      event : "options.chart.label.title",
       group : "general",
       weight : -10,
       editors : [{
@@ -52,6 +52,7 @@ function() {
         }
       }
     });
+
     options.push({
       name  : "width",
       group : "general",
@@ -61,12 +62,15 @@ function() {
         type  : "int",
         options : {
           min     : 0,
+          step    : 25,
           max     : 3840,
           unit    : "px",
           default : preferences.width || 500
         }
       }]
-    }, {
+    });
+
+    options.push({
       name  : "height",
       group : "general",
       weight : 11,
@@ -76,6 +80,7 @@ function() {
         options : {
           min     : 0,
           max     : 2400,
+          step    : 25,
           unit    : "px",
           default : preferences.height || 250
         }

@@ -18,6 +18,11 @@ function(extractor, applyOptions) {
       isaxis : true,
       min  : 1,
       max  : 1
+    }, {
+      name : "value",
+      isaxis : true,
+      min  : 1,
+      max  : 1
     }],
     options : []
   };

@@ -10,8 +10,8 @@ function() {
 
 console.log(JSON.stringify(options));
 
-    if("undefined" !== typeof options["title"] && options["title"]) {
-      ensureLabel(o).title = options["title"];
+    if("undefined" !== typeof options["label.title"] && options["label.title"]) {
+      ensureLabel(o).title = options["label.title"];
       if("undefined" !== typeof options.titleontop && !options.titleontop)
         o.titleontop = options.titleontop
     }
@@ -24,11 +24,11 @@ console.log(JSON.stringify(options));
       }
     }
 
-    if("undefined" !== typeof options.datapoint) {
-      if(false === options.datapoint) {
-        ensureLabel(o).datapoint = "";
-      } else if("string" === typeof options.datapoint) {
-        ensureLabel(o).datapoint = options.datapoint;
+    if("undefined" !== typeof options["label.datapoint"]) {
+      if(false === options["label.datapoint"]) {
+        ensureLabel(o).datapoint = false;
+      } else if("string" === typeof options["label.datapoint"]) {
+        ensureLabel(o).datapoint = options["label.datapoint"];
       }
     }
   };

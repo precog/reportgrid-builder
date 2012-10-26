@@ -3,6 +3,7 @@ define([
   , "config/chart/extract/allextract"
   , "config/chart/extract/cartesianextract"
   , "config/chart/extract/svgextract"
+  , "config/chart/extract/scattergraphextract"
 ],
 
 function(extractor) {

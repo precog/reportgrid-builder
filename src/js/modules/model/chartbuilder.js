@@ -25,7 +25,8 @@ function(charts) {
           var axis = {
                 type : o.field.field || o.field.name
               };
-          if(i > 0)
+          // TODO THIS SHOULD GO IN THE AXIS OPTIONS
+          if(i > 0 && type === "linechart")
             axis.variable = "dependent";
           axes.push(axis);
           counter++;

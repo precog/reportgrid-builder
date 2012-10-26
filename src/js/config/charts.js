@@ -4,7 +4,7 @@ define([
   , "config/chart/linechart"
   , "config/chart/streamgraph"
   , "config/chart/funnelchart"
-//  , "config/chart/heatgrid" // not displaying anything
+  , "config/chart/heatgrid"
   , "config/chart/leaderboard"
   , "config/chart/pivottable"
   , "config/chart/scattergraph"

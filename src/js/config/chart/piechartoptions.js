@@ -2,6 +2,7 @@ define([
     "config/chart/options/applier"
   , "config/chart/options/alloptions"
   , "config/chart/options/svgoptions"
+  , "config/chart/options/piechartoptions"
 ],
 
 function(applier) {

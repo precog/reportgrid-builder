@@ -4,6 +4,7 @@ define([
   , "config/chart/extract/cartesianextract"
   , "config/chart/extract/svgextract"
   , "config/chart/extract/segmentextract"
+  , "config/chart/extract/linechartextract"
 ],
 
 function(extractor) {
