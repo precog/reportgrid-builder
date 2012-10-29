@@ -26,7 +26,7 @@ function(charts) {
                 type : o.field.field || o.field.name
               };
           // TODO THIS SHOULD GO IN THE AXIS OPTIONS
-          if(i > 0 && type === "linechart")
+          if(i > 0 && ["linechart", "barchart"].indexOf(type) >= 0)
             axis.variable = "dependent";
           axes.push(axis);
           counter++;
