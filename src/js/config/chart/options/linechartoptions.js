@@ -62,5 +62,73 @@ function() {
         default : ""
       }]
     });
+
+    options.push({
+      name : "displayarea",
+      label : "area chart",
+      group : "linechart",
+      event : "options.chart.linechart.displayarea",
+      editors : [{
+        type : "bool",
+        options :  {
+          default : false
+        }
+      }]
+    });
+
+    options.push({
+      name : "y0property",
+      label : "field for y0",
+      group : "linechart",
+      event : "options.chart.linechart.y0property",
+      editors : [{
+        type : "string",
+        options : {
+          default : ""
+        }
+      }],
+      condition : {
+        event   : "options.chart.linechart.displayarea",
+        visible : function(value) {
+          return !!value;
+        }
+      }
+    });
+
+    options.push({
+      name  : "sensibleradius",
+      label : "sensible radius",
+      group : "linechart",
+      weight : 10,
+      event : "options.chart.linechart.sensibleradius",
+      editors : [{
+        type  : "int",
+        options : {
+          min     : 0,
+          step    : 10,
+          unit    : "px",
+          default : 100
+        }
+      }]
+    });
+
+    options.push({
+      name : "lineeffect",
+      label : "effect",
+      group : "linechart",
+      event : "options.chart.linechart.lineeffect",
+      weight : 10,
+      editors : [{
+        type : "selection",
+        options : {
+          default : "gradient",
+          values : [
+              { value : "noeffect",    label : "none" }
+            , { value : "dropshadow:", label : "shadow",   editor : { type : "string", options : { default : "0.5,0.5,2" } } }
+            , { value : "gradient:",   label : "gradient", editor : { type : "string", options : { default : "0.75,2" } } }
+          ]
+        }
+      }]
+    });
   }
 });

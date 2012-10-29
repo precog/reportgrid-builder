@@ -11,7 +11,7 @@ function(ensure) {
       if(((/^[a-z]+:=/i).test(expr))) {
         var parts = expr.split(":=");
         o.symbol = "=symbol('"+parts[0]+"',"+parts[1]+")";
-      } else {
+      } else if(expr != '[no symbol]') {
         o.symbol = expr;
       }
     }

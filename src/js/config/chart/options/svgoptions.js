@@ -63,7 +63,6 @@ function() {
         options : {
           min     : 0,
           step    : 25,
-          max     : 3840,
           unit    : "px",
           default : preferences.width || 500
         }
@@ -79,7 +78,6 @@ function() {
         type  : "int",
         options : {
           min     : 0,
-          max     : 2400,
           step    : 25,
           unit    : "px",
           default : preferences.height || 250
