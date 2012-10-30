@@ -151,16 +151,7 @@ function() {
             { value : "stepbefore", label : "step before" }
           ]
         }
-      }
-        /*
-        , {
-        type : "expression",
-        options : {
-          default : ""
-        }
-      }
-         */
-      ]
+      }]
     });
   }
 });
