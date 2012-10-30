@@ -121,14 +121,46 @@ function() {
       editors : [{
         type : "selection",
         options : {
-          default : "gradient",
+          default : "gradient:",
           values : [
               { value : "noeffect",    label : "none" }
             , { value : "dropshadow:", label : "shadow",   editor : { type : "string", options : { default : "0.5,0.5,2" } } }
-            , { value : "gradient:",   label : "gradient", editor : { type : "string", options : { default : "0.75,2" } } }
+            , { value : "gradient:",   label : "gradient", editor : { type : "string", options : { default : "-1.2,2" } } }
           ]
         }
       }]
+    });
+
+    options.push({
+      name : "lineinterpolation",
+      label : "interpolation",
+      group : "linechart",
+      event : "options.chart.linechart.lineinterpolation",
+      weight : 0,
+      editors : [{
+        type : "selection",
+        options : {
+          default : "linear",
+          values : [
+            { value : "linear" },
+            { value : "basis" },
+            { value : "cardinal:", label : "cardinal", editor : { type : "float", options : { default : 0.75, step : 0.05  } } },
+            { value : "monotone" },
+            { value : "step" },
+            { value : "stepafter", label : "step after" },
+            { value : "stepbefore", label : "step before" }
+          ]
+        }
+      }
+        /*
+        , {
+        type : "expression",
+        options : {
+          default : ""
+        }
+      }
+         */
+      ]
     });
   }
 });
