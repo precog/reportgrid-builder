@@ -4,9 +4,9 @@ define([
 
 function($) {
   var toapply = $.makeArray(arguments).slice(1);
-  return function(toapply, options) {
+  return function(toapply, options, preferences) {
     $.each(toapply, function() {
-      this(options);
+      this(options, preferences);
     });
   };
 });

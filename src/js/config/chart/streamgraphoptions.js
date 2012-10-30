@@ -9,6 +9,6 @@ define([
 function(applier) {
   var toapply = $.makeArray(arguments).slice(1);
   return function(options) {
-    applier(toapply, options);
+    applier(toapply, options, { hidey : true });
   };
 });

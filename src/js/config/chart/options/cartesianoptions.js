@@ -5,6 +5,9 @@ define([
 function() {
   return function(options, preferences) {
     preferences = preferences || {};
+
+console.log(JSON.stringify(preferences));
+
     options.push({
       name  : "displayrules",
       label : "display rules",
@@ -21,23 +24,29 @@ function() {
         }
       }]
     });
-    options.push({
-      name : "yscaleposition",
-      label : "y position",
-      event : "options.chart.cartesian.yscaleposition",
-      editors : [{
-        type : "selection",
-        options : {
-          selectiontext : false,
-          default : "alternating",
-          values : [
-              { value : "alternating" }
-            , { value : "left" }
-            , { value : "right" }
-          ]
-        }
-      }]
-    });
+
+    if(!preferences.hidey) {
+      var values = [
+          { value : "left" }
+        , { value : "right" }
+      ];
+      if(!preferences.singley) {
+        values.unshift({ value : "alternating" });
+      }
+      options.push({
+        name : "yscaleposition",
+        label : "y position",
+        event : "options.chart.cartesian.yscaleposition",
+        editors : [{
+          type : "selection",
+          options : {
+            selectiontext : false,
+            default : values[0],
+            values  : values
+          }
+        }]
+      });
+    }
     options.push({
       name  : "labelhorizontal",
       group : "label",
