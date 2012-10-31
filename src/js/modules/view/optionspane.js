@@ -66,13 +66,9 @@ function($, ui, editors, optiongroups) {
         $fields.append($container);
       }
 
-      if(!groups[info.group]) {
+      if(ctx.debug && !groups[info.group]) {
         console.warn("UNMATCHED GROUP " + info.group + " for " + info.name);
       }
-
-      $container.append('<div class="name">'+(info.label || info.name)+'</div>');
-      var $option = $('<div class="option"></div>');
-      $container.append($option);
 
       function ctx_on_handler(v) {
         if(v !== editor.value.get())
@@ -87,9 +83,11 @@ function($, ui, editors, optiongroups) {
       if(info.editors.length > 1) {
         var menu = ui.contextmenu('<div class="rg-widget settings-menu"></div>'),
             $multitrigger = ui.button($container, {
-              icon : "ui-icon-gear",
-              description : "switch editor"
-            }).click(function() {
+                icon : "ui-icon-gear",
+                description : "switch editor",
+                className : "swap-option"
+              })
+              .click(function() {
               var pos = $(this).offset(),
                   h = $(this).outerHeight();
               menu.css({
@@ -120,6 +118,11 @@ function($, ui, editors, optiongroups) {
           $ul.append($li);
         }
       }
+
+
+      $container.append('<div class="name">'+(info.label || info.name)+'</div>');
+      var $option = $('<div class="option"></div>');
+      $container.append($option);
 
       editor = editors.create($option, info.editors[index].type, info.editors[index].options);
       editor.value.on("value.change", ctx_trigger_handler);

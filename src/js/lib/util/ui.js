@@ -68,6 +68,8 @@ function($, dom, notification, uid) {
           o.handler.apply(button.get(0));
           e.preventDefault(); return false;
         });
+      if(o.className)
+        button.addClass(o.className);
       if(o.description)
         wrapper.tooltip(button, o.description);
       return button;

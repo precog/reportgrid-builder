@@ -1,7 +1,11 @@
 @import "elements";
 @import "css/jquery-pnotify/jquery.pnotify.default.css";
-@dimensionWidget: 136px;
+@optionWidth: 150px;
+@optionLabelWidth: 90px;
 @chartIconSize: 24px;
+@fieldSetWidth: @optionWidth+@optionLabelWidth+15;
+@numberEditorWidth: 50px;
+@miniEditorWidth: 50px;
 
 .ui-pnotify, .ui-pnotify-history-container {
   font-size: 73%;
@@ -336,7 +340,7 @@
     padding: 0px;
     margin-top: 5px;
     margin-left: 5px;
-    width: @dimensionWidget;
+    width: @optionWidth;
     .receptor {
 //            border: 1px solid #e9e9e9;
       padding: 2px;
@@ -345,7 +349,7 @@
     .dimension-receptor {
       min-height: 20px;
       .dimension-placeholder {
-        width: @dimensionWidget - 4;
+        width: @optionWidth - 4;
         height: 1em;
         display: inline-block;
       }
@@ -416,7 +420,7 @@
 
       .name {
         float: left;
-        width: 5em;
+        width: @optionLabelWidth;
         text-align: right;
         vertical-align: baseline;
         padding: 0.4em 0.2em 0.3em 0.2em;
@@ -438,11 +442,11 @@
         min-height: 1.6em;
 
         input[type="text"] {
-          width: @dimensionWidget;
+          width: @optionWidth;
         }
         input[type="number"] {
           text-align: right;
-          width: 4em;
+          width: @numberEditorWidth;
         }
         input[type="text"],
         input[type="number"] {
@@ -453,7 +457,7 @@
 
         .subeditor {
           input {
-            width: 3em;
+            width: @miniEditorWidth;
           }
         }
 
@@ -472,11 +476,21 @@
         float: left;
       }
 
-      button.ui-button {
+/*
+      button.swap-option {
+        display: block;
+        float : left;
+      }
+*/
+      button.swap-option {
         width: 16px;
         height: 16px;
-        margin-top: 1px;
-        float: right;
+        margin-top: 3px;
+        margin-left: 3px;
+        /*
+        float: left;
+        */
+        position: absolute;
         display: block;
       }
 
@@ -492,11 +506,11 @@
       }
 
       select {
-        max-width: @dimensionWidget;
+        max-width: @optionWidth;
       }
 
       select.with-editor {
-        max-width: @dimensionWidget - 40px;
+        max-width: @optionWidth - @miniEditorWidth;
       }
     }
   }
@@ -505,10 +519,9 @@
     margin: 0 0 5px 5px;
     padding: 0;
     float: left;
-    width: 230px;
+    width: @fieldSetWidth;
 
     .fields {
-//      max-height: 100px;
       overflow: auto;
     }
   }
