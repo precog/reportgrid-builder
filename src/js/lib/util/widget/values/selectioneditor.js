@@ -61,6 +61,7 @@ function($, createEditor) {
         if(subeditor) {
           subeditor.destroy();
           $subeditor.children("*").remove();
+          subeditor = null;
         }
         if("undefined" === typeof index || !(einfo = options.values[index].editor)) {
           $input.removeClass("with-editor");

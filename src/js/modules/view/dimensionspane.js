@@ -57,8 +57,7 @@ function($, uiconfig, createDrop, ui) {
 
       dimensions.push({ drop : drop, add : add, remove : remove });
 
-      ui.snapHeight($container, uiconfig.fieldsetGridSnapping);
-//      el.append(drop);
+//      ui.snapHeight($container, uiconfig.fieldsetGridSnapping);
     }
 
     ctx.on("view.editor.dimensions", init);

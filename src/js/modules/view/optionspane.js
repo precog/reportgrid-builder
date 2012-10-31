@@ -155,7 +155,7 @@ function($, uiconfig, ui, editors, optiongroups) {
 
       $container.append('<div class="clr"></div>');
 
-      ui.snapHeight($fieldset, uiconfig.fieldsetGridSnapping);
+//      ui.snapHeight($fieldset, uiconfig.fieldsetGridSnapping);
 
       setTimeout(function() {
         ctx_trigger_handler(editor.value.get());
