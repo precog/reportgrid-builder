@@ -10,7 +10,7 @@ function() {
       group : "barchart",
       event : "options.chart.barchart.horizontal",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : false
         }
@@ -23,7 +23,7 @@ function() {
       weight : -10,
       event : "options.chart.barchart.stacked",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }

@@ -69,7 +69,7 @@ function() {
       group : "linechart",
       event : "options.chart.linechart.displayarea",
       editors : [{
-        type : "bool",
+        type : "boolean",
         options :  {
           default : false
         }

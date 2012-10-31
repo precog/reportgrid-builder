@@ -22,7 +22,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -40,7 +40,7 @@ function() {
       event : "options.chart.titleontop",
       group : "label",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }

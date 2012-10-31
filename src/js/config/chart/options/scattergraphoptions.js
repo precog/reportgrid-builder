@@ -11,7 +11,7 @@ function() {
      group : "barchart",
      event : "options.chart.barchart.horizontal",
      editors : [{
-     type  : "bool",
+     type  : "boolean",
      options : {
      default : false
      }

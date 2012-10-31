@@ -26,7 +26,7 @@ function() {
       weight : 0,
       event : "options.chart.leaderboard.colorscale",
       editors : [{
-        type : "bool",
+        type : "boolean",
         options : {
           default : false
         }
@@ -40,7 +40,7 @@ function() {
       weight : 0,
       event : "options.chart.leaderboard.usemax",
       editors : [{
-        type : "bool",
+        type : "boolean",
         options : {
           default : false
         }
@@ -54,7 +54,7 @@ function() {
       weight : 0,
       event : "options.chart.leaderboard.displaybar",
       editors : [{
-        type : "bool",
+        type : "boolean",
         options : {
           default : true
         }
@@ -67,7 +67,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -85,7 +85,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }

@@ -12,7 +12,7 @@ function() {
       group : "displaytotals",
       event : "options.chart.pivottable.displaytotalcolumns",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -25,7 +25,7 @@ function() {
       group : "displaytotals",
       event : "options.chart.pivottable.displaytotalrows",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -38,7 +38,7 @@ function() {
       group : "pivottable",
       event : "options.chart.pivottable.displayheatmap",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -104,7 +104,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -123,7 +123,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -142,7 +142,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -161,7 +161,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -179,7 +179,7 @@ function() {
       group : "pivottable",
       event : "options.chart.pivottable.startcolor",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }

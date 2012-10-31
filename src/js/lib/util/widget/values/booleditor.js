@@ -22,7 +22,7 @@ function(createEditor) {
             case "on", "off", "true", "false":
               return null;
             default:
-              return v+" is not an acceptable bool value";
+              return v+" is not an acceptable boolean value";
           }
         }
         return null;

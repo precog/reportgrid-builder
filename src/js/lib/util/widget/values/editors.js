@@ -10,7 +10,7 @@ define([
 
 function() {
   var editors = $.makeArray(arguments),
-      types   = ["float", "int", "bool", "expression", "string", "selection", "template"];
+      types   = ["float", "int", "boolean", "expression", "string", "selection", "template"];
 
   return {
     create : function(el, type, options){

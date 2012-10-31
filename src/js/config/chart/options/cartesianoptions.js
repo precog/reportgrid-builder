@@ -36,7 +36,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : false
         }
@@ -54,7 +54,7 @@ function() {
       group : "label",
       weight : -10,
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -72,7 +72,7 @@ function() {
       label : "horizontal",
       event : "options.chart.labelhorizontal",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -85,7 +85,7 @@ function() {
       group : "rules",
       event : "options.chart.cartesian.displayrulemajor",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : false
         }
@@ -103,7 +103,7 @@ function() {
       group : "rules",
       event : "options.chart.cartesian.displayruleminor",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : false
         }
@@ -121,7 +121,7 @@ function() {
       group : "tickmarks",
       event : "options.chart.cartesian.displaytickmajor",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -139,7 +139,7 @@ function() {
       group : "tickmarks",
       event : "options.chart.cartesian.displaytickminor",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -157,7 +157,7 @@ function() {
       group : "axis",
       event : "options.chart.cartesian.displayticklabel",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -175,7 +175,7 @@ function() {
       group : "tickmarks",
       event : "options.chart.cartesian.displayanchorlinetick",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : false
         }
@@ -193,7 +193,7 @@ function() {
       group : "tickmarks",
       event : "options.chart.cartesian.displayanchorlinerule",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : false
         }

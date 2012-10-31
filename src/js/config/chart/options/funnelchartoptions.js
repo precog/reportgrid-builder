@@ -87,7 +87,7 @@ function() {
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
@@ -104,7 +104,7 @@ function() {
       group : "label",
       event : "options.chart.label.arrow",
       editors : [{
-        type  : "bool",
+        type  : "boolean",
         options : {
           default : true
         }
