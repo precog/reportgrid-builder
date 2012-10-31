@@ -28,6 +28,7 @@ require([
   , "modules/view/dimensionspane"
   , "modules/view/optionspane"
   , "modules/view/chartpane"
+  , "modules/view/changergtheme"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);

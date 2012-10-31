@@ -6,11 +6,12 @@ define([
   , "lib/util/widget/values/stringeditor"
   , "lib/util/widget/values/selectioneditor"
   , "lib/util/widget/values/templateeditor"
+  , "lib/util/widget/values/rgcsseditor"
 ],
 
 function() {
   var editors = $.makeArray(arguments),
-      types   = ["float", "int", "boolean", "expression", "string", "selection", "template"];
+      types   = ["float", "int", "boolean", "expression", "string", "selection", "template", "rgcss"];
 
   return {
     create : function(el, type, options){
