@@ -1,10 +1,11 @@
 define([
     "jquery"
+  , "config/ui"
   , "lib/util/widget/dropdimension"
   , "lib/util/ui"
 ],
 
-function($, createDrop, ui) {
+function($, uiconfig, createDrop, ui) {
 
   return function(ctx) {
     var el,
@@ -55,6 +56,8 @@ function($, createDrop, ui) {
       });
 
       dimensions.push({ drop : drop, add : add, remove : remove });
+
+      ui.snapHeight($container, uiconfig.fieldsetGridSnapping);
 //      el.append(drop);
     }
 

@@ -1,11 +1,12 @@
 define([
     "jquery"
+  , "config/ui"
   , "lib/util/ui"
   , "lib/util/widget/values/editors"
   , "config/optiongroups"
 ],
 
-function($, ui, editors, optiongroups) {
+function($, uiconfig, ui, editors, optiongroups) {
 
   return function(ctx) {
     var el,
@@ -153,6 +154,9 @@ function($, ui, editors, optiongroups) {
       });
 
       $container.append('<div class="clr"></div>');
+
+      ui.snapHeight($fieldset, uiconfig.fieldsetGridSnapping);
+
       setTimeout(function() {
         ctx_trigger_handler(editor.value.get());
       }, 0);

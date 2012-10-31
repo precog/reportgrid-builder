@@ -292,6 +292,11 @@ function($, dom, notification, uid) {
           selectIndex(-1);
         }
       };
+    },
+    snapHeight : function(el, step) {
+      el = $(el);
+      el.css("min-height", 0);
+      el.css("min-height", (step + Math.round((el.outerHeight(false)-1)/step) * step) + "px");
     }
   };
 });
