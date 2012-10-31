@@ -5,6 +5,8 @@ function() {
   return [
       { group : "general",          label : "general" }
 
+    , { group : "axis",             label : "axis" }
+
     , { group : "barchart",         label : "bar chart" }
     , { group : "funnelchart",      label : "funnel chart" }
     , { group : "heatgrid",         label : "heat grid" }
@@ -22,6 +24,8 @@ function() {
 
     , { group : "symbol",           label : "symbols" }
     , { group : "label",            label : "label" }
+    , { group : "tickmarks",        label : "tickmarks" }
+    , { group : "rules",        label : "rules" }
     , { group : "padding",          label : "padding" }
     , { group : "other",            label : "other" }
   ];
