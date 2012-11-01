@@ -12,7 +12,7 @@ function($, ui, createEditor, rgcolors) {
     var menu = ui.selectmenu(el, {
       data : rgcolors,
       format : function(item) {
-        var label = item.name.substr(10).split(".").shift() + "&nbsp;";
+        var label = '<span class="tiny">' + item.name.substr(10).split(".").shift() + "</span>&nbsp;";
         $.each(item.colors, function() {
           label += '<span class="minipalette" style="background-color: '+this+'"></span>';
         });
@@ -20,10 +20,9 @@ function($, ui, createEditor, rgcolors) {
       },
       width : 320
     });
-    var $input = $('<input type="text" class="string">');
+    var $input = $('<input type="hidden" class="string">');
 
     $(menu).on("select", function(e, data, c) {
-console.log("EDITOR", data.name);
       $input.val(data.name);
       $input.change();
     });
@@ -36,6 +35,8 @@ console.log("EDITOR", data.name);
       filter : options.filter || function(v) { return v.trim(); }
     };
 
-    return createEditor(el, options, params);
+    var ed = createEditor(el, options, params);
+    el.find(".control-container").hide();
+    return ed;
   };
 });

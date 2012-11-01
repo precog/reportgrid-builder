@@ -78,7 +78,8 @@ function($, uiconfig, ui, editors, optiongroups) {
 
       function ctx_trigger_handler(v) {
         ctx.trigger(info.event, v);
-        ctx.trigger("chart.option.set", info.event.split(".").slice(2).join("."), v);
+        if(info.event.substr(0, "options.chart.".length) === "options.chart.")
+          ctx.trigger("chart.option.set", info.event.split(".").slice(2).join("."), v);
       }
 
       if(info.editors.length > 1) {

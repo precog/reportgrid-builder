@@ -49,6 +49,7 @@ function($) {
       }
 
       ctx.on("chart.render.execute", execute);
+      ctx.on("chart.rgcss.loaded", render);
       ctx.on("chart.render.clear", clear);
       ctx.on("options.chart.width", change_width);
       ctx.on("options.chart.height", change_height);
