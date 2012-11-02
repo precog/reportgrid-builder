@@ -1,11 +1,13 @@
 @import "elements";
 @import "css/jquery-pnotify/jquery.pnotify.default.css";
-@optionWidth: 150px;
+@import "css/jquery-minicolors/jquery.miniColors.css";
+
+@optionWidth: 170px;
 @optionLabelWidth: 90px;
 @chartIconSize: 24px;
-@fieldSetWidth: @optionWidth+@optionLabelWidth+15;
 @numberEditorWidth: 50px;
-@miniEditorWidth: 50px;
+@colorEditorWidth: 60px;
+@miniEditorWidth: 70px;
 
 .ui-pnotify, .ui-pnotify-history-container {
   font-size: 73%;
@@ -240,7 +242,7 @@
   .data {
     .toolbar {
       border-top: 0;
-    //        line-height: 17px;
+    //        line-height: 16px;
     }
   }
 
@@ -403,8 +405,11 @@
   }
 
   .dimensions-container {
-    float: left;
     margin: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background-position: 50% 0%;
 
     .name {
       float: left;
@@ -430,6 +435,12 @@
   }
 
   .options-container {
+    overflow: auto;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+
+
     .option-editor {
       clear: left;
       position: relative;
@@ -448,7 +459,6 @@
 
       .control-container {
         float: left;
-        line-height: 2em;
       }
 
       .option {
@@ -460,9 +470,16 @@
         input[type="text"] {
           width: @optionWidth;
         }
-        input[type="number"] {
+
+        input[type="number"]
+        {
           text-align: right;
           width: @numberEditorWidth;
+        }
+
+        input.color
+        {
+          width: @colorEditorWidth;
         }
         input[type="text"],
         input[type="number"] {
@@ -529,16 +546,22 @@
         max-width: @optionWidth - @miniEditorWidth;
       }
     }
-  }
 
-  fieldset {
-    margin: 0 0 5px 5px;
-    padding: 0;
-    float: left;
-    width: @fieldSetWidth;
+    fieldset {
+      margin: 0;
+      padding: 0;
+//      border-top: 0;
+      border-bottom: 0;
+      border-left: 0;
+      border-right: 0;
 
-    .fields {
-      overflow: auto;
+      .fields {
+        overflow: auto;
+      }
+    }
+
+    fieldset:first-child {
+      border-top: 0;
     }
   }
 
@@ -552,7 +575,7 @@
   }
 
   .chart-container {
-    clear: both;
+    overflow: auto;
   }
 
   .clr {
@@ -712,4 +735,25 @@
   z-index: 10000;
   position : absolute;
   display: none;
+}
+
+.miniColors-huePicker,
+.miniColors-opacityPicker {
+  width: 16px;
+}
+
+.miniColors-trigger,
+.miniColors-triggerWrap {
+  width: 16px;
+  height: 16px;
+}
+
+.miniColors-triggerWrap {
+  background: url("jquery-minicolors/images/trigger-custom.png") -16px 0 no-repeat;
+}
+
+.miniColors-trigger {
+  vertical-align: middle;
+  outline: none;
+  background: url(jquery-minicolors/images/trigger-custom.png) 0 0 no-repeat;
 }

@@ -117,15 +117,7 @@ function($, tplLayout) {
         north : toolbarDouble
       });
 
-      create($container.find('.main'), {
-        east : {
-            size : "20%"
-          , initClosed : false
-          , minSize : 200
-          , maxSize : 600
-          , maskIframesOnResize : true
-        }
-      });
+      create($container.find('.main'));
 
 
 

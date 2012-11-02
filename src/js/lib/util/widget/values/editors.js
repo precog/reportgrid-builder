@@ -7,12 +7,13 @@ define([
   , "lib/util/widget/values/selectioneditor"
   , "lib/util/widget/values/templateeditor"
   , "lib/util/widget/values/rgcsseditor"
+  , "lib/util/widget/values/coloreditor"
   , "lib/util/widget/values/colorlisteditor"
 ],
 
 function() {
   var editors = $.makeArray(arguments),
-      types   = ["float", "int", "boolean", "expression", "string", "selection", "template", "rgcss", "colorslist"];
+      types   = ["float", "int", "boolean", "expression", "string", "selection", "template", "rgcss", "color", "colorlist"];
 
   return {
     create : function(el, type, options){

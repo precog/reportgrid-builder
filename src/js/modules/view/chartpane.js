@@ -1,13 +1,15 @@
 define([
   "jquery",
-  "http://api.reportgrid.com/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
-//  "http://localhost/rg/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
+//  "http://api.reportgrid.com/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
+  "http://localhost/rg/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
 ],
 
 function($) {
   return function(ctx) {
     function init(el) {
-      var info, timer;
+      var info,
+          timer,
+          $chart = $('<div style="margin: 0 auto"></div>').appendTo(el);
 //      $(el).css({ width : "600px", height : "400px" });
 
       function execute(newinfo) { //{ type : current.type, dimensions : current.dimensions, datasource : datasources[path] }
@@ -22,7 +24,7 @@ function($) {
 
       function reducedRender() {
         if(!info) return;
-        ReportGrid.chart(el.get(0),  {
+        ReportGrid.chart($chart.get(0),  {
             axes    : info.axes,
             load    : info.loader,
             options : info.options
@@ -32,12 +34,12 @@ function($) {
       }
 
       function change_width(v) {
-        $(el).css("width", v+"px");
+        $chart.css("width", v+"px");
         render();
       }
 
       function change_height(v) {
-        $(el).css("height", v+"px");
+        $chart.css("height", v+"px");
         render();
       }
 
@@ -45,7 +47,7 @@ function($) {
         clearInterval(timer);
         if(ReportGrid.tooltip)
           ReportGrid.tooltip.hide();
-        el.children("*").remove();
+        $chart.children("*").remove();
       }
 
       ctx.on("chart.render.execute", execute);
