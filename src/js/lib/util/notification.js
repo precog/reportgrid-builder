@@ -126,13 +126,35 @@ function(dom) {
           noty.find(".ui-pnotify-icon,.ui-pnotify-closer,.ui-pnotify-sticker,.ui-pnotify-title").hide();
 
           var ul = noty.find("ul.menu");
-          $(items).each(function(index, item) {
-            var li = $('<li>'+item.content+'</li>');
+
+          var length = 0;
+
+          function createItem(item) {
+console.log("CREATE ITEM", item);
+            var li = $('<li>'+item.content+'</li>'),
+                index = length;
             ul.append(li);
             li.click(function() {
               $(noty).trigger("select", [item.data, index]);
             });
+            length++;
+          }
+
+          function removeItem(index) {
+            length--;
+            throw "NOT IMPLEMENTED REMOVEITEM IN NOTIFICATION";
+          }
+
+          $(items).each(function(index, item) {
+            createItem(item);
           });
+
+          noty.menu = {
+            add : function(item) {
+              createItem(item);
+            },
+            remove : removeItem
+          };
 
           return noty;
         },

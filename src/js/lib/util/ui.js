@@ -243,6 +243,7 @@ function($, dom, notification, uid) {
       function selectIndex(i, force) {
         if(!force && index === i) return;
         index = i;
+console.log(index, o.data);
         var content = i < 0 ? selectMessage() : o.selectedFormat ? o.selectedFormat(o.data[index]) : o.format(o.data[index]);
         triggerLabel.html(content);
       }
@@ -282,7 +283,15 @@ function($, dom, notification, uid) {
           of : trigger.find("button:first")
         });
       });
-
+/*
+      var timer;
+      function refresh() {
+        clearInterval(timer);
+        timer = setTimeout(function() {
+          menu.menu("refresh");
+        }, 15);
+      }
+*/
       return widget = {
           selectIndex : function(index) {
             selectIndex(index);
@@ -290,6 +299,24 @@ function($, dom, notification, uid) {
         , getSelected : function() { return index; }
         , reset : function() {
           selectIndex(-1);
+        }
+        , add : function(item) {
+console.log("START REFRESH");
+          o.data.push(item);
+          menu.menu.add(item);
+          /*
+          moptions.items.push(item);
+          menu.menu("option", "items", moptions.items);
+          refresh();
+          */
+        }
+        , remove : function(index) {
+          menu.menu.remove(index);
+          /*
+          moptions.items.splice(index, 1);
+          menu.menu("option", "items", moptions.items);
+          refresh();
+          */
         }
       };
     },

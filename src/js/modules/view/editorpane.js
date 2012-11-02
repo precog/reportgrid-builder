@@ -30,7 +30,7 @@ function($, tplEditor) {
 
       $splitter.layout({
         south : {
-            size : 200
+            size : 85
           , initClosed : false
           , resizable: false
           , closable : false
@@ -39,32 +39,12 @@ function($, tplEditor) {
         }
       });
 
-      ctx.trigger("view.editor.chartselector", $dimensions);
-      ctx.trigger("view.editor.dimensions", $dimensions);
+      ctx.trigger("view.editor.chartselector", $('<div class="pane chartselector-container"></div>').appendTo($dimensions));
+      ctx.trigger("view.editor.datasourceselector", $('<div class="pane dataosurceselector-container"></div>').appendTo($dimensions));
+      ctx.trigger("view.editor.dimensions", $('<div class="pane dimensionsoptions-container"></div>').appendTo($dimensions));
       ctx.trigger("view.editor.options", $options);
       ctx.trigger("view.editor.chart", $chart);
-/*
-      // create containers
-      // chart selection
-      var $chartSelection = $('<div class="chart-selection-container"></div>');
-      // dimensions container
-      var $dimensions = $('<div class="dimensions-container"></div>');
-      // options container
-      var $options = $('<div class="options-container"></div>');
-      // chart container
-      var $chart = $('<div class="chart-container"></div>');
-      el.append($chartSelection);
-      el.append($dimensions);
-      el.append($options);
-      el.append($chart);
-*/
 
-/*
-      ctx.trigger("view.editor.chartselector", $chartSelection);
-      ctx.trigger("view.editor.dimensions", $dimensions);
-      ctx.trigger("view.editor.options", $options);
-      ctx.trigger("view.editor.chart", $chart);
-*/
       el.mousedown(function() { if(ReportGrid.tooltip) ReportGrid.tooltip.hide(); });
     }
 

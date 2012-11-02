@@ -9,16 +9,13 @@ function($, uiconfig, createDrop, ui) {
 
   return function(ctx) {
     var el,
-        $container,
         $fields,
         dimensions = [];
     function init(container) {
       el = container;
 
-      $container = $('<fieldset class="ui-widget-content ui-corner-all"><div class="group-header ui-widget-content ui-widget-header">dimensions</div><div class="fields"></div></div>');
-      $fields = $container.find(".fields:first");
-
-      $container.appendTo(el);
+      $fields = $('<div class="fields"></div>');
+      $fields.appendTo(el);
 
       ctx.on("chart.type.change", update);
       ctx.on("chart.dimension.add", appendDimension);
@@ -57,7 +54,7 @@ function($, uiconfig, createDrop, ui) {
 
       dimensions.push({ drop : drop, add : add, remove : remove });
 
-//      ui.snapHeight($container, uiconfig.fieldsetGridSnapping);
+//      ui.snapHeight($fields, uiconfig.fieldsetGridSnapping);
     }
 
     ctx.on("view.editor.dimensions", init);

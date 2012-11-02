@@ -16,7 +16,7 @@ function($, ui, charts) {
         },
         width : 200
       });
-      $(menu).on("select", function(e, data, c) {
+      $(menu).on("select", function(e, data) {
         ctx.trigger("chart.type.change", data.type);
       });
 
