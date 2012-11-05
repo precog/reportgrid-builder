@@ -19,19 +19,22 @@ function($, ui, charts) {
     function init(el) {
       menu = ui.selectmenu(el, {
         data : [],
+        position : {
+          menu : "center bottom",
+          at : "center bottom"
+        },
         format : function(item) {
-console.log(item);
-          return '<span class="text">'+item.data.name+'</span>';
+          return '<span class="text">'+item.data.name.split("/").pop()+'</span>';
         },
         width : 300
       });
       $(menu).on("select", function(e, data) {
-        console.log(e, data);
-//        ctx.trigger("chart.datasource.change", data.type);
+        ctx.trigger("chart.datasource.change", data);
       });
 
       ctx.on("chart.datasource.change", function(data) {
-        console.log("DATA SOURCE CHANGE", e, data);
+        console.log("MUST UPDATE THE SELECTOR");
+        console.log("DATA SOURCE CHANGE", data);
 //        menu.selectIndex(charts.map[type].index);
       });
 
@@ -48,13 +51,11 @@ console.log(item);
 
     function addToQueue(item) {
       queue.push(item);
-      console.log("ADD ITEM TO MENU QUEUE", item);
     }
 
     function add(item) {
-console.log("ADD ITEM DATASOURCE", item);
       items.push(item);
-      menu.add({ content : item.name, data : item });
+      menu.add({ content : item.name.split("/").pop(), data : item });
     }
 
     function removeFromArray(arr, item) {
@@ -76,7 +77,7 @@ console.log("ADD ITEM DATASOURCE", item);
 
     function remove(item) {
       removeFromArray(items, item);
-      console.log("REMOVE ITEM");
+      console.log("REMOVE ITEM FROM SELECTOR");
     }
 
     ctx.on("data.source.add", addToQueue);

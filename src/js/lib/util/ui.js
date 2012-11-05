@@ -231,6 +231,8 @@ function($, dom, notification, uid) {
           at : "right top"
         }
       }, o);
+
+console.log("MENU", JSON.stringify(o.position));
       var widget,
           trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
           triggerLabel = trigger.find(".label span.text"),
@@ -243,7 +245,6 @@ function($, dom, notification, uid) {
       function selectIndex(i, force) {
         if(!force && index === i) return;
         index = i;
-console.log(index, o.data);
         var content = i < 0 ? selectMessage() : o.selectedFormat ? o.selectedFormat(o.data[index]) : o.format(o.data[index]);
         triggerLabel.html(content);
       }
@@ -301,7 +302,6 @@ console.log(index, o.data);
           selectIndex(-1);
         }
         , add : function(item) {
-console.log("START REFRESH");
           o.data.push(item);
           menu.menu.add(item);
           /*

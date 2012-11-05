@@ -130,7 +130,6 @@ function(dom) {
           var length = 0;
 
           function createItem(item) {
-console.log("CREATE ITEM", item);
             var li = $('<li>'+item.content+'</li>'),
                 index = length;
             ul.append(li);

@@ -11,6 +11,10 @@ function($, ui, charts) {
     function init(el) {
       var menu = ui.selectmenu(el, {
         data : charts.list,
+        position : {
+          menu : "center bottom",
+          at : "center bottom"
+        },
         format : function(item) {
           return '<span class="chart-icon icon-'+item.type+'"></span><span class="text">'+item.label+'</span>';
         },

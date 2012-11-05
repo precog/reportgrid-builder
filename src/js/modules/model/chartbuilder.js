@@ -6,7 +6,7 @@ function(charts) {
   return function(ctx) {
     var current = {
           type : null,
-          dataPath : null,
+          datasource : null,
           dimensions : {},
           options : {}
         },
@@ -39,7 +39,7 @@ function(charts) {
 
     function triggerChart() {
       try {
-        var datasource = datasources[current.dataPath].datasource,
+        var datasource = current.datasource.datasource,
             options    = { },
             loader = function(handler) {
               datasource.on("success", handler);
@@ -49,10 +49,8 @@ function(charts) {
         if(axes === null)
           throw "not enough axes to feed the chart";
         charts.map[current.type].extractOptions(options, current.dimensions, current.options);
-
         if(ctx.debug)
           console.info("CHART OPTIONS", JSON.stringify(options));
-
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
       } catch(e) {
         ctx.trigger("chart.render.clear");
@@ -60,15 +58,17 @@ function(charts) {
     }
 
     function fieldAdd(data, info) {
-      if(!current.dataPath) {
-        current.dataPath = data.path.split("/").slice(0, -1).join("/");
-      }
-      var name = data.path.split("/").pop();
+      var name = data.name;
       (current.dimensions[info.name] || (current.dimensions[info.name] = [])).push({
         name     : name,
         category : data.type,
-        field    : datasources[current.dataPath].fields.map[name]
+        field    : current.datasource.fields.map[name]
       });
+      triggerChart();
+    }
+
+    function changeDataSource(ds) {
+      current.datasource = ds;
       triggerChart();
     }
 
@@ -82,7 +82,6 @@ function(charts) {
 
     function chartType(type) {
       current.type = type;
-      current.dataPath = null;
       current.dimensions = {};
       current.options = {};
       triggerChart();
@@ -93,6 +92,7 @@ function(charts) {
       triggerChart();
     }
 
+    ctx.on("chart.datasource.change", changeDataSource);
     ctx.on("chart.type.change", chartType);
     ctx.on("chart.field.add", fieldAdd);
     ctx.on("chart.field.remove", fieldRemove);
