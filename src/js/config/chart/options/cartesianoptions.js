@@ -275,6 +275,79 @@ function() {
       }]
     });
 
+
+    options.push({
+      name  : "paddingleft",
+      label : "left",
+      group : "padding",
+      weight : 5,
+      event : "options.chart.padding.left",
+      editors : [{
+        type  : "int",
+        options : {
+          min     : 0,
+          max     : 500,
+          step    : 10,
+          unit    : "px",
+          default : preferences.height || 0
+        }
+      }]
+    });
+
+    options.push({
+      name  : "paddingright",
+      label : "right",
+      group : "padding",
+      weight : 6,
+      event : "options.chart.padding.right",
+      editors : [{
+        type  : "int",
+        options : {
+          min     : 0,
+          max     : 500,
+          step    : 10,
+          unit    : "px",
+          default : preferences.height || 0
+        }
+      }]
+    });
+
+    options.push({
+      name  : "paddingtop",
+      label : "top",
+      group : "padding",
+      weight : 7,
+      event : "options.chart.padding.top",
+      editors : [{
+        type  : "int",
+        options : {
+          min     : 0,
+          max     : 500,
+          step    : 10,
+          unit    : "px",
+          default : preferences.height || 0
+        }
+      }]
+    });
+
+    options.push({
+      name  : "paddingbottom",
+      label : "bottom",
+      group : "padding",
+      weight : 8,
+      event : "options.chart.padding.bottom",
+      editors : [{
+        type  : "int",
+        options : {
+          min     : 0,
+          max     : 500,
+          step    : 10,
+          unit    : "px",
+          default : preferences.height || 0
+        }
+      }]
+    });
+
     // displayruleminor false
     // displayrulemajor false
     // displaytickminor true

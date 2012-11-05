@@ -12,6 +12,10 @@ function($, uiconfig, ui) {
 
     function updateChartType(type) {
       $fields.children("*").remove();
+      if(datasource)
+        setTimeout(function() {
+          updateDataSource(datasource);
+        }, 200);
     }
 
     function updateDataSource(source) {
