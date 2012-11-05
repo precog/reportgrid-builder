@@ -38,13 +38,7 @@ function($, tplLayout) {
         }
       }));
     }
-/*
-    function fixbar() {
-      var res = $container.find(".builder .ui-layout-resizer.ui-layout-resizer-south.ui-layout-resizer-open.ui-layout-resizer-south-open.ui-widget-shadow");
-      if(!this.bottom) this.bottom = parseInt(res.css("bottom"));
-      res.css("bottom", (this.bottom + 2) + "px");
-    }
-*/
+
     function resize() {
       var $parent = $container.parent();
       $container.css({
@@ -97,20 +91,9 @@ function($, tplLayout) {
       create($container, {
         north : $.extend({}, toolbar, { size : toolbarMainHeight }),
         west : {
-            size : 290
+            size : 240
           , initClosed : false
         }
-      });
-
-      create($container.find('.system'), {
-        south : {
-            size : "25%"
-          , initClosed : true
-        }
-      });
-
-      create($container.find('.data'), {
-        north : toolbarDouble
       });
 
       create($container.find('.reports'), {

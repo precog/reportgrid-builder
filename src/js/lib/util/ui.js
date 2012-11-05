@@ -232,7 +232,6 @@ function($, dom, notification, uid) {
         }
       }, o);
 
-console.log("MENU", JSON.stringify(o.position));
       var widget,
           trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
           triggerLabel = trigger.find(".label span.text"),

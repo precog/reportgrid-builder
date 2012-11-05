@@ -19,6 +19,7 @@ function($, ui, charts) {
     function init(el) {
       menu = ui.selectmenu(el, {
         data : [],
+        selectMessage : "select the data source",
         position : {
           menu : "center bottom",
           at : "center bottom"
