@@ -348,17 +348,9 @@ function() {
       }]
     });
 
-    // displayruleminor false
-    // displayrulemajor false
-    // displaytickminor true
-    // displaytickmajor true
     // displayticklabel true
     // displayanchorlinetick false
     // displayanchorlinerule false
-    // lengthtickminor 2
-    // lengthtickmajor 5
-    // paddingtickminor 1
-    // paddingtickmajor 1
     // paddingticklabel 10
 
 

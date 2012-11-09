@@ -24,6 +24,8 @@ function($) {
 
       function reducedRender() {
         if(!info) return;
+        if(ctx.debug)
+          console.log("rendering ...");
         ReportGrid.chart($chart.get(0),  {
             axes    : info.axes,
             load    : info.loader,

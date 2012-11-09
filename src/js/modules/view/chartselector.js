@@ -11,14 +11,14 @@ function($, ui, charts) {
     function init(el) {
       var menu = ui.selectmenu(el, {
         data : charts.list,
+        labelWidth : 160,
         position : {
-          menu : "center bottom",
-          at : "center bottom"
+          menu : "left bottom",
+          at : "left bottom"
         },
         format : function(item) {
           return '<span class="chart-icon icon-'+item.type+'"></span><span class="text">'+item.label+'</span>';
-        },
-        width : 200
+        }
       });
       $(menu).on("select", function(e, data) {
         ctx.trigger("chart.type.change", data.type);

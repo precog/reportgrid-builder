@@ -57,26 +57,19 @@ function(charts) {
       }
     }
 
-    function fieldAdd(data, info) {
-      var name = data.name;
-      (current.dimensions[info.name] || (current.dimensions[info.name] = [])).push({
-        name     : name,
-        category : data.type,
-        field    : current.datasource.fields.map[name]
-      });
-      triggerChart();
-    }
-
     function changeDataSource(ds) {
       current.datasource = ds;
       triggerChart();
     }
 
-    function fieldRemove(data, info) {
-      var arr = current.dimensions[info.name];
-      if(arr) {
-        arr.splice(arr.indexOf(data), 1);
-      }
+    function setAxis(types, info) {
+      current.dimensions[info.name] = types.map(function(type) {
+        return {
+          name     : type.name,
+          category : type.type,
+          field    : current.datasource.fields.map[type.name]
+        }
+      });
       triggerChart();
     }
 
@@ -94,8 +87,8 @@ function(charts) {
 
     ctx.on("chart.datasource.change", changeDataSource);
     ctx.on("chart.type.change", chartType);
-    ctx.on("chart.field.add", fieldAdd);
-    ctx.on("chart.field.remove", fieldRemove);
+    ctx.on("chart.axis.change", setAxis);
+
     ctx.on("data.source.add", function(item) {
       datasources[item.name] = item;
     });

@@ -236,6 +236,11 @@ function($, dom, notification, uid) {
           trigger = $('<div class="selectmenu ui-buttonset"><button class="label ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"><span class="ui-button-text text"></span><span class="ui-icon ui-icon-triangle-1-s dropdown"></span></button></div>'),
           triggerLabel = trigger.find(".label span.text"),
           index   = ("undefined" !== typeof o.selectedIndex && o.selectedIndex) || -1;
+
+      if(o.labelWidth) {
+        triggerLabel.css("width", o.labelWidth + "px");
+      }
+
       function selectMessage()
       {
         return o.selectMessage || "select an option";

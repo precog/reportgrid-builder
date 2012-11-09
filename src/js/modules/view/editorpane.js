@@ -39,8 +39,9 @@ function($, tplEditor) {
         }
       });
 
-      ctx.trigger("view.editor.chartselector", $('<div class="pane chartselector-container"></div>').appendTo($dimensions));
-      ctx.trigger("view.editor.datasourceselector", $('<div class="pane dataosurceselector-container"></div>').appendTo($dimensions));
+     var $selectors = $('<div class="selectors pane"></div>').appendTo($dimensions);
+      ctx.trigger("view.editor.chartselector", $('<div class="chartselector-container"></div>').appendTo($selectors));
+      ctx.trigger("view.editor.datasourceselector", $('<div class="dataosurceselector-container"></div>').appendTo($selectors));
       ctx.trigger("view.editor.dimensions", $('<div class="pane dimensionsoptions-container"></div>').appendTo($dimensions));
       ctx.trigger("view.editor.options", $options);
       ctx.trigger("view.editor.chart", $chart);
