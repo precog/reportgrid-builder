@@ -5,8 +5,8 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name  : "rgcss",
-      group : "general",
+      name  : "css",
+      group : "aesthetic",
       event : "chart.rgcss.load",
       editors : [{
         type  : "rgcss",

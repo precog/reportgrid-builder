@@ -121,9 +121,12 @@ function($, uiconfig, ui, editors, optiongroups) {
         }
       }
 
-
-      $container.append('<div class="name">'+(info.label || info.name)+'</div>');
+      var $label = $('<div class="name">'+(("undefined" !== typeof info.label) ? info.label : info.name)+'</div>');
+      $container.append($label);
       var $option = $('<div class="option"></div>');
+      if(info.className) {
+        $container.addClass(info.className);
+      }
       $container.append($option);
 
       editor = editors.create($option, info.editors[index].type, info.editors[index].options);

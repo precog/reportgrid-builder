@@ -66,7 +66,7 @@ function() {
 
     options.push({
       name  : "effect",
-      group : "funnelchart",
+      group : "aesthetic",
       weight : 0,
       event : "options.chart.funnelchart.effect",
       editors : [{

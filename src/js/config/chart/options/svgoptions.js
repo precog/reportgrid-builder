@@ -55,7 +55,9 @@ function() {
 
     options.push({
       name  : "width",
+      label : "size",
       group : "general",
+      className : "inline first",
       weight : 10,
       event : "options.chart.width",
       editors : [{
@@ -63,7 +65,6 @@ function() {
         options : {
           min     : 0,
           step    : 25,
-          unit    : "px",
           default : preferences.width || 500
         }
       }]
@@ -71,7 +72,9 @@ function() {
 
     options.push({
       name  : "height",
+      label : " x ",
       group : "general",
+      className : "inline last",
       weight : 11,
       event : "options.chart.height",
       editors : [{
@@ -79,7 +82,6 @@ function() {
         options : {
           min     : 0,
           step    : 25,
-          unit    : "px",
           default : preferences.height || 250
         }
       }]

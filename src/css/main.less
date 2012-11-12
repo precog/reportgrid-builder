@@ -6,6 +6,7 @@
 @optionLabelWidth: 90px;
 @chartIconSize: 24px;
 @numberEditorWidth: 50px;
+@numberEditorReducedWidth: 32px;
 @colorEditorWidth: 60px;
 @miniEditorWidth: 65px;
 
@@ -206,6 +207,17 @@
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
+  }
+
+  .editor {
+
+    .loader {
+      display: block;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 0;
+    }
   }
 
   .support {
@@ -411,20 +423,20 @@
     background-position: 50% 0%;
 
     .name {
-      float: left;
-      width: 6em;
-/*      clear: left; */
-      text-align: right;
       vertical-align: baseline;
-      padding: 0.4em 0.2em 0.3em 0.2em;
+//      padding: 0.4em 0.2em 0.3em 2em;
       font-size: 93%;
     }
+
+    .name:first-child {
+//      padding-left: 0;
+    }
+
     .name:after {
-      content: ": "
+//      content: ": "
     }
 
     .dimension {
-      float: left;
       margin: 0;
     }
 
@@ -436,22 +448,35 @@
       float: left;
       margin: 5px 0 0 5px;
     }
-/*
-    .selectors {
-      float : left;
+
+    .fields {
+      overflow: auto;
+      height: 80px;
+//      border: 1px solid red;
     }
 
-*/
+    .pair {
+//      border: 1px solid green;
+      float: left;
+      text-align: center;
+      margin: 2px;
+      padding: 2px 4px;
+    }
+
     .chartselector-container {
-//      border: 1px solid blue;
+
     }
 
     .datasource-container {
-//      border: 1px solid gree;
+
     }
 
     .dimensionsoptions-container {
-//      border: 1px solid yellow;
+      float: none;
+      position: absolute;
+      top: 0;
+      left: 220px;
+      right: 0;
     }
   }
 
@@ -475,7 +500,7 @@
         font-size: 93%;
       }
       .name:after {
-        content: ": "
+//        content: ": "
       }
 
       .control-container {
@@ -530,12 +555,6 @@
         float: left;
       }
 
-/*
-      button.swap-option {
-        display: block;
-        float : left;
-      }
-*/
       button.swap-option {
         width: 16px;
         height: 16px;
@@ -565,6 +584,40 @@
 
       select.with-editor {
         max-width: @optionWidth - @miniEditorWidth;
+      }
+    }
+
+    .fields {
+
+      .option-editor.inline {
+        clear: none;
+
+        .name {
+          width: inherit;
+        }
+
+        .clr {
+          clear: none;
+        }
+      }
+
+      .option-editor.reduce {
+        input[type="number"]
+        {
+          width: @numberEditorReducedWidth;
+        }
+      }
+
+      .option-editor.inline.first {
+        .name {
+          width: @optionLabelWidth;
+        }
+      }
+
+      .option-editor.inline.last {
+        .option {
+        //        clear: left;
+        }
       }
     }
 

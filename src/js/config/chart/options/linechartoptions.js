@@ -115,7 +115,7 @@ function() {
     options.push({
       name : "lineeffect",
       label : "effect",
-      group : "linechart",
+      group : "aesthetic",
       event : "options.chart.linechart.lineeffect",
       weight : 10,
       editors : [{

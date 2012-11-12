@@ -24,8 +24,14 @@ function($) {
 
       function reducedRender() {
         if(!info) return;
-        if(ctx.debug)
-          console.log("rendering ...");
+        var old = info.options.ready || function() {},
+            start;
+        info.options.ready = function(){
+          var end = +new Date();
+          ctx.trigger("chart.render.end", { time : end - start, start : start, end : end });
+          old();
+        };
+        ctx.trigger("chart.render.start", start = +new Date());
         ReportGrid.chart($chart.get(0),  {
             axes    : info.axes,
             load    : info.loader,
@@ -45,6 +51,16 @@ function($) {
         render();
       }
 
+      var loader = $('<div class="loader"><img src="images/loading.gif" alt="loading ..."></div>').appendTo(el).hide();
+
+      function render_start() {
+        loader.show();
+      }
+
+      function render_end() {
+        loader.hide();
+      }
+
       function clear() {
         clearInterval(timer);
         if(ReportGrid.tooltip)
@@ -57,6 +73,9 @@ function($) {
       ctx.on("chart.render.clear", clear);
       ctx.on("options.chart.width", change_width);
       ctx.on("options.chart.height", change_height);
+
+      ctx.on("chart.render.start", render_start);
+      ctx.on("chart.render.end", render_end);
     };
 
     ctx.on("view.editor.chart", init);

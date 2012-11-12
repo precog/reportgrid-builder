@@ -32,7 +32,7 @@ function() {
 
     options.push({
       name  : "effect",
-      group : "barchart",
+      group : "aesthetic",
       weight : 0,
       event : "options.chart.barchart.effect",
       editors : [{

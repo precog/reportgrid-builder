@@ -22,11 +22,12 @@ function() {
     , { group : "displaytotals",    label : "display totals" }
     , { group : "customclasses",    label : "custom classes" }
 
+    , { group : "aesthetic",        label : "aesthetic" }
     , { group : "symbol",           label : "symbols" }
     , { group : "label",            label : "label" }
     , { group : "tickmarks",        label : "tickmarks" }
-    , { group : "rules",        label : "rules" }
-    , { group : "padding",          label : "padding" }
+    , { group : "rules",            label : "rules" }
+
     , { group : "other",            label : "other" }
   ];
   ;

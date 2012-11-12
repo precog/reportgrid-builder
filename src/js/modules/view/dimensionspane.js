@@ -8,6 +8,7 @@ function($, uiconfig, ui) {
   return function(ctx) {
     var el,
         $fields,
+        $closer,
         datasource,
         axeslist,
         axesmap;
@@ -190,16 +191,19 @@ function($, uiconfig, ui) {
     }
 
     function appendDimension(dimension) {
-      $fields.append('<div class="name">'+(dimension.label || dimension.name)+'</div>');
-      var $div = $('<div class="dimension"></div>').appendTo($fields);
+      var $pair = $('<div class="pair ui-widget-header ui-corner-all"></div>');
+      $pair.insertBefore($closer);
+      var $label = $('<div class="name">'+(dimension.label || dimension.name)+'</div>');
+      $pair.append($label);
+      var $div = $('<div class="dimension"></div>').appendTo($pair);
       createMainDimensionSelector($div, dimensionInfo(dimension));
     }
 
     function init(container) {
       el = container;
 
-      $fields = $('<div class="fields"></div>');
-      $fields.appendTo(el);
+      $fields = $('<div class="fields"></div>').appendTo(el);
+      $closer = $('<div class="clr"></div>').appendTo($fields);
 
       ctx.on("chart.type.change", updateChartType);
       ctx.on("chart.datasource.change", updateDataSource);

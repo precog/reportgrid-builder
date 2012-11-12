@@ -21,7 +21,7 @@ function() {
     options.push({
       name : "streameffect",
       label : "effect",
-      group : "streamgraph",
+      group : "aesthetic",
       event : "options.chart.streamgraph.effect",
       weight : 10,
       editors : [{

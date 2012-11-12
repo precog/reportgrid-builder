@@ -136,7 +136,7 @@ function() {
 
     options.push({
       name  : "effect",
-      group : "piechart",
+      group : "aesthetic",
       weight : 0,
       event : "options.chart.piechart.effect",
       editors : [{

@@ -207,12 +207,15 @@ function() {
 */
     options.push({
       name  : "lengthtickminor",
-      label : "length minor",
+      label : "minor tickmarks",
+      className : "inline first",
       group : "tickmarks",
       event : "options.chart.cartesian.lengthtickminor",
+      weight : 100,
       editors : [{
         type  : "float",
         options : {
+          unit : "length",
           default : 2,
           step : 1
         }
@@ -220,13 +223,34 @@ function() {
     });
 
     options.push({
-      name  : "lengthtickmajor",
-      label : "length major",
+      name  : "paddingtickminor",
+      label : "",
+      className : "inline last",
       group : "tickmarks",
-      event : "options.chart.cartesian.lengthtickmajor",
+      event : "options.chart.cartesian.paddingtickminor",
+      weight : 101,
       editors : [{
         type  : "float",
         options : {
+          unit : "margin",
+          default : 1,
+          step : 1
+        }
+      }]
+    });
+
+
+    options.push({
+      name  : "lengthtickmajor",
+      label : "major tickmarks",
+      group : "tickmarks",
+      className : "inline first",
+      event : "options.chart.cartesian.lengthtickmajor",
+      weight : 110,
+      editors : [{
+        type  : "float",
+        options : {
+          unit : "length",
           default : 5,
           step : 1
         }
@@ -234,27 +258,16 @@ function() {
     });
 
     options.push({
-      name  : "paddingtickminor",
-      label : "margin minor",
-      group : "tickmarks",
-      event : "options.chart.cartesian.paddingtickminor",
-      editors : [{
-        type  : "float",
-        options : {
-          default : 1,
-          step : 1
-        }
-      }]
-    });
-
-    options.push({
       name  : "paddingtickmajor",
-      label : "margin major",
+      label : "",
       group : "tickmarks",
+      className : "inline last",
       event : "options.chart.cartesian.paddingtickmajor",
+      weight : 111,
       editors : [{
         type  : "float",
         options : {
+          unit : "margin",
           default : 1,
           step : 1
         }
@@ -278,8 +291,9 @@ function() {
 
     options.push({
       name  : "paddingleft",
-      label : "left",
-      group : "padding",
+      label : "padding",
+      group : "aesthetic",
+      className : "inline first reduce",
       weight : 5,
       event : "options.chart.padding.left",
       editors : [{
@@ -288,7 +302,8 @@ function() {
           min     : 0,
           max     : 500,
           step    : 10,
-          unit    : "px",
+          unit    : "L",
+          title   : "left",
           default : preferences.height || 0
         }
       }]
@@ -296,8 +311,9 @@ function() {
 
     options.push({
       name  : "paddingright",
-      label : "right",
-      group : "padding",
+      label : "",
+      group : "aesthetic",
+      className : "inline reduce",
       weight : 6,
       event : "options.chart.padding.right",
       editors : [{
@@ -306,7 +322,8 @@ function() {
           min     : 0,
           max     : 500,
           step    : 10,
-          unit    : "px",
+          unit    : "R",
+          title   : "right",
           default : preferences.height || 0
         }
       }]
@@ -314,8 +331,9 @@ function() {
 
     options.push({
       name  : "paddingtop",
-      label : "top",
-      group : "padding",
+      label : "",
+      group : "aesthetic",
+      className : "inline reduce",
       weight : 7,
       event : "options.chart.padding.top",
       editors : [{
@@ -324,7 +342,8 @@ function() {
           min     : 0,
           max     : 500,
           step    : 10,
-          unit    : "px",
+          unit    : "T",
+          title   : "top",
           default : preferences.height || 0
         }
       }]
@@ -332,8 +351,9 @@ function() {
 
     options.push({
       name  : "paddingbottom",
-      label : "bottom",
-      group : "padding",
+      label : "",
+      group : "aesthetic",
+      className : "inline last reduce",
       weight : 8,
       event : "options.chart.padding.bottom",
       editors : [{
@@ -342,7 +362,8 @@ function() {
           min     : 0,
           max     : 500,
           step    : 10,
-          unit    : "px",
+          unit    : "B",
+          title   : "bottom",
           default : preferences.height || 0
         }
       }]

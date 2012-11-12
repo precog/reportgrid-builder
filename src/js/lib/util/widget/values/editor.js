@@ -38,9 +38,13 @@ function($, createValue) {
 
     $('<div class="control-container"><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
     params.input.appendTo(el.find(".control"));
+    if(options.title)
+      params.input.attr("title", options.title);
     var error = el.find(".error");
     if(options.unit) {
       el.find(".unit").html(options.unit);
+      if(options.title)
+        el.find(".unit").attr("title", options.title);
     }
 
     var value = createValue(options.default, params.validate, params.filter);
