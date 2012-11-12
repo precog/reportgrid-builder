@@ -3,7 +3,7 @@ define([
   , "lib/model/dataloader"
 ],
 
-function(charts, createLaoder) {
+function(charts, createLoader) {
   return function(ctx) {
     var current = {
           type : null,
@@ -54,6 +54,7 @@ function(charts, createLaoder) {
           console.info("CHART OPTIONS", JSON.stringify(options));
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
       } catch(e) {
+console.log(e);
         ctx.trigger("chart.render.clear");
       }
     }
