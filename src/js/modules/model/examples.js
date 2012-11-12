@@ -1,9 +1,8 @@
 define([
     "jquery"
-  , "lib/model/datasource"
 ],
 
-function($, datasource) {
+function($) {
   var examples = [{
           name : "Olympic Medals 2011",
           src  : "olympic-medals-2011.json",
@@ -187,8 +186,6 @@ function($, datasource) {
   return function(ctx) {
     ctx.on("modules.ready", function() {
       $(examples).each(function(i, example) {
-//        example.datasource = datasource(path(datapath,example.src));
-
         example.src  = path(datapath,example.src);
         example.type = example.type || "json";
         example.name = path(root, example.name);
