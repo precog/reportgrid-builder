@@ -30,7 +30,7 @@ function($, tplEditor) {
 
       $splitter.layout({
         south : {
-            size : 85
+            size : 100
           , initClosed : false
           , resizable: false
           , closable : false

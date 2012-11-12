@@ -16,13 +16,13 @@ function() {
     , { group : "pivottable",       label : "pivot table" }
     , { group : "scattergraph",     label : "scatter graph" }
     , { group : "streamgraph",      label : "stream graph" }
+    , { group : "aesthetic",        label : "aesthetic" }
 
     , { group : "barpadding",       label : "spacing" }
     , { group : "piechartposition", label : "positions" }
     , { group : "displaytotals",    label : "display totals" }
     , { group : "customclasses",    label : "custom classes" }
 
-    , { group : "aesthetic",        label : "aesthetic" }
     , { group : "symbol",           label : "symbols" }
     , { group : "label",            label : "label" }
     , { group : "tickmarks",        label : "tickmarks" }

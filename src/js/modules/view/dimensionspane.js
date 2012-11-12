@@ -14,7 +14,7 @@ function($, uiconfig, ui) {
         axesmap;
 
     function updateChartType(type) {
-      $fields.children("*").remove();
+      $fields.children("div.pair").remove();
       if(datasource)
         setTimeout(function() {
           updateDataSource(datasource);
