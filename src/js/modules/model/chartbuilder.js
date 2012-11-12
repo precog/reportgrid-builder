@@ -54,7 +54,6 @@ function(charts, createLoader) {
           console.info("CHART OPTIONS", JSON.stringify(options));
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
       } catch(e) {
-console.log(e);
         ctx.trigger("chart.render.clear");
       }
     }
