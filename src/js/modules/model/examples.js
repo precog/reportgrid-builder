@@ -187,7 +187,10 @@ function($, datasource) {
   return function(ctx) {
     ctx.on("modules.ready", function() {
       $(examples).each(function(i, example) {
-        example.datasource = datasource(path(datapath,example.src));
+//        example.datasource = datasource(path(datapath,example.src));
+
+        example.src  = path(datapath,example.src);
+        example.type = example.type || "json";
         example.name = path(root, example.name);
         var fields = example.fields;
         example.fields = { list : fields };

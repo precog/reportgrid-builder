@@ -1,8 +1,9 @@
 define([
     "config/charts"
+  , "lib/model/dataloader"
 ],
 
-function(charts) {
+function(charts, createLaoder) {
   return function(ctx) {
     var current = {
           type : null,
@@ -39,11 +40,11 @@ function(charts) {
 
     function triggerChart() {
       try {
-        var datasource = current.datasource.datasource,
+        var dataloader = createLoader(current.datasource),
             options    = { },
             loader = function(handler) {
-              datasource.on("success", handler);
-              datasource.load();
+              dataloader.on("success", handler);
+              dataloader.load();
             };
         var axes = extractAxes(current.type);
         if(axes === null)

@@ -12,7 +12,7 @@ function($) {
           $chart = $('<div style="margin: 0 auto"></div>').appendTo(el);
 //      $(el).css({ width : "600px", height : "400px" });
 
-      function execute(newinfo) { //{ type : current.type, dimensions : current.dimensions, datasource : datasources[path] }
+      function execute(newinfo) {
         info = newinfo;
         render();
       }
