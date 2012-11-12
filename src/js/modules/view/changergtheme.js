@@ -9,7 +9,7 @@ function($) {
     function poll(callback) {
       clearInterval(timer);
       if($("head").find('link.custom-rg-css').length > 0) {
-        setTimeout(callback, 500);
+        setTimeout(callback, 1000);
       } else {
         timer = setTimeout(function() { poll(callback); }, 50);
       }
