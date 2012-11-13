@@ -14,7 +14,6 @@ function($, ui, tplDialog) {
 
     function init() {
       if($dialog) return false;
-console.log("??????????????????????????? INIT");
       $dialog = $(tplDialog).appendTo('body')
         .dialog({
             modal : true
@@ -35,7 +34,6 @@ console.log("??????????????????????????? INIT");
           , position : "center"
         });
 //      $tabs = $dialog.find(".tabs").tabs();
-console.log($dialog.find(".main-container"));
       $dialog.find(".main-container").layout({
           west : {
               size : 240
@@ -65,7 +63,14 @@ console.log($dialog.find(".main-container"));
         }
       });
 
-      ctx.trigger("view.data.pane", $dialog.find(".tree"));
+      ctx.trigger("view.data.tree", $dialog.find(".tree"));
+      ctx.trigger("view.data.toolbar-description", $dialog.find(".datasources .toolbar-description"));
+      ctx.trigger("view.data.toolbar-main", $dialog.find(".datasources .toolbar-main"));
+      ctx.trigger("view.data.toolbar-context", $dialog.find(".datasources .toolbar-context"));
+
+      ctx.trigger("view.data.datasource", $dialog.find(".datasource"));
+      ctx.trigger("view.data.dataviewer", $dialog.find(".dataviewer"));
+
       return true;
     }
 
@@ -75,7 +80,6 @@ console.log($dialog.find(".main-container"));
           description : "about me"
         }).click(function() {
           if(!init()) {
-console.log("REOPEN");
             $dialog.dialog("open");
           }
         });

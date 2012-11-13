@@ -19,12 +19,11 @@ function($, createTree) {
       });
       $(tree).on("node.created", function(e, el, node) {
         var a = $(el).find("a").first()
-          .attr("data-node", JSON.stringify(node));
+              .attr("data-node", JSON.stringify(node));
       });
     }
 
-    $.when(ctx.on("view.data.pane"), ctx.on("data.system.ready")).then(function(viewargs, systemargs) {
-console.log("INIT DATASOURCE TREE !!!!!!!!!!!!!!!!!!");
+    $.when(ctx.on("view.data.tree"), ctx.on("data.system.ready")).then(function(viewargs, systemargs) {
       init(viewargs[0], systemargs[0]);
     });
   };
