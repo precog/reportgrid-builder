@@ -17,6 +17,7 @@ require([
   , "modules/model/dimensionstyper"
   , "modules/model/chartbuilder"
   , "modules/view/theme"
+  , "modules/view/datasourcewindow"
   , "modules/view/thememenu"
   , "modules/view/layout"
   , "modules/view/editor/tabs"

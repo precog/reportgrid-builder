@@ -10,7 +10,7 @@
 @colorEditorWidth: 60px;
 @miniEditorWidth: 65px;
 
-.ui-pnotify, .ui-pnotify-history-container {
+.ui-pnotify, .ui-pnotify-history-container, .rg-el, .rg-el.ui-widget {
   font-size: 73%;
   font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
 }
@@ -168,7 +168,14 @@
   border: 0;
 }
 
-.rg-builder {
+.rg-el.ui-dialog {
+  .ui-dialog-content {
+    padding: 0.5em 0.25em;
+  }
+}
+
+.rg-builder,
+.rg-el {
   font-size: 73%;
   font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
 
