@@ -64,6 +64,8 @@ console.log($dialog.find(".main-container"));
           , spacing_closed: 0
         }
       });
+
+      ctx.trigger("view.data.pane", $dialog.find(".tree"));
       return true;
     }
 

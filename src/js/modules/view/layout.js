@@ -124,11 +124,12 @@ function($, tplLayout) {
       // trigger events
       ctx.trigger("view.main.toolbar-main", $container.find(".mainbar .toolbar-main"));
       ctx.trigger("view.main.toolbar-context", $container.find(".mainbar .toolbar-context"));
+/*
       ctx.trigger("view.data.pane", $container.find(".data"));
       ctx.trigger("view.data.toolbar-description", $container.find(".data .toolbar-description"));
       ctx.trigger("view.data.toolbar-main", $container.find(".data .toolbar-main"));
       ctx.trigger("view.data.toolbar-context", $container.find(".data .toolbar-context"));
-
+*/
       ctx.trigger("view.reports.pane", $container.find(".reports"));
       ctx.trigger("view.reports.toolbar-description", $container.find(".reports .toolbar-description"));
       ctx.trigger("view.reports.toolbar-main", $container.find(".reports .toolbar-main"));
