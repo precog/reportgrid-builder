@@ -18,7 +18,7 @@ function($, ui, tplDialog) {
         .dialog({
             modal : true
           , autoOpen : true
-          , resizable : false
+          , resizable : true
           , width : 800
           , height : 600
           , dialogClass : "rg-el"

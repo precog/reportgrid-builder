@@ -21,6 +21,10 @@ function($, createTree) {
         var a = $(el).find("a").first()
               .attr("data-node", JSON.stringify(node));
       });
+      $(tree).on("node.activated", function(node, e) {
+console.log("SELECTED", node);
+console.log("PARENT", tree.getParent(node));
+      });
     }
 
     $.when(ctx.on("view.data.tree"), ctx.on("data.system.ready")).then(function(viewargs, systemargs) {

@@ -17,9 +17,17 @@ function($, compare) {
     var types = { },
         treepane = {
           toggle : function(node) {
-            var node = findNode(node.path, node.type);
+            node = findNode(node.path, node.type);
             if(!node) return;
             tree.jstree("toggle_node", node);
+          },
+          getParent : function(node) {
+            node = findNode(node.path, node.type);
+            if(!node) return null;
+            var el = tree.jstree("get_parent", node.get(0));
+            if(!el) return null;
+            if(-1 === el) return { type : "folder", path : "/" };
+            return getNodeFromElement(el);
           }
         },
         names = fs.typeNames();
@@ -65,10 +73,14 @@ function($, compare) {
       $(treepane).trigger("node.created", [el, { type : type, path : path }]);
     });
 
+    function getNodeFromElement(el) {
+      return { type : el.attr("rel"), path : el.attr("data-path") };
+    }
+
     var selected;
     tree.bind("click.jstree", function() {
       var el = tree.jstree("get_selected"),
-          current = { type : el.attr("rel"), path : el.attr("data-path") };
+          current = getNodeFromElement(el);
       if(selected && selected.type === current.type && selected.path === current.path)
         return;
       if(selected)
