@@ -8,23 +8,25 @@ function($, createTree) {
   return function(ctx) {
 
     function init(container, datasources) {
-      var last;
-      function activateNode(data) {
+      var map = {
+        folder : "/"
+      };
+      function activateNode(data, type, parentType) {
         if(!data) return;
-        if(!data || data.type === "folder") {
-          if(last) {
-            ctx.trigger("datasource.source.deselected", last);
-            last = null;
-          }
-        } else if(data.type === "datasource") {
-          if(last && data.path === last.path)
+        if(data.type === type) {
+          if(data.path === map[type])
             return;
-          if(last)
-            ctx.trigger("datasource.deselected", last);
-          ctx.trigger("datasource.source.selected", data);
-          last = data;
+          if(map[type])
+            ctx.trigger("data."+type+".deselected", map[type]);
+          ctx.trigger("data."+type+".selected", data.path);
+          map[type] = data.path;
+        } else if(data.type === parentType) {
+          if(map[type]) {
+            ctx.trigger("data."+type+".deselected", map[type]);
+            map[type] = null;
+          }
         } else {
-          activateNode(tree.getParent(data));
+          activateNode(tree.getParent(data), type, parentType);
         }
       }
 
@@ -43,7 +45,8 @@ function($, createTree) {
         var a = $(el).find("a").first()
               .attr("data-node", JSON.stringify(node));
       });
-      $(tree).on("node.selected", function(_, data) { activateNode(data); });
+      $(tree).on("node.selected", function(_, data) { activateNode(data, "datasource", "folder"); });
+      $(tree).on("node.selected", function(_, data) { activateNode(data, "folder", null); });
     }
 
     $.when(ctx.on("view.data.tree"), ctx.on("data.system.ready")).then(function(viewargs, systemargs) {
