@@ -83,10 +83,11 @@ function($, compare) {
           current = getNodeFromElement(el);
       if(selected && selected.type === current.type && selected.path === current.path)
         return;
-      if(selected)
-        $(treepane).trigger("node.deactivated", selected);
+      if(selected) {
+        $(treepane).trigger("node.deselected", selected);
+      }
       selected = current;
-      $(treepane).trigger("node.activated", selected);
+      $(treepane).trigger("node.selected", selected);
     });
     tree.bind("create_node.jstree", function(e, data) {
       var el = $(data.rslt.obj[0]);
