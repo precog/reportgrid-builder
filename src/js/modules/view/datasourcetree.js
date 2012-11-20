@@ -7,7 +7,7 @@ define([
 function($, createTree) {
   return function(ctx) {
 
-    function init(container, datasources) {
+    function init(container, fs) {
       var map = {
         folder : "/"
       };
@@ -17,12 +17,12 @@ function($, createTree) {
           if(data.path === map[type])
             return;
           if(map[type])
-            ctx.trigger("data."+type+".deselected", map[type]);
-          ctx.trigger("data."+type+".selected", data.path);
+            ctx.trigger("data."+type+".deselect", map[type]);
+          ctx.trigger("data."+type+".select", data.path);
           map[type] = data.path;
         } else if(data.type === parentType) {
           if(map[type]) {
-            ctx.trigger("data."+type+".deselected", map[type]);
+            ctx.trigger("data."+type+".deselect", map[type]);
             map[type] = null;
           }
         } else {
@@ -30,7 +30,7 @@ function($, createTree) {
         }
       }
 
-      var tree = createTree(container, datasources, {
+      var tree = createTree(container, fs, {
         icons : {
             datasource : "images/datasource.png"
           , continuous : "images/continuous.png"

@@ -1,22 +1,70 @@
 define([
     "jquery"
   , "lib/util/grid"
+  , "lib/model/dataloader"
 ],
 
-function($, createGrid) {
+function($, createGrid, createLoader) {
   return function(ctx) {
-    function init(el) {
+    var $el,
+        grid;
+
+    function createColumns(fields) {
+      var columns = [];
+
+      return fields.map(function(field) {
+        var name = field.name;
+        return { id : name, name : name, field : field.field || name };
+      });
+    }
+
+    function createOptions() {
+      return {
+          enableCellNavigation: false
+        , enableColumnReorder: true
+//        , autoHeight : true
+        , forceFitColumns: true
+      };
+    }
+
+    function createLoadedHandler(datasource) {
+      return function(data) {
+        var columns = createColumns(datasource.fields.list),
+            options = createOptions();
+console.log(data, columns, options);
+        grid = createGrid($el, data, columns, options);
+      };
+    }
+
+    function dataError(error) {
 
     }
 
-    ctx.on("theme.changing", function(theme) {
-      menu.find('li[data-theme]').each(function() {
-        if($(this).attr("data-theme") === theme) {
-          $(this).addClass('ui-state-active');
-        } else {
-          $(this).removeClass('ui-state-active');
-        }
-      });
+    ctx.on("data.datasource.preview.render", function(datasource) {
+      var loader = createLoader(datasource);
+      loader.on("success", createLoadedHandler(datasource));
+      loader.on("error", dataError);
+      loader.load();
+    });
+
+    ctx.on("data.datasource.preview.clear", function() {
+console.log("DESTROY ", grid);
+      if(grid) {
+        grid.destroy();
+        grid = null;
+      }
+    });
+
+    ctx.on("data.datasource.selected", function(datasource) {
+      ctx.trigger("data.datasource.preview.render", datasource);
+    });
+
+    ctx.on("data.datasource.deselected", function(datasource) {
+      ctx.trigger("data.datasource.preview.clear");
+    });
+
+    ctx.on("view.data.dataviewer", function(container) {
+      $el = $('<div class="datasource-preview"></div>').appendTo(container);
     });
   }
 });

@@ -177,6 +177,7 @@ function($, compare) {
       });
 
       $(fs).on("removed", function(e, path, type) {
+console.log("ON FS REMOVE", path, type);
         removeNodeByPath(path, type);
       });
 

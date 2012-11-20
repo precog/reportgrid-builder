@@ -66,7 +66,7 @@ function($) {
             , { name : "tAverage", type : "continuous" }
             , { name : "precipitation", type : "continuous" }
             , { name : "snow", type : "continuous" }
-            , { name : "SnowCover", type : "continuous" }
+            , { name : "snowCover", type : "continuous" }
           ]
         }, {
           name : "Fictional Movie Clips",
@@ -197,7 +197,7 @@ function($) {
           o[field.name] = field;
         }
         example.fields.map = o;
-        ctx.trigger("data.source.add", example);
+        ctx.trigger("data.datasource.add", example);
       });
     });
   };

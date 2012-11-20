@@ -90,12 +90,12 @@ function(charts, createLoader) {
     ctx.on("chart.type.change", chartType);
     ctx.on("chart.axis.change", setAxis);
 
-    ctx.on("data.source.add", function(item) {
+    ctx.on("data.datasource.add", function(item) {
       datasources[item.name] = item;
     });
     ctx.on("chart.option.set", chartOptionSet);
 
-    ctx.on("data.source.remove", function(item) {
+    ctx.on("data.datasource.remove", function(item) {
       delete datasources[item.name];
     });
   };

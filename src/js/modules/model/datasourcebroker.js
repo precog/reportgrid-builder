@@ -1,44 +1,33 @@
 define([
-  "lib/util/arrays"
+
 ],
 
-function(arrays) {
+function() {
 
   return function(ctx) {
-    var queue = [], filesystem;
+    var map = {};
 
-    function dequeue() {
-      if(!filesystem) return;
-      while(queue.length > 0) {
-        addItem(queue.shift());
-      }
-    }
-
-    function addItem(item) {
-      filesystem.add(item.name, "datasource");
-      for(var i = 0; i < item.fields.list.length; i++) {
-        filesystem.add(item.name+"/"+item.fields.list[i].name, item.fields.list[i].type);
-      }
-    }
-
-    function removeItem(item) {
-      filesystem.remove(item.name);
-    }
-
-    ctx.on("data.source.add", function(item) {
-      queue.push(item);
-      dequeue();
+    ctx.on("data.datasource.add", function(item) {
+      map[item.name] = item;
     });
 
-    ctx.on("data.source.remove", function(item) {
-      if(arrays.remove(queue))
-        return;
-      removeItem(item);
+    ctx.on("data.datasource.removebyname", function(name) {
+      if(!map[name]) return;
+      ctx.trigger("data.datasource.remove", map[name]);
     });
 
-    ctx.on("data.system.ready", function(fs) {
-      filesystem = fs;
-      dequeue();
+    ctx.on("data.datasource.remove", function(item) {
+      delete map[item.path];
+    });
+
+    ctx.on("data.datasource.select", function(path) {
+      if(map[path])
+        ctx.trigger("data.datasource.selected", map[path]);
+    });
+
+    ctx.on("data.datasource.deselect", function(path) {
+      if(map[path])
+        ctx.trigger("data.datasource.deselected", map[path]);
     });
   }
 });
