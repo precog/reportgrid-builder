@@ -41,11 +41,11 @@ function($, ui, charts) {
 
       dequeue();
 
-      ctx.on("data.source.add", add);
-      ctx.on("data.source.remove", remove);
+      ctx.on("data.datasource.add", add);
+      ctx.on("data.datasource.remove", remove);
 
-      ctx.off("data.source.add", addToQueue);
-      ctx.off("data.source.remove", removeFromQueue);
+      ctx.off("data.datasource.add", addToQueue);
+      ctx.off("data.datasource.remove", removeFromQueue);
     }
 
     function addToQueue(item) {
@@ -79,8 +79,8 @@ function($, ui, charts) {
       console.log("REMOVE ITEM FROM SELECTOR");
     }
 
-    ctx.on("data.source.add", addToQueue);
-    ctx.on("data.source.remove", removeFromQueue);
+    ctx.on("data.datasource.add", addToQueue);
+    ctx.on("data.datasource.remove", removeFromQueue);
 
     ctx.on("view.editor.datasourceselector", init);
   }
