@@ -8,7 +8,7 @@ function() {
     var map = {};
 
     ctx.on("data.datasource.add", function(item) {
-      map[item.name] = item;
+      map[item.path+item.name] = item;
     });
 
     ctx.on("data.datasource.removebyname", function(name) {

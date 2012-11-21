@@ -189,15 +189,10 @@ function($) {
         example.src  = path(datapath,example.src);
         example.type = example.type || "json";
         example.path = path(root, "");
-        var fields = example.fields;
-        example.fields = { list : fields };
-        var o = {};
-        for(var i = 0; i < fields.length; i++) {
-          var field = fields[i];
-          o[field.field] = field;
+        for(var i = 0; i < example.fields.length; i++) {
+          var field = example.fields[i];
           field.name = field.name || field.field;
         }
-        example.fields.map = o;
         ctx.trigger("data.datasource.add", example);
       });
     });

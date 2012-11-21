@@ -3,33 +3,50 @@ define([
   , "lib/util/widget/values/editors"
   , "lib/model/dataloader"
   , "lib/model/modelguesser"
+  , "lib/util/ui"
   , "text!templates/form.datasource.html"
 ],
 
-function($, editors, createLoader, guess, tplForm) {
+function($, editors, createLoader, guess, ui, tplForm) {
   return function(ctx) {
-    var $el, $fields;
+    var $el, $fields, $actions, $path, fields;
     function init(container) {
       $el = $('<div class="datasource-form"></div>').append(tplForm).appendTo(container);
       $fields = $el.find("dd.fields");
+      $path = $el.find("dd.path");
+      $actions = $el.find(".actions");
 
-      var $action = $el.find(".actions"),
-        ename = editors.create($el.find("dd.name"), "string", {
-          placeholder : "Data Source Name"
-        }),
-        etype = editors.create($('<div class="type"></div>').appendTo($el.find("dd.type")), "selection", {
-            default : "",
-            values : [{
-              value : "url",
-              label : "reference url"
-            }, {
-              value : "text",
-              label : "paste data"
-            }, {
-              value : "file",
-              label : "upload file"
-            }]
+      var $button = ui.button($actions, {
+        label : "save",
+        text : true,
+//        disabled : true,
+        handler : function() {
+          ctx.trigger("data.datasource.add", {
+            path   : $path.text(),
+            name   : ename.value.get(),
+            type   : "json",
+            src    : stype.value.get(),
+            fields : fields
+          });
+        }
+      });
+
+      var ename = editors.create($el.find("dd.name"), "string", {
+            placeholder : "Data Source Name"
           }),
+          etype = editors.create($('<div class="type"></div>').appendTo($el.find("dd.type")), "selection", {
+              default : "",
+              values : [{
+                value : "url",
+                label : "reference url"
+              }, {
+                value : "text",
+                label : "paste data"
+              }, {
+                value : "file",
+                label : "upload file"
+              }]
+            }),
           $stype = $('<div class="stype"></div>').appendTo($el.find("dd.type")),
           stype;
       etype.value.on("value.change", function(value) {
@@ -47,25 +64,20 @@ function($, editors, createLoader, guess, tplForm) {
               placeholder : "http://www.example.com/data.json"
             });
             stype.value.on("value.change", function(value) {
-console.log("URL CHANGED", value);
               $fields.html("loading ...");
               var loader = createLoader({
                 type : "json",
                 src  : value
               });
               loader.on("success", function(data) {
-console.log("DATA", data);
-                var fields = guess.list(data);
+                fields = guess.list(data);
                 $fields.html(fields.map(function(field) {
                   return field.name;
                 }).join(", "));
-console.log("FIELDS", fields);
                 ctx.trigger("data.datasource.preview.render", {
                   type : "json",
                   src  : value,
-                  fields : {
-                    list : fields
-                  }
+                  fields : fields
                 });
               });
               loader.on("error", function(error) {
@@ -74,7 +86,6 @@ console.log("ERROR", error);
               loader.load();
             });
             // TO DO REMOVE ME
-console.log("CHANGING HERE");
             stype.value.set("http://beta.precog.com/analytics/v1/fs/0000000828/?apiKey=907C4B1E-A00D-4B1D-A191-90D4DE00EEB6&q=import%20std%3A%3Atime%3A%3A*%20data%20%3A%3D%20%2F%2FbyAccount%20solve%20'email%20data'%20%3A%3D%20data%20where%20data.email%20%3D%20'email%20data'%20where%20getMillis(data'.timestamp)%20%3D%20max(getMillis(data'.timestamp))");
             break;
           case "file":
@@ -90,7 +101,7 @@ console.log("CHANGING HERE");
 ///      editor.value.on("value.change", ctx_trigger_handler);
     }
     ctx.on("data.folder.select", function(path) {
-      $el.find("dd.path").text(path);
+      $path.text(path);
     });
     ctx.on("data.datasource.preview.render", function(datasource) {
 /*

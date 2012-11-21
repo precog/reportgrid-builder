@@ -28,7 +28,7 @@ function($, createGrid, createLoader) {
 
     function createLoadedHandler(datasource) {
       return function(data) {
-        var columns = createColumns(datasource.fields.list),
+        var columns = createColumns(datasource.fields),
             options = createOptions();
 console.log(data, columns, options);
         grid = createGrid($el, data, columns, options);

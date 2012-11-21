@@ -9,7 +9,7 @@ function(createDispatcher, createAjax) {
     var key,
         ds = createDispatcher(),
         loader;
-
+console.log(options);
     switch(options.type.toLowerCase()) {
       case "json":
         loader = createAjax(options.src);

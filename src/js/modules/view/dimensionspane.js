@@ -10,6 +10,7 @@ function($, uiconfig, ui) {
         $fields,
         $closer,
         fields,
+        fieldsmap,
         axeslist,
         axesmap;
 
@@ -32,7 +33,7 @@ function($, uiconfig, ui) {
         });
       }
       axesmap = {};
-      axeslist = fields.list.map(function(field) {
+      axeslist = fields.map(function(field) {
         var axis = {
           type : field.type,
           name : field.field,
@@ -47,6 +48,10 @@ function($, uiconfig, ui) {
 
     function updateDataSource(source) {
       fields = source.fields;
+      fieldsmap = {};
+      for(var i = 0; i < fields.length; i++) {
+        fieldsmap[fields[i].field] = fields[i];
+      }
       updateFields(fields);
     }
 
@@ -115,7 +120,7 @@ function($, uiconfig, ui) {
           return $(this).val() !== "";
         })
         .each(function() {
-          types.push(fields.map[$(this).val()]);
+          types.push(fieldsmap[$(this).val()]);
         });
       ctx.trigger("chart.axis.change", types, dimension);
     }
@@ -182,7 +187,7 @@ function($, uiconfig, ui) {
         } else {
           $select.find(".optional").text("[remove]");
         }
-        if($container.find("select").length < Math.min(info.max || 100, fields.list.length)) {
+        if($container.find("select").length < Math.min(info.max || 100, fields.length)) {
           var $clone = $select.clone();
           $container.append($clone);
         }

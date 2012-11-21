@@ -8,10 +8,10 @@ function(charts, createLoader) {
     var current = {
           type : null,
           datasource : null,
+          fieldsmap : {},
           dimensions : {},
           options : {}
         }
-//      , datasources = {}
       ;
 
     function extractAxes(type) {
@@ -21,12 +21,9 @@ function(charts, createLoader) {
         var dimension = chartDimensions[i],
             counter   = 0;
         if(!dimension.isaxis) continue;
-console.log(current.dimensions);
         for(var j = 0; j < (dimension.max || current.dimensions[dimension.name].length); j++) {
-console.log(dimension.name, j);
           var o = current.dimensions[dimension.name][j];
           if(!o) break;
-console.log(o);
           var axis = {
                 type : o.field.field
               };
@@ -44,21 +41,16 @@ console.log(o);
 
     function triggerChart() {
       try {
-console.log("A");
         var dataloader = createLoader(current.datasource),
             options    = { },
             loader = function(handler) {
               dataloader.on("success", handler);
               dataloader.load();
             };
-console.log("B", current.type);
         var axes = extractAxes(current.type);
-console.log("C");
         if(axes === null)
           throw "not enough axes to feed the chart";
-console.log("D");
         charts.map[current.type].extractOptions(options, current.dimensions, current.options);
-console.log("E");
         if(ctx.debug)
           console.info("CHART OPTIONS", JSON.stringify(options));
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
@@ -69,16 +61,20 @@ console.log("E");
 
     function changeDataSource(ds) {
       current.datasource = ds;
+      current.fieldsmap = {};
+      for(var i = 0; i < ds.fields.length; i++) {
+        current.fieldsmap[ds.fields[i].field] = ds.fields[i];
+      }
+
       triggerChart();
     }
 
     function setAxis(types, info) {
       current.dimensions[info.name] = types.map(function(type) {
-console.log(type);
         return {
           name     : type.field,
           category : type.type,
-          field    : current.datasource.fields.map[type.field]
+          field    : current.fieldsmap[type.field]
         }
       });
       triggerChart();
@@ -99,16 +95,6 @@ console.log(type);
     ctx.on("chart.datasource.change", changeDataSource);
     ctx.on("chart.type.change", chartType);
     ctx.on("chart.axis.change", setAxis);
-/*
-    ctx.on("data.datasource.add", function(item) {
-      datasources[item.name] = item;
-    });
-*/
     ctx.on("chart.option.set", chartOptionSet);
-/*
-    ctx.on("data.datasource.remove", function(item) {
-      delete datasources[item.name];
-    });
-*/
   };
 });
