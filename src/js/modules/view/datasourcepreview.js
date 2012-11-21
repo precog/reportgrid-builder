@@ -13,8 +13,7 @@ function($, createGrid, createLoader) {
       var columns = [];
 
       return fields.map(function(field) {
-        var name = field.name;
-        return { id : name, name : name, field : field.field || name };
+        return { id : name, name : field.name || field.field, field : field.field };
       });
     }
 
@@ -48,7 +47,6 @@ console.log(data, columns, options);
     });
 
     ctx.on("data.datasource.preview.clear", function() {
-console.log("DESTROY ", grid);
       if(grid) {
         grid.destroy();
         grid = null;

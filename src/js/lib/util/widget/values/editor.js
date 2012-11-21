@@ -36,6 +36,10 @@ function($, createValue) {
       };
     }
 
+    if(options.placeholder) {
+      params.input.attr("placeholder", options.placeholder);
+    }
+
     $('<div class="control-container"><span class="control"></span><span class="unit"></span></div><div class="error" style="display:none;">error goes here</div>').appendTo(el);
     params.input.appendTo(el.find(".control"));
     if(options.title)

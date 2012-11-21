@@ -38,8 +38,8 @@ function($, ui, tplDialog) {
           west : {
               size : 240
             , initClosed : false
-            , spacing_open: 0
-            , spacing_closed: 0
+//            , spacing_open: 0
+//            , spacing_closed: 0
           }
       });
       $dialog.find(".datasources").layout({

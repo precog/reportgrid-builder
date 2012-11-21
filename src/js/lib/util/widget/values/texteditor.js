@@ -4,9 +4,9 @@ define([
 
 function(createEditor) {
   return function(el, options) {
-    options = $.extend({default : "" }, options);
-console.log("string", JSON.stringify(options));
-    var $input = $('<input type="text" class="string">');
+    options = $.extend({default : null }, options);
+console.log("text", JSON.stringify(options));
+    var $input = $('<textarea class="text"></textarea>');
     if(options.className)
       $input.addClass(options.className);
     var params = {

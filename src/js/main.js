@@ -27,6 +27,7 @@ require([
   , "modules/view/chartselector"
   , "modules/view/datasourceselector"
   , "modules/view/datasourcepreview"
+  , "modules/view/datasourceedit"
   , "modules/view/dimensionspane"
   , "modules/view/optionspane"
   , "modules/view/chartpane"

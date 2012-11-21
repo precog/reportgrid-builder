@@ -35,10 +35,10 @@ function($, uiconfig, ui) {
       axeslist = fields.list.map(function(field) {
         var axis = {
           type : field.type,
-          name : field.name,
+          name : field.field,
           $select : null
         };
-        axesmap[field.name] = axis;
+        axesmap[field.field] = axis;
         return axis;
       });
 
