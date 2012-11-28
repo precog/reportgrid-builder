@@ -30,7 +30,7 @@ function($, createGrid, createLoader) {
       return function(data) {
         var columns = createColumns(datasource.fields),
             options = createOptions();
-console.log(data, columns, options);
+//console.log(data, JSON.stringify(datasource.fields), columns, options);
         grid = createGrid($el, data, columns, options);
       };
     }

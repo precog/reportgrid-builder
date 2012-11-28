@@ -187,7 +187,7 @@ function($) {
     ctx.on("modules.ready", function() {
       $(examples).each(function(i, example) {
         example.src  = path(datapath,example.src);
-        example.type = example.type || "json";
+        example.type = example.type || "url";
         example.path = path(root, "");
         for(var i = 0; i < example.fields.length; i++) {
           var field = example.fields[i];

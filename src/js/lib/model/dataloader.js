@@ -1,9 +1,12 @@
 define([
     "lib/util/dispatcher"
   , "lib/model/loader/ajax"
+  , "lib/model/loader/array"
+  , "lib/model/loader/text"
+  , "lib/util/md5"
 ],
 
-function(createDispatcher, createAjax) {
+function(createDispatcher, createAjax, createArray, createText, md5) {
   var cache = {};
   return function(options) {
     var aborted = false,
@@ -12,12 +15,20 @@ function(createDispatcher, createAjax) {
         loader;
 
     switch(options.type.toLowerCase()) {
-      case "json":
+      case "url":
         loader = createAjax(options.src);
-        key = "json:"+options.src;
+        key = "url:"+options.src;
+        break;
+      case "text":
+        loader = createText(options.data);
+        key = "array:" + md5(options.data);
+        break;
+      case "array":
+        loader = createArray(options.data);
+        key = "array:" + md5(JSON.stringify(options.data));
         break;
       default:
-        throw "a datasource of type " + options.type + " is not supported (yet)";
+        throw "a datasource of type '" + options.type + "' is not supported (yet)";
     }
 
     function success(data) {

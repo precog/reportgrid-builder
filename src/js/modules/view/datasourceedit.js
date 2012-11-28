@@ -25,7 +25,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
           ctx.trigger("data.datasource.add", {
             path   : $path.text(),
             name   : ename.value.get(),
-            type   : "json",
+            type   : "url",
             src    : stype.value.get(),
             fields : fields
           });
@@ -50,14 +50,62 @@ function($, editors, createLoader, guess, ui, tplForm) {
             }),
           $stype = $('<div class="stype"></div>').appendTo($el.find("dd.type")),
           stype;
+
+      function success(data, type, opt) {
+        fields = guess.list(data);
+        $fields.html(fields.map(function(field) {
+          return field.name;
+        }).join(", "));
+        ctx.trigger("data.datasource.preview.render", $.extend({ type : type, fields : fields }, opt));
+      }
+
+      function error(msg) {
+        ctx.trigger("data.datasource.preview.clear");
+        $fields.html("-");
+        if(msg) {
+          $error.html("error loading the data: " + msg);
+          $error.show();
+        } else {
+          $error.hide();
+        }
+      }
+
+      function clear() {
+        if(loader) {
+          loader.abort();
+        }
+        $error.hide();
+        $fields.html("-");
+      }
+
+      function validateJsonString(s) {
+        try {
+          var json = JSON.parse(s);
+          if(!json instanceof Array || "object" !== typeof json[0])
+            return "the json string must be an array of objects";
+          else
+            return null;
+        } catch(e) {
+          return "invalid json format: " + e;
+        }
+      }
+
       etype.value.on("value.change", function(value) {
+        clear();
         if(stype) {
           stype.destroy();
         }
         switch(value) {
           case "text":
             stype = editors.create($stype, "text", {
-              placeholder : '[{"country:"USA",value:1000}]'
+              placeholder : '[{"country:"USA",value:1000}]',
+              validate : validateJsonString
+            });
+            stype.value.on("value.change", function(data) {
+              success(JSON.parse(data), "text", { data : data });
+            });
+            stype.value.on("value.validationError", function() {
+              error(null);
             });
             break;
           case "url":
@@ -65,30 +113,22 @@ function($, editors, createLoader, guess, ui, tplForm) {
               placeholder : "http://www.example.com/data.json"
             });
             stype.value.on("value.change", function(value) {
-              $error.hide();
+              clear();
               $fields.html("loading ...");
               if(loader) {
                 loader.abort();
               }
               loader = createLoader({
-                type : "json",
+                type : "url",
                 src  : value
               });
               loader.on("success", function(data) {
-                fields = guess.list(data);
-                $fields.html(fields.map(function(field) {
-                  return field.name;
-                }).join(", "));
-                ctx.trigger("data.datasource.preview.render", {
-                  type : "json",
-                  src  : value,
-                  fields : fields
-                });
+                success(data, "url", { src : value });
+                loader = null;
               });
-              loader.on("error", function(error) {
-                $fields.html("-");
-                $error.html("error loading the data: " + error);
-                $error.show();
+              loader.on("error", function(msg) {
+                error(msg);
+                loader = null;
               });
               loader.load();
             });
@@ -99,8 +139,24 @@ function($, editors, createLoader, guess, ui, tplForm) {
             stype = editors.create($stype, "file", {
 
             });
+            stype.value.on("value.change", function(file) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                var data = e.target.result,
+                    validation = validateJsonString(data);
+                if(validation) {
+                  error(validation);
+                } else {
+                  success(JSON.parse(data), "text", { data : data });
+                }
+              };
+              reader.readAsText(file);
+            });
             break;
         }
+        stype.value.on("value.validationError", function() {
+          stype.el.find("div.error").addClass("ui-state-error ui-corner-all");
+        });
       });
       etype.value.set("url");
 
