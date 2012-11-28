@@ -1,8 +1,9 @@
 define([
+  "jquery",
   "lib/util/dispatcher"
 ],
 
-function(createDispatcher) {
+function($, createDispatcher) {
   return function(defaultValue, defaultValidator, defaultFilter) {
     var model,
         value = defaultValue,
@@ -13,14 +14,29 @@ function(createDispatcher) {
     ;
 
     return model = {
-      set : function(newvalue) {
-        if((lastError = validator(newvalue)) != null) {
-          dispatcher.trigger("value.validationError", lastError, newvalue);
-          return false;
-        }
+      _set : function(newvalue) {
         var oldvalue = value;
         value = filter(newvalue);
         dispatcher.trigger("value.change", value, oldvalue);
+      },
+      set : function(newvalue) {
+        var test = validator(newvalue);
+        if(test && ("object" === typeof test) && test.then) {
+          // is a "promise", deal asynchronously
+          test.then(function(validationresult) {
+            if((lastError = validationresult) != null) {
+              dispatcher.trigger("value.validationError", lastError, newvalue);
+              return false;
+            }
+            model._set(newvalue);
+          });
+          return;
+        }
+        if((lastError = test) != null) {
+          dispatcher.trigger("value.validationError", lastError, newvalue);
+          return false;
+        }
+        model._set(newvalue);
         return true;
       },
       setDefault : function(newvalue) {

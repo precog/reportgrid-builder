@@ -8,7 +8,7 @@ function() {
     var map = {};
 
     ctx.on("data.datasource.add", function(item) {
-      map[item.path+item.name] = item;
+      map[item.path] = item;
     });
 
     ctx.on("data.datasource.removebyname", function(name) {
@@ -21,6 +21,7 @@ function() {
     });
 
     ctx.on("data.datasource.select", function(path) {
+console.log("SELECTED", path);
       if(map[path])
         ctx.trigger("data.datasource.selected", map[path]);
     });

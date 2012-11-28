@@ -89,6 +89,20 @@ function($, compare) {
         type = type || defaultType;
         return _has(path = normalize(path), type) || _isRoot(path, type);
       },
+      validate : function(path, type) {
+        type = type || defaultType;
+        if(_has(path = normalize(path), type) || _isRoot(path, type))
+          return "node already exist";
+        var parts = path.substr(1).split("/"),
+            name = parts[parts.length-1];
+        if(!validateName(name))
+          return "invalid characters in name";
+        var parentPath = "/" + parts.slice(0, parts.length - 1).join("/"),
+            parentType = this.typeContainerFor(type);
+        if(!this.has(parentPath, parentType))
+          return "parent node does not exist";
+        return null;
+      },
       add : function(path, type, recursive) {
         type = type || defaultType;
         recursive = !!recursive;

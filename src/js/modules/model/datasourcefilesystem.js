@@ -28,15 +28,15 @@ function(createfs, arrays) {
     }
 
     function addItem(item) {
-      fs.add(item.name, "datasource");
+      fs.add(item.path, "datasource");
       for(var i = 0; i < item.fields.length; i++) {
         var field = item.fields[i];
-        fs.add(item.path+item.name+"/"+field.name, field.type);
+        fs.add(item.path+"/"+field.name, field.type, true);
       }
     }
 
-    function removeItem(name, type) {
-      fs.remove(name, type);
+    function removeItem(path, type) {
+      fs.remove(path, type);
     }
 
     ctx.on("modules.ready", function() {
@@ -48,10 +48,15 @@ function(createfs, arrays) {
       dequeue();
     });
 
+    ctx.on("data.datasource.path.validate", function(path) {
+      var validation = fs.validate(path);
+      ctx.trigger("data.datasource.path.validated", path, !validation, validation);
+    });
+
     ctx.on("data.datasource.remove", function(item) {
       if(arrays.remove(queue, item))
         return;
-      removeItem(item.name, "datasource");
+      removeItem(item.path, "datasource");
     });
   };
 });

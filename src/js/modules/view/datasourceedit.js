@@ -9,7 +9,7 @@ define([
 
 function($, editors, createLoader, guess, ui, tplForm) {
   return function(ctx) {
-    var $el, $error, $fields, $actions, $path, fields, loader;
+    var $el, $error, $fields, $actions, $path, fields, loader, dataready = false, nameready = false;
     function init(container) {
       $el = $('<div class="datasource-form"></div>').append(tplForm).appendTo(container);
       $fields = $el.find("dd.fields");
@@ -17,10 +17,12 @@ function($, editors, createLoader, guess, ui, tplForm) {
       $path = $el.find("dd.path");
       $actions = $el.find(".actions");
 
-      var $button = ui.button($actions, {
+      var $save = ui.button($actions, {
         label : "save",
         text : true,
-//        disabled : true,
+        disabled : true
+        /*
+        ,
         handler : function() {
           ctx.trigger("data.datasource.add", {
             path   : $path.text(),
@@ -30,11 +32,35 @@ function($, editors, createLoader, guess, ui, tplForm) {
             fields : fields
           });
         }
+        */
       });
 
       var ename = editors.create($el.find("dd.name"), "string", {
-            placeholder : "Data Source Name"
-          }),
+            placeholder : "Data Source Name",
+            // TODO add validate function that checks if the path is already taken
+          validate : function(value) {
+            if(!value) return "name cannot be empty";
+            var deferred = $.Deferred(),
+              path = $path.text();
+            if(path.substr(-1) !== "/") path += "/";
+            path += value;
+
+            ctx.on("data.datasource.path.validated", function(vpath, valid, reason) {
+              if(path !== vpath) return;
+              if(valid) {
+                deferred.resolve(null);
+                nameready = true;
+                changeSaveState();
+              }
+              else
+                deferred.resolve(reason);
+            });
+
+            ctx.trigger("data.datasource.path.validate", path);
+
+            return deferred;
+          }
+        }),
           etype = editors.create($('<div class="type"></div>').appendTo($el.find("dd.type")), "selection", {
               default : "",
               values : [{
@@ -51,15 +77,47 @@ function($, editors, createLoader, guess, ui, tplForm) {
           $stype = $('<div class="stype"></div>').appendTo($el.find("dd.type")),
           stype;
 
+
+      ename.value.on("value.validationError", function() {
+        ename.el.find("div.error").addClass("ui-state-error ui-corner-all");
+        nameready = false;
+        changeSaveState();
+      });
+
+      function changeSaveState() {
+        if(dataready && nameready) {
+          $save.button("enable");
+        } else {
+          $save.button("disable");
+        }
+      }
+
       function success(data, type, opt) {
         fields = guess.list(data);
         $fields.html(fields.map(function(field) {
           return field.name;
         }).join(", "));
         ctx.trigger("data.datasource.preview.render", $.extend({ type : type, fields : fields }, opt));
+        $save.off("click");
+        $save.on("click", function() {
+          var path = $path.text();
+          if(path.substr(-1) !== "/") path += "/";
+          var name = ename.value.get();
+          ctx.trigger("data.datasource.add", $.extend({
+            path   : path + name,
+            name   : name,
+            type   : type,
+            src    : stype.value.get(),
+            fields : fields
+          }, opt));
+        });
+        dataready = true;
+        changeSaveState();
       }
 
       function error(msg) {
+        dataready = false;
+        changeSaveState();
         ctx.trigger("data.datasource.preview.clear");
         $fields.html("-");
         if(msg) {
@@ -71,11 +129,14 @@ function($, editors, createLoader, guess, ui, tplForm) {
       }
 
       function clear() {
+        dataready = false;
+        changeSaveState();
         if(loader) {
           loader.abort();
         }
         $error.hide();
         $fields.html("-");
+        changeSaveState();
       }
 
       function validateJsonString(s) {
@@ -133,7 +194,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
               loader.load();
             });
             // TO DO REMOVE ME
-            stype.value.set("http://beta.precog.com/analytics/v1/fs/0000000828/?apiKey=907C4B1E-A00D-4B1D-A191-90D4DE00EEB6&q=import%20std%3A%3Atime%3A%3A*%20data%20%3A%3D%20%2F%2FbyAccount%20solve%20'email%20data'%20%3A%3D%20data%20where%20data.email%20%3D%20'email%20data'%20where%20getMillis(data'.timestamp)%20%3D%20max(getMillis(data'.timestamp))");
+            //stype.value.set("http://beta.precog.com/analytics/v1/fs/0000000828/?apiKey=907C4B1E-A00D-4B1D-A191-90D4DE00EEB6&q=import%20std%3A%3Atime%3A%3A*%20data%20%3A%3D%20%2F%2FbyAccount%20solve%20'email%20data'%20%3A%3D%20data%20where%20data.email%20%3D%20'email%20data'%20where%20getMillis(data'.timestamp)%20%3D%20max(getMillis(data'.timestamp))");
             break;
           case "file":
             stype = editors.create($stype, "file", {

@@ -176,7 +176,7 @@ function($) {
             , { field : "", type : "" }
           ]
         }*/]
-      root = "", // in the form of /path or empty
+      root = "/examples", // in the form of /path or empty
       datapath = "data";
 
   function path() {
@@ -188,7 +188,7 @@ function($) {
       $(examples).each(function(i, example) {
         example.src  = path(datapath,example.src);
         example.type = example.type || "url";
-        example.path = path(root, "");
+        example.path = path(root, example.name);
         for(var i = 0; i < example.fields.length; i++) {
           var field = example.fields[i];
           field.name = field.name || field.field;
