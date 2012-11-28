@@ -9,10 +9,11 @@ define([
 
 function($, editors, createLoader, guess, ui, tplForm) {
   return function(ctx) {
-    var $el, $fields, $actions, $path, fields, loader;
+    var $el, $error, $fields, $actions, $path, fields, loader;
     function init(container) {
       $el = $('<div class="datasource-form"></div>').append(tplForm).appendTo(container);
       $fields = $el.find("dd.fields");
+      $error = $el.find("dd.error").hide();
       $path = $el.find("dd.path");
       $actions = $el.find(".actions");
 
@@ -64,6 +65,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
               placeholder : "http://www.example.com/data.json"
             });
             stype.value.on("value.change", function(value) {
+              $error.hide();
               $fields.html("loading ...");
               if(loader) {
                 loader.abort();
@@ -84,8 +86,9 @@ function($, editors, createLoader, guess, ui, tplForm) {
                 });
               });
               loader.on("error", function(error) {
-                $fields.html("error loading the data:" + error);
-console.log("ERROR", error);
+                $fields.html("-");
+                $error.html("error loading the data: " + error);
+                $error.show();
               });
               loader.load();
             });
