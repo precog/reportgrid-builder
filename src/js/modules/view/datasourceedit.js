@@ -9,7 +9,7 @@ define([
 
 function($, editors, createLoader, guess, ui, tplForm) {
   return function(ctx) {
-    var $el, $fields, $actions, $path, fields;
+    var $el, $fields, $actions, $path, fields, loader;
     function init(container) {
       $el = $('<div class="datasource-form"></div>').append(tplForm).appendTo(container);
       $fields = $el.find("dd.fields");
@@ -65,7 +65,10 @@ function($, editors, createLoader, guess, ui, tplForm) {
             });
             stype.value.on("value.change", function(value) {
               $fields.html("loading ...");
-              var loader = createLoader({
+              if(loader) {
+                loader.abort();
+              }
+              loader = createLoader({
                 type : "json",
                 src  : value
               });
@@ -81,6 +84,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
                 });
               });
               loader.on("error", function(error) {
+                $fields.html("error loading the data:" + error);
 console.log("ERROR", error);
               });
               loader.load();

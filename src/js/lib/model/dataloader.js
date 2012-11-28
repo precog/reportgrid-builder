@@ -6,10 +6,11 @@ define([
 function(createDispatcher, createAjax) {
   var cache = {};
   return function(options) {
-    var key,
+    var aborted = false,
+        key,
         ds = createDispatcher(),
         loader;
-console.log(options);
+
     switch(options.type.toLowerCase()) {
       case "json":
         loader = createAjax(options.src);
@@ -20,9 +21,18 @@ console.log(options);
     }
 
     function success(data) {
+      if(aborted) {
+        error("user cancelled");
+        return;
+      }
       if(!options.nocache)
         cache[key] = data;
       ds.trigger("success", data);
+      ds.trigger("complete");
+    }
+
+    function error(message) {
+      ds.trigger("error", message);
       ds.trigger("complete");
     }
 
@@ -34,14 +44,17 @@ console.log(options);
       }
       loader(
         success,
-        function(error) {
-          ds.trigger("error", error);
-          ds.trigger("complete");
-        },
+        error,
         function(current, total) {
           ds.trigger("progress", current, total)
         }
       );
+    };
+
+    ds.abort = function() {
+      if(aborted) return;
+      aborted = true;
+      if(loader.abort) loader.abort();
     };
     return ds;
   };
