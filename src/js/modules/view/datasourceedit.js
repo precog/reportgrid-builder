@@ -21,46 +21,33 @@ function($, editors, createLoader, guess, ui, tplForm) {
         label : "save",
         text : true,
         disabled : true
-        /*
-        ,
-        handler : function() {
-          ctx.trigger("data.datasource.add", {
-            path   : $path.text(),
-            name   : ename.value.get(),
-            type   : "url",
-            src    : stype.value.get(),
-            fields : fields
-          });
-        }
-        */
       });
 
       var ename = editors.create($el.find("dd.name"), "string", {
             placeholder : "Data Source Name",
-            // TODO add validate function that checks if the path is already taken
-          validate : function(value) {
-            if(!value) return "name cannot be empty";
-            var deferred = $.Deferred(),
-              path = $path.text();
-            if(path.substr(-1) !== "/") path += "/";
-            path += value;
+            validate : function(value) {
+              if(!value) return "name cannot be empty";
+              var deferred = $.Deferred(),
+                path = $path.text();
+              if(path.substr(-1) !== "/") path += "/";
+              path += value;
 
-            ctx.on("response.datasource.path.validated", function(vpath, valid, reason) {
-              if(path !== vpath) return;
-              if(valid) {
-                deferred.resolve(null);
-                nameready = true;
-                changeSaveState();
-              }
-              else
-                deferred.resolve(reason);
-            });
+              ctx.on("response.datasource.path.validated", function(vpath, valid, reason) {
+                if(path !== vpath) return;
+                if(valid) {
+                  deferred.resolve(null);
+                  nameready = true;
+                  changeSaveState();
+                }
+                else
+                  deferred.resolve(reason);
+              });
 
-            ctx.trigger("request.datasource.path.validate", path);
+              ctx.trigger("request.datasource.path.validate", path);
 
-            return deferred;
-          }
-        }),
+              return deferred;
+            }
+          }),
           etype = editors.create($('<div class="type"></div>').appendTo($el.find("dd.type")), "selection", {
               default : "",
               values : [{
@@ -195,8 +182,6 @@ function($, editors, createLoader, guess, ui, tplForm) {
               });
               loader.load();
             });
-            // TO DO REMOVE ME
-            //http://beta.precog.com/analytics/v1/fs/0000000828/?apiKey=907C4B1E-A00D-4B1D-A191-90D4DE00EEB6&q=import%20std%3A%3Atime%3A%3A*%20data%20%3A%3D%20%2F%2FbyAccount%20solve%20'email%20data'%20%3A%3D%20data%20where%20data.email%20%3D%20'email%20data'%20where%20getMillis(data'.timestamp)%20%3D%20max(getMillis(data'.timestamp))
             break;
           case "file":
             stype = editors.create($stype, "file", {
@@ -223,36 +208,9 @@ function($, editors, createLoader, guess, ui, tplForm) {
       });
       etype.value.set("url");
 
-//      editor = editors.create($option, info.editors[index].type, info.editors[index].options);
-///      editor.value.on("value.change", ctx_trigger_handler);
     }
     ctx.on("data.folder.select", function(path) {
       $path.text(path);
-    });
-    ctx.on("data.datasource.preview.render", function(datasource) {
-/*
-      var loader = createLoader(datasource);
-      loader.on("success", createLoadedHandler(datasource));
-      loader.on("error", dataError);
-      loader.load();
-*/
-    });
-
-    ctx.on("data.datasource.preview.clear", function() {
-/*
-      if(grid) {
-        grid.destroy();
-        grid = null;
-      }
-*/
-    });
-
-    ctx.on("data.datasource.selected", function(datasource) {
-//      ctx.trigger("data.datasource.preview.render", datasource);
-    });
-
-    ctx.on("data.datasource.deselected", function(datasource) {
-//      ctx.trigger("data.datasource.preview.clear");
     });
 
     ctx.on("view.data.datasource", init);

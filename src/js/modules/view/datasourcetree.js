@@ -19,6 +19,7 @@ function($, createTree) {
           if(map[type])
             ctx.trigger("data."+type+".deselect", map[type]);
           ctx.trigger("data."+type+".select", data.path);
+          ctx.trigger("data."+type+".current", data.path);
           map[type] = data.path;
         } else if(data.type === parentType) {
           if(map[type]) {
@@ -45,8 +46,16 @@ function($, createTree) {
         var a = $(el).find("a").first()
               .attr("data-node", JSON.stringify(node));
       });
-      $(tree).on("node.selected", function(_, data) { activateNode(data, "datasource", "folder"); });
       $(tree).on("node.selected", function(_, data) { activateNode(data, "folder", null); });
+      $(tree).on("node.selected", function(_, data) { activateNode(data, "datasource", "folder"); });
+
+      ctx.on("data.folder.remove", function(path) {
+        fs.remove(path, "folder");
+      });
+
+      ctx.on("data.folder.add", function(path) {
+        fs.add(path, "folder");
+      });
     }
 
     $.when(ctx.on("view.data.tree"), ctx.on("data.system.ready")).then(function(viewargs, systemargs) {

@@ -11,9 +11,21 @@ function() {
       map[item.path] = item;
     });
 
-    ctx.on("data.datasource.removebyname", function(name) {
-      if(!map[name]) return;
-      ctx.trigger("data.datasource.remove", map[name]);
+    ctx.on("data.datasource.removebypath", function(path) {
+      if(!map[path]) return;
+      ctx.trigger("data.datasource.remove", map[path]);
+    });
+
+    ctx.on("data.folder.remove", function(path) {
+      if(path.substr(-1) !== '/') path += '/';
+      var len = path.length;
+      console.log("REMOVE FOLDER", path);
+      for(var key in map) {
+        if(!map.hasOwnProperty(key)) continue;
+        if(key.length >  len && key.substr(0, len) === path) {
+          ctx.trigger("data.datasource.removebypath", key);
+        }
+      }
     });
 
     ctx.on("data.datasource.remove", function(item) {
@@ -21,7 +33,6 @@ function() {
     });
 
     ctx.on("data.datasource.select", function(path) {
-console.log("SELECTED", path);
       if(map[path])
         ctx.trigger("data.datasource.selected", map[path]);
     });
