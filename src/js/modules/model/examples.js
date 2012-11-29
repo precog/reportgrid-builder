@@ -183,18 +183,26 @@ function($) {
     return $.makeArray(arguments).join("/");
   }
 
+  function loadExamples(ctx) {
+    $(examples).each(function(i, example) {
+      example.src  = path(datapath,example.src);
+      example.type = example.type || "url";
+      example.path = path(root, example.name);
+      for(var i = 0; i < example.fields.length; i++) {
+        var field = example.fields[i];
+        field.name = field.name || field.field;
+      }
+      ctx.trigger("data.datasource.add", example);
+    });
+  }
+
   return function(ctx) {
     ctx.on("modules.ready", function() {
-      $(examples).each(function(i, example) {
-        example.src  = path(datapath,example.src);
-        example.type = example.type || "url";
-        example.path = path(root, example.name);
-        for(var i = 0; i < example.fields.length; i++) {
-          var field = example.fields[i];
-          field.name = field.name || field.field;
-        }
-        ctx.trigger("data.datasource.add", example);
+      ctx.on("response.datasource.localstorage.hasdata", function(hasdata) {
+        if(!hasdata)
+          loadExamples(ctx);
       });
+      ctx.trigger("request.datasource.localstorage.hasdata");
     });
   };
 });

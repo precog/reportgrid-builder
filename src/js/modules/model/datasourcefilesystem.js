@@ -48,9 +48,9 @@ function(createfs, arrays) {
       dequeue();
     });
 
-    ctx.on("data.datasource.path.validate", function(path) {
-      var validation = fs.validate(path);
-      ctx.trigger("data.datasource.path.validated", path, !validation, validation);
+    ctx.on("request.datasource.path.validate", function(path) {
+      var validation = fs.validate(path, "datasource");
+      ctx.trigger("response.datasource.path.validated", path, !validation, validation);
     });
 
     ctx.on("data.datasource.remove", function(item) {

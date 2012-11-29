@@ -45,7 +45,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
             if(path.substr(-1) !== "/") path += "/";
             path += value;
 
-            ctx.on("data.datasource.path.validated", function(vpath, valid, reason) {
+            ctx.on("response.datasource.path.validated", function(vpath, valid, reason) {
               if(path !== vpath) return;
               if(valid) {
                 deferred.resolve(null);
@@ -56,7 +56,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
                 deferred.resolve(reason);
             });
 
-            ctx.trigger("data.datasource.path.validate", path);
+            ctx.trigger("request.datasource.path.validate", path);
 
             return deferred;
           }
@@ -100,6 +100,8 @@ function($, editors, createLoader, guess, ui, tplForm) {
         ctx.trigger("data.datasource.preview.render", $.extend({ type : type, fields : fields }, opt));
         $save.off("click");
         $save.on("click", function() {
+          nameready = false;
+          changeSaveState();
           var path = $path.text();
           if(path.substr(-1) !== "/") path += "/";
           var name = ename.value.get();
@@ -194,7 +196,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
               loader.load();
             });
             // TO DO REMOVE ME
-            //stype.value.set("http://beta.precog.com/analytics/v1/fs/0000000828/?apiKey=907C4B1E-A00D-4B1D-A191-90D4DE00EEB6&q=import%20std%3A%3Atime%3A%3A*%20data%20%3A%3D%20%2F%2FbyAccount%20solve%20'email%20data'%20%3A%3D%20data%20where%20data.email%20%3D%20'email%20data'%20where%20getMillis(data'.timestamp)%20%3D%20max(getMillis(data'.timestamp))");
+            //http://beta.precog.com/analytics/v1/fs/0000000828/?apiKey=907C4B1E-A00D-4B1D-A191-90D4DE00EEB6&q=import%20std%3A%3Atime%3A%3A*%20data%20%3A%3D%20%2F%2FbyAccount%20solve%20'email%20data'%20%3A%3D%20data%20where%20data.email%20%3D%20'email%20data'%20where%20getMillis(data'.timestamp)%20%3D%20max(getMillis(data'.timestamp))
             break;
           case "file":
             stype = editors.create($stype, "file", {

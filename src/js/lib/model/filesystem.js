@@ -91,8 +91,9 @@ function($, compare) {
       },
       validate : function(path, type) {
         type = type || defaultType;
-        if(_has(path = normalize(path), type) || _isRoot(path, type))
-          return "node already exist";
+        path = normalize(path)
+        if(_has(path, type) || _isRoot(path, type))
+          return "node already exists";
         var parts = path.substr(1).split("/"),
             name = parts[parts.length-1];
         if(!validateName(name))

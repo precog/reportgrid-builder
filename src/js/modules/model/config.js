@@ -1,24 +1,27 @@
 define([
-  "lib/util/storagemonitor"
+  "lib/util/store"
 ],
 
 function(createStore) {
-  var CONFIG_KEY = "rg-builder-config",
+  var STORE_NAME = "RGBUILDER:CONFIG",
       defaults = {
         theme : "gray"
       },
-      config = createStore(CONFIG_KEY, defaults);
+      store = createStore(STORE_NAME, defaults);
 
   return function(ctx) {
-    config.monitor.bind("theme", function(theme) {
+    /*
+    store.monitor.bind("theme", function(theme) {
       ctx.trigger("theme.change", theme);
     });
+    */
     ctx.on("modules.ready", function() {
-      var theme = config.get("theme");
+      var theme = store.get("theme");
       ctx.trigger("theme.change", theme);
     });
     ctx.on("theme.changing", function(theme) {
-      config.set("theme", theme, true);
+      store.set("theme", theme, true);
+      store.commit();
     });
   };
 });
