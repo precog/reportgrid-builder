@@ -30,8 +30,8 @@ function(charts, createLoader) {
           // TODO THIS SHOULD GO IN THE AXIS OPTIONS
           if(i > 0 && ["linechart", "barchart"].indexOf(type) >= 0)
             axis.variable = "dependent";
-          else
-            axis.variable = "independent";
+//          else
+//            axis.variable = "independent";
           axes.push(axis);
           counter++;
         }
