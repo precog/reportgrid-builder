@@ -32,13 +32,12 @@ function($, ui, charts) {
       $(menu).on("select", function(e, data) {
         ctx.trigger("chart.datasource.change", data);
       });
-
+/*
       ctx.on("chart.datasource.change", function(data) {
         console.log("MUST UPDATE THE SELECTOR");
         console.log("DATA SOURCE CHANGE", data);
-//        menu.selectIndex(charts.map[type].index);
       });
-
+*/
       dequeue();
 
       ctx.on("data.datasource.add", add);
@@ -76,7 +75,7 @@ function($, ui, charts) {
 
     function remove(item) {
       removeFromArray(items, item);
-      console.log("REMOVE ITEM FROM SELECTOR");
+      console.log("TODO: REMOVE ITEM FROM SELECTOR");
     }
 
     ctx.on("data.datasource.add", addToQueue);

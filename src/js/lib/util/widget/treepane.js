@@ -57,8 +57,7 @@ function($, compare) {
               , select_range_modifier : false
             },
             types : types
-          })
-          .addClass("ui-widget-content"),
+          }),
         root
       ;
 
@@ -177,7 +176,6 @@ function($, compare) {
       });
 
       $(fs).on("removed", function(e, path, type) {
-console.log("ON FS REMOVE", path, type);
         removeNodeByPath(path, type);
       });
 

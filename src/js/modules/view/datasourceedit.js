@@ -52,7 +52,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
               default : "",
               values : [{
                 value : "url",
-                label : "reference url"
+                label : "remote service"
               }, {
                 value : "text",
                 label : "paste data"

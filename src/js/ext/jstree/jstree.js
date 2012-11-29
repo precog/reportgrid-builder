@@ -1958,7 +1958,7 @@ Some static functions and variables, unless you know exactly what you are doing 
 				'.jstree-rtl li li { margin-left:0px; margin-right:18px; } ' + 
 				'li.jstree-open ul { display:block; } ' + 
 				'li.jstree-closed ul { display:none !important; } ' + 
-				'.jstree li a { display:inline; border-width:0 !important; padding:0px 2px !important; } ';
+				'.jstree li a { dis-play:inline; border-width:0 !important; padding:0px 2px !important; } ';
 		}
 		// Correct IE 7 (shifts anchor nodes onhover)
 		if($.jstree.IS_IE7) { 
