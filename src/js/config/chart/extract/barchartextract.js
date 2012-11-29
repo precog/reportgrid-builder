@@ -20,5 +20,8 @@ function(ensure) {
 
     if("undefined" !== typeof options["barchart.barpaddingdatapoint"] && options["barchart.barpaddingdatapoint"] != 2)
       o.barpaddingdatapoint = options["barchart.barpaddingdatapoint"];
+
+    if(options["barchart.startproperty"])
+      o.startat = options["barchart.startproperty"];
   }
 });

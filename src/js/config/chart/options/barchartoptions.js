@@ -31,6 +31,20 @@ function() {
     });
 
     options.push({
+      name  : "startat",
+      label : "start at",
+      group : "barchart",
+      weight : -10,
+      event : "options.chart.barchart.startproperty",
+      editors : [{
+        type  : "string",
+        options : {
+          default : ""
+        }
+      }]
+    });
+
+    options.push({
       name  : "effect",
       group : "aesthetic",
       weight : 0,

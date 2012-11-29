@@ -28,7 +28,7 @@ function($, ui) {
       });
 */
       // fake
-      tabs.tabs("add", "#pg-editor-tab", "hello world");
+      tabs.tabs("add", "#pg-editor-tab", "chart");
     }
 
     ctx.on("view.editor.tabs", function(el) {
