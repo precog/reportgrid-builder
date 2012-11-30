@@ -19,7 +19,7 @@ function($) {
 
       function render() {
         clearInterval(timer);
-        timer = setTimeout(reducedRender, 100);
+        timer = setTimeout(reducedRender, 400);
       }
 
       function reducedRender() {

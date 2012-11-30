@@ -19,6 +19,10 @@ require([
   , "modules/model/datasourcebroker"
   , "modules/model/datasourcefilesystem"
   , "modules/model/datasourcelocalstorage"
+  , "modules/model/reportsbroker"
+  , "modules/model/reportsfilesystem"
+  , "modules/model/reportslocalstorage"
+  , "modules/model/chartstate"
   , "modules/view/theme"
   , "modules/view/datasourcewindow"
   , "modules/view/thememenu"
@@ -30,11 +34,13 @@ require([
   , "modules/view/datasourcepreview"
   , "modules/view/datasourceedit"
   , "modules/view/datasourcetreeactions"
+  , "modules/view/reportstreeactions"
   , "modules/view/dimensionspane"
   , "modules/view/optionspane"
   , "modules/view/chartpane"
   , "modules/view/changergtheme"
   , "modules/view/datasourcetree"
+  , "modules/view/reportstree"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);

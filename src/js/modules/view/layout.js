@@ -125,7 +125,7 @@ function($, tplLayout) {
       ctx.trigger("view.main.toolbar-main", $container.find(".mainbar .toolbar-main"));
       ctx.trigger("view.main.toolbar-context", $container.find(".mainbar .toolbar-context"));
 
-      ctx.trigger("view.reports.pane", $container.find(".reports"));
+      ctx.trigger("view.reports.tree", $container.find(".reports .tree"));
       ctx.trigger("view.reports.toolbar-description", $container.find(".reports .toolbar-description"));
       ctx.trigger("view.reports.toolbar-main", $container.find(".reports .toolbar-main"));
       ctx.trigger("view.reports.toolbar-context", $container.find(".reports .toolbar-context"));

@@ -34,7 +34,7 @@ function($, compare) {
     o = o || { };
     var types         = o.types || { "folder" : { "container" : ["folder"] } },
         defaultType   = o.defaultType || "folder",
-        caseSensitive = "undefined" !== typeof o.caseSensitive ? !!o.caseSensitive : false;
+        caseSensitive = "undefined" !== typeof o.caseSensitive ? !!o.caseSensitive : false,
         map           = { },
         cimap         = { }, // case insensitive
         containers    = { };

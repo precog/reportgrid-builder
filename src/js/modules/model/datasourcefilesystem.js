@@ -28,7 +28,7 @@ function(createfs, arrays) {
     }
 
     function addItem(item) {
-      fs.add(item.path, "datasource");
+      fs.add(item.path, "datasource", true);
       for(var i = 0; i < item.fields.length; i++) {
         var field = item.fields[i];
         fs.add(item.path+"/"+field.name, field.type, true);
