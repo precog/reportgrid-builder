@@ -9,18 +9,19 @@ function($, createTree) {
 
     function init(container, fs) {
       var map = {
-        folder : "/"
-      };
+            folder : "/"
+          },
+          current;
       function activateNode(data, type, parentType) {
         if(!data) return;
         if(data.type === type) {
-          if(data.path === map[type])
+          if(data.path === current)
             return;
           if(map[type])
             ctx.trigger("reports."+type+".deselect", map[type]);
           ctx.trigger("reports."+type+".select", data.path);
           ctx.trigger("reports."+type+".current", data.path);
-          map[type] = data.path;
+          current = map[type] = data.path;
         } else if(data.type === parentType) {
           if(map[type]) {
             ctx.trigger("reports."+type+".deselect", map[type]);
