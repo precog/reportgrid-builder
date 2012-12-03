@@ -44,6 +44,11 @@ function($, createTree) {
       });
       $(tree).on("node.selected", function(_, data) { activateNode(data, "folder", null); });
       $(tree).on("node.selected", function(_, data) { activateNode(data, "report", "folder"); });
+      $(tree).on("node.trigger", function(_, data)  {
+        if(data.type === "report") {
+          ctx.trigger("reports.report.openpath", data.path);
+        }
+      });
 
       ctx.on("reports.folder.remove", function(path) {
         fs.remove(path, "folder");

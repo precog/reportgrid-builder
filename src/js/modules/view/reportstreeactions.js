@@ -7,7 +7,11 @@ function($, ui) {
   return function(ctx) {
 
     function initContext(bar) {
-      var $delete = ui.button(bar, {
+      var $open = ui.button(bar, {
+            icon : "ui-icon-query",
+            disabled : true
+          }),
+          $delete = ui.button(bar, {
             icon : "ui-icon-trash",
             disabled : true
           }),
@@ -23,10 +27,16 @@ function($, ui) {
         }
       }
 
-      function deleteDatasource(path) {
+      function deleteReport(path) {
         return function() {
           if(window.confirm("Are you sure you want to delete the report at \"" + path + "\"?\nThis operation is not undoable."))
             ctx.trigger("reports.report.removebypath", path);
+        }
+      }
+
+      function openReport(path) {
+        return function() {
+          ctx.trigger("reports.report.openpath", path);
         }
       }
 
@@ -34,7 +44,7 @@ function($, ui) {
         return function() {
           var name = window.prompt("Create a new folder at: \"" + path + "\"");
           if(name === null)
-            reutrn;
+            return;
           name = name.trim();
           if(!name) {
             alert("the new folder cannot have an empty name");
@@ -82,12 +92,20 @@ function($, ui) {
         }
       });
 
+      ctx.on("reports.report.deselect", function(path) {
+        $open.button("disable");
+      });
+
       ctx.on("reports.report.current", function(path) {
         $delete
           .button("enable")
           .off("click")
-          .on("click", deleteDatasource(path))
+          .on("click", deleteReport(path))
         ;
+        $open
+          .button("enable")
+          .off("click")
+          .on("click", openReport(path))
       });
     }
 
@@ -108,6 +126,7 @@ function($, ui) {
 
       function stateChange(state) {
         if(working) return;
+        $save.off("click");
         $save.on("click", function() {
           if(!currentPath) {
             var name = window.prompt("Please input a name for the current chart");
@@ -126,7 +145,6 @@ function($, ui) {
                 return;
               }
               currentPath = path;
-              $save.off("click");
               ctx.trigger("reports.report.add", currentPath, state);
             });
             ctx.trigger("request.report.path.validate", currentFolder+name);

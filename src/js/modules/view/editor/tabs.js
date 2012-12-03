@@ -38,6 +38,7 @@ function($, ui) {
           var index = ui.index;
         }
       });
+      tabs.hide();
     });
     ctx.on("view.editor.toolbar-context", function(el) {
       context = $(el);

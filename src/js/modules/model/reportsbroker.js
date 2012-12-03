@@ -40,5 +40,10 @@ function() {
       if(map[path])
         ctx.trigger("reports.report.deselected", path, map[path]);
     });
+
+    ctx.on("reports.report.openpath", function(path) {
+      if(!map[path]) return;
+      ctx.trigger("chart.state.update", map[path]);
+    });
   }
 });

@@ -47,10 +47,14 @@ function($, uiconfig, ui) {
     }
 
     function updateDataSource(source) {
-      fields = source.fields;
       fieldsmap = {};
-      for(var i = 0; i < fields.length; i++) {
-        fieldsmap[fields[i].field] = fields[i];
+      if(source) {
+        fields = source.fields;
+        for(var i = 0; i < fields.length; i++) {
+          fieldsmap[fields[i].field] = fields[i];
+        }
+      } else {
+        fields = [];
       }
       updateFields(fields);
     }

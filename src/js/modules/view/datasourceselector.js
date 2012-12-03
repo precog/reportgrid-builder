@@ -4,7 +4,7 @@ define([
 ],
 
 
-function($, ui, charts) {
+function($, ui) {
 
   return function(ctx) {
     var queue = [],
@@ -27,17 +27,15 @@ function($, ui, charts) {
         },
         format : function(item) {
           return '<span class="text">'+item.data.name.split("/").pop()+'</span>';
+        },
+        id : function(value, item) {
+          return value === item.data.path;
         }
       });
       $(menu).on("select", function(e, data) {
         ctx.trigger("chart.datasource.change", data);
       });
-/*
-      ctx.on("chart.datasource.change", function(data) {
-        console.log("MUST UPDATE THE SELECTOR");
-        console.log("DATA SOURCE CHANGE", data);
-      });
-*/
+
       dequeue();
 
       ctx.on("data.datasource.add", add);
@@ -45,6 +43,10 @@ function($, ui, charts) {
 
       ctx.off("data.datasource.add", addToQueue);
       ctx.off("data.datasource.remove", removeFromQueue);
+
+      ctx.on("chart.datasource.change", function(datasource) {
+        menu.select(datasource.path);
+      });
     }
 
     function addToQueue(item) {

@@ -59,14 +59,21 @@ function(charts, createLoader) {
       }
     }
 
+    var timer;
+    function delayedTriggerChart() {
+      clearTimeout(timer);
+      timer = setTimeout(triggerChart, 200);
+    }
+
     function changeDataSource(ds) {
       current.datasource = ds;
       current.fieldsmap = {};
-      for(var i = 0; i < ds.fields.length; i++) {
-        current.fieldsmap[ds.fields[i].field] = ds.fields[i];
+      if(ds) {
+        for(var i = 0; i < ds.fields.length; i++) {
+          current.fieldsmap[ds.fields[i].field] = ds.fields[i];
+        }
       }
-
-      triggerChart();
+      delayedTriggerChart();
     }
 
     function setAxis(types, info) {
@@ -77,19 +84,19 @@ function(charts, createLoader) {
           field    : current.fieldsmap[type.field]
         }
       });
-      triggerChart();
+      delayedTriggerChart();
     }
 
     function chartType(type) {
       current.type = type;
       current.dimensions = {};
       current.options = {};
-      triggerChart();
+      delayedTriggerChart();
     }
 
     function chartOptionSet(key, value) {
       current.options[key] = value;
-      triggerChart();
+      delayedTriggerChart();
     }
 
     ctx.on("chart.datasource.change", changeDataSource);

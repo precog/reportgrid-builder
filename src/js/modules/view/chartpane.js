@@ -14,24 +14,24 @@ function($) {
 
       function execute(newinfo) {
         info = newinfo;
-        render();
+        delayedRender();
+      }
+
+      function delayedRender() {
+        clearTimeout(timer);
+        timer = setTimeout(render, 500);
       }
 
       function render() {
-        clearInterval(timer);
-        timer = setTimeout(reducedRender, 400);
-      }
-
-      function reducedRender() {
         if(!info) return;
         var old = info.options.ready || function() {},
             start;
         info.options.ready = function(){
           var end = +new Date();
-          ctx.trigger("chart.render.end", { time : end - start, start : start, end : end });
+          ctx.trigger("chart.delayedRender.end", { time : end - start, start : start, end : end });
           old();
         };
-        ctx.trigger("chart.render.start", start = +new Date());
+        ctx.trigger("chart.delayedRender.start", start = +new Date());
         ReportGrid.chart($chart.get(0),  {
             axes    : info.axes,
             load    : info.loader,
@@ -41,23 +41,23 @@ function($) {
         );
       }
 
-      function change_width(v) {
+      function changeWidth(v) {
         $chart.css("width", v+"px");
-        render();
+        delayedRender();
       }
 
-      function change_height(v) {
+      function changeHeight(v) {
         $chart.css("height", v+"px");
-        render();
+        delayedRender();
       }
 
       var loader = $('<div class="loader"><img src="images/loading.gif" alt="loading ..."></div>').appendTo(el).hide();
 
-      function render_start() {
+      function renderStart() {
         loader.show();
       }
 
-      function render_end() {
+      function renderEnd() {
         loader.hide();
       }
 
@@ -67,15 +67,15 @@ function($) {
           ReportGrid.tooltip.hide();
         $chart.children("*").remove();
       }
-
+      
       ctx.on("chart.render.execute", execute);
-      ctx.on("chart.rgcss.loaded", render);
+      ctx.on("chart.rgcss.loaded", delayedRender);
       ctx.on("chart.render.clear", clear);
-      ctx.on("options.chart.width", change_width);
-      ctx.on("options.chart.height", change_height);
+      ctx.on("options.chart.width", changeWidth);
+      ctx.on("options.chart.height", changeHeight);
 
-      ctx.on("chart.render.start", render_start);
-      ctx.on("chart.render.end", render_end);
+      ctx.on("chart.render.start", renderStart);
+      ctx.on("chart.render.end", renderEnd);
     };
 
     ctx.on("view.editor.chart", init);

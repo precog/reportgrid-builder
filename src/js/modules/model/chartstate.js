@@ -10,7 +10,7 @@ function() {
 
     function reset() {
       state = {
-        chart : null,
+        chart : "barchart",
         datasource : null,
         dimensions : {},
         options : {}
@@ -23,42 +23,72 @@ function() {
       timer = setTimeout(change, 200);
     }
 
+    function update(newstate) {
+      unwire();
+      state = newstate;
+
+      ctx.trigger("chart.type.change", state.chart);
+      ctx.trigger("chart.datasource.change", state.datasource);
+
+
+      for(var name in state.dimensions) {
+        if(!state.dimensions.hasOwnProperty(name)) continue;
+        var dim = state.dimensions[name];
+        ctx.trigger("chart.axis.change", dim.variable, dim.axis);
+      }
+
+      for(var name in state.options) {
+        if(!state.options.hasOwnProperty(name)) continue;
+        ctx.trigger("chart.option.set", name, state.options[name]);
+      }
+
+      wire();
+      change();
+    }
+
     function change() {
       ctx.trigger("chart.state.change", state);
     }
 
-    // intercept chart type
-    ctx.on("chart.type.change", function(chart) {
+    function typeChange(chart) {
       state.chart = chart;
       delayedChange();
-    });
+    }
 
-    // intercept datasource
-    ctx.on("chart.datasource.change", function(datasource) {
+    function datasourceChange(datasource) {
       state.datasource = datasource;
       delayedChange();
-    });
+    }
 
-    // interecept dimensions
-    ctx.on("chart.axis.change", function(variable, axis) {
-      state.dimensions[axis.name] = variable;
+    function axisChange(variable, axis) {
+      state.dimensions[axis.name] = { variable : variable, axis : axis };
       delayedChange();
-    });
+    }
 
-    // intercept options
-    ctx.on("chart.option.set", function(name, value) {
+    function optionSet(name, value) {
       state.options[name] = value;
       delayedChange();
-    });
+    }
+
+    function wire() {
+      ctx.on("chart.type.change", typeChange);
+      ctx.on("chart.datasource.change", datasourceChange);
+      ctx.on("chart.axis.change", axisChange);
+      ctx.on("chart.option.set", optionSet);
+    }
+    wire();
+
+    function unwire() {
+      ctx.off("chart.type.change", typeChange);
+      ctx.off("chart.datasource.change", datasourceChange);
+      ctx.off("chart.axis.change", axisChange);
+      ctx.off("chart.option.set", optionSet);
+    }
 
     ctx.on("chart.state.reset", function() {
       reset();
     });
 
-    // listen to request.save
-      // trigger save state
-
-    // trigger save ready
-    // trigger save not ready
+    ctx.on("chart.state.update", update);
   };
 });

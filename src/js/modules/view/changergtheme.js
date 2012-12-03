@@ -5,7 +5,7 @@ define([
 function($) {
 
   return function(ctx) {
-    var timer;
+    var timer, current;
     function poll(callback) {
       clearInterval(timer);
       if($("head").find('link.custom-rg-css').length > 0) {
@@ -15,6 +15,8 @@ function($) {
       }
     }
     function changecharttheme(theme) {
+      if(current === theme) return;
+      current = theme;
 //      $("head").find('link[href="https://api.reportgrid.com/css/rg-charts.css"]').remove();
       $("head").find('link.custom-rg-css').remove();
       $("head").append('<link rel="stylesheet" class="custom-rg-css" href="https://api.reportgrid.com/css/colors/'+theme+'">');

@@ -253,6 +253,20 @@ function($, dom, notification, uid) {
         triggerLabel.html(content);
       }
 
+      function select(value) {
+        var i = -1;
+console.log("?????????????????????? SELECT", value);
+console.log("ITEMS", moptions.items);
+        for(var j = 0; j < moptions.items.length; j++) {
+console.log("COMPARE", value, moptions.items[j], moptions.id(value, moptions.items[j]));
+          if(moptions.id(value, moptions.items[j])) {
+            i = j;
+            break;
+          }
+        }
+        selectIndex(i, false);
+      }
+
       el.append(trigger);
 
       selectIndex(index, true);
@@ -269,7 +283,8 @@ function($, dom, notification, uid) {
             content : o.format(item),
             data    : item
           }
-        })
+        }),
+        id :o.id || function(a, b) { return a === b; }
       };
       if(o.width)
         moptions.width = o.width + "px";
@@ -308,6 +323,7 @@ function($, dom, notification, uid) {
         , add : function(item) {
           o.data.push(item);
           menu.menu.add(item);
+          moptions.items.push(item);
           /*
           moptions.items.push(item);
           menu.menu("option", "items", moptions.items);
@@ -316,11 +332,13 @@ function($, dom, notification, uid) {
         }
         , remove : function(index) {
           menu.menu.remove(index);
-          /*
           moptions.items.splice(index, 1);
+          /*
           menu.menu("option", "items", moptions.items);
           refresh();
           */
+        }, select : function(value) {
+          select(value);
         }
       };
     },
