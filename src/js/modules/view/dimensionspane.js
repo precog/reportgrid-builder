@@ -1,10 +1,11 @@
 define([
     "jquery"
   , "config/ui"
+  , "config/charts"
   , "lib/util/ui"
 ],
 
-function($, uiconfig, ui) {
+function($, uiconfig, charts, ui) {
   return function(ctx) {
     var el,
         $fields,
@@ -12,10 +13,16 @@ function($, uiconfig, ui) {
         fields,
         fieldsmap,
         axeslist,
-        axesmap;
+        axesmap,
+        currentDimensions = {};
 
     function updateChartType(type) {
       $fields.children("div.pair").remove();
+      var chart = charts.map[type];
+      dimensionsInfo = {};
+      for(var i = 0; i < chart.dimensions.length; i++) {
+        appendDimension(chart.dimensions[i]);
+      }
       if(fields)
         setTimeout(function() {
           updateFields(fields);
@@ -42,7 +49,6 @@ function($, uiconfig, ui) {
         axesmap[field.field] = axis;
         return axis;
       });
-
       fillSelects();
     }
 
@@ -56,6 +62,7 @@ function($, uiconfig, ui) {
       } else {
         fields = [];
       }
+//      var defaultValues = currentDimensions[dimension.name] || [];
       updateFields(fields);
     }
 
@@ -69,17 +76,29 @@ function($, uiconfig, ui) {
     }
 
     function fillSelect($select) {
-      $(axeslist).each(function() {
-        var $option = $('<option class="value '+this.type+'">'+this.name+'</option>');
-        $select.append($option);
+      $select.each(function(i) {
+        var $current = $(this),
+            name  = $current.attr("data-id"),
+            pos   = $current.index(),
+            value = (currentDimensions[name] || [])[pos];
+        $(axeslist).each(function() {
+          var $option = $('<option class="value '+this.type+'">'+this.name+'</option>');
+          if(value === this.name) {
+            $option.attr("selected", true);
+            $current.attr("disabled", false);
+          }
+          $current.append($option);
+        });
+
       });
     }
 
     function updateSingleSelect($container, dimension) {
-
+      var $principal = $container.find("select.principal");
     }
 
     function updateMultipleSelect($container, dimension) {
+
       var $selects   = $container.find('select.secondary'),
           $nonempty  = $selects.filter(function() { return $(this).val() !== ''; }),
           $empty     = $selects.filter(function() { return $(this).val() === ''; }),
@@ -110,6 +129,7 @@ function($, uiconfig, ui) {
     function createSecondaryDimensionSelector($container, dimension) {
       var $select = $('<select class="secondary"></select>').appendTo($container),
           optionality = "optional";
+      $select.attr("data-id", dimension.name);
       $select.append('<option value="" class="'+optionality+'">['+optionality+']</option>');
       $select.on("change", createSelectChange($container, $select, true, dimension));
 
@@ -126,13 +146,15 @@ function($, uiconfig, ui) {
         .each(function() {
           types.push(fieldsmap[$(this).val()]);
         });
+      ctx.off("chart.axis.change", axisChange);
       ctx.trigger("chart.axis.change", types, dimension);
+      ctx.on("chart.axis.change", axisChange);
     }
 
     function createSelectChange($container, $select, multiple, dimension) {
       var lastval;
       return function() {
-        var val  = $select.val();
+        var val = $select.val();
         if(lastval && $container.find("select").filter(function() {
           return $select.get(0) !== this && $(this).val() === lastval;
         }).length === 0) {
@@ -159,6 +181,7 @@ function($, uiconfig, ui) {
     function createMainDimensionSelector($container, info) {
       var $select = $('<select class="principal"></select>').appendTo($container),
           optionality = info.optional ? "optional" : "mandatory";
+      $select.attr("data-id", info.dimension.name);
       $select.addClass(optionality);
       if(info.multiple)
         $select.addClass("multiple");
@@ -167,40 +190,6 @@ function($, uiconfig, ui) {
       $select.append('<option value="" class="'+optionality+'">['+optionality+']</option>');
 
       $select.on("change", createSelectChange($container, $select, info.multiple, info.dimension));
-    }
-
-    function createSelect($container, info) {
-      var $select = $('<select></select>').appendTo($container);
-      if(info.max === null || info.max > 1)
-        $select.addClass("multi");
-      if(info.secondary)
-        $select.addClass("secondary");
-      if(!info.enabled)
-        $select.attr("disabled", true);
-      if(info.min === 0) {
-        $select.append('<option value="" class="optional">[optional]</option>');
-      } else {
-        $select.append('<option value="" class="mandatory">[select]</option>');
-      }
-      var lastval;
-      $select.on("change", function() {
-        var val = $(this).val();
-        axesmap[val].$select = $select;
-        if(val == "") {
-          $select.find(".optional").text("[optional]");
-        } else {
-          $select.find(".optional").text("[remove]");
-        }
-        if($container.find("select").length < Math.min(info.max || 100, fields.length)) {
-          var $clone = $select.clone();
-          $container.append($clone);
-        }
-        $select.find(".mandatory").remove();
-        lastval = val;
-        triggerChangeAxis($container, dimension);
-      });
-
-      return $select;
     }
 
     function appendDimension(dimension) {
@@ -219,9 +208,32 @@ function($, uiconfig, ui) {
       $closer = $('<div class="clr"></div>').appendTo($fields);
 
       ctx.on("chart.type.change", updateChartType);
+//      ctx.on("chart.dimension.add", appendDimension);
       ctx.on("chart.datasource.change", updateDataSource);
-      ctx.on("chart.dimension.add", appendDimension);
     }
+
+    function axisChange(types, dimension) {
+      var t = types.slice(0),
+        info = dimensionInfo(dimension);
+      function dequeue(rep) {
+        if(t.length === 0) return;
+        var field = t.shift().field;
+        if(axesmap[field]) {
+          var select = el.find('select[data-id="'+dimension.name+'"]'),
+            $sel = $(select.get(rep));
+          $sel.val(field);
+          if(info.multiple) // && $sel.parent().find("select.secondary").length + 1 < axeslist.length)
+            createSecondaryDimensionSelector($sel.parent(), dimension);
+        }
+        rep++;
+        setTimeout(function() { dequeue(rep + 1); }, 20);
+      }
+
+      setTimeout(function() { dequeue(0); }, 20);
+      currentDimensions[dimension.name] = types.map(function(v) { return v.field; });
+    }
+
+    ctx.on("chart.axis.change", axisChange);
 
     ctx.on("view.editor.dimensions", init);
   };

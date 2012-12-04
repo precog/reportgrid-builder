@@ -253,12 +253,9 @@ function($, dom, notification, uid) {
         triggerLabel.html(content);
       }
 
-      function select(value) {
+      function selectValue(value) {
         var i = -1;
-console.log("?????????????????????? SELECT", value);
-console.log("ITEMS", moptions.items);
         for(var j = 0; j < moptions.items.length; j++) {
-console.log("COMPARE", value, moptions.items[j], moptions.id(value, moptions.items[j]));
           if(moptions.id(value, moptions.items[j])) {
             i = j;
             break;
@@ -337,8 +334,8 @@ console.log("COMPARE", value, moptions.items[j], moptions.id(value, moptions.ite
           menu.menu("option", "items", moptions.items);
           refresh();
           */
-        }, select : function(value) {
-          select(value);
+        }, selectValue : function(value) {
+          selectValue(value);
         }
       };
     },

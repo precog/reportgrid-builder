@@ -23,6 +23,7 @@ require([
   , "modules/model/reportsfilesystem"
   , "modules/model/reportslocalstorage"
   , "modules/model/chartstate"
+  , "modules/view/brand"
   , "modules/view/theme"
   , "modules/view/datasourcewindow"
   , "modules/view/thememenu"
