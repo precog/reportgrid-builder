@@ -11,6 +11,10 @@ function($, ui) {
             icon : "ui-icon-query",
             disabled : true
           }),
+          $export = ui.button(bar, {
+            icon : "ui-icon-arrowthickstop-1-s",
+            disabled : true
+          }),
           $delete = ui.button(bar, {
             icon : "ui-icon-trash",
             disabled : true
@@ -36,7 +40,13 @@ function($, ui) {
 
       function openReport(path) {
         return function() {
-          ctx.trigger("reports.report.openpath", path);
+          ctx.trigger("reports.report.exportpath", path);
+        }
+      }
+
+      function exportReport(path) {
+        return function() {
+          ctx.trigger("reports.report.exportpath", path);
         }
       }
 
@@ -94,6 +104,7 @@ function($, ui) {
 
       ctx.on("reports.report.deselect", function(path) {
         $open.button("disable");
+        $export.button("disable");
       });
 
       ctx.on("reports.report.current", function(path) {
@@ -106,6 +117,10 @@ function($, ui) {
           .button("enable")
           .off("click")
           .on("click", openReport(path))
+        $export
+          .button("enable")
+          .off("click")
+          .on("click", exportReport(path))
       });
     }
 

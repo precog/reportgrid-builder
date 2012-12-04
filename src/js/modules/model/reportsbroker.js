@@ -1,8 +1,8 @@
 define([
-
+  "lib/util/download"
 ],
 
-function() {
+function(download) {
 
   return function(ctx) {
     var map = {};
@@ -44,6 +44,15 @@ function() {
     ctx.on("reports.report.openpath", function(path) {
       if(!map[path]) return;
       ctx.trigger("chart.state.update", map[path]);
+    });
+
+    ctx.on("reports.report.exportpath", function(path) {
+      if(!map[path]) return;
+      ctx.trigger("reports.report.export", map[path], path);
+    });
+
+    ctx.on("reports.report.export", function(report, path) {
+      download(JSON.stringify(report), path.split("/").pop()+".json")
     });
   }
 });
