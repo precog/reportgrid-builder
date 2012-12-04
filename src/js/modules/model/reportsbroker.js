@@ -1,8 +1,6 @@
-define([
-  "lib/util/download"
-],
+define([],
 
-function(download) {
+function() {
 
   return function(ctx) {
     var map = {};
@@ -50,9 +48,5 @@ function(download) {
       if(!map[path]) return;
       ctx.trigger("reports.report.export", map[path], path);
     });
-
-    ctx.on("reports.report.export", function(report, path) {
-      download(JSON.stringify(report), path.split("/").pop()+".json")
-    });
-  }
+  };
 });

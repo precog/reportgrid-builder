@@ -5,7 +5,7 @@ define([
 function(createEditor) {
   return function(el, options) {
     options = $.extend({default : null }, options);
-    var $input = $('<input type="file" class="string">');
+    var $input = $('<input type="file" class="file">');
     if(options.className)
       $input.addClass(options.className);
     var params = {

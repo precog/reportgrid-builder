@@ -36,6 +36,7 @@ require([
   , "modules/view/datasourceedit"
   , "modules/view/datasourcetreeactions"
   , "modules/view/reportstreeactions"
+  , "modules/view/reportsdownloadupload"
   , "modules/view/dimensionspane"
   , "modules/view/optionspane"
   , "modules/view/chartpane"

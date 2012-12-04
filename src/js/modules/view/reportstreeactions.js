@@ -11,6 +11,10 @@ function($, ui) {
             icon : "ui-icon-query",
             disabled : true
           }),
+          $import = ui.button(bar, {
+            icon : "ui-icon-arrowthickstop-1-n",
+            disabled : false
+          }),
           $export = ui.button(bar, {
             icon : "ui-icon-arrowthickstop-1-s",
             disabled : true
@@ -41,6 +45,12 @@ function($, ui) {
       function openReport(path) {
         return function() {
           ctx.trigger("reports.report.exportpath", path);
+        }
+      }
+
+      function importReport(path) {
+        return function() {
+          ctx.trigger("reports.report.importpath", path);
         }
       }
 
@@ -77,6 +87,7 @@ function($, ui) {
       }
 
       $newfolder.on("click", createFolder("/"));
+      $import.on("click", importReport("/"));
 
       ctx.on("reports.folder.select", function(path) {
         $newfolder
@@ -84,10 +95,15 @@ function($, ui) {
           .off("click")
           .on("click", createFolder(path))
         ;
+        $import.button("enable")
+          .off("click")
+          .on("click", importReport(path))
+        ;
       });
 
       ctx.on("reports.folder.deselect", function(path) {
         $newfolder.button("disable");
+        $import.button("disable");
       });
 
       ctx.on("reports.folder.current", function(path) {

@@ -300,15 +300,7 @@ function($, dom, notification, uid) {
           of : trigger.find("button:first")
         });
       });
-/*
-      var timer;
-      function refresh() {
-        clearInterval(timer);
-        timer = setTimeout(function() {
-          menu.menu("refresh");
-        }, 15);
-      }
-*/
+
       return widget = {
           selectIndex : function(index) {
             selectIndex(index);
@@ -321,19 +313,10 @@ function($, dom, notification, uid) {
           o.data.push(item);
           menu.menu.add(item);
           moptions.items.push(item);
-          /*
-          moptions.items.push(item);
-          menu.menu("option", "items", moptions.items);
-          refresh();
-          */
         }
         , remove : function(index) {
           menu.menu.remove(index);
           moptions.items.splice(index, 1);
-          /*
-          menu.menu("option", "items", moptions.items);
-          refresh();
-          */
         }, selectValue : function(value) {
           selectValue(value);
         }
