@@ -92,7 +92,6 @@ function($, uiconfig, ui, editors, optiongroups) {
       function editor_value_set(event, v, type) {
         if(event !== eventName) return;
         if(v !== editor.value.get()) {
-console.log("$$$$$$$$$$", event, eventName, v, type);
           var newindex = -1;
           for(var i = 0; i < info.editors.length; i++)
           {
@@ -104,7 +103,6 @@ console.log("$$$$$$$$$$", event, eventName, v, type);
           if(menu && newindex >= 0 && newindex != index) {
             menu.find("li:eq("+newindex+")").click();
           }
-          console.log(editor.value.validate(v));
           editor.value.set(v);
         }
       }

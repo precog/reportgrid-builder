@@ -24,6 +24,11 @@ function(createDispatcher) {
         log.apply(window, arguments);
         trigger.apply(ctx, arguments);
       };
+      ctx.log = function() {
+        log.apply(window, arguments);
+      };
+    } else {
+      ctx.log = function() {};
     }
 
     return ctx;

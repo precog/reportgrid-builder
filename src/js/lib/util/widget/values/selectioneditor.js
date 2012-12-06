@@ -4,7 +4,6 @@ define([
 ],
 
 function($, createEditor) {
-//console.log("EDITORS", editors, arguments);
   function createOptionElement(value, label, index) {
     if(!label) label = value;
     var $el = $('<option>'+label+'</option>');
@@ -51,7 +50,7 @@ function($, createEditor) {
       $input.append($el);
     });
 
-    var lastIndex;
+    var lastIndex, subDefault;
     $input.on("change", function() {
       var index = $(this).find('[value="'+$(this).val()+'"]').attr("data-index"),
           einfo;
@@ -68,8 +67,8 @@ function($, createEditor) {
           return;
         }
         $input.addClass("with-editor");
-        subeditor = editors.create($subeditor, einfo.type, einfo.options);
-
+        var eoptions = $.extend({}, einfo.options, { default : subDefault || einfo.options.default });
+        subeditor = editors.create($subeditor, einfo.type, eoptions);
         function setSubValue() {
           var $o = $input.find('option[data-index="'+index+'"]'),
             value = $o.attr("value");
@@ -84,7 +83,26 @@ function($, createEditor) {
     });
 
     params.set = function(v) {
-      params.input.val(v);
+      if(v === params.input.val()) return;
+      var pos;
+      if(v.indexOf && (pos = v.indexOf(":")) >= 0) {
+        var prefix = v.substr(0, pos+1);
+        $input.find("option").each(function() {
+          var $option = $(this),
+              value = $option.attr("value");
+          if(value.substr(0, prefix.length) !== prefix) {
+            return;
+          }
+          subDefault = v.substr(pos+1);
+          $option.attr("value", v);
+          params.input.val(v);
+          $input.change();
+          return false;
+        });
+      } else {
+        params.input.val(v);
+      }
+
     };
     params.get = function() {
       return params.input.val();
