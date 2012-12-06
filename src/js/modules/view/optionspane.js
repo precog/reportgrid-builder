@@ -59,7 +59,8 @@ function($, uiconfig, ui, editors, optiongroups) {
           $fields = $fieldset.find(".fields:first"),
           weight = info.weight || 0,
           $ref = findRef($fields, weight, info.name),
-          $container = $('<div class="option-editor" data-weight="'+weight+'" data-name="'+info.name+'"></div>');
+          $container = $('<div class="option-editor" data-weight="'+weight+'" data-name="'+info.name+'"></div>'),
+          eventName = info.event.split(".").slice(2).join(".");
 
       if($ref) {
         $container.insertBefore($ref);
@@ -79,8 +80,22 @@ function($, uiconfig, ui, editors, optiongroups) {
       function ctx_trigger_handler(v) {
         ctx.trigger(info.event, v);
         if(info.event.substr(0, "options.chart.".length) === "options.chart.")
-          ctx.trigger("chart.option.set", info.event.split(".").slice(2).join("."), v);
+        {
+          ctx.off("chart.option.set", editor_value_set);
+          ctx.trigger("chart.option.set", eventName, v);
+          ctx.on("chart.option.set", editor_value_set);
+        }
       }
+
+      function editor_value_set(type, v) {
+        if(type !== eventName) return;
+        if(v !== editor.value.get()) {
+console.log("$$$$$$$$$$", type, eventName, v);
+          editor.value.set(v);
+        }
+      }
+
+      ctx.on("chart.option.set", editor_value_set);
 
       if(info.editors.length > 1) {
         var menu = ui.contextmenu('<div class="rg-widget settings-menu"></div>'),
@@ -132,7 +147,8 @@ function($, uiconfig, ui, editors, optiongroups) {
       editor = editors.create($option, info.editors[index].type, info.editors[index].options);
       editor.value.on("value.change", ctx_trigger_handler);
 
-      ctx.on(info.event, ctx_on_handler);
+
+//      ctx.on(info.event, ctx_on_handler);
 
 
       function condition_visible() {
@@ -153,13 +169,12 @@ function($, uiconfig, ui, editors, optiongroups) {
           ctx.off(info.condition.event, condition_visible);
         }
         editor.value.off("value.change", ctx_trigger_handler);
-        ctx.off(info.event, ctx_on_handler);
+//        ctx.off(info.event, ctx_on_handler);
+        ctx.off("chart.option.set", editor_value_set);
         editor.destroy();
       });
 
       $container.append('<div class="clr"></div>');
-
-//      ui.snapHeight($fieldset, uiconfig.fieldsetGridSnapping);
 
       setTimeout(function() {
         ctx_trigger_handler(editor.value.get());

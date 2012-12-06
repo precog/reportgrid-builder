@@ -45,7 +45,7 @@ function($, ui) {
       ctx.off("data.datasource.remove", removeFromQueue);
 
       ctx.on("chart.datasource.change", function(datasource) {
-        menu.selectValue(datasource.path);
+        menu.selectValue((datasource && datasource.path) || null);
       });
     }
 

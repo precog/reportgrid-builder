@@ -37,13 +37,15 @@ function() {
         ctx.trigger("chart.axis.change", dim.variable, dim.axis);
       }
 
-      for(var name in state.options) {
-        if(!state.options.hasOwnProperty(name)) continue;
-        ctx.trigger("chart.option.set", name, state.options[name]);
-      }
+      setTimeout(function() {
+        for(var name in state.options) {
+          if(!state.options.hasOwnProperty(name)) continue;
+          ctx.trigger("chart.option.set", name, state.options[name]);
+        }
 
-      wire();
-      change();
+        wire();
+        change();
+      }, 0);
     }
 
     function change() {
