@@ -40,7 +40,7 @@ function() {
       setTimeout(function() {
         for(var name in state.options) {
           if(!state.options.hasOwnProperty(name)) continue;
-          ctx.trigger("chart.option.set", name, state.options[name]);
+          ctx.trigger("chart.option.set", name, state.options[name].value, state.options[name].type);
         }
 
         wire();
@@ -67,8 +67,8 @@ function() {
       delayedChange();
     }
 
-    function optionSet(name, value) {
-      state.options[name] = value;
+    function optionSet(name, value, type) {
+      state.options[name] = { value : value, type : type };
       delayedChange();
     }
 
