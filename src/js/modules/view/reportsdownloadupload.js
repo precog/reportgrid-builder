@@ -50,14 +50,24 @@ function($, download, upload) {
       var path = opath;
       if(path.substr(-1) !== "/") path += "/";
       path += name;
-      ctx.on("response.report.path.validated", function(npath, valid, reason) {
+
+      function validated(npath, valid, reason) {
         if(path !== npath) return;
+        ctx.off("response.report.path.validated", validated);
         if(valid) {
           ctx.trigger("reports.report.add", path, content);
         } else {
-          // TODO: ask for alternate name
+          var result = window.prompt("A report with name '"+name+"' already exists, please try a different name:", name);
+          if(result === null) return;
+          result = result.trim();
+          if(result === "") {
+            alert("invalid empty name");
+          }
+          ctx.trigger("reports.report.import", opath, result, content);
         }
-      });
+      };
+
+      ctx.on("response.report.path.validated", validated);
       ctx.trigger("request.report.validate", path);
     });
   };
