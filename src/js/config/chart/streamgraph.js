@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
     type  : "streamgraph"
+    , method : "streamGraph"
     , label : "Stream Graph"
     , extractOptions : extractor()
     , dimensions : [{

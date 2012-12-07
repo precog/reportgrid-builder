@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "scattergraph"
+    , method : "scatterGraph"
     , label : "Scatter Graph"
     , extractOptions : extractor()
     , dimensions : [{

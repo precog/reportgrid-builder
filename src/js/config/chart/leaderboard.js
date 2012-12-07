@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "leaderboard"
+    , method : "leaderBoard"
     , label : "Leaderboard"
     , extractOptions : extractor()
     , dimensions : [{

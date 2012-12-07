@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "funnelchart"
+    , method : "funnelChart"
     , label : "Funnel Chart"
     , extractOptions : extractor()
     , dimensions : [{

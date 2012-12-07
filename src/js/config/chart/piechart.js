@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "piechart"
+    , method : "pieChart"
     , label : "Pie Chart"
     , extractOptions : extractor()
     , dimensions : [{

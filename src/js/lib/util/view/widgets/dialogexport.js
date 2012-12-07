@@ -5,6 +5,7 @@ define([
   , "lib/util/dom"
   , "lib/util/notification"
   , 'ext/jquery-ui/jquery.ui'
+  , 'ext/zclip/jquery.zclip'
 ],
 
 function($, tplDialog, ui, dom, notification) {
@@ -25,33 +26,32 @@ function($, tplDialog, ui, dom, notification) {
         return true;
       }
     }];
-    // TODO BUTTON MUST NOT BE HERE
-    /*
     buttons.push({
       text : "Download",
       click : function() {
+        /*
         notification.quick("code downloaded");
         elForm.submit();
         elDialog.dialog("close");
+        */
       }
     });
-    */
     elDialog = $('body')
       .append(tplDialog)
-      .find('.pg-dialog-export')
+      .find('.rg-dialog-export')
       .dialog({
         modal : true
         , autoOpen : false
         , resizable : false
         , width : 820
         , height : 480
-        , dialogClass : "pg-el"
+        , dialogClass : "rg-el"
         , closeOnEscape: true
         , buttons : buttons
       }),
-      elActions = elDialog.find(".pg-actions"),
-      elOptions = elDialog.find(".pg-options"),
-      elText = elDialog.find(".pg-export textarea"),
+      elActions = elDialog.find(".rg-actions"),
+      elOptions = elDialog.find(".rg-options"),
+      elText = elDialog.find(".rg-export textarea"),
       elForm = elDialog.find("form");
 
 //    elForm.attr("action", downloadQueryService);
@@ -122,7 +122,7 @@ function($, tplDialog, ui, dom, notification) {
       clip = elDialog.dialog("widget").find('.ui-dialog-buttonpane button.ui-button:first')
         .css({ zIndex : 1000000 })
         .zclip({
-          path:'js/libs/jquery/zclip/ZeroClipboard.swf',
+          path:'js/ext/zclip/ZeroClipboard.swf',
           copy:function(){
             return ""+elText.val();
           },

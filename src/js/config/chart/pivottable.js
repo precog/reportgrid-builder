@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "pivottable"
+    , method : "pivotTable"
     , label : "Pivot Table"
     , extractOptions : extractor()
     , dimensions : [{

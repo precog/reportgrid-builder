@@ -52,7 +52,7 @@ function(charts, createLoader) {
           throw "not enough axes to feed the chart";
         charts.map[current.type].extractOptions(options, current.dimensions, current.options);
         ctx.log("CHART OPTIONS", JSON.stringify(options));
-        ctx.trigger("chart.render.execute", { type : current.type, loader : loader, axes : axes, options : options });
+        ctx.trigger("chart.render.execute", { type : current.type, loader : loader, datasource : current.datasource, axes : axes, options : options });
       } catch(e) {
         ctx.trigger("chart.render.clear");
       }

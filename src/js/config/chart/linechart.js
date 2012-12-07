@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "linechart"
+    , method : "lineChart"
     , label : "Line Chart"
     , extractOptions : extractor()
     , dimensions : [{

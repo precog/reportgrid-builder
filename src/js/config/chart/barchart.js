@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "barchart"
+    , method : "barChart"
     , label : "Bar Chart"
     , extractOptions : extractor()
     , dimensions : [{

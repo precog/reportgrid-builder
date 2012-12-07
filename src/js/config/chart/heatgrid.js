@@ -6,6 +6,7 @@ define([
 function(extractor, applyOptions) {
   var chart = {
       type  : "heatgrid"
+    , method : "heatGrid"
     , label : "Heat Map"
     , extractOptions : extractor()
     , dimensions : [{
