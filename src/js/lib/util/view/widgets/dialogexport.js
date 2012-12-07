@@ -6,11 +6,13 @@ define([
   , "lib/util/dom"
   , "lib/util/notification"
   , 'ext/jquery-ui/jquery.ui'
-  , 'ext/zclip/jquery.zclip'
+//  , 'ext/zclip/jquery.zclip'
 ],
 
 function($, tplDialog, download, ui, dom, notification) {
-  var  elText, elDialog, elActions, elForm, clip, formCallback, currentAction, filename;
+  var elText, elDialog, elActions, elOptions, elForm,
+//      clip,
+      formCallback, currentAction, filename;
 
   function selectCode() {
     setTimeout(function() { dom.selectText(elText.get(0)); }, 100);
@@ -20,13 +22,16 @@ function($, tplDialog, download, ui, dom, notification) {
     elDialog.dialog("option", "position", "center");
   }
   function init() {
-    var buttons = [{
+    var buttons = [];
+    /*
+    buttons.push({
       text : "Copy",
       click : function() {
         elDialog.dialog("close");
         return true;
       }
-    }];
+    });
+    */
     buttons.push({
       text : "Download",
       click : function() {
@@ -51,7 +56,6 @@ function($, tplDialog, download, ui, dom, notification) {
       elText = elDialog.find(".rg-export textarea"),
       elForm = elDialog.find("form");
 
-//    elForm.attr("action", downloadQueryService);
     elForm.submit(function(e) {
       // TODO NEED TO USE THE LOCAL DOWNLOAD
       if(formCallback)
@@ -113,7 +117,7 @@ function($, tplDialog, download, ui, dom, notification) {
     elDialog.dialog("option", "position", "center");
     elDialog.dialog("option", "title", title);
     elDialog.dialog("open");
-
+/*
     if(clip) {
       $(window).trigger("resize"); // triggers reposition of the Flash overlay
     } else {
@@ -122,17 +126,15 @@ function($, tplDialog, download, ui, dom, notification) {
         .zclip({
           path:'js/ext/zclip/ZeroClipboard.swf',
           copy : function(){
-console.log("COPYING");
             var val = ""+elText.val();
-//            alert(val);
-console.log("COPYING AFTER");
+            // TODO for some reason it doesn't seem to work with HTML
             return val;
           },
           afterCopy : function() {
-console.log("COPIED");
-//            notification.quick("copied to clipboard");
+
           }
         });
     }
+*/
   };
 });
