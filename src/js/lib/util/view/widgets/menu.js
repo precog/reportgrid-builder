@@ -4,7 +4,6 @@ define([
 ],
 function($) {
   $.widget("custom.menu", {
-    // default options
     options: {
 /*
       red: 255,

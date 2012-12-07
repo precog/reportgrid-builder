@@ -1,7 +1,7 @@
 define([
     "jquery"
   , "lib/util/ui"
-  , "lib/util/widget/values/editor"
+  , "lib/util/view/editors/editor"
   , "config/rgcolors"
 ],
 

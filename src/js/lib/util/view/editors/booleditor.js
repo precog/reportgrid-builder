@@ -1,5 +1,5 @@
 define([
-  "lib/util/widget/values/editor"
+  "lib/util/view/editors/editor"
 ],
 
 function(createEditor) {

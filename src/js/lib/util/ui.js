@@ -3,7 +3,7 @@ define([
   , 'lib/util/dom'
   , 'lib/util/notification'
   , 'lib/util/uid'
-  , 'lib/util/widget/menu'
+  , 'lib/util/view/widgets/menu'
   , 'ext/jquery-ui/jquery.ui'
 ],
 

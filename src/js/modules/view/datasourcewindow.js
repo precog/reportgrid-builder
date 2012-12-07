@@ -78,7 +78,7 @@ function($, ui, tplDialog) {
     ctx.on("view.main.toolbar-context", function(el) {
       ui.button(el, {
           icon : "ui-icon-arrowthickstop-1-n",
-          description : "about me"
+          description : "import/manage data sources"
         }).click(function() {
           if(!init()) {
             $dialog.dialog("open");

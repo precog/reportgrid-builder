@@ -1,6 +1,6 @@
 define([
     "jquery"
-  , "lib/util/widget/values/editor"
+  , "lib/util/view/editors/editor"
   , "ext/jquery-minicolors/jquery.miniColors"
 ],
 
@@ -12,7 +12,7 @@ function($, createEditor) {
       return (/^(rgb\s*\(\s*[012]?[0-9]{1,2}\s*,\s*[012]?[0-9]{1,2}\s*,\s*[012]?[0-9]{1,2}\s*\)|#[0-9a-f]{3}([0-9a-f]{3})?)$/i).test(color);
     }
 
-    var $input = $('<input type="text" class="color">'),
+    var $input = $('<input type="text" class="colors">'),
         $colors = $('<div class="color-list"></ul>');
     if(options.className)
       $input.addClass(options.className);
@@ -31,9 +31,7 @@ function($, createEditor) {
       }
     };
 
-
     var ed = createEditor(el, options, params);
-    /*
     $('<div class="colors-container"></div>').insertAfter(el.find('.control-container')).append($colors);
     ed.value.on("value.change", function(colors) {
       $colors.children("*").remove();
@@ -55,10 +53,6 @@ function($, createEditor) {
         }).miniColors("value", color);
       });
     });
-    */
-
-    $input.miniColors();
-
     if(options.default)
       ed.value.set(options.default);
 

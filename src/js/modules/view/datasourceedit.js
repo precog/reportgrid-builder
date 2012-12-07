@@ -1,6 +1,6 @@
 define([
     "jquery"
-  , "lib/util/widget/values/editors"
+  , "lib/util/view/editors/editors"
   , "lib/model/dataloader"
   , "lib/model/modelguesser"
   , "lib/util/ui"

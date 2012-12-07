@@ -2,7 +2,7 @@ define([
     "jquery"
   , "config/ui"
   , "lib/util/ui"
-  , "lib/util/widget/values/editors"
+  , "lib/util/view/editors/editors"
   , "config/optiongroups"
 ],
 

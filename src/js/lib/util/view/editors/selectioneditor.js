@@ -1,6 +1,6 @@
 define([
     "jquery"
-  , "lib/util/widget/values/editor"
+  , "lib/util/view/editors/editor"
 ],
 
 function($, createEditor) {
@@ -56,7 +56,7 @@ function($, createEditor) {
           einfo;
       if(index === lastIndex) return;
       lastIndex = index;
-      require(["lib/util/widget/values/editors"], function (editors) {
+      require(["lib/util/view/editors/editors"], function (editors) {
         if(subeditor) {
           subeditor.destroy();
           $subeditor.children("*").remove();

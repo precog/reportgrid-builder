@@ -43,6 +43,7 @@ require([
   , "modules/view/changergtheme"
   , "modules/view/datasourcetree"
   , "modules/view/reportstree"
+  , "modules/view/exporthtml"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);

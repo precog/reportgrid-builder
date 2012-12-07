@@ -1,11 +1,12 @@
 define([
-  "lib/util/widget/values/editor"
+  "lib/util/view/editors/editor"
 ],
 
 function(createEditor) {
   return function(el, options) {
     options = $.extend({default : "" }, options);
-    var $input = $('<input type="text" class="string">');
+
+    var $input = $('<input type="text" class="template">');
     if(options.className)
       $input.addClass(options.className);
     var params = {

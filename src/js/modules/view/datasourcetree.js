@@ -1,6 +1,6 @@
 define([
   "jquery"
-  , "lib/util/widget/treepane"
+  , "lib/util/view/widgets/treepane"
   , "ext/jquery-ui/jquery.ui"
 ],
 

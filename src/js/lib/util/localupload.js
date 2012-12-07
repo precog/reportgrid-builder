@@ -1,6 +1,6 @@
 define([
     "jquery"
-  , "lib/util/widget/values/fileeditor"
+  , "lib/util/view/editors/fileeditor"
   , "lib/util/ui"
 ],
 

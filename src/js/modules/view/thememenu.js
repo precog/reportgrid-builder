@@ -28,7 +28,7 @@ function($, themes, ui) {
     ctx.on("view.main.toolbar-context", function(el) {
       ui.button(el, {
         icon : "ui-icon-gear",
-        description : "about me"
+        description : "change theme"
       }).click(function() {
           var pos = $(this).offset(),
             w = $(this).outerWidth(),
