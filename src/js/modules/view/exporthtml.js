@@ -1,9 +1,10 @@
 define([
     "jquery"
   , "lib/util/ui"
+  , "lib/util/view/widgets/dialogexport"
 ],
 
-function($, ui) {
+function($, ui, exportWindow) {
   return function(ctx) {
     function init(el) {
       $export = ui.button(el, {
