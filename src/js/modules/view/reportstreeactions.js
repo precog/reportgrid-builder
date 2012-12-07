@@ -6,7 +6,7 @@ define([
 function($, ui) {
   return function(ctx) {
 
-    function initContext(bar) {
+    function init_context(bar) {
       var $open = ui.button(bar, {
             icon : "ui-icon-query",
             disabled : true
@@ -28,39 +28,39 @@ function($, ui) {
             disabled : false
           });
 
-      function deleteFolder(path) {
+      function delete_folder(path) {
         return function() {
           if(window.confirm("Are you sure you want to delete the folder \"" + path + "\" and all of its contents?\nThis operation is not undoable."))
             ctx.trigger("reports.folder.remove", path);
         }
       }
 
-      function deleteReport(path) {
+      function delete_report(path) {
         return function() {
           if(window.confirm("Are you sure you want to delete the report at \"" + path + "\"?\nThis operation is not undoable."))
             ctx.trigger("reports.report.removebypath", path);
         }
       }
 
-      function openReport(path) {
+      function open_report(path) {
         return function() {
-          ctx.trigger("reports.report.exportpath", path);
+          ctx.trigger("reports.report.openpath", path);
         }
       }
 
-      function importReport(path) {
+      function import_report(path) {
         return function() {
           ctx.trigger("reports.report.importpath", path);
         }
       }
 
-      function exportReport(path) {
+      function export_report(path) {
         return function() {
           ctx.trigger("reports.report.exportpath", path);
         }
       }
 
-      function createFolder(path) {
+      function create_folder(path) {
         return function() {
           var name = window.prompt("Create a new folder at: \"" + path + "\"");
           if(name === null)
@@ -86,18 +86,18 @@ function($, ui) {
         }
       }
 
-      $newfolder.on("click", createFolder("/"));
-      $import.on("click", importReport("/"));
+      $newfolder.on("click", create_folder("/"));
+      $import.on("click", import_report("/"));
 
       ctx.on("reports.folder.select", function(path) {
         $newfolder
           .button("enable")
           .off("click")
-          .on("click", createFolder(path))
+          .on("click", create_folder(path))
         ;
         $import.button("enable")
           .off("click")
-          .on("click", importReport(path))
+          .on("click", import_report(path))
         ;
       });
 
@@ -113,7 +113,7 @@ function($, ui) {
           $delete
             .button("enable")
             .off("click")
-            .on("click", deleteFolder(path))
+            .on("click", delete_folder(path))
           ;
         }
       });
@@ -127,20 +127,21 @@ function($, ui) {
         $delete
           .button("enable")
           .off("click")
-          .on("click", deleteReport(path))
+          .on("click", delete_report(path))
         ;
         $open
           .button("enable")
           .off("click")
-          .on("click", openReport(path))
+          .on("click", open_report(path))
+        ;
         $export
           .button("enable")
           .off("click")
-          .on("click", exportReport(path))
+          .on("click", export_report(path))
       });
     }
 
-    function initMain(bar) {
+    function init_main(bar) {
       var currentFolder = "/",
           currentPath,
           working = false,
@@ -155,7 +156,22 @@ function($, ui) {
           currentFolder += "/";
       });
 
-      function stateChange(state) {
+      function enable_state_change() {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(function() {
+          ctx.off("chart.state.change", enable_state_change);
+          ctx.on("chart.state.change", state_change);
+        }, 750);
+      }
+      
+      function open_path(path) {
+        ctx.off("chart.state.change", state_change);
+        ctx.on("chart.state.change", enable_state_change);
+        currentPath = path;
+        $save.button("disable");
+      }
+
+      function state_change(state) {
         if(working) return;
         $save.off("click");
         $save.on("click", function() {
@@ -187,7 +203,8 @@ function($, ui) {
         $save.button("enable");
       }
 
-      ctx.on("chart.state.change", stateChange);
+      ctx.on("chart.state.change", state_change);
+      ctx.on("reports.report.openpath", open_path);
 
       ctx.on("chart.state.reset", function() {
         currentPath = null;
@@ -195,7 +212,7 @@ function($, ui) {
       });
     }
 
-    ctx.on("view.reports.toolbar-context", initContext);
-    ctx.on("view.editor.toolbar-context", initMain);
+    ctx.on("view.reports.toolbar-context", init_context);
+    ctx.on("view.editor.toolbar-context", init_main);
   };
 });

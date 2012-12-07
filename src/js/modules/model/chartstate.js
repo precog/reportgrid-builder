@@ -18,7 +18,7 @@ function() {
     }
     reset();
 
-    function delayedChange() {
+    function delayed_change() {
       clearTimeout(timer);
       timer = setTimeout(change, 200);
     }
@@ -52,39 +52,39 @@ function() {
       ctx.trigger("chart.state.change", state);
     }
 
-    function typeChange(chart) {
+    function type_change(chart) {
       state.chart = chart;
-      delayedChange();
+      delayed_change();
     }
 
-    function datasourceChange(datasource) {
+    function datasource_change(datasource) {
       state.datasource = datasource;
-      delayedChange();
+      delayed_change();
     }
 
-    function axisChange(variable, axis) {
+    function axis_change(variable, axis) {
       state.dimensions[axis.name] = { variable : variable, axis : axis };
-      delayedChange();
+      delayed_change();
     }
 
-    function optionSet(name, value, type) {
+    function option_set(name, value, type) {
       state.options[name] = { value : value, type : type };
-      delayedChange();
+      delayed_change();
     }
 
     function wire() {
-      ctx.on("chart.type.change", typeChange);
-      ctx.on("chart.datasource.change", datasourceChange);
-      ctx.on("chart.axis.change", axisChange);
-      ctx.on("chart.option.set", optionSet);
+      ctx.on("chart.type.change", type_change);
+      ctx.on("chart.datasource.change", datasource_change);
+      ctx.on("chart.axis.change", axis_change);
+      ctx.on("chart.option.set", option_set);
     }
     wire();
 
     function unwire() {
-      ctx.off("chart.type.change", typeChange);
-      ctx.off("chart.datasource.change", datasourceChange);
-      ctx.off("chart.axis.change", axisChange);
-      ctx.off("chart.option.set", optionSet);
+      ctx.off("chart.type.change", type_change);
+      ctx.off("chart.datasource.change", datasource_change);
+      ctx.off("chart.axis.change", axis_change);
+      ctx.off("chart.option.set", option_set);
     }
 
     ctx.on("chart.state.reset", function() {
