@@ -7,7 +7,8 @@ define([
 
 function($, ui, openExportDialog, chart2html) {
   return function(ctx) {
-    var current_chart;
+    var current_chart,
+        current_name = "index.html";
     function init(el) {
       $export = ui.button(el, {
         icon : "ui-icon-arrowthickstop-1-s",
@@ -17,7 +18,9 @@ function($, ui, openExportDialog, chart2html) {
           openExportDialog("Export Chart", [{
             name : "HTML",
             token : "html",
-            options : {},
+            options : {
+              filename : current_name
+            },
             handler : chart2html
           }], current_chart);
         }
@@ -32,8 +35,13 @@ function($, ui, openExportDialog, chart2html) {
         $export.button("disable");
       }
 
+      function name_set(name) {
+        current_name = (name || "index") + ".html";
+      }
+
       ctx.on("chart.render.execute", renderable);
       ctx.on("chart.render.clear", unrenderable);
+      ctx.on("chart.name.set", name_set);
     };
 
     ctx.on("view.editor.toolbar-context", init);

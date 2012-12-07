@@ -1,6 +1,7 @@
 define([
     "jquery"
   , "text!templates/dialog.export.html"
+  , "lib/util/localdownload"
   , "lib/util/ui"
   , "lib/util/dom"
   , "lib/util/notification"
@@ -8,8 +9,8 @@ define([
   , 'ext/zclip/jquery.zclip'
 ],
 
-function($, tplDialog, ui, dom, notification) {
-  var  elText, elDialog, elActions, elForm, clip, formCallback, currentAction;
+function($, tplDialog, download, ui, dom, notification) {
+  var  elText, elDialog, elActions, elForm, clip, formCallback, currentAction, filename;
 
   function selectCode() {
     setTimeout(function() { dom.selectText(elText.get(0)); }, 100);
@@ -29,11 +30,7 @@ function($, tplDialog, ui, dom, notification) {
     buttons.push({
       text : "Download",
       click : function() {
-        /*
-        notification.quick("code downloaded");
-        elForm.submit();
-        elDialog.dialog("close");
-        */
+        download(""+elText.val(), filename);
       }
     });
     elDialog = $('body')
@@ -92,6 +89,7 @@ function($, tplDialog, ui, dom, notification) {
       }
       elText.text(action.handler(code, action.options));
       selectCode();
+      filename = action.options.filename || "file";
     }
 
     selected = selected || actions[0].token;
@@ -123,11 +121,16 @@ function($, tplDialog, ui, dom, notification) {
         .css({ zIndex : 1000000 })
         .zclip({
           path:'js/ext/zclip/ZeroClipboard.swf',
-          copy:function(){
-            return ""+elText.val();
+          copy : function(){
+console.log("COPYING");
+            var val = ""+elText.val();
+//            alert(val);
+console.log("COPYING AFTER");
+            return val;
           },
           afterCopy : function() {
-            notification.quick("copied to clipboard");
+console.log("COPIED");
+//            notification.quick("copied to clipboard");
           }
         });
     }

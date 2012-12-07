@@ -193,6 +193,7 @@ function($, ui) {
               }
               currentPath = path;
               ctx.trigger("reports.report.add", currentPath, state);
+              ctx.trigger("chart.name.set", name);
             });
             ctx.trigger("request.report.path.validate", currentFolder+name);
           } else {

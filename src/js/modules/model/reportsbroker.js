@@ -42,6 +42,7 @@ function() {
     ctx.on("reports.report.openpath", function(path) {
       if(!map[path]) return;
       ctx.trigger("chart.state.update", map[path]);
+      ctx.trigger("chart.name.set", path.split("/").pop());
     });
 
     ctx.on("reports.report.exportpath", function(path) {
