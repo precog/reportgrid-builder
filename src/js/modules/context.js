@@ -4,9 +4,11 @@ define([
 function(createDispatcher) {
   var logger = window.console || {info:function(){}};
   var log = function() {
-        logger.group(arguments[0]);
-        logger.info.apply(logger, [new Date().toLocaleTimeString()].concat($.makeArray(arguments).slice(1)));
-        logger.groupEnd(arguments[0])
+        logger.groupCollapsed(arguments[0]);
+        [new Date().toLocaleTimeString()].concat($.makeArray(arguments).slice(1)).forEach(function(v) {
+          logger.info(v);
+        });
+        logger.groupEnd();
       };
 
   return function(debug) {

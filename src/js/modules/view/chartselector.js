@@ -25,10 +25,12 @@ function($, ui, charts) {
       });
 
       ctx.on("chart.type.change", function(type) {
-        menu.selectIndex(charts.map[type].index);
+        menu.selectIndex(charts.map[type].index, true);
       });
 
-      ctx.trigger("chart.type.change", "barchart");
+      setTimeout(function() {
+        ctx.trigger("chart.type.change", "barchart");
+      }, 100);
     }
 
     ctx.on("view.editor.chartselector", init);

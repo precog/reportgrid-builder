@@ -1,106 +1,752 @@
+@import "css/jquery-pnotify/jquery.pnotify.default.css";
+@import "css/jquery-minicolors/jquery.miniColors.css";
+@import "css/jquery-slickgrid/slick.grid.css";
+.ui-pnotify,
+.ui-pnotify-history-container,
+.rg-el,
+.rg-el.ui-widget {
+  font-size: 73%;
+  font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+}
+.ui-pnotify > .ui-widget.ui-pnotify-shadow {
+  position: relative;
+}
+.ui-pnotify h4,
+.ui-pnotify h5,
+.ui-pnotify h6 {
+  margin: 0;
+  margin-bottom: 4px;
+}
+.rg-el .datasource-form .actions {
+  float: right;
+}
+.ui-pnotify .actions {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  text-align: right;
+}
+.ui-pnotify .actions label {
+  font-size: 83%;
+  font-style: italic;
+}
+.ui-pnotify .actions input[type="checkbox"] {
+  margin: 0 6px;
+}
+.ui-pnotify .textarea {
+  margin: 8px 4px 0 0;
+}
+.ui-pnotify .textarea textarea {
+  resize: none;
+  font-family: monospace;
+  font-size: 13px;
+  outline: 0;
+  width: 100%;
+  height: 7.4em;
+}
+.ui-pnotify .footer {
+  font-size: 83%;
+  font-style: italic;
+  text-align: right;
+}
+.ui-pnotify ul.menu {
+  max-height: 420px;
+  overflow: auto;
+  padding-right: 4px;
+}
+.ui-pnotify ul.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ui-pnotify ul.menu > li {
+  padding: 4px 8px 6px;
+  position: relative;
+  margin: 0;
+}
+.ui-pnotify ul.menu > li:last-child {
+  margin-bottom: 0;
+}
+.ui-pnotify .history {
+  max-height: 420px;
+  overflow: auto;
+  padding-right: 4px;
+}
+.ui-pnotify .history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ui-pnotify .history-item {
+  padding: 4px 8px 6px;
+  position: relative;
+}
+.ui-pnotify .history ul li {
+  margin-bottom: 4px;
+}
+.ui-pnotify .history ul li:last-child {
+  margin-bottom: 0;
+}
+.ui-pnotify .history pre {
+  white-space: pre;
+  margin: 0;
+  padding: 0;
+  font-size: 130%;
+  float: left;
+}
+.ui-pnotify .history .header {
+  font-weight: bold;
+  font-size: 83%;
+  float: left;
+  width: 6em;
+  clear: left;
+}
+.ui-pnotify .history .info {
+  font-style: italic;
+  font-size: 83%;
+  padding-top: 8px;
+  clear: left;
+}
+.ui-pnotify .history .toolbar {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+}
+.ui-pnotify .clear {
+  clear: both;
+}
+.ui-pnotify span.label {
+  display: block;
+  float: left;
+  width: 100px;
+}
+.ui-pnotify .selection input[type="number"] {
+  width: 5em;
+}
+.ui-pnotify .selection.ui-content {
+  margin-bottom: 4px;
+  width: 240px;
+  line-height: 2em;
+  padding: 0 0.2em;
+}
+.ui-pnotify .selection.ui-content select {
+  width: 138px;
+}
+.ui-pnotify .selection.ui-content:last-child {
+  margin-bottom: 0;
+}
 .rg-builder.ui-widget-content {
   border: 0;
 }
-.rg-builder {
+.rg-el.ui-dialog .ui-dialog-content {
+  padding: 0.5em 0.25em;
+}
+.rg-builder,
+.rg-el {
   font-size: 73%;
   font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
   
   
 }
+.rg-builder .tiny,
+.rg-el .tiny {
+  font-size: 85%;
+}
+.rg-builder .small,
+.rg-el .small {
+  font-size: 93%;
+}
 .rg-builder .system,
+.rg-el .system,
 .rg-builder .main,
+.rg-el .main,
 .rg-builder .data,
-.rg-builder .reports {
+.rg-el .data,
+.rg-builder .reports,
+.rg-el .reports {
   border: 0;
 }
-.rg-builder .builder {
+.rg-builder .builder,
+.rg-el .builder {
   border-top: 0;
   border-bottom: 0;
 }
-.rg-builder .reports .tree {
+.rg-builder .reports .tree,
+.rg-el .reports .tree {
   border-bottom: 0;
 }
-.rg-builder .editor.pane {
+.rg-builder .editor.pane,
+.rg-el .editor.pane {
   border-left: 0;
   border-right: 0;
   border-bottom: 0;
 }
-.rg-builder .support {
+.rg-builder .editor .loader,
+.rg-el .editor .loader {
+  display: block;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+}
+.rg-builder .support,
+.rg-el .support {
   border-bottom: 0;
 }
-.rg-builder .ui-layout-resizer {
+.rg-builder .ui-layout-resizer,
+.rg-el .ui-layout-resizer {
   border-radius: 0;
 }
-.rg-builder .data .toolbar {
+.rg-builder .data .toolbar,
+.rg-el .data .toolbar {
   border-top: 0;
 }
-.rg-builder .builder .toolbar {
+.rg-builder .builder .toolbar,
+.rg-el .builder .toolbar {
   border-top: 0;
   border-left: 0;
   border-right: 0;
 }
-.rg-builder .toolbar {
+.rg-builder .toolbar,
+.rg-el .toolbar {
   border-bottom: 0;
   vertical-align: baseline;
 }
 .rg-builder .toolbar-actions,
-.rg-builder .toolbar-context {
+.rg-el .toolbar-actions,
+.rg-builder .toolbar-context,
+.rg-el .toolbar-context {
   margin: 5px;
   line-height: 24px;
 }
+.rg-builder .toolbar-tall .toolbar-actions,
+.rg-el .toolbar-tall .toolbar-actions,
+.rg-builder .toolbar-tall .toolbar-context,
+.rg-el .toolbar-tall .toolbar-context {
+  margin: 18px 5px 5px;
+}
 .rg-builder .mainbar .toolbar-actions,
-.rg-builder .mainbar .toolbar-context {
+.rg-el .mainbar .toolbar-actions,
+.rg-builder .mainbar .toolbar-context,
+.rg-el .mainbar .toolbar-context {
   position: absolute;
   line-height: 36px;
 }
-.rg-builder .mainbar {
+.rg-builder .mainbar,
+.rg-el .mainbar {
   height: 38px;
 }
-.rg-builder .ui-widget-content.support {
+.rg-builder .ui-widget-content.support,
+.rg-el .ui-widget-content.support {
   border-top: 0;
 }
 .rg-builder .toolbar-actions button,
-.rg-builder .toolbar-context button {
+.rg-el .toolbar-actions button,
+.rg-builder .toolbar-context button,
+.rg-el .toolbar-context button {
   height: 24px;
 }
-.rg-builder .toolbar-context {
+.rg-builder .toolbar-context,
+.rg-el .toolbar-context {
   position: absolute;
   right: 0;
   top: 0;
 }
-.rg-builder .toolbar-description {
+.rg-builder .toolbar-description,
+.rg-el .toolbar-description {
   margin: 4px 5px;
 }
-.rg-builder .toolbar-main {
+.rg-builder .toolbar-main,
+.rg-el .toolbar-main {
   float: left;
   margin-left: 5px;
 }
-.rg-builder .toolbar-context {
+.rg-builder .toolbar-context,
+.rg-el .toolbar-context {
   float: right;
   margin-right: 5px;
 }
-.rg-builder .system .toolbar-context {
+.rg-builder .system .toolbar-context,
+.rg-el .system .toolbar-context {
   position: relative;
   margin-top: 0;
 }
 .rg-builder .toolbar-main button,
-.rg-builder .toolbar-context button {
+.rg-el .toolbar-main button,
+.rg-builder .toolbar-context button,
+.rg-el .toolbar-context button {
   width: 2.4em;
   height: 24px;
 }
-.rg-builder .tabs-container.ui-tabs {
+.rg-builder .tabs-container.ui-tabs,
+.rg-el .tabs-container.ui-tabs {
   border: 0;
   margin-top: 4px;
   margin-left: 3px;
   background-color: transparent;
   background-image: none;
 }
-.rg-builder .tabs-container.ui-tabs .ui-tabs-nav {
+.rg-builder .tabs-container.ui-tabs .ui-tabs-nav,
+.rg-el .tabs-container.ui-tabs .ui-tabs-nav {
   margin: 0;
   padding: 0;
   border: 0;
   background-color: transparent;
   background-image: none;
+}
+.rg-builder .jstree li.root-node > ul > li,
+.rg-el .jstree li.root-node > ul > li {
+  margin-left: 0;
+}
+.rg-builder .jstree,
+.rg-el .jstree {
+  overflow: auto;
+}
+.rg-builder .jstree.jstree-default.jstree-focused,
+.rg-el .jstree.jstree-default.jstree-focused {
+  background-color: transparent;
+}
+.rg-builder .dimension,
+.rg-el .dimension {
+  padding: 0px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.rg-builder .dimension .receptor,
+.rg-el .dimension .receptor {
+  padding: 2px;
+  margin: 1px;
+}
+.rg-builder .dimension .dimension-receptor,
+.rg-el .dimension .dimension-receptor {
+  min-height: 20px;
+}
+.rg-builder .dimension .dimension-receptor .dimension-placeholder,
+.rg-el .dimension .dimension-receptor .dimension-placeholder {
+  width: 166px;
+  height: 1em;
+  display: inline-block;
+}
+.rg-builder .dimension .ui-state-hover,
+.rg-el .dimension .ui-state-hover,
+.rg-builder .dimension .ui-state-active,
+.rg-el .dimension .ui-state-active {
+  display: block;
+}
+.rg-builder .dimension ul.dimension-receptor,
+.rg-el .dimension ul.dimension-receptor,
+.rg-builder .dimension ul.dimension-receptor li,
+.rg-el .dimension ul.dimension-receptor li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  cursor: pointer;
+}
+.rg-builder .dimension .ui-sortable-disabled,
+.rg-el .dimension .ui-sortable-disabled {
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  -webkit-opacity: 0.5;
+  opacity: 0.5;
+}
+.rg-builder .selectmenu .dropdown,
+.rg-el .selectmenu .dropdown {
+  margin: 0 0.5em;
+}
+.rg-builder .selectmenu button span,
+.rg-el .selectmenu button span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.rg-builder .selectmenu button span.text,
+.rg-el .selectmenu button span.text {
+  
+}
+.rg-builder .selectmenu button .chart-icon,
+.rg-el .selectmenu button .chart-icon {
+  margin-right: 0.5em;
+}
+.rg-builder .selectmenu button .ui-icon,
+.rg-el .selectmenu button .ui-icon {
+  vertical-align: sub;
+}
+.rg-builder .dimensions-container,
+.rg-el .dimensions-container {
+  margin: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background-position: 50% 0%;
+}
+.rg-builder .dimensions-container .name,
+.rg-el .dimensions-container .name {
+  vertical-align: baseline;
+  font-size: 93%;
+}
+.rg-builder .dimensions-container .dimension,
+.rg-el .dimensions-container .dimension {
+  margin: 0;
+}
+.rg-builder .dimensions-container .dimension:last-child,
+.rg-el .dimensions-container .dimension:last-child {
+  margin-bottom: 2px;
+}
+.rg-builder .dimensions-container .pane,
+.rg-el .dimensions-container .pane {
+  float: left;
+  margin: 5px 0 0 5px;
+}
+.rg-builder .dimensions-container .fields,
+.rg-el .dimensions-container .fields {
+  overflow: auto;
+  height: 95px;
+}
+.rg-builder .dimensions-container .pair,
+.rg-el .dimensions-container .pair {
+  float: left;
+  text-align: center;
+  margin: 2px;
+  padding: 2px 4px;
+}
+.rg-builder .dimensions-container .dimensionsoptions-container,
+.rg-el .dimensions-container .dimensionsoptions-container {
+  float: none;
+  position: absolute;
+  top: 0;
+  left: 220px;
+  right: 0;
+}
+.rg-builder .options-container,
+.rg-el .options-container {
+  overflow: auto;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 0;
+}
+.rg-builder .options-container .option-editor,
+.rg-el .options-container .option-editor {
+  clear: left;
+  position: relative;
+}
+.rg-builder .options-container .option-editor .name,
+.rg-el .options-container .option-editor .name {
+  float: left;
+  width: 90px;
+  text-align: right;
+  vertical-align: baseline;
+  padding: 0.4em 0.2em 0.3em 0.2em;
+  font-size: 93%;
+}
+.rg-builder .options-container .option-editor .control-container,
+.rg-el .options-container .option-editor .control-container {
+  float: left;
+}
+.rg-builder .options-container .option-editor .option,
+.rg-el .options-container .option-editor .option {
+  float: left;
+  margin: 0;
+  min-width: 2em;
+  min-height: 1.6em;
+}
+.rg-builder .options-container .option-editor .option input[type="text"],
+.rg-el .options-container .option-editor .option input[type="text"] {
+  width: 170px;
+}
+.rg-builder .options-container .option-editor .option input[type="number"],
+.rg-el .options-container .option-editor .option input[type="number"] {
+  text-align: right;
+  width: 50px;
+}
+.rg-builder .options-container .option-editor .option input.color,
+.rg-el .options-container .option-editor .option input.color {
+  width: 60px;
+}
+.rg-builder .options-container .option-editor .option input[type="text"],
+.rg-el .options-container .option-editor .option input[type="text"],
+.rg-builder .options-container .option-editor .option input[type="number"],
+.rg-el .options-container .option-editor .option input[type="number"] {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.rg-builder .options-container .option-editor .option .subeditor input,
+.rg-el .options-container .option-editor .option .subeditor input {
+  width: 65px;
+}
+.rg-builder .options-container .option-editor .option .unit,
+.rg-el .options-container .option-editor .option .unit {
+  padding-left: 1px;
+  font-size: 93%;
+}
+.rg-builder .options-container .option-editor .option .subeditor,
+.rg-el .options-container .option-editor .option .subeditor {
+  float: left;
+}
+.rg-builder .options-container .option-editor .multi,
+.rg-el .options-container .option-editor .multi {
+  background-color: #ee5757;
+  float: left;
+}
+.rg-builder .options-container .option-editor button.swap-option,
+.rg-el .options-container .option-editor button.swap-option {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  margin-left: 3px;
+  
+  position: absolute;
+  display: block;
+}
+.rg-builder .options-container .option-editor .ui-icon,
+.rg-el .options-container .option-editor .ui-icon {
+  margin-top: -9px;
+  margin-left: -9px;
+}
+.rg-builder .options-container .option-editor input.template,
+.rg-el .options-container .option-editor input.template,
+.rg-builder .options-container .option-editor input.expression,
+.rg-el .options-container .option-editor input.expression {
+  font-family: Menlo, monospace;
+  font-size: 85%;
+}
+.rg-builder .options-container .option-editor select,
+.rg-el .options-container .option-editor select {
+  max-width: 170px;
+}
+.rg-builder .options-container .option-editor select.with-editor,
+.rg-el .options-container .option-editor select.with-editor {
+  max-width: 105px;
+}
+.rg-builder .options-container .fields .option-editor.inline,
+.rg-el .options-container .fields .option-editor.inline {
+  clear: none;
+}
+.rg-builder .options-container .fields .option-editor.inline .name,
+.rg-el .options-container .fields .option-editor.inline .name {
+  width: inherit;
+}
+.rg-builder .options-container .fields .option-editor.inline .clr,
+.rg-el .options-container .fields .option-editor.inline .clr {
+  clear: none;
+}
+.rg-builder .options-container .fields .option-editor.reduce input[type="number"],
+.rg-el .options-container .fields .option-editor.reduce input[type="number"] {
+  width: 32px;
+}
+.rg-builder .options-container .fields .option-editor.inline.first .name,
+.rg-el .options-container .fields .option-editor.inline.first .name {
+  width: 90px;
+}
+.rg-builder .options-container fieldset,
+.rg-el .options-container fieldset {
+  margin: 0;
+  padding: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.rg-builder .options-container fieldset .fields,
+.rg-el .options-container fieldset .fields {
+  overflow: auto;
+}
+.rg-builder .options-container fieldset:first-child,
+.rg-el .options-container fieldset:first-child {
+  border-top: 0;
+}
+.rg-builder .datasource-form textarea,
+.rg-el .datasource-form textarea,
+.rg-builder .datasource-form input[type="text"],
+.rg-el .datasource-form input[type="text"] {
+  width: 450px;
+}
+.rg-builder .datasource-form textarea,
+.rg-el .datasource-form textarea {
+  height: 4em;
+}
+.rg-builder .group-header,
+.rg-el .group-header {
+  margin: 0;
+  padding: 0.2em 0.5em;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  font-size: 93%;
+}
+.rg-builder .chart-container,
+.rg-el .chart-container {
+  overflow: auto;
+}
+.rg-builder .clr,
+.rg-el .clr {
+  clear: left;
+}
+.rg-builder ul.color-list,
+.rg-el ul.color-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.rg-builder ul.color-list li,
+.rg-el ul.color-list li {
+  padding: 0;
+  margin: 0 0 0 2px;
+  width: 12px;
+  height: 12px;
+  float: left;
+  display: block;
+}
+.rg-builder .datasource-preview,
+.rg-el .datasource-preview {
+  width: 100%;
+  height: 100%;
+}
+.rg-builder .fieldset dt,
+.rg-el .fieldset dt {
+  clear: left;
+}
+.rg-builder .fieldset dt,
+.rg-el .fieldset dt {
+  float: left;
+  width: 70px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+.rg-builder .fieldset dt:after,
+.rg-el .fieldset dt:after {
+  content: ":";
+}
+.rg-builder .fieldset dd,
+.rg-el .fieldset dd {
+  float: left;
+  margin: 0;
+}
+.rg-builder .fieldset .actions,
+.rg-el .fieldset .actions {
+  clear: left;
+}
+.rg-builder div.error,
+.rg-el div.error,
+.rg-builder dd.error,
+.rg-el dd.error {
+  padding: 4px;
+}
+.minipalette {
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+}
+.rg-builder .chart-icon,
+.ui-pnotify-text .chart-icon {
+  display: inline-block;
+  width: 26px;
+  height: 24px;
+  background-image: url("../images/sprites-chart.png");
+}
+.rg-builder .chart-icon.icon-sankey,
+.ui-pnotify-text .chart-icon.icon-sankey {
+  background-position: 0 0px;
+}
+.rg-builder .chart-icon.icon-linechart,
+.ui-pnotify-text .chart-icon.icon-linechart {
+  background-position: 0 -24px;
+}
+.rg-builder .chart-icon.icon-areachart,
+.ui-pnotify-text .chart-icon.icon-areachart {
+  background-position: 0 -48px;
+}
+.rg-builder .chart-icon.icon-stacked-percent-areachart,
+.ui-pnotify-text .chart-icon.icon-stacked-percent-areachart {
+  background-position: 0 -72px;
+}
+.rg-builder .chart-icon.icon-stacked-areachart,
+.ui-pnotify-text .chart-icon.icon-stacked-areachart {
+  background-position: 0 -96px;
+}
+.rg-builder .chart-icon.icon-barchart,
+.ui-pnotify-text .chart-icon.icon-barchart {
+  background-position: 0 -120px;
+}
+.rg-builder .chart-icon.icon-stacked-barchart,
+.ui-pnotify-text .chart-icon.icon-stacked-barchart {
+  background-position: 0 -144px;
+}
+.rg-builder .chart-icon.icon-piechart,
+.ui-pnotify-text .chart-icon.icon-piechart {
+  background-position: 0 -168px;
+}
+.rg-builder .chart-icon.icon-donutchart,
+.ui-pnotify-text .chart-icon.icon-donutchart {
+  background-position: 0 -192px;
+}
+.rg-builder .chart-icon.icon-leaderboard,
+.ui-pnotify-text .chart-icon.icon-leaderboard {
+  background-position: 0 -216px;
+}
+.rg-builder .chart-icon.icon-funnelchart,
+.ui-pnotify-text .chart-icon.icon-funnelchart {
+  background-position: 0 -240px;
+}
+.rg-builder .chart-icon.icon-streamgraph,
+.ui-pnotify-text .chart-icon.icon-streamgraph {
+  background-position: 0 -264px;
+}
+.rg-builder .chart-icon.icon-heatgrid,
+.ui-pnotify-text .chart-icon.icon-heatgrid {
+  background-position: 0 -288px;
+}
+.rg-builder .chart-icon.icon-pivottable,
+.ui-pnotify-text .chart-icon.icon-pivottable {
+  background-position: 0 -312px;
+}
+.rg-builder .chart-icon.icon-geochart,
+.ui-pnotify-text .chart-icon.icon-geochart {
+  background-position: 0 -336px;
+}
+.ui-pnotify-text .menu {
+  cursor: pointer;
+}
+.ui-pnotify-text .menu span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ui-pnotify-text .menu span.text {
+  margin-left: 0.5em;
+}
+.rg-dimension-dragger {
+  overflow: visible !important;
+}
+.rg-dimension-trashbin {
+  position: absolute;
+  border-radius: 10px;
+}
+.rg-dimension-trashbin .dimension-trash.ui-state-default.ui-sortable {
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-image: url(../images/trash.png);
+}
+.rg-dimension-trashbin ul {
+  width: 200px;
+  height: 32px;
+}
+.rg-dimension-trashbin ul .dimension-placeholder {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background-color: transparent;
+  background-image: none;
+}
+.rg-dimension-trashbin ul,
+.rg-dimension-trashbin li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.rg-dimension-trashbin li,
+.rg-dimension-trashbin a {
+  visibility: hidden;
+}
+.rg-remove-draggable {
+  border: 8px solid red !important;
 }
 .rg-widget {
   font-size: 73%;
@@ -111,4 +757,45 @@
   z-index: 10000;
   position: absolute;
   display: none;
+}
+.miniColors-huePicker,
+.miniColors-opacityPicker {
+  width: 16px;
+}
+.miniColors-trigger,
+.miniColors-triggerWrap {
+  width: 16px;
+  height: 16px;
+}
+.miniColors-triggerWrap {
+  background: url("jquery-minicolors/images/trigger-custom.png") -16px 0 no-repeat;
+}
+.miniColors-trigger {
+  vertical-align: middle;
+  outline: none;
+  background: url(jquery-minicolors/images/trigger-custom.png) 0 0 no-repeat;
+}
+.ui-dialog .ui-dialog-content.rg-dialog-export {
+  overflow: hidden;
+}
+.rg-el.ui-widget .rg-dialog-export .rg-toolbar.rg-actions,
+.rg-el.ui-widget .rg-dialog-export .rg-toolbar.rg-options {
+  text-align: center;
+}
+.rg-el.ui-widget .rg-dialog-export .rg-toolbar.rg-options {
+  margin-top: 4px;
+}
+.rg-el.ui-widget .rg-dialog-export textarea {
+  resize: none;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 16px;
+  width: 799px;
+  height: 324px;
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+}
+.rg-el.ui-widget .rg-dialog-export textarea:focus {
+  outline: 0;
 }
