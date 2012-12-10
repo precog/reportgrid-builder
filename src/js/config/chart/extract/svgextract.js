@@ -41,5 +41,13 @@ function(ensure) {
     if(options['padding.bottom']) {
       ensure('padding', o).bottom = options['padding.bottom'];
     }
+
+    if(options['width'] && options['width'] !== 500) {
+      o.width = options['width'];
+    }
+
+    if(options['height'] && options['height'] !== 250) {
+      o.height = options['height'];
+    }
   };
 });
