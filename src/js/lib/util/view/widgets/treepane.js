@@ -152,6 +152,7 @@ function($, compare) {
       if(node === null)
         return;
       tree.jstree("delete_node", node);
+      $(treepane).trigger("node.removed", getNodeFromElement(node));
     }
 
     function findNode(path, type) {

@@ -32,6 +32,22 @@ function($, createTree) {
         }
       }
 
+      function deactivateNode(data, type, parentType) {
+        if(!data) return;
+        if(data.type === type) {
+          if(map[type])
+            ctx.trigger("reports."+type+".deselect", map[type]);
+          current = map[type] = null;
+        } else if(data.type === parentType) {
+          if(map[type]) {
+            ctx.trigger("reports."+type+".deselect", map[type]);
+            map[type] = null;
+          }
+        } else {
+          deactivateNode(tree.getParent(data), type, parentType);
+        }
+      }
+
       var tree = createTree(container, fs, {
         icons : {
             report : "images/report.png"
@@ -44,6 +60,10 @@ function($, createTree) {
       });
       $(tree).on("node.selected", function(_, data) { activateNode(data, "folder", null); });
       $(tree).on("node.selected", function(_, data) { activateNode(data, "report", "folder"); });
+
+      $(tree).on("node.removed", function(_, data) { deactivateNode(data, "folder", null); });
+      $(tree).on("node.removed", function(_, data) { deactivateNode(data, "report", "folder"); });
+
       $(tree).on("node.trigger", function(_, data)  {
         if(data.type === "report") {
           ctx.trigger("reports.report.openpath", data.path);

@@ -121,6 +121,7 @@ function($, ui) {
       ctx.on("reports.report.deselect", function(path) {
         $open.button("disable");
         $export.button("disable");
+        $delete.button("disable");
       });
 
       ctx.on("reports.report.current", function(path) {
