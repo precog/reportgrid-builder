@@ -149,6 +149,13 @@ function($, ui) {
           $save = ui.button(bar, {
             icon : "ui-icon-disk",
             disabled : true
+          }),
+          $newreport = ui.button(bar, {
+            icon : "ui-icon-plus",
+            disabled : false,
+            handler : function() {
+              ctx.trigger("chart.state.reset");
+            }
           });
 
       ctx.on("reports.folder.select", function(path) {
