@@ -199,7 +199,7 @@ function($, ui) {
             ctx.trigger("request.report.path.validate", currentFolder+name);
           } else {
             $save.button("disable");
-            ctx.trigger("reports.report.change", currentPath, state);
+            ctx.trigger("reports.report.update", currentPath, state);
           }
         });
         $save.button("enable");

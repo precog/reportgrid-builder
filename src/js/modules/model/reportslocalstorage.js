@@ -19,6 +19,11 @@ function(createStore) {
       store.delayedCommit();
     });
 
+    ctx.on("reports.report.update", function(path, state) {
+      map[path] = state;
+      store.delayedCommit();
+    });
+
     ctx.on("reports.report.remove", function(path) {
       delete map[path];
       store.delayedCommit();
