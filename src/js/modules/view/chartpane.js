@@ -1,15 +1,16 @@
 define([
-  "jquery",
-  "http://api.reportgrid.com/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
-//  "http://localhost/rg/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
+    "jquery"
+  , "text!templates/layout.chart.html"
+//  , "http://api.reportgrid.com/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
+  , "http://localhost/rg/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
 ],
 
-function($) {
+function($, tplChart) {
   return function(ctx) {
     function init(el) {
       var info,
           timer,
-          $chart = $('<div style="margin: 0 auto"></div>').appendTo(el);
+          $chart = $(tplChart).appendTo(el).find(".chart");
 //      $(el).css({ width : "600px", height : "400px" });
 
       function execute(newinfo) {
@@ -42,23 +43,23 @@ function($) {
       }
 
       function changeWidth(v) {
-        $chart.css("width", v+"px");
+//        $chart.css("width", v+"px");
         delayedRender();
       }
 
       function changeHeight(v) {
-        $chart.css("height", v+"px");
+//        $chart.css("height", v+"px");
         delayedRender();
       }
 
-      var loader = $('<div class="loader"><img src="images/loading.gif" alt="loading ..."></div>').appendTo(el).hide();
+      var $loader = $('<div class="loader"><img src="images/loading.gif" alt="loading ..."></div>').appendTo(el).hide();
 
       function renderStart() {
-        loader.show();
+        $loader.show();
       }
 
       function renderEnd() {
-        loader.hide();
+        $loader.hide();
       }
 
       function clear() {
