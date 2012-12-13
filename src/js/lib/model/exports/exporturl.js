@@ -14,6 +14,6 @@ function() {
         base += "/";
       src = base + src;
     }
-    return 'ReportGrid.request("'+src+'")';
+    return 'ReportGrid.query.request("'+src+'")';
   };
 });

@@ -3,7 +3,7 @@ define([
   , "lib/util/template"
   , "config/charts"
   , "lib/model/exports/datasource2load"
-  , "text!templates/html.chart.export.html"
+  , "text!templates/export.chart.html"
 ],
 
 function($, template, charts, datasource2load, tplHtml) {
