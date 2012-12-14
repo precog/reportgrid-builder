@@ -5,19 +5,35 @@ function() {
   return function(ctx) {
     var map = {};
 
+    function save(path, item) {
+      map[path] = JSON.stringify(item);
+    }
+
+    function load(path) {
+      return JSON.parse(map[path]);
+    }
+
+    function exists(path) {
+      return !!map[path];
+    }
+
+    function remove(path) {
+      delete map[path];
+    }
+
     ctx.on("reports.report.add", function(path, item) {
-      map[path] = item;
+      save(path, item);
     });
 
     ctx.on("reports.report.update", function(path, item) {
-      if(!map[path]) {
+      if(!exists(path)) {
         ctx.trigger("reports.report.add", path, item);
       }
     });
 
     ctx.on("reports.report.removebypath", function(path) {
-      if(!map[path]) return;
-      ctx.trigger("reports.report.remove", path, map[path]);
+      if(!exists(path)) return;
+      ctx.trigger("reports.report.remove", path, load(path));
     });
 
     ctx.on("reports.folder.remove", function(path) {
@@ -32,28 +48,28 @@ function() {
     });
 
     ctx.on("reports.report.remove", function(path, item) {
-      delete map[path];
+      remove(path);
     });
 
     ctx.on("reports.report.select", function(path) {
-      if(map[path])
-        ctx.trigger("reports.report.selected", path, map[path]);
+      if(exists(path))
+        ctx.trigger("reports.report.selected", path, load(path));
     });
 
     ctx.on("reports.report.deselect", function(path) {
-      if(map[path])
-        ctx.trigger("reports.report.deselected", path, map[path]);
+      if(exists(path))
+        ctx.trigger("reports.report.deselected", path, load(path));
     });
 
     ctx.on("reports.report.openpath", function(path) {
-      if(!map[path]) return;
-      ctx.trigger("chart.state.update", map[path]);
+      if(!exists(path)) return;
+      ctx.trigger("chart.state.update", load(path));
       ctx.trigger("chart.name.set", path.split("/").pop());
     });
 
     ctx.on("reports.report.exportpath", function(path) {
-      if(!map[path]) return;
-      ctx.trigger("reports.report.export", map[path], path);
+      if(!exists(path)) return;
+      ctx.trigger("reports.report.export", load(path), path);
     });
   };
 });

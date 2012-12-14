@@ -6,26 +6,31 @@ define([
 function($, ui) {
   return function(ctx) {
 
-    function init_context(bar) {
-      var $open = ui.button(bar, {
+    function init_context($bar) {
+      var $open = ui.button($bar, {
             icon : "ui-icon-query",
-            disabled : true
+            disabled : true,
+            description : "open chart"
           }),
-          $import = ui.button(bar, {
+          $import = ui.button($bar, {
             icon : "ui-icon-arrowthickstop-1-n",
-            disabled : false
+            disabled : false,
+            description : "import chart from file"
           }),
-          $export = ui.button(bar, {
+          $export = ui.button($bar, {
             icon : "ui-icon-arrowthickstop-1-s",
-            disabled : true
+            disabled : true,
+            description : "export chart from file"
           }),
-          $delete = ui.button(bar, {
+          $delete = ui.button($bar, {
             icon : "ui-icon-trash",
-            disabled : true
+            disabled : true,
+            description : "remove selected"
           }),
-          $newfolder = ui.button(bar, {
+          $newfolder = ui.button($bar, {
             icon : "ui-icon-new-folder",
-            disabled : false
+            disabled : false,
+            description : "create folder"
           });
 
       function delete_folder(path) {
@@ -142,21 +147,54 @@ function($, ui) {
       });
     }
 
-    function init_main(bar) {
+    function init_main($bar) {
       var currentFolder = "/",
           currentPath,
+          currentState,
           working = false,
-          $save = ui.button(bar, {
+          $saveset = $('<span></span>').appendTo($bar),
+          $save = ui.button($saveset, {
             icon : "ui-icon-disk",
-            disabled : true
+            disabled : true,
+            description : "save chart"
           }),
-          $newreport = ui.button(bar, {
+          $saveas = ui.button($saveset, {
+            icon : "ui-icon-arrowrefresh-1-w",
+            disabled : true,
+            description : "save chart as ...",
+            handler : function() {
+              if(!currentState)
+                return;
+              var name = window.prompt("Please input a name for the current chart");
+              if(null === name) {
+                return;
+              }
+              working = true;
+              ctx.on("response.report.path.validated", function(path, valid, reason) {
+                if(path !== currentFolder+name)
+                  return;
+                working = false;
+                if(!valid) {
+                  alert("Invalid chart name: " + reason);
+                  return;
+                }
+                currentPath = path;
+                ctx.trigger("reports.report.add", path, currentState);
+                ctx.trigger("chart.name.set", name);
+              });
+              ctx.trigger("request.report.path.validate", currentFolder+name);
+            }
+          }),
+          $newreport = ui.button($bar, {
             icon : "ui-icon-plus",
             disabled : false,
             handler : function() {
               ctx.trigger("chart.state.reset");
-            }
+            },
+            description : "new chart"
           });
+
+      $saveset.buttonset();
 
       ctx.on("reports.folder.select", function(path) {
         currentFolder = path;
@@ -164,9 +202,10 @@ function($, ui) {
           currentFolder += "/";
       });
 
-      function enable_state_change() {
+      function enable_state_change(state) {
         clearTimeout(this.timer);
         this.timer = setTimeout(function() {
+          currentState = state;
           ctx.off("chart.state.change", enable_state_change);
           ctx.on("chart.state.change", state_change);
         }, 750);
@@ -177,10 +216,12 @@ function($, ui) {
         ctx.on("chart.state.change", enable_state_change);
         currentPath = path;
         $save.button("disable");
+        $saveas.button("enable");
       }
 
       function state_change(state) {
         if(working) return;
+        currentState = state;
         $save.off("click");
         $save.on("click", function() {
           if(!currentPath) {
@@ -189,6 +230,7 @@ function($, ui) {
               return;
             }
             $save.button("disable");
+            $saveas.button("enable");
             working = true;
             ctx.on("response.report.path.validated", function(path, valid, reason) {
               if(path !== currentFolder+name)
@@ -217,7 +259,9 @@ function($, ui) {
 
       ctx.on("chart.state.reset", function() {
         currentPath = null;
+        currentState = null;
         $save.button("disable");
+        $saveas.button("disable");
       });
     }
 

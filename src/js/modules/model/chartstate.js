@@ -69,6 +69,7 @@ function() {
 
     function option_set(name, value, type) {
       state.options[name] = { value : value, type : type };
+//      state.options = JSON.parse(JSON.stringify(state.options));
       delayed_change();
     }
 

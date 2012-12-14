@@ -26,6 +26,11 @@ define([
         ctx.on("chart.state.change", reset_state_change)
       }
 
+      function report_remove(path) {
+        if($name.text() === path.split("/").pop())
+          reset_status();
+      }
+
       var timer;
       function reset_state_change() {
         timer = clearInterval(timer);
@@ -38,6 +43,7 @@ define([
       ctx.on("chart.name.set", set_name);
       ctx.on("chart.state.change", reset_status);
       ctx.on("reports.report.update", clear_status);
+      ctx.on("reports.report.remove", report_remove);
 
       reset_name();
       reset_status();
