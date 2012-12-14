@@ -9,6 +9,12 @@ function() {
       map[path] = item;
     });
 
+    ctx.on("reports.report.update", function(path, item) {
+      if(!map[path]) {
+        ctx.trigger("reports.report.add", path, item);
+      }
+    });
+
     ctx.on("reports.report.removebypath", function(path) {
       if(!map[path]) return;
       ctx.trigger("reports.report.remove", path, map[path]);
