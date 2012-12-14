@@ -28,7 +28,7 @@ require([
   , "modules/view/datasourcewindow"
   , "modules/view/thememenu"
   , "modules/view/layout"
-  , "modules/view/editor/tabs"
+//  , "modules/view/tabs"
   , "modules/view/editorpane"
   , "modules/view/chartselector"
   , "modules/view/datasourceselector"
@@ -44,6 +44,7 @@ require([
   , "modules/view/datasourcetree"
   , "modules/view/reportstree"
   , "modules/view/exporthtml"
+  , "modules/view/reportname"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);

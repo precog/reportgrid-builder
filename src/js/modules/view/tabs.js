@@ -5,6 +5,7 @@ define([
 
 function($, ui) {
   return function(ctx) {
+    /*
     var tabs, context;
 
 
@@ -22,11 +23,7 @@ function($, ui) {
 //          editors.activate(index);
         }
       }, 'li a');
-/*
-      ui.button(context, {
-        icon : "ui-icon-disk"
-      });
-*/
+
       // fake
       tabs.tabs("add", "#pg-editor-tab", "chart");
     }
@@ -43,6 +40,7 @@ function($, ui) {
     ctx.on("view.editor.toolbar-context", function(el) {
       context = $(el);
     });
-    $.when(ctx.on("view.editor.tabs"), ctx.on("view.editor.toolbar-context")).then(init);
+    */
+//    $.when(ctx.on("view.editor.tabs"), ctx.on("view.editor.toolbar-context")).then(init);
   };
 });

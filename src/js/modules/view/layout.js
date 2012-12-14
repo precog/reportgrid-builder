@@ -134,6 +134,7 @@ function($, tplLayout) {
 
       ctx.trigger("view.editor.pane", $container.find(".main .editor"));
       ctx.trigger("view.editor.tabs", $container.find(".builder .tabs-container"));
+      ctx.trigger("view.editor.toolbar-main", $container.find(".builder .toolbar-main:first"));
       ctx.trigger("view.editor.toolbar-context", $container.find(".builder .toolbar-context:first"));
 
       $(window).resize(resize);
