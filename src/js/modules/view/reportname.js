@@ -6,7 +6,6 @@ define([
     function init($el) {
       var $name = $('<span class="name"></span>').appendTo($el),
           $status = $('<span class="status"></span>').appendTo($el);
-      $name.text("unnamed report");
 
       function reset_status() {
         $status.text("*");
@@ -17,7 +16,7 @@ define([
       }
 
       function reset_name() {
-        set_name("unnamed reports");
+        set_name("unnamed awesomness");
       }
 
       function set_name(name) {
