@@ -25,6 +25,7 @@ function($, tplChart) {
 
       function render() {
         if(!info) return;
+        clear();
         var old = info.options.ready || function() {},
             start;
         info.options.ready = function(){

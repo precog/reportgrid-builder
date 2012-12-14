@@ -21,12 +21,24 @@ define([
       }
 
       function set_name(name) {
+        clear_status();
         $name.text(name);
+        ctx.off("chart.state.change", reset_status);
+        ctx.on("chart.state.change", reset_state_change)
+      }
+
+      var timer;
+      function reset_state_change() {
+        timer = clearInterval(timer);
+        timer = setTimeout(function() {
+          ctx.on("chart.state.change", reset_status);
+        }, 500);
       }
 
       ctx.on("chart.state.reset", reset_name);
       ctx.on("chart.name.set", set_name);
       ctx.on("chart.state.change", reset_status);
+      ctx.on("reports.report.update", clear_status);
 
       reset_name();
       reset_status();
