@@ -16,7 +16,7 @@ define([
       }
 
       function reset_name() {
-        set_name("unnamed awesomness");
+        set_name("unnamed awesomeness");
       }
 
       function set_name(name) {
