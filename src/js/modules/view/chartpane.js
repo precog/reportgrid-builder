@@ -20,7 +20,7 @@ function($, tplChart) {
 
       function delayedRender() {
         clearTimeout(timer);
-        timer = setTimeout(render, 500);
+        timer = setTimeout(render, 750);
       }
 
       function render() {

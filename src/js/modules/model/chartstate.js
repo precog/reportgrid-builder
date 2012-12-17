@@ -88,6 +88,10 @@ function() {
       ctx.off("chart.option.set", option_set);
     }
 
+    function css_palette_set(css) {
+      ctx.trigger("chart.rgcss.load", css);
+    }
+
     ctx.on("chart.state.reset", function() {
       reset();
       ctx.trigger("chart.type.change", state.chart);
@@ -95,5 +99,6 @@ function() {
     });
 
     ctx.on("chart.state.update", update);
+    ctx.on("options.chart.css.palette.set", css_palette_set);
   };
 });
