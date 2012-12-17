@@ -62,13 +62,9 @@ function() {
             iftrue = ""+iftrue;
             if("undefined" !== typeof iffalse)
               iffalse = ""+iffalse;
-//            console.log(condition, iftrue, iffalse);
             var fcondition = fcache[condition] || (fcache[condition] = create_scoped_function(condition));
             if(fcondition(this)) {
               var fiftrue = fcache[iftrue] || (fcache[iftrue] = create_scoped_function(iftrue));
-//              console.log(fiftrue);
-//              console.log(this);
-//              console.log(fiftrue(this));
               return fiftrue(this)
             } else if(iffalse) {
               var fiffalse = fcache[fiffalse] || (fcache[fiffalse] = create_scoped_function(fiffalse));
