@@ -71,7 +71,6 @@ function($, uiconfig, charts, ui) {
       
       var $select = $fields.find("select");
       $select.find(".value").remove();
-      $select.attr("disabled", false);
       fillSelect($select);
     }
 
@@ -85,10 +84,13 @@ function($, uiconfig, charts, ui) {
           var $option = $('<option class="value '+this.type+'">'+this.name+'</option>');
           if(value === this.name) {
             $option.attr("selected", true);
-            $current.attr("disabled", false);
           }
           $current.append($option);
         });
+        if($current.find("option").length > 1)
+          $current.attr("disabled", false);
+        else
+          $current.attr("disabled", true);
 
       });
     }

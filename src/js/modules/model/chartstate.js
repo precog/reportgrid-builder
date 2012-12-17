@@ -91,6 +91,7 @@ function() {
     ctx.on("chart.state.reset", function() {
       reset();
       ctx.trigger("chart.type.change", state.chart);
+      ctx.trigger("chart.datasource.change", null);
     });
 
     ctx.on("chart.state.update", update);
