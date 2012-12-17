@@ -8,7 +8,9 @@ function($, createValue) {
     var editor;
 
     if(!params.set) {
-      params.set = function(v) { params.input.val(v); };
+      params.set = function(v) {
+        params.input.val(v);
+      };
     }
 
     if(!params.get) {

@@ -10,6 +10,9 @@ function($, ui, createEditor, rgcolors) {
     options = $.extend({default : "" }, options);
 
     var menu = ui.selectmenu(el, {
+      id : function(a, b) {
+        return a === b.data.name;
+      },
       data : rgcolors,
       format : function(item) {
         var label = '<span class="tiny">' + item.name.substr(10).split(".").shift() + "</span>&nbsp;";
@@ -22,18 +25,24 @@ function($, ui, createEditor, rgcolors) {
     });
     var $input = $('<input type="hidden" class="string">');
 
-    $(menu).on("select", function(e, data, c) {
+    function menu_select(e, data) {
       $input.val(data.name);
       $input.change();
-    });
+    }
+
+    $(menu).on("select", menu_select);
 
     if(options.className)
       $input.addClass(options.className);
     var params = {
-      input : $input,
-      validate : options.validate || function(v) { return null; },
-      filter : options.filter || function(v) { return v.trim(); }
-    };
+          input : $input,
+          validate : options.validate || function(v) { return null; },
+          filter : options.filter || function(v) { return v.trim(); },
+          set : function(v) {
+            params.input.val(v);
+            menu.selectValue(v);
+          }
+        };
 
     var ed = createEditor(el, options, params);
     el.find(".control-container").hide();
