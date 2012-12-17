@@ -14,6 +14,14 @@ function(charts, createLoader) {
         }
       ;
 
+    function reduceAxis(axis) {
+      for(var key in axis) {
+        if(!axis.hasOwnProperty(key) || key === "type") continue;
+        return axis;
+      }
+      return axis.type;
+    }
+
     function extractAxes(type) {
       var axes = [],
           chartDimensions = charts.map[type].dimensions;
@@ -30,7 +38,7 @@ function(charts, createLoader) {
           // TODO THIS SHOULD GO IN THE AXIS OPTIONS
           if(i > 0 && ["linechart", "barchart"].indexOf(type) >= 0)
             axis.variable = "dependent";
-          axes.push(axis);
+          axes.push(reduceAxis(axis));
           counter++;
         }
         if(counter < dimension.min)
