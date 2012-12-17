@@ -21,7 +21,7 @@ function(ensure) {
     if("undefined" !== typeof options["label.datapoint"]) {
       if(false === options["label.datapoint"]) {
         ensure('label',o).datapoint = function() {return null;};
-      } else if("string" === typeof options["label.datapoint"]) {
+      } else if("string" === typeof options["label.datapoint"] && options["label.datapoint"]) {
         ensure('label',o).datapoint = options["label.datapoint"];
       }
     }
