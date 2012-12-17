@@ -15,7 +15,7 @@ function($, template, charts, datasource2load, tplHtml) {
           , axes       : JSON.stringify(chart.axes)
           , options    : JSON.stringify(chart_options, null, 2)
           , load       : datasource2load(chart.datasource)
-//          , script     : JSON.stringify(chart, null, 2)
+          , rgcss      : chart.customcss
         };
     return template(tplHtml, params);
   };
