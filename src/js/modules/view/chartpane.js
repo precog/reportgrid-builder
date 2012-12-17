@@ -26,12 +26,10 @@ function($, tplChart) {
       function render() {
         if(!info) return;
         clear();
-        var old = info.options.ready || function() {},
-            start;
+        var start;
         info.options.ready = function(){
           var end = +new Date();
           ctx.trigger("chart.render.end", { time : end - start, start : start, end : end });
-          old();
         };
         ctx.trigger("chart.render.start", start = +new Date());
         ReportGrid.chart($chart.get(0),  {
