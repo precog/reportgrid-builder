@@ -10,7 +10,7 @@ define([
 ],
 
 function($, tplDialog, download, ui, dom, notification) {
-  var elText, elDialog, elActions, elOptions, elForm,
+  var elText, $elDialog, $elActions, $elOptions, $elForm,
 //      clip,
       formCallback, currentAction, filename;
 
@@ -19,7 +19,7 @@ function($, tplDialog, download, ui, dom, notification) {
   }
 
   function reposition() {
-    elDialog.dialog("option", "position", "center");
+    $elDialog.dialog("option", "position", "center");
   }
   function init() {
     var buttons = [];
@@ -27,7 +27,7 @@ function($, tplDialog, download, ui, dom, notification) {
     buttons.push({
       text : "Copy",
       click : function() {
-        elDialog.dialog("close");
+        $elDialog.dialog("close");
         return true;
       }
     });
@@ -35,10 +35,11 @@ function($, tplDialog, download, ui, dom, notification) {
     buttons.push({
       text : "Download",
       click : function() {
+        $elDialog.dialog("close");
         download(""+elText.val(), filename);
       }
     });
-    elDialog = $('body')
+    $elDialog = $('body')
       .append(tplDialog)
       .find('.rg-dialog-export')
       .dialog({
@@ -51,12 +52,12 @@ function($, tplDialog, download, ui, dom, notification) {
         , closeOnEscape: true
         , buttons : buttons
       }),
-      elActions = elDialog.find(".rg-actions"),
-      elOptions = elDialog.find(".rg-options"),
-      elText = elDialog.find(".rg-export textarea"),
-      elForm = elDialog.find("form");
+      $elActions = $elDialog.find(".rg-actions"),
+      $elOptions = $elDialog.find(".rg-options"),
+      elText = $elDialog.find(".rg-export textarea"),
+      $elForm = $elDialog.find("form");
 
-    elForm.submit(function(e) {
+    $elForm.submit(function(e) {
       // TODO NEED TO USE THE LOCAL DOWNLOAD
       if(formCallback)
         return formCallback.call(this, elText.text(), currentAction);
@@ -68,8 +69,8 @@ function($, tplDialog, download, ui, dom, notification) {
       selectCode();
     });
 
-    elDialog.bind("dialogopen", function() { $(window).on("resize", reposition); });
-    elDialog.bind("dialogclose", function() { $(window).off("resize", reposition); });
+    $elDialog.bind("dialogopen", function() { $(window).on("resize", reposition); });
+    $elDialog.bind("dialogclose", function() { $(window).off("resize", reposition); });
   }
 
   var inited = false;
@@ -79,32 +80,32 @@ function($, tplDialog, download, ui, dom, notification) {
       init();
       inited = true;
     }
-    elActions.find("*").remove();
-    elOptions.find("*").remove();
+    $elActions.find("*").remove();
+    $elOptions.find("*").remove();
 
-    function execute(action) {
-      elDialog.find("input[name=name]").val("precog." + action.token);
-      elOptions.find("*").remove();
-      if(action.buildOptions) {
-        action.buildOptions(elOptions, function() {
-          elText.text(action.handler(code, action.options));
+    function execute() {
+      $elDialog.find("input[name=name]").val("precog." + currentAction.token);
+      $elOptions.find("*").remove();
+      if(currentAction.buildOptions) {
+        currentAction.buildOptions($elOptions, function() {
+          elText.text(currentAction.handler(code, currentAction.options));
           selectCode();
         });
       }
-      elText.text(action.handler(code, action.options));
+      elText.text(currentAction.handler(code, currentAction.options));
       selectCode();
-      filename = action.options.filename || "file";
+      filename = currentAction.options.filename || "file";
     }
 
     selected = selected || actions[0].token;
-    ui.radios(elActions, $(actions).map(function(i, action) {
+    ui.radios($elActions, $(actions).map(function(i, action) {
       if(action.token === selected)
         currentAction = action;
       return {
-        label : action.name
+          label : action.name
         , handler : function() {
           currentAction = action;
-          execute(action);
+          execute();
           return true;
         }
         , group : "actions"
@@ -112,16 +113,16 @@ function($, tplDialog, download, ui, dom, notification) {
       };
     }));
 
-    elActions.find(".ui-button:first").click();
+    $elActions.find(".ui-button:first").click();
 
-    elDialog.dialog("option", "position", "center");
-    elDialog.dialog("option", "title", title);
-    elDialog.dialog("open");
+    $elDialog.dialog("option", "position", "center");
+    $elDialog.dialog("option", "title", title);
+    $elDialog.dialog("open");
 /*
     if(clip) {
       $(window).trigger("resize"); // triggers reposition of the Flash overlay
     } else {
-      clip = elDialog.dialog("widget").find('.ui-dialog-buttonpane button.ui-button:first')
+      clip = $elDialog.dialog("widget").find('.ui-dialog-buttonpane button.ui-button:first')
         .css({ zIndex : 1000000 })
         .zclip({
           path:'js/ext/zclip/ZeroClipboard.swf',
