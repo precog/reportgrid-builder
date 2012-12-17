@@ -28,6 +28,8 @@ function() {
     ctx.on("reports.report.update", function(path, item) {
       if(!exists(path)) {
         ctx.trigger("reports.report.add", path, item);
+      } else {
+        save(path, item);
       }
     });
 
