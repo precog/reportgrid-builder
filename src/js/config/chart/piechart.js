@@ -13,7 +13,8 @@ function(extractor, applyOptions) {
       name : "label",
       isaxis : true,
       min  : 1,
-      max  : 1
+      max  : 1,
+      accept : ["ordinal", "category"]
     }, {
       name : "measure",
       isaxis : true,

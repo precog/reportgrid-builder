@@ -22,7 +22,8 @@ function(extractor, applyOptions) {
     }, {
       name : "segment",
       min  : 0,
-      max  : 1
+      max  : 1,
+      accept : ["ordinal", "category"]
     }],
     options : []
   };

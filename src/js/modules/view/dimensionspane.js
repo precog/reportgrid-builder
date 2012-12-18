@@ -14,6 +14,7 @@ function($, uiconfig, charts, ui) {
         fieldsmap,
         axeslist,
         axesmap,
+        dimensionsmap = {},
         currentDimensions = {};
 
     function updateChartType(type) {
@@ -79,8 +80,11 @@ function($, uiconfig, charts, ui) {
         var $current = $(this),
             name  = $current.attr("data-id"),
             pos   = $current.index(),
-            value = (currentDimensions[name] || [])[pos];
+            value = (currentDimensions[name] || [])[pos],
+            dimension = dimensionsmap[name];
         $(axeslist).each(function() {
+          if(dimension.accept && dimension.accept.indexOf(this.type) < 0)
+            return;
           var $option = $('<option class="value '+this.type+'">'+this.name+'</option>');
           if(value === this.name) {
             $option.attr("selected", true);
@@ -122,8 +126,8 @@ function($, uiconfig, charts, ui) {
 
     function dimensionInfo(dimension) {
       return {
-        optional : dimension.min === 0,
-        multiple : dimension.max === null || dimension.max > 1,
+        optional  : dimension.min === 0,
+        multiple  : dimension.max === null || dimension.max > 1,
         dimension : dimension
       };
     }
@@ -200,6 +204,7 @@ function($, uiconfig, charts, ui) {
       var $label = $('<div class="name">'+(dimension.label || dimension.name)+'</div>');
       $pair.append($label);
       var $div = $('<div class="dimension"></div>').appendTo($pair);
+      dimensionsmap[dimension.name] = dimension;
       createMainDimensionSelector($div, dimensionInfo(dimension));
     }
 
