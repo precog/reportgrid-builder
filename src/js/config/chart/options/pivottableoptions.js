@@ -35,7 +35,7 @@ function() {
     options.push({
       name  : "displayheatmap",
       label : "display colors",
-      group : "pivottable",
+      group : "aesthetic",
       event : "options.chart.pivottable.displayheatmap",
       editors : [{
         type  : "boolean",
@@ -45,12 +45,20 @@ function() {
       }]
     });
 
+    var condition = {
+          event   : "options.chart.pivottable.displayheatmap",
+          visible : function(value) {
+            return !!value;
+          }
+      };
+
     options.push({
       name : "startcolor",
       label : "start color",
       group : "aesthetic",
       event : "options.chart.pivottable.startcolor",
       weight : 10,
+      condition : condition,
       editors : [{
         type : "color",
         options : {
@@ -65,6 +73,7 @@ function() {
       group : "aesthetic",
       event : "options.chart.pivottable.endcolor",
       weight : 11,
+      condition : condition,
       editors : [{
         type : "color",
         options : {

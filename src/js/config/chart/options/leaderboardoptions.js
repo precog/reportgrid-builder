@@ -9,7 +9,7 @@ function() {
     options.push({
       name : "sort",
       group : "leaderboard",
-      weight : 0,
+      weight : 2,
       event : "options.chart.leaderboard.sort",
       editors : [{
         type : "expression",
@@ -22,7 +22,7 @@ function() {
     options.push({
       name : "colorscale",
       label : "use colors",
-      group : "leaderboard",
+      group : "aesthetic",
       weight : 0,
       event : "options.chart.leaderboard.colorscale",
       editors : [{
@@ -37,8 +37,14 @@ function() {
       name : "usemax",
       label : "use max",
       group : "leaderboard",
-      weight : 0,
+      weight : 1,
       event : "options.chart.leaderboard.usemax",
+      condition : {
+        event   : "options.chart.leaderboard.displaybar",
+        visible : function(value) {
+          return !!value;
+        }
+      },
       editors : [{
         type : "boolean",
         options : {
