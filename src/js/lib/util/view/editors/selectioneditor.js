@@ -85,7 +85,7 @@ function($, createEditor) {
     params.set = function(v) {
       if(v === params.input.val()) return;
       var pos;
-      if(v.indexOf && (pos = v.indexOf(":")) >= 0) {
+      if(v && v.indexOf && (pos = v.indexOf(":")) >= 0) {
         var prefix = v.substr(0, pos+1);
         $input.find("option").each(function() {
           var $option = $(this),
