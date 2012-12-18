@@ -59,5 +59,13 @@ function(ensure) {
         ensure('label',o).totalover = options["label.totalover"];
       }
     }
+
+    if(options["pivottable.startcolor"] && "#ffffff" !== options["pivottable.startcolor"]) {
+      o.startcolor = options["pivottable.startcolor"];
+    }
+
+    if(options["pivottable.endcolor"] && "#007fff" !== options["pivottable.endcolor"]) {
+      o.endcolor = options["pivottable.endcolor"];
+    }
   }
 });

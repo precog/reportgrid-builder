@@ -46,6 +46,34 @@ function() {
     });
 
     options.push({
+      name : "startcolor",
+      label : "start color",
+      group : "aesthetic",
+      event : "options.chart.pivottable.startcolor",
+      weight : 10,
+      editors : [{
+        type : "color",
+        options : {
+          default : "#ffffff"
+        }
+      }]
+    });
+
+    options.push({
+      name : "endcolor",
+      label : "end color",
+      group : "aesthetic",
+      event : "options.chart.pivottable.endcolor",
+      weight : 11,
+      editors : [{
+        type : "color",
+        options : {
+          default : "#007fff"
+        }
+      }]
+    });
+
+    options.push({
       name  : "cellclass",
       label : "cell",
       group : "customclasses",

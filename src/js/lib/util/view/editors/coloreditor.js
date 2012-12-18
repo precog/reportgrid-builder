@@ -28,39 +28,40 @@ function($, createEditor) {
       },
       filter : options.filter || function(v) {
         return v.split(",").map(function(v) { return v.trim(); }).join(",");
+      },
+      set : function(value) {
+        $input.val(value);
+        $input.miniColors("value", value);
       }
     };
 
 
     var ed = createEditor(el, options, params);
-    /*
-    $('<div class="colors-container"></div>').insertAfter(el.find('.control-container')).append($colors);
-    ed.value.on("value.change", function(colors) {
-      $colors.children("*").remove();
-      $.each(colors.split(","), function() {
-        var color = this,
-            $cin = $('<input type="hidden">');
-        $colors.append($cin);
-        $cin.miniColors({
-          close : function(hex, rgb) {
-            var s = [];
-            $colors.find("input").each(function() {
-              var val = $(this).val();
-              if(val.substr(1,3) === val.substr(4))
-                val = val.substr(0, 4);
-              s.push(val);
-            });
-            ed.value.set(s.join(","));
-          }
-        }).miniColors("value", color);
-      });
-    });
-    */
 
-    $input.miniColors();
+    var timer;
+    function delayed_refresh() {
+      clearInterval(timer);
+      timer = setTimeout(refresh, 500);
+    }
+
+    function refresh() {
+      clearInterval(timer);
+      if(ed.value.get() !== $input.val())
+        $input.change();
+    }
+
+    $input.miniColors({
+      change : delayed_refresh,
+      close  : refresh
+    });
 
     if(options.default)
+    {
       ed.value.set(options.default);
+//console.log("MINI", options.default);
+//      $input.miniColors("value", options.default);
+    }
+
 
     return ed;
   };
