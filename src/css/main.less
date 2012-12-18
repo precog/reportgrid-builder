@@ -10,6 +10,8 @@
 @numberEditorReducedWidth: 32px;
 @colorEditorWidth: 52px;
 @miniEditorWidth: 65px;
+@paletteColorWidth: 8px;
+@paletteColorHeight: 8px;
 
 .ui-pnotify, .ui-pnotify-history-container, .rg-el, .rg-el.ui-widget {
   font-size: 73%;
@@ -697,8 +699,8 @@
     li {
       padding: 0;
       margin: 0 0 0 2px;
-      width: 12px;
-      height: 12px;
+      width: @paletteColorWidth;
+      height: @paletteColorHeight;
       float: left;
       display: block;
     }
@@ -758,8 +760,8 @@
 }
 
 .minipalette {
-  width: 12px;
-  height: 12px;
+  width: @paletteColorWidth;
+  height: @paletteColorHeight;
   margin-left: 2px;
 }
 

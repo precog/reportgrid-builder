@@ -11,8 +11,7 @@ function(createStore) {
   }
 
   function load_filter(v) {
-//    return "string" === typeof v ? JSON.parse(v) : v;
-    return JSON.parse(v);
+    return "string" === typeof v ? JSON.parse(v) : v;
   }
 
   return function(ctx) {

@@ -21,6 +21,7 @@ function($, ui) {
         data : [],
         selectMessage : "select the data source",
         labelWidth : 160,
+        width : 400,
         position : {
           menu : "left bottom",
           at : "left bottom"
