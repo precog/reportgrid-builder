@@ -4,13 +4,16 @@ define([
 
 function(createEditor) {
   return function(el, options) {
-    options = $.extend({default : 0 }, options);
+    options = $.extend({default : 0, allowEmpty : false }, options);
 
     var $input = $('<input type="number" step="'+(options.step || '1')+'" class="int">');
 
     var params = {
       input : $input,
       validate : function(v) {
+        v = (""+v).trim();
+        if(options.allowEmpty && v === "")
+          return null;
         if(""+parseInt(v) !== ""+v)
           return "must be an integer value";
         v = parseInt(v);

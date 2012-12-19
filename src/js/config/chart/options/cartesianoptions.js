@@ -304,7 +304,8 @@ function() {
           step    : 10,
           unit    : "L",
           title   : "left",
-          default : preferences.height || 0
+          allowEmpty : true,
+          default : ""
         }
       }]
     });
@@ -324,7 +325,8 @@ function() {
           step    : 10,
           unit    : "R",
           title   : "right",
-          default : preferences.height || 0
+          allowEmpty : true,
+          default : ""
         }
       }]
     });
@@ -344,7 +346,8 @@ function() {
           step    : 10,
           unit    : "T",
           title   : "top",
-          default : preferences.height || 0
+          allowEmpty : true,
+          default : ""
         }
       }]
     });
@@ -364,7 +367,8 @@ function() {
           step    : 10,
           unit    : "B",
           title   : "bottom",
-          default : preferences.height || 0
+          allowEmpty : true,
+          default : ""
         }
       }]
     });

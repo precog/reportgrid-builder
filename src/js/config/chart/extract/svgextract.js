@@ -26,21 +26,14 @@ function(ensure) {
       }
     }
 
-    if(options['padding.left']) {
-      ensure('padding', o).left = options['padding.left'];
-    }
-
-    if(options['padding.right']) {
-      ensure('padding', o).right = options['padding.right'];
-    }
-
-    if(options['padding.top']) {
-      ensure('padding', o).top = options['padding.top'];
-    }
-
-    if(options['padding.bottom']) {
-      ensure('padding', o).bottom = options['padding.bottom'];
-    }
+    var paddings = ["left", "right", "top", "bottom"];
+    paddings.forEach(function(key) {
+      var name  = 'padding.'+ key,
+          value = options[name];
+      if(value !== "" && value !== null && !Math.isNaN(value)) {
+        ensure('padding', o)[key] = value;
+      }
+    });
 
     if(options['width'] && options['width'] !== 500) {
       o.width = options['width'];
