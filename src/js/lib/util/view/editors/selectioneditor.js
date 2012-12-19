@@ -52,7 +52,8 @@ function($, createEditor) {
 
     var lastIndex, subDefault;
     $input.on("change", function() {
-      var index = $(this).find('[value="'+$(this).val()+'"]').attr("data-index"),
+      var value = $(this).val(),
+          index = $(this).find('[value="'+value+'"]').attr("data-index"),
           einfo;
       if(index === lastIndex) return;
       lastIndex = index;
@@ -67,7 +68,7 @@ function($, createEditor) {
           return;
         }
         $input.addClass("with-editor");
-        var eoptions = $.extend({}, einfo.options, { default : subDefault || einfo.options.default });
+        var eoptions = $.extend({}, einfo.options, { default : value.split(":").pop() || einfo.options.default });
         subeditor = editors.create($subeditor, einfo.type, eoptions);
         function setSubValue() {
           var $o = $input.find('option[data-index="'+index+'"]'),
@@ -85,13 +86,14 @@ function($, createEditor) {
     params.set = function(v) {
       if(v === params.input.val()) return;
       var pos;
+      subDefault = null;
       if(v && v.indexOf && (pos = v.indexOf(":")) >= 0) {
         var prefix = v.substr(0, pos+1);
         $input.find("option").each(function() {
           var $option = $(this),
               value = $option.attr("value");
           if(value.substr(0, prefix.length) !== prefix) {
-            return;
+            return true;
           }
           subDefault = v.substr(pos+1);
           $option.attr("value", v);

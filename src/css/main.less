@@ -10,8 +10,8 @@
 @numberEditorReducedWidth: 32px;
 @colorEditorWidth: 52px;
 @miniEditorWidth: 65px;
-@paletteColorWidth: 8px;
-@paletteColorHeight: 8px;
+@paletteColorWidth: 12px;
+@paletteColorHeight: 12px;
 
 .ui-pnotify, .ui-pnotify-history-container, .rg-el, .rg-el.ui-widget {
   font-size: 73%;
@@ -762,7 +762,7 @@
 .minipalette {
   width: @paletteColorWidth;
   height: @paletteColorHeight;
-  margin-left: 2px;
+  margin-left: 0px;
 }
 
 .rg-builder,
@@ -832,6 +832,13 @@
       margin-left: 0.5em;
     }
     cursor: pointer;
+
+    .palette-item {
+
+      .palette {
+        float: right;
+      }
+    }
   }
 }
 

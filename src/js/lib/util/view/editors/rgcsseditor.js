@@ -15,13 +15,15 @@ function($, ui, createEditor, rgcolors) {
       },
       data : rgcolors,
       format : function(item) {
-        var label = '<span class="tiny">' + item.name.substr(10).split(".").shift() + "</span>&nbsp;";
+        var label = '<div class="palette">';
         $.each(item.colors, function() {
           label += '<span class="minipalette" style="background-color: '+this+'"></span>';
         });
-        return '<span class="text" data-css="'+item.name+'">'+label+'</span>';
+        label += '</div><div class="tiny">' + item.name.substr(10).split(".").shift() + '</div>';
+        return '<div class="text palette-item" data-css="'+item.name+'">'+label+'</div>';
       },
-      width : 320
+      width : 320,
+      labelWidth : 150
     });
     var $input = $('<input type="hidden" class="string">');
 
