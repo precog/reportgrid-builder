@@ -40,6 +40,7 @@ function() {
       name : "color",
       group : "aesthetic",
       event : "options.chart.heatgrid.color",
+      className : "multiline",
       editors : [{
         type  : "selection",
         options : {
@@ -53,5 +54,5 @@ function() {
         }
       }]
     });
-  }
+  };
 });
