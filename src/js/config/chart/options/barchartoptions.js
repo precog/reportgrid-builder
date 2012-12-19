@@ -37,7 +37,7 @@ function() {
       weight : -10,
       event : "options.chart.barchart.startproperty",
       editors : [{
-        type  : "string",
+        type  : "variable",
         options : {
           default : ""
         }

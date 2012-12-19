@@ -1,16 +1,17 @@
 define([
     "lib/model/filesystem"
+  , "lib/model/variables"
   , "lib/util/arrays"
 ],
 
-function(createfs, arrays) {
+function(createfs, variables, arrays) {
 
   return function(ctx) {
     var queue = [],
         fs = createfs({
           types : {
               "folder":     { "container" : ["datasource", "folder"] }
-            , "datasource": { "container" : ["discrete", "continuous", "category", "time"] }
+            , "datasource": { "container" : variables.all() }
             , "category":   { "container" : false }
             , "ordinal":    { "container" : false }
             , "time":       { "container" : false }

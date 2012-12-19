@@ -140,7 +140,7 @@ function($, uiconfig, ui, editors, optiongroups) {
           }
           current_type = info.editors[index].type;
           // create new
-          editor = editors.create($option, info.editors[index].type, info.editors[index].options);
+          editor = editors.create($option, info.editors[index].type, info.editors[index].options, ctx);
           editor.value.on("value.change", ctx_trigger_handler);
         }
 
@@ -160,7 +160,7 @@ function($, uiconfig, ui, editors, optiongroups) {
       }
       $container.append($option);
 
-      editor = editors.create($option, info.editors[index].type, info.editors[index].options);
+      editor = editors.create($option, info.editors[index].type, info.editors[index].options, ctx);
       editor.value.on("value.change", ctx_trigger_handler);
       current_type = info.editors[index].type;
 

@@ -62,6 +62,10 @@ function() {
       delayed_change();
     }
 
+    function request_chart_datasource() {
+      ctx.trigger("response.chart.datasource", state.datasource);
+    }
+
     function axis_change(variable, axis) {
       state.dimensions[axis.name] = { variable : variable, axis : axis };
       delayed_change();
@@ -100,5 +104,6 @@ function() {
 
     ctx.on("chart.state.update", update);
     ctx.on("options.chart.css.palette.set", css_palette_set);
+    ctx.on("request.chart.datasource", request_chart_datasource);
   };
 });

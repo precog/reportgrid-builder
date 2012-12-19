@@ -14,7 +14,7 @@ function(extractor, applyOptions) {
       isaxis : true,
       min  : 1,
       max  : 1,
-      accept : ["ordinal", "category"]
+      accept : ["category"]
     }, {
       name : "value",
       isaxis : true,

@@ -614,8 +614,15 @@
     .option-editor.multiline {
       .option {
           float: none;
+          .control-container {
+            float: none;
+          }
           .subeditor {
             float: none;
+            margin-left: @optionLabelWidth;
+            input[type="text"] {
+              width: @optionWidth;
+            }
           }
       }
     }

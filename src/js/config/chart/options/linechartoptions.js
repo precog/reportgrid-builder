@@ -82,7 +82,7 @@ function() {
       group : "linechart",
       event : "options.chart.linechart.y0property",
       editors : [{
-        type : "string",
+        type : "variable",
         options : {
           default : ""
         }
