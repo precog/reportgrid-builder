@@ -13,7 +13,9 @@ function() {
       editors : [{
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["stats"],
+          useDimensions : true
         }
       }]
     });
@@ -59,7 +61,9 @@ function() {
       event : "options.chart.linechart.symbolstyle",
       editors : [{
         type : "template",
-        default : ""
+        default : "",
+        variables : ["stats"],
+        useDimensions : true
       }]
     });
 

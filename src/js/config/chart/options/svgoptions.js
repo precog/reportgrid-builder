@@ -11,7 +11,9 @@ function() {
       editors : [{
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["axes", "values", "types"],
+          placeholder : ""
         }
       }]
     });
@@ -29,7 +31,9 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["stats"],
+          useDimensions : true
         }
       }]
     });

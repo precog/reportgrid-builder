@@ -148,7 +148,8 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["value", "axis"]
         }
       }]
     });
@@ -167,7 +168,8 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["value", "stats"]
         }
       }]
     });
@@ -186,7 +188,8 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["value", "stats"]
         }
       }]
     });
@@ -205,23 +208,10 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["value", "axis"]
         }
       }]
     });
-/*
-    options.push({
-      name  : "startcolor",
-      label : "low color",
-      group : "pivottable",
-      event : "options.chart.pivottable.startcolor",
-      editors : [{
-        type  : "boolean",
-        options : {
-          default : true
-        }
-      }]
-    });
-*/
-  }
+  };
 });

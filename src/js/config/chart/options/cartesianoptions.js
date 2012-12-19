@@ -43,7 +43,8 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"]
         }
       }]
     });
@@ -61,7 +62,8 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["value","type"]
         }
       }]
     });

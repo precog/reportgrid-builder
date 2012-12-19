@@ -80,7 +80,9 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["stats"],
+          useDimensions : true
         }
       }]
     });
@@ -98,7 +100,9 @@ function() {
       }, {
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["stats"],
+          useDimensions : true
         }
       }]
     });

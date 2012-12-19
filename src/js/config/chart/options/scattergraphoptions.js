@@ -5,22 +5,6 @@ define([
 function() {
   return function(options, preferences) {
     preferences = preferences || {};
-    /*
-     options.push({
-     name  : "horizontal",
-     group : "barchart",
-     event : "options.chart.barchart.horizontal",
-     editors : [{
-     type  : "boolean",
-     options : {
-     default : false
-     }
-     }]
-     });
-     */
-
-
-
     options.push({
       name : "datapoint",
       group : "label",
@@ -28,7 +12,9 @@ function() {
       editors : [{
         type  : "template",
         options : {
-          default : ""
+          default : "",
+          variables : ["stats"],
+          useDimensions : true
         }
       }]
     });
@@ -72,7 +58,9 @@ function() {
       event : "options.chart.scattergraph.symbolstyle",
       editors : [{
         type : "template",
-        default : ""
+        default : "",
+        variables : ["stats"],
+        useDimensions : true
       }]
     });
   };
