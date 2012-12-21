@@ -28,7 +28,7 @@ function($, uid) {
         ? (function() {
               var pattern = /\./g;
               return function(v) {
-                return v.replace(pattern, "_");
+                return v.replace(pattern, ":");
               };
           })()
         : function(v) {return v;};
