@@ -57,5 +57,19 @@ function($, createDispatcher) {
       dispatcher.trigger("A", "a");
       equal(executions, expected);
     });
+
+    asyncTest("Data Loading from String", function() {
+      setTimeout(function(){
+        ok(true);
+        start();
+      }, 1000);
+    });
+    // test request/respond
+
+    // test provide with on
+
+    // test provide with one
+
+    // test provide with when
   };
 });

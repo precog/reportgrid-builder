@@ -51,10 +51,8 @@ function($, download, upload) {
       if(path.substr(-1) !== "/") path += "/";
       path += name;
 
-      function validated(npath, valid, reason) {
-        if(path !== npath) return;
-        ctx.off("response.report.path.validated", validated);
-        if(valid) {
+      ctx.request("report.path.validate", path, function(response) {
+        if(response.valid) {
           ctx.trigger("reports.report.add", path, content);
         } else {
           var result = window.prompt("A report with name '"+name+"' already exists, please try a different name:", name);
@@ -65,10 +63,7 @@ function($, download, upload) {
           }
           ctx.trigger("reports.report.import", opath, result, content);
         }
-      };
-
-      ctx.on("response.report.path.validated", validated);
-      ctx.trigger("request.report.validate", path);
+      });
     });
   };
 });

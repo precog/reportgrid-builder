@@ -102,9 +102,6 @@ function($, variables, createEditor) {
 
 
     ctx.on("chart.datasource.change", chart_datasource_change);
-    ctx.on("response.chart.datasource", chart_datasource_change);
-    ctx.trigger("request.chart.datasource");
-
     return ed;
   };
 });

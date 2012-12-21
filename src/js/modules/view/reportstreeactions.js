@@ -78,15 +78,12 @@ function($, ui) {
             if(npath.substr(-1) !== "/") npath += "/";
             npath += name;
 
-            ctx.on("response.report.path.validated", function(vpath, valid, reason) {
-              if(npath !== vpath) return;
-              if(valid) {
+            ctx.request("report.path.validate", npath, function(response) {
+              if(response.valid) {
                 ctx.trigger("reports.folder.add", npath);
               } else
-                alert("Unable to create the folder \""+name+"\": " + reason);
+                alert("Unable to create the folder \""+name+"\": " + response.reason);
             });
-
-            ctx.trigger("request.report.path.validate", npath);
           }
         }
       }
@@ -170,19 +167,16 @@ function($, ui) {
                 return;
               }
               working = true;
-              ctx.on("response.report.path.validated", function(path, valid, reason) {
-                if(path !== currentFolder+name)
-                  return;
+              ctx.request("report.path.validate", path, function(response) {
                 working = false;
-                if(!valid) {
-                  alert("Invalid chart name: " + reason);
+                if(!response.valid) {
+                  alert("Invalid chart name: " + response.reason);
                   return;
                 }
                 currentPath = path;
                 ctx.trigger("reports.report.add", path, currentState);
                 ctx.trigger("chart.name.set", name);
               });
-              ctx.trigger("request.report.path.validate", currentFolder+name);
             }
           }),
           $newreport = ui.button($bar, {
@@ -232,12 +226,11 @@ function($, ui) {
             $save.button("disable");
             $saveas.button("enable");
             working = true;
-            ctx.on("response.report.path.validated", function(path, valid, reason) {
-              if(path !== currentFolder+name)
-                return;
+            var path = currentFolder+name;
+            ctx.request("report.path.validate", path, function(response) {
               working = false;
-              if(!valid) {
-                alert("Invalid report name: " + reason);
+              if(!response.valid) {
+                alert("Invalid report name: " + response.reason);
                 $save.button("enable");
                 return;
               }
@@ -245,7 +238,6 @@ function($, ui) {
               ctx.trigger("reports.report.add", currentPath, state);
               ctx.trigger("chart.name.set", name);
             });
-            ctx.trigger("request.report.path.validate", currentFolder+name);
           } else {
             $save.button("disable");
             ctx.trigger("reports.report.update", currentPath, state);

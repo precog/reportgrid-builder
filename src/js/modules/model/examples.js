@@ -198,11 +198,10 @@ function($) {
 
   return function(ctx) {
     ctx.on("modules.ready", function() {
-      ctx.on("response.datasource.localstorage.hasdata", function(hasdata) {
+      ctx.request("datasource.localstorage.hasdata", function(hasdata) {
         if(!hasdata)
           loadExamples(ctx);
       });
-      ctx.trigger("request.datasource.localstorage.hasdata");
     });
   };
 });

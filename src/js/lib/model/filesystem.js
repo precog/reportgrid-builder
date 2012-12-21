@@ -5,7 +5,7 @@ define([
 
 function($, compare) {
   var SPLITTER = ":",
-      PATTERN_NAME = /^[a-z]+[a-z0-9 _.-]*$/i;
+      PATTERN_NAME = /^[a-z0-9 _.-]+$/i;
 
   function validateName(name) {
     return PATTERN_NAME.test(name);

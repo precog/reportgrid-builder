@@ -1,6 +1,5 @@
 define([
     "jquery"
-  , "test/lib/model/test-datasource"
   , "test/lib/util/test-dispatcher"
   , "test/lib/model/test-value"
   , "test/lib/model/test-object"

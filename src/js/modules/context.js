@@ -12,7 +12,7 @@ function(createDispatcher) {
       };
 
   return function(debug) {
-    var ctx = createDispatcher();
+    var ctx = createDispatcher(true);
 
     ctx.debug = debug;
 

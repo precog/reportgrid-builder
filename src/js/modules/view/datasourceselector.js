@@ -34,7 +34,7 @@ function($, ui) {
         }
       });
       $(menu).on("select", function(e, data) {
-        ctx.trigger("chart.datasource.change", data);
+        ctx.provide("chart.datasource.change", data);
       });
 
       dequeue();

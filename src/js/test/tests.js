@@ -7,6 +7,6 @@ require([
   , "test/test-suite"
   , "test/ext/qunit"
 ],
-function($, suite) {
+function($, suite, a) {
   $(suite.run);
 });

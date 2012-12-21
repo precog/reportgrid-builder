@@ -32,18 +32,15 @@ function($, editors, createLoader, guess, ui, tplForm) {
               if(path.substr(-1) !== "/") path += "/";
               path += value;
 
-              ctx.on("response.datasource.path.validated", function(vpath, valid, reason) {
-                if(path !== vpath) return;
-                if(valid) {
+              ctx.request("datasource.path.validate", path, function(response) {
+                if(response.valid) {
                   deferred.resolve(null);
                   nameready = true;
                   changeSaveState();
+                } else {
+                  deferred.resolve(response.reason);
                 }
-                else
-                  deferred.resolve(reason);
               });
-
-              ctx.trigger("request.datasource.path.validate", path);
 
               return deferred;
             }

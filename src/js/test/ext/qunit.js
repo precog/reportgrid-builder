@@ -1,5 +1,5 @@
 /**
- * QUnit v1.10.0pre-795a73bedbd941cd809101c191382ae6bfaba59a 2012-08-22 - A JavaScript Unit Testing Framework
+ * QUnit v1.10.0 - A JavaScript Unit Testing Framework
  *
  * http://qunitjs.com
  *
@@ -306,7 +306,7 @@
     // call on start of module test to prepend name to all tests
     module: function( name, testEnvironment ) {
       config.currentModule = name;
-      config.currentModuleTestEnviroment = testEnvironment;
+      config.currentModuleTestEnvironment = testEnvironment;
       config.modules[name] = true;
     },
 
@@ -339,7 +339,7 @@
         async: async,
         callback: callback,
         module: config.currentModule,
-        moduleTestEnvironment: config.currentModuleTestEnviroment,
+        moduleTestEnvironment: config.currentModuleTestEnvironment,
         stack: sourceFromStacktrace( 2 )
       });
 

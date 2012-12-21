@@ -39,6 +39,7 @@ function($, createTree) {
           , discrete   : "images/discrete.png"
           , ordinal    : "images/ordinal.png"
           , category   : "images/category.png"
+          , data       : "images/data.png"
         }
       });
 

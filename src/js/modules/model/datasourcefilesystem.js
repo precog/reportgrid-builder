@@ -17,6 +17,7 @@ function(createfs, variables, arrays) {
             , "time":       { "container" : false }
             , "discrete":   { "container" : false }
             , "continuous": { "container" : false }
+            , "data":       { "container" : false }
           },
           defaultType : "folder"
         });
@@ -49,9 +50,12 @@ function(createfs, variables, arrays) {
       dequeue();
     });
 
-    ctx.on("request.datasource.path.validate", function(path) {
+    ctx.respond("datasource.path.validate", function(path) {
       var validation = fs.validate(path, "datasource");
-      ctx.trigger("response.datasource.path.validated", path, !validation, validation);
+      return {
+        valid  : !validation,
+        reason : validation
+      };
     });
 
     ctx.on("data.datasource.remove", function(item) {

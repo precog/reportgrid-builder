@@ -28,7 +28,7 @@ function() {
       state = newstate;
 
       ctx.trigger("chart.type.change", state.chart);
-      ctx.trigger("chart.datasource.change", state.datasource);
+      ctx.provide("chart.datasource.change", state.datasource);
 
 
       for(var name in state.dimensions) {
@@ -62,10 +62,6 @@ function() {
       delayed_change();
     }
 
-    function request_chart_datasource() {
-      ctx.trigger("response.chart.datasource", state.datasource);
-    }
-
     function axis_change(variable, axis) {
       state.dimensions[axis.name] = { variable : variable, axis : axis };
       delayed_change();
@@ -73,7 +69,6 @@ function() {
 
     function option_set(name, value, type) {
       state.options[name] = { value : value, type : type };
-//      state.options = JSON.parse(JSON.stringify(state.options));
       delayed_change();
     }
 
@@ -99,11 +94,10 @@ function() {
     ctx.on("chart.state.reset", function() {
       reset();
       ctx.trigger("chart.type.change", state.chart);
-      ctx.trigger("chart.datasource.change", null);
+      ctx.provide("chart.datasource.change", null);
     });
 
     ctx.on("chart.state.update", update);
     ctx.on("options.chart.css.palette.set", css_palette_set);
-    ctx.on("request.chart.datasource", request_chart_datasource);
   };
 });

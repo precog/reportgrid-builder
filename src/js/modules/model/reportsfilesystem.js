@@ -39,9 +39,15 @@ function(createfs, arrays) {
       dequeue();
     });
 
-    ctx.on("request.report.path.validate", function(path) {
+
+
+
+    ctx.respond("report.path.validate", function(path) {
       var validation = fs.validate(path, "report");
-      ctx.trigger("response.report.path.validated", path, !validation, validation);
+      return {
+        valid : !validation,
+        reason : validation
+      };
     });
 
     ctx.on("reports.report.remove", function(path) {
