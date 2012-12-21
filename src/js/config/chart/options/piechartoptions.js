@@ -101,23 +101,7 @@ function() {
         }
       }]
     });
-/*
-    options.push({
-      name : "overradius",
-      label : "over",
-      group : "piechartposition",
-      event : "options.chart.piechart.overradius",
-      editors : [{
-        type : "float",
-        options : {
-          default : 0.95,
-          step : 0.05,
-          min : 0,
-          max : 1
-        }
-      }]
-    });
-*/
+
     options.push({
       name : "labelorientation",
       label : "orientantion",
@@ -162,7 +146,10 @@ function() {
       editors : [{
         type : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["a", "b"],
+          useDimensions : false,
+          placeholder : "=compare(a.value,b.value)"
         }
       }]
     });

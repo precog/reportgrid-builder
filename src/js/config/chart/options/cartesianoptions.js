@@ -94,7 +94,10 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"],
+          placeholder : '=type=="axisvariable"',
+          useDimensions : false
         }
       }]
     });
@@ -112,7 +115,10 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"],
+          placeholder : '=type=="axisvariable"',
+          useDimensions : false
         }
       }]
     });
@@ -130,7 +136,10 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"],
+          placeholder : '=type=="axisvariable"',
+          useDimensions : false
         }
       }]
     });
@@ -148,7 +157,10 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"],
+          placeholder : '=type=="axisvariable"',
+          useDimensions : false
         }
       }]
     });
@@ -166,7 +178,10 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"],
+          placeholder : '=type=="axisvariable"',
+          useDimensions : false
         }
       }]
     });
@@ -184,7 +199,10 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"],
+          placeholder : '=type=="axisvariable"',
+          useDimensions : false
         }
       }]
     });
@@ -202,7 +220,9 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["type"],
+          useDimensions : false
         }
       }]
     });

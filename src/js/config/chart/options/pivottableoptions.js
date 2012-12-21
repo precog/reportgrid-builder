@@ -90,7 +90,9 @@ function() {
       editors : [{
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["stats"],
+          useDimensions : true
         }
       }]
     });
@@ -103,7 +105,9 @@ function() {
       editors : [{
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["value", "header"],
+          useDimensions : false
         }
       }]
     });
@@ -116,7 +120,9 @@ function() {
       editors : [{
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["header"],
+          useDimensions : false
         }
       }]
     });
@@ -129,7 +135,9 @@ function() {
       editors : [{
         type  : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["value", "values"],
+          useDimensions : false
         }
       }]
     });

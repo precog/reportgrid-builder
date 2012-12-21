@@ -20,7 +20,7 @@ function() {
       }]
     });
 
-    var sizeeditor = { type : "expression", options : { default : "=64", unit : "px²", className : "small" }};
+    var sizeeditor = { type : "expression", options : { default : "=64", unit : "px²", className : "small", variables : ["stats"], useDimensions : true }};
     options.push({
       name : "symbol",
       label : "shape",
@@ -49,7 +49,10 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : "=symbol('circle',64)"
+          default : "=symbol('circle',64)",
+          variables : ["stats"],
+          useDimensions : true,
+          placeholder : "=compare(a.value,b.value)"
         }
       }]
     });
@@ -59,11 +62,20 @@ function() {
       label : "style",
       group : "symbol",
       event : "options.chart.linechart.symbolstyle",
+      condition : {
+        event   : "options.chart.linechart.symbol",
+        visible : function(value) {
+          return value !== "[no symbol]" && value !== "";
+        }
+      },
       editors : [{
         type : "template",
-        default : "",
-        variables : ["stats"],
-        useDimensions : true
+        options : {
+          default : "",
+          variables : ["stats"],
+          useDimensions : true,
+          placeholder : ""
+        }
       }]
     });
 

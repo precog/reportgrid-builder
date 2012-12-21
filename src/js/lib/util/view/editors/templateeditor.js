@@ -41,10 +41,10 @@ function(createEditor) {
 
     function chart_datasource_change(datasource) {
       var variables = extract_variables(datasource && datasource.fields),
-          title = variables.length === 0
+          title = (variables.length === 0)
             ? "no variables are available"
-            : "variables: @" + variables.join(", @")
-      ;
+            : "variables: @" + variables.join(", @");
+
       $input.attr("title", title);
       if(variables.length > 0 && "undefined" === typeof options.placeholder) {
         $input.attr("placeholder", guess_placeholder(datasource && datasource.fields));

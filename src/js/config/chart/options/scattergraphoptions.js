@@ -46,7 +46,9 @@ function() {
       }, {
         type  : "expression",
         options : {
-          default : "=symbol('circle',64)"
+          default : "=symbol('circle',64)",
+          variables : ["stats"],
+          useDimensions : true
         }
       }]
     });
@@ -58,9 +60,12 @@ function() {
       event : "options.chart.scattergraph.symbolstyle",
       editors : [{
         type : "template",
-        default : "",
-        variables : ["stats"],
-        useDimensions : true
+        options : {
+          default : "",
+          variables : ["stats"],
+          useDimensions : true,
+          placeholder : ""
+        }
       }]
     });
   };

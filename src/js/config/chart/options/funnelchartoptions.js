@@ -14,7 +14,10 @@ function() {
       editors : [{
         type : "expression",
         options : {
-          default : ""
+          default : "",
+          variables : ["a", "b"],
+          useDimensions : false,
+          placeholder : "=compare(a.value,b.value)"
         }
       }]
     });
