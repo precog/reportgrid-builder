@@ -11,7 +11,7 @@ function($, createTree) {
       var map = {
         folder : "/"
       };
-      function activateNode(data, type, parentType) {
+      function activate_node(data, type, parentType) {
         if(!data) return;
         if(data.type === type) {
           if(data.path === map[type])
@@ -27,7 +27,7 @@ function($, createTree) {
             map[type] = null;
           }
         } else {
-          activateNode(tree.getParent(data), type, parentType);
+          activate_node(tree.getParent(data), type, parentType);
         }
       }
 
@@ -47,8 +47,8 @@ function($, createTree) {
         var a = $(el).find("a").first()
               .attr("data-node", JSON.stringify(node));
       });
-      $(tree).on("node.selected", function(_, data) { activateNode(data, "folder", null); });
-      $(tree).on("node.selected", function(_, data) { activateNode(data, "datasource", "folder"); });
+      $(tree).on("node.selected", function(_, data) { activate_node(data, "folder", null); });
+      $(tree).on("node.selected", function(_, data) { activate_node(data, "datasource", "folder"); });
 
       ctx.on("data.folder.remove", function(path) {
         fs.remove(path, "folder");
@@ -59,7 +59,7 @@ function($, createTree) {
       });
     }
 
-    $.when(ctx.on("view.data.tree"), ctx.on("data.system.ready")).then(function(viewargs, systemargs) {
+    $.when(ctx.one("view.data.tree"), ctx.one("data.system.ready")).then(function(viewargs, systemargs) {
       init(viewargs[0], systemargs[0]);
     });
   };

@@ -183,7 +183,7 @@ function($) {
     return $.makeArray(arguments).join("/");
   }
 
-  function loadExamples(ctx) {
+  function load_examples(ctx) {
     $(examples).each(function(i, example) {
       example.src  = path(datapath,example.src);
       example.type = example.type || "url";
@@ -197,10 +197,10 @@ function($) {
   }
 
   return function(ctx) {
-    ctx.on("modules.ready", function() {
+    ctx.one("modules.ready", function() {
       ctx.request("datasource.localstorage.hasdata", function(hasdata) {
         if(!hasdata)
-          loadExamples(ctx);
+          load_examples(ctx);
       });
     });
   };

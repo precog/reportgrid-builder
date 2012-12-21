@@ -257,7 +257,7 @@ function($, ui) {
       });
     }
 
-    ctx.on("view.reports.toolbar-context", init_context);
-    ctx.on("view.editor.toolbar-context", init_main);
+    ctx.one("view.reports.toolbar-context", init_context);
+    ctx.one("view.editor.toolbar-context", init_main);
   };
 });

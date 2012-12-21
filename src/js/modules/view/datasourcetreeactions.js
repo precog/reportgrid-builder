@@ -16,21 +16,21 @@ function($, ui) {
             disabled : false
           });
 
-      function deleteFolder(path) {
+      function delete_folder(path) {
         return function() {
           if(window.confirm("Are you sure you want to delete the folder \"" + path + "\" and all of its contents?\nThis operation is not undoable."))
             ctx.trigger("data.folder.remove", path);
         }
       }
 
-      function deleteDatasource(path) {
+      function delete_datasource(path) {
         return function() {
           if(window.confirm("Are you sure you want to delete the datasource at \"" + path + "\"?\nThis operation is not undoable."))
             ctx.trigger("data.datasource.removebypath", path);
         }
       }
 
-      function createFolder(path) {
+      function create_folder(path) {
         return function() {
           var name = window.prompt("Create a new folder at: \"" + path + "\"");
           if(name === null)
@@ -54,13 +54,13 @@ function($, ui) {
         }
       }
 
-      $newfolder.on("click", createFolder("/"));
+      $newfolder.on("click", create_folder("/"));
 
       ctx.on("data.folder.select", function(path) {
         $newfolder
           .button("enable")
           .off("click")
-          .on("click", createFolder(path))
+          .on("click", create_folder(path))
         ;
       });
 
@@ -75,7 +75,7 @@ function($, ui) {
           $delete
             .button("enable")
             .off("click")
-            .on("click", deleteFolder(path))
+            .on("click", delete_folder(path))
           ;
         }
       });
@@ -84,11 +84,11 @@ function($, ui) {
         $delete
           .button("enable")
           .off("click")
-          .on("click", deleteDatasource(path))
+          .on("click", delete_datasource(path))
         ;
       });
     }
 
-    ctx.on("view.data.toolbar-context", init);
+    ctx.one("view.data.toolbar-context", init);
   };
 });

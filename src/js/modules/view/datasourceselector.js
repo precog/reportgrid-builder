@@ -42,15 +42,15 @@ function($, ui) {
       ctx.on("data.datasource.add", add);
       ctx.on("data.datasource.remove", remove);
 
-      ctx.off("data.datasource.add", addToQueue);
-      ctx.off("data.datasource.remove", removeFromQueue);
+      ctx.off("data.datasource.add", add_to_queue);
+      ctx.off("data.datasource.remove", remove_from_queue);
 
       ctx.on("chart.datasource.change", function(datasource) {
         menu.selectValue((datasource && datasource.path) || null);
       });
     }
 
-    function addToQueue(item) {
+    function add_to_queue(item) {
       queue.push(item);
     }
 
@@ -59,7 +59,7 @@ function($, ui) {
       menu.add({ content : item.name.split("/").pop(), data : item });
     }
 
-    function removeFromArray(arr, item) {
+    function remove_from_array(arr, item) {
       var j = -1;
       for(var i = 0; i < arr.length; i++) {
         if(arr[i].name == item.name) {
@@ -72,18 +72,18 @@ function($, ui) {
 
     }
 
-    function removeFromQueue(item) {
-      removeFromArray(queue, item);
+    function remove_from_queue(item) {
+      remove_from_array(queue, item);
     }
 
     function remove(item) {
-      removeFromArray(items, item);
+      remove_from_array(items, item);
       console.log("TODO: REMOVE ITEM FROM SELECTOR");
     }
 
-    ctx.on("data.datasource.add", addToQueue);
-    ctx.on("data.datasource.remove", removeFromQueue);
+    ctx.on("data.datasource.add", add_to_queue);
+    ctx.on("data.datasource.remove", remove_from_queue);
 
-    ctx.on("view.editor.datasourceselector", init);
+    ctx.one("view.editor.datasourceselector", init);
   }
 });

@@ -21,7 +21,6 @@ function($, createGrid, createLoader) {
       return {
           enableCellNavigation: false
         , enableColumnReorder: true
-//        , autoHeight : true
         , forceFitColumns: true
       };
     }
@@ -30,7 +29,6 @@ function($, createGrid, createLoader) {
       return function(data) {
         var columns = createColumns(datasource.fields),
             options = createOptions();
-//console.log(data, JSON.stringify(datasource.fields), columns, options);
         grid = createGrid($el, data, columns, options);
       };
     }
@@ -61,7 +59,7 @@ function($, createGrid, createLoader) {
       ctx.trigger("data.datasource.preview.clear");
     });
 
-    ctx.on("view.data.dataviewer", function(container) {
+    ctx.one("view.data.dataviewer", function(container) {
       $el = $('<div class="datasource-preview"></div>').appendTo(container);
     });
   }

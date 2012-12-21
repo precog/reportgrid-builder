@@ -64,18 +64,18 @@ function($, ui, tplDialog) {
         }
       });
 
-      ctx.trigger("view.data.tree", $dialog.find(".tree"));
-      ctx.trigger("view.data.toolbar-description", $dialog.find(".datasources .toolbar-description"));
-      ctx.trigger("view.data.toolbar-main", $dialog.find(".datasources .toolbar-main"));
-      ctx.trigger("view.data.toolbar-context", $dialog.find(".datasources .toolbar-context"));
+      ctx.provide("view.data.tree", $dialog.find(".tree"));
+      ctx.provide("view.data.toolbar-description", $dialog.find(".datasources .toolbar-description"));
+      ctx.provide("view.data.toolbar-main", $dialog.find(".datasources .toolbar-main"));
+      ctx.provide("view.data.toolbar-context", $dialog.find(".datasources .toolbar-context"));
 
-      ctx.trigger("view.data.datasource", $dialog.find(".datasource"));
-      ctx.trigger("view.data.dataviewer", $dialog.find(".dataviewer"));
+      ctx.provide("view.data.datasource", $dialog.find(".datasource"));
+      ctx.provide("view.data.dataviewer", $dialog.find(".dataviewer"));
 
       return true;
     }
 
-    ctx.on("view.main.toolbar-context", function(el) {
+    ctx.one("view.main.toolbar-context", function(el) {
       ui.button(el, {
           icon : "ui-icon-arrowthickstop-1-n",
           description : "import/manage data sources"

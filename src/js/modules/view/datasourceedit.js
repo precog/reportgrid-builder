@@ -36,7 +36,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
                 if(response.valid) {
                   deferred.resolve(null);
                   nameready = true;
-                  changeSaveState();
+                  change_save_state();
                 } else {
                   deferred.resolve(response.reason);
                 }
@@ -65,10 +65,10 @@ function($, editors, createLoader, guess, ui, tplForm) {
       ename.value.on("value.validationError", function() {
         ename.el.find("div.error").addClass("ui-state-error ui-corner-all");
         nameready = false;
-        changeSaveState();
+        change_save_state();
       });
 
-      function changeSaveState() {
+      function change_save_state() {
         if(dataready && nameready) {
           $save.button("enable");
         } else {
@@ -85,7 +85,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
         $save.off("click");
         $save.on("click", function() {
           nameready = false;
-          changeSaveState();
+          change_save_state();
           var path = $path.text();
           if(path.substr(-1) !== "/") path += "/";
           var name = ename.value.get();
@@ -98,12 +98,12 @@ function($, editors, createLoader, guess, ui, tplForm) {
           }, opt));
         });
         dataready = true;
-        changeSaveState();
+        change_save_state();
       }
 
       function error(msg) {
         dataready = false;
-        changeSaveState();
+        change_save_state();
         ctx.trigger("data.datasource.preview.clear");
         $fields.html("-");
         if(msg) {
@@ -116,16 +116,16 @@ function($, editors, createLoader, guess, ui, tplForm) {
 
       function clear() {
         dataready = false;
-        changeSaveState();
+        change_save_state();
         if(loader) {
           loader.abort();
         }
         $error.hide();
         $fields.html("-");
-        changeSaveState();
+        change_save_state();
       }
 
-      function validateJsonString(s) {
+      function validate_json_string(s) {
         try {
           var json = JSON.parse(s);
           if(!json instanceof Array || "object" !== typeof json[0])
@@ -146,7 +146,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
           case "text":
             stype = editors.create($stype, "text", {
               placeholder : '[{"country:"USA",value:1000}]',
-              validate : validateJsonString
+              validate : validate_json_string
             });
             stype.value.on("value.change", function(data) {
               success(JSON.parse(data), "text", { data : data });
@@ -188,7 +188,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
               var reader = new FileReader();
               reader.onload = function(e) {
                 var data = e.target.result,
-                    validation = validateJsonString(data);
+                    validation = validate_json_string(data);
                 if(validation) {
                   error(validation);
                 } else {
@@ -210,6 +210,6 @@ function($, editors, createLoader, guess, ui, tplForm) {
       $path.text(path);
     });
 
-    ctx.on("view.data.datasource", init);
+    ctx.one("view.data.datasource", init);
   }
 });

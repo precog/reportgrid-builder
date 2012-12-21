@@ -27,7 +27,7 @@ function() {
       unwire();
       state = newstate;
 
-      ctx.trigger("chart.type.change", state.chart);
+      ctx.provide("chart.type.change", state.chart);
       ctx.provide("chart.datasource.change", state.datasource);
 
 
@@ -93,7 +93,7 @@ function() {
 
     ctx.on("chart.state.reset", function() {
       reset();
-      ctx.trigger("chart.type.change", state.chart);
+      ctx.provide("chart.type.change", state.chart);
       ctx.provide("chart.datasource.change", null);
     });
 

@@ -6,11 +6,11 @@ define([
 function ($, themes) {
   var UI_BASE_THEME_URL = "css/jquery-ui/";
 
-  function themeUrl(name) {
+  function theme_url(name) {
     return UI_BASE_THEME_URL + name + "/jquery-ui.css";
   }
 
-  function pollCSS(url, callback) {
+  function poll_css(url, callback) {
     function poll() {
       try {
         var sheets = document.styleSheets;
@@ -29,12 +29,12 @@ function ($, themes) {
     poll();
   }
 
-  function setUITheme(name, callback) {
-    var url = themeUrl(name),
+  function set_ui_theme(name, callback) {
+    var url = theme_url(name),
       cssLink = $('<link href="'+url+'" type="text/css" rel="stylesheet" class="ui-theme" />');
     if($.browser.safari) {
       // no onload event
-      pollCSS(url, callback);
+      poll_css(url, callback);
     } else {
       cssLink.on("load", callback);
     }
@@ -51,7 +51,7 @@ function ($, themes) {
       if(current === theme) return;
       current = theme;
       ctx.trigger("theme.changing", theme);
-      setUITheme(themes.map[theme].ui, function() {
+      set_ui_theme(themes.map[theme].ui, function() {
         ctx.trigger('view.theme.changed', theme);
       });
     });

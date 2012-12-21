@@ -6,7 +6,7 @@ define([
 
 function($, themes, ui) {
 
-  function buildItems(ctx, menu, groups) {
+  function build_items(ctx, menu, groups) {
     $.each(groups, function(key) {
       menu.append('<li class="ui-state-disabled ui-menu-item" role="presentation"><a href="#">'+key+' themes:</a></li>');
       $.each(this, function() {
@@ -23,9 +23,9 @@ function($, themes, ui) {
 
   return function(ctx) {
     var menu = ui.contextmenu('<div class="rg-widget settings-menu"></div>');
-    buildItems(ctx, menu.find("ul:first"), themes.groups);
+    build_items(ctx, menu.find("ul:first"), themes.groups);
 
-    ctx.on("view.main.toolbar-context", function(el) {
+    ctx.one("view.main.toolbar-context", function(el) {
       ui.button(el, {
         icon : "ui-icon-gear",
         description : "change theme"

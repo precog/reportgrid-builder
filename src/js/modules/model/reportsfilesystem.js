@@ -39,9 +39,6 @@ function(createfs, arrays) {
       dequeue();
     });
 
-
-
-
     ctx.respond("report.path.validate", function(path) {
       var validation = fs.validate(path, "report");
       return {

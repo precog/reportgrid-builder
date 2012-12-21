@@ -49,6 +49,6 @@ function($, tplEditor) {
       el.mousedown(function() { if(ReportGrid.tooltip) ReportGrid.tooltip.hide(); });
     }
 
-    ctx.on("view.editor.pane", init);
+    ctx.one("view.editor.pane", init);
   }
 });

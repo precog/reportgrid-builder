@@ -23,7 +23,7 @@ function($, uiconfig, ui, editors, optiongroups) {
       });
       defaultGroup = groups[optiongroups[optiongroups.length - 1].group];
       ctx.on("chart.type.change", update);
-      ctx.on("chart.option.add", appendOption);
+      ctx.on("chart.option.add", append_option);
     };
 
     function update(type) {
@@ -52,7 +52,7 @@ function($, uiconfig, ui, editors, optiongroups) {
       return null;
     }
 
-    function appendOption(info) {
+    function append_option(info) {
       var editor,
           index = 0,
           $fieldset = (groups[info.group] || defaultGroup).show(),
@@ -198,6 +198,6 @@ function($, uiconfig, ui, editors, optiongroups) {
       }, 0);
     }
 
-    ctx.on("view.editor.options", init);
+    ctx.one("view.editor.options", init);
   };
 });

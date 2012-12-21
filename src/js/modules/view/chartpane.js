@@ -15,10 +15,10 @@ function($, tplChart) {
 
       function execute(newinfo) {
         info = newinfo;
-        delayedRender();
+        delayed_render();
       }
 
-      function delayedRender() {
+      function delayed_render() {
         clearTimeout(timer);
         timer = setTimeout(render, 750);
       }
@@ -41,23 +41,21 @@ function($, tplChart) {
         );
       }
 
-      function changeWidth(v) {
-//        $chart.css("width", v+"px");
-        delayedRender();
+      function change_width(v) {
+        delayed_render();
       }
 
-      function changeHeight(v) {
-//        $chart.css("height", v+"px");
-        delayedRender();
+      function change_height(v) {
+        delayed_render();
       }
 
       var $loader = $('<div class="loader"><img src="images/loading.gif" alt="loading ..."></div>').appendTo(el).hide();
 
-      function renderStart() {
+      function render_start() {
         $loader.show();
       }
 
-      function renderEnd() {
+      function render_end() {
         $loader.hide();
       }
 
@@ -69,15 +67,15 @@ function($, tplChart) {
       }
       
       ctx.on("chart.render.execute", execute);
-      ctx.on("chart.rgcss.loaded", delayedRender);
+      ctx.on("chart.rgcss.loaded", delayed_render);
       ctx.on("chart.render.clear", clear);
-      ctx.on("options.chart.width", changeWidth);
-      ctx.on("options.chart.height", changeHeight);
+      ctx.on("options.chart.width", change_width);
+      ctx.on("options.chart.height", change_height);
 
-      ctx.on("chart.render.start", renderStart);
-      ctx.on("chart.render.end", renderEnd);
+      ctx.on("chart.render.start", render_start);
+      ctx.on("chart.render.end", render_end);
     };
 
-    ctx.on("view.editor.chart", init);
+    ctx.one("view.editor.chart", init);
   };
 });

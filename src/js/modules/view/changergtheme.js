@@ -14,7 +14,7 @@ function($) {
         timer = setTimeout(function() { poll(callback); }, 50);
       }
     }
-    function changecharttheme(theme) {
+    function change_chart_theme(theme) {
       if(current === theme) return;
       current = theme;
 //      $("head").find('link[href="https://api.reportgrid.com/css/rg-charts.css"]').remove();
@@ -24,6 +24,6 @@ function($) {
         ctx.trigger("chart.rgcss.loaded", theme);
       });
     }
-    ctx.on("chart.rgcss.load", changecharttheme);
+    ctx.on("chart.rgcss.load", change_chart_theme);
   }
 });

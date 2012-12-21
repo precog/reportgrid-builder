@@ -54,7 +54,7 @@ function($, tplLayout) {
       }
     }
 
-    function themechanged() {
+    function theme_changed() {
       if(!$container) {
         clearInterval(this.killTimer);
         killTimer = setTimeout(init, 20);
@@ -121,21 +121,21 @@ function($, tplLayout) {
         .addClass("ui-state-hover")
       ;
 
-      // trigger events
-      ctx.trigger("view.main.toolbar-main", $container.find(".mainbar .toolbar-main"));
-      ctx.trigger("view.main.toolbar-context", $container.find(".mainbar .toolbar-context"));
+      // provide events
+      ctx.provide("view.main.toolbar-main", $container.find(".mainbar .toolbar-main"));
+      ctx.provide("view.main.toolbar-context", $container.find(".mainbar .toolbar-context"));
 
-      ctx.trigger("view.reports.tree", $container.find(".reports .tree"));
-      ctx.trigger("view.reports.toolbar-description", $container.find(".reports .toolbar-description"));
-      ctx.trigger("view.reports.toolbar-main", $container.find(".reports .toolbar-main"));
-      ctx.trigger("view.reports.toolbar-context", $container.find(".reports .toolbar-context"));
+      ctx.provide("view.reports.tree", $container.find(".reports .tree"));
+      ctx.provide("view.reports.toolbar-description", $container.find(".reports .toolbar-description"));
+      ctx.provide("view.reports.toolbar-main", $container.find(".reports .toolbar-main"));
+      ctx.provide("view.reports.toolbar-context", $container.find(".reports .toolbar-context"));
 
-      ctx.trigger("view.support.pane", $container.find(".main .support"));
+      ctx.provide("view.support.pane", $container.find(".main .support"));
 
-      ctx.trigger("view.editor.pane", $container.find(".main .editor"));
-      ctx.trigger("view.editor.tabs", $container.find(".builder .tabs-container"));
-      ctx.trigger("view.editor.toolbar-main", $container.find(".builder .toolbar-main:first"));
-      ctx.trigger("view.editor.toolbar-context", $container.find(".builder .toolbar-context:first"));
+      ctx.provide("view.editor.pane", $container.find(".main .editor"));
+      ctx.provide("view.editor.tabs", $container.find(".builder .tabs-container"));
+      ctx.provide("view.editor.toolbar-main", $container.find(".builder .toolbar-main:first"));
+      ctx.provide("view.editor.toolbar-context", $container.find(".builder .toolbar-context:first"));
 
       $(window).resize(resize);
 
@@ -156,7 +156,7 @@ function($, tplLayout) {
       }, 1000);
     }
 
-    ctx.on("view.container.ready", init);
-    ctx.on("theme.changed", themechanged);
+    ctx.one("view.container.ready", init);
+    ctx.on("theme.changed", theme_changed);
   };
 });

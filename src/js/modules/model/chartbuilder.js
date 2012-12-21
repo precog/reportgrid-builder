@@ -22,7 +22,7 @@ function(charts, createLoader) {
       return axis.type;
     }
 
-    function extractAxes(type) {
+    function extract_axes(type) {
       var axes = [],
           chartDimensions = charts.map[type].dimensions;
       for(var i = 0; i < chartDimensions.length; i++) {
@@ -47,7 +47,7 @@ function(charts, createLoader) {
       return axes;
     }
 
-    function triggerChart() {
+    function trigger_chart() {
       try {
         var dataloader = createLoader(current.datasource),
             options    = { },
@@ -55,7 +55,7 @@ function(charts, createLoader) {
               dataloader.on("success", handler);
               dataloader.load();
             };
-        var axes = extractAxes(current.type);
+        var axes = extract_axes(current.type);
         if(axes === null)
           throw "not enough axes to feed the chart";
         charts.map[current.type].extractOptions(options, current.dimensions, current.options);
@@ -67,12 +67,12 @@ function(charts, createLoader) {
     }
 
     var timer;
-    function delayedTriggerChart() {
+    function delayed_trigger_chart() {
       clearTimeout(timer);
-      timer = setTimeout(triggerChart, 200);
+      timer = setTimeout(trigger_chart, 200);
     }
 
-    function changeDataSource(ds) {
+    function change_data_source(ds) {
       current.datasource = ds;
       current.fieldsmap = {};
       if(ds) {
@@ -80,10 +80,10 @@ function(charts, createLoader) {
           current.fieldsmap[ds.fields[i].field] = ds.fields[i];
         }
       }
-      delayedTriggerChart();
+      delayed_trigger_chart();
     }
 
-    function setAxis(types, info) {
+    function set_axis(types, info) {
       current.dimensions[info.name] = types.map(function(type) {
         return {
           name     : type.field,
@@ -91,24 +91,24 @@ function(charts, createLoader) {
           field    : current.fieldsmap[type.field]
         }
       });
-      delayedTriggerChart();
+      delayed_trigger_chart();
     }
 
-    function chartType(type) {
+    function chart_type(type) {
       current.type = type;
       current.dimensions = {};
       current.options = {};
-      delayedTriggerChart();
+      delayed_trigger_chart();
     }
 
-    function chartOptionSet(key, value) {
+    function chart_option_set(key, value) {
       current.options[key] = value;
-      delayedTriggerChart();
+      delayed_trigger_chart();
     }
 
-    ctx.on("chart.datasource.change", changeDataSource);
-    ctx.on("chart.type.change", chartType);
-    ctx.on("chart.axis.change", setAxis);
-    ctx.on("chart.option.set", chartOptionSet);
+    ctx.on("chart.datasource.change", change_data_source);
+    ctx.on("chart.type.change", chart_type);
+    ctx.on("chart.axis.change", set_axis);
+    ctx.on("chart.option.set", chart_option_set);
   };
 });

@@ -10,12 +10,7 @@ function(createStore) {
       store = createStore(STORE_NAME, defaults);
 
   return function(ctx) {
-    /*
-    store.monitor.bind("theme", function(theme) {
-      ctx.trigger("theme.change", theme);
-    });
-    */
-    ctx.on("modules.ready", function() {
+    ctx.one("modules.ready", function() {
       var theme = store.get("theme");
       ctx.trigger("theme.change", theme);
     });

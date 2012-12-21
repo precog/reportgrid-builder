@@ -49,6 +49,6 @@ define([
       reset_status();
     }
 
-    ctx.on("view.editor.toolbar-main", init);
+    ctx.one("view.editor.toolbar-main", init);
   };
 });

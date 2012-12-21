@@ -44,6 +44,6 @@ function($, ui, openExportDialog, chart2html) {
       ctx.on("chart.name.set", name_set);
     };
 
-    ctx.on("view.editor.toolbar-context", init);
+    ctx.one("view.editor.toolbar-context", init);
   };
 });

@@ -21,7 +21,7 @@ function($, ui, charts) {
         }
       });
       $(menu).on("select", function(e, data) {
-        ctx.trigger("chart.type.change", data.type);
+        ctx.provide("chart.type.change", data.type);
       });
 
       ctx.on("chart.type.change", function(type) {
@@ -29,7 +29,7 @@ function($, ui, charts) {
       });
 
       setTimeout(function() {
-        ctx.trigger("chart.type.change", "barchart");
+        ctx.provide("chart.type.change", "barchart");
       }, 100);
     }
 

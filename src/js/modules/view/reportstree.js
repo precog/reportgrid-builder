@@ -12,7 +12,7 @@ function($, createTree) {
             folder : "/"
           },
           current;
-      function activateNode(data, type, parentType) {
+      function activate_node(data, type, parentType) {
         if(!data) return;
         if(data.type === type) {
           if(data.path === current)
@@ -28,11 +28,11 @@ function($, createTree) {
             map[type] = null;
           }
         } else {
-          activateNode(tree.getParent(data), type, parentType);
+          activate_node(tree.getParent(data), type, parentType);
         }
       }
 
-      function deactivateNode(data, type, parentType) {
+      function deactivate_node(data, type, parentType) {
         if(!data) return;
         if(data.type === type) {
           if(map[type])
@@ -44,7 +44,7 @@ function($, createTree) {
             map[type] = null;
           }
         } else {
-          deactivateNode(tree.getParent(data), type, parentType);
+          deactivate_node(tree.getParent(data), type, parentType);
         }
       }
 
@@ -58,11 +58,11 @@ function($, createTree) {
         var a = $(el).find("a").first()
               .attr("data-node", JSON.stringify(node));
       });
-      $(tree).on("node.selected", function(_, data) { activateNode(data, "folder", null); });
-      $(tree).on("node.selected", function(_, data) { activateNode(data, "report", "folder"); });
+      $(tree).on("node.selected", function(_, data) { activate_node(data, "folder", null); });
+      $(tree).on("node.selected", function(_, data) { activate_node(data, "report", "folder"); });
 
-      $(tree).on("node.removed", function(_, data) { deactivateNode(data, "folder", null); });
-      $(tree).on("node.removed", function(_, data) { deactivateNode(data, "report", "folder"); });
+      $(tree).on("node.removed", function(_, data) { deactivate_node(data, "folder", null); });
+      $(tree).on("node.removed", function(_, data) { deactivate_node(data, "report", "folder"); });
 
       $(tree).on("node.trigger", function(_, data)  {
         if(data.type === "report") {
@@ -79,7 +79,7 @@ function($, createTree) {
       });
     }
 
-    $.when(ctx.on("view.reports.tree"), ctx.on("reports.system.ready")).then(function(viewargs, systemargs) {
+    $.when(ctx.one("view.reports.tree"), ctx.one("reports.system.ready")).then(function(viewargs, systemargs) {
       init(viewargs[0], systemargs[0]);
     });
   };

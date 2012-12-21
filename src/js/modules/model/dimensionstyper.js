@@ -5,13 +5,7 @@ define([
 
 function($, charts) {
   return function(ctx) {
-    function init(_, a2) {
-      var type = a2[0];
-      signalDimensions(type);
-      ctx.on("chart.type.change", signalDimensions);
-    }
-
-    function signalDimensions(type) {
+    function type_change(type) {
       // TODO, this highlights a problem with event handling priority
       setTimeout(function() {
         $(charts.map[type].dimensions).each(function(i, info) {
@@ -22,7 +16,6 @@ function($, charts) {
         });
       }, 0);
     }
-
-    ctx.when("app.ready", "chart.type.change").then(init);
+    ctx.on("chart.type.change", type_change);
   };
 });
