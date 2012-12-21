@@ -12,7 +12,11 @@ function(createEditor, template) {
     var params = {
       input : $input,
       validate : options.validate || function(v) {
-        return (""+v).substr(0, 1) === "=" ? null : "an expression must begin with =";
+        v = ""+v;
+        if(v === "" || v.substr(0, 1) === "=")
+          return null;
+        else
+          return "an expression must begin with =";
       },
       filter : options.filter || function(v) {
         if("string" === typeof v)

@@ -47,6 +47,7 @@ function($, createValue) {
     if(options.title)
       params.input.attr("title", options.title);
     var error = el.find(".error");
+    error.addClass("ui-state-error ui-corner-all");
     if(options.unit) {
       el.find(".unit").html(options.unit);
       if(options.title)
