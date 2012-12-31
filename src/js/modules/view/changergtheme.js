@@ -19,6 +19,7 @@ function($) {
       current = theme;
 //      $("head").find('link[href="https://api.reportgrid.com/css/rg-charts.css"]').remove();
       $("head").find('link.custom-rg-css').remove();
+      if(!theme) return;
       $("head").append('<link rel="stylesheet" class="custom-rg-css" href="https://api.reportgrid.com/css/colors/'+theme+'">');
       poll(function() {
         ctx.trigger("chart.rgcss.loaded", theme);

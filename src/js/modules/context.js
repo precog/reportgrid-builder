@@ -3,11 +3,48 @@ define([
   , "lib/util/dispatcher"
 ],
 function($, createDispatcher) {
-  var logger = window.console || {info:function(){}};
-  var log = function() {
-        logger.groupCollapsed("%c"+arguments[0]+": "+arguments[1], 'background: #222; color: #bada55');
-        [new Date().toLocaleTimeString()].concat($.makeArray(arguments).slice(2)).forEach(function(v) {
-          logger.info(v);
+  var logger = window.console || {log:function(){}},
+      colors = {
+        on      : "#f6f6f6",
+        one     : "#eaeaea",
+        off     : "#ffe0e0",
+        trigger : "#eff",
+        request : "#fef",
+        respond : "#ffe",
+        provide : "#efe"
+      },
+      log = function() {
+        logger.groupCollapsed("%c"+arguments[0]+": "+arguments[1], 'color: #999; font-weight: normal; background-color: ' + (colors[arguments[0]] || "#fff"));
+        logger.log("%c"+new Date().toLocaleTimeString(),"color:#bbb;font-size:85%");
+        $.makeArray(arguments).slice(2).forEach(function(v) {
+          var out;
+          try {
+            switch(typeof v) {
+              case "function":
+                out = v;
+                break;
+              case "string":
+                out = v + " (string)";
+                break;
+              case "number":
+                out = v + " (number)";
+                break;
+              case "bool":
+                out = v + " (bool)";
+                break;
+              case "undefined":
+                out = "(undefined)";
+                break;
+              default:
+                if(v instanceof Date)
+                  out = v + " (date)";
+                else
+                  out = JSON.stringify(v)
+            }
+          } catch(e) {
+            out = v;
+          }
+          logger.log(out);
         });
         logger.groupEnd();
       };
@@ -23,17 +60,17 @@ function($, createDispatcher) {
           states  = {};
 
       var generic_extractor = function(name, args) {
-            return [name, args[0], args.slice(1)];
+            return [name, args[0]].concat(args.slice(1));
           },
           methods = [
               { name    : "trigger" }
             , { name    : "provide" }
-            , { name    : "on" }
-//            , { name    : "one" }
-            , { name    : "off", extract: function(name, args) { return [name]; } }
-            , { name    : "when", extract: function(name, args) { return [name]; } }
-            , { name    : "request", extract: function(name, args) { return [name]; } }
-            , { name    : "respond", extract: function(name, args) { return [name]; } }
+            , { name    : "on", extract: function(name, args) { return [name, args[0], args[1]]; } }
+            , { name    : "one", extract: function(name, args) { return [name, args[0], args[1]]; } }
+            , { name    : "off", extract: function(name, args) { return [name, args[0]]; } }
+            , { name    : "when", extract: function(name, args) { return [name].concat(args); /*]; */ } }
+            , { name    : "request", extract: function(name, args) { return [name].concat(args); } }
+            , { name    : "respond", extract: function(name, args) { return [name, args[0]]; } }
           ];
 
       for(var i = 0; i < methods.length; i++) {
@@ -46,26 +83,11 @@ function($, createDispatcher) {
             var type = (ctx.counter[args[0]] || (ctx.counter[args[0]] = {}));
             type[args[1]] = (type[args[1]] || 0) + 1;
             log.apply(window, args);
-            original.apply(ctx, arguments);
+            return original.apply(ctx, arguments);
           }
         })(methods[i]);
       }
-      /*
-      ctx.trigger = function() {
-        var type = arguments[0];
-        ctx.counter[type] = (ctx.counter[type] || 0) + 1;
-        log.apply(window, arguments);
-        trigger.apply(ctx, arguments);
-      };
 
-      var provide = ctx.provide;
-      ctx.provide = function() {
-        var type = arguments[0];
-        ctx.counter[type] = (ctx.counter[type] || 0) + 1;
-        log.apply(window, arguments);
-        provide.apply(ctx, arguments);
-      };
-*/
       ctx.log = function() {
         log.apply(window, arguments);
       };
