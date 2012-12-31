@@ -12,7 +12,6 @@ requirejs.config({
 require([
     "jquery"
   , "modules/context"
-  , "modules/view/debugger"
   , "modules/model/config"
   , "modules/model/examples"
   , "modules/model/dimensionstyper"

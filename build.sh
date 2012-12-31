@@ -5,12 +5,23 @@ cp -r -f src/css/jquery-ui/gray/images/*.* build/css/jquery-ui/gray/images
 cp -r -f src/css/jquery-ui/blue/images/*.* build/css/jquery-ui/blue/images
 cp -r -f src/css/jquery-ui/dark/images/*.* build/css/jquery-ui/dark/images
 cp -r -f src/css/jquery-ui/black/images/*.* build/css/jquery-ui/black/images
+cp -r -f src/images/*.* build/images
+cp -r -f src/js/ext/jstree/themes/default/*.* build/themes/default
+cp -r -f src/data/*.* build/data
+cp -r -f src/css/jquery-minicolors/images/*.* build/css/css/jquery-minicolors/images
+cp -r -f src/css/jquery-minicolors/images/*.* build/css/jquery-minicolors/images
 
 # MINIFY CSS
 node tools/r.js -o cssIn=src/css/jquery-ui/black/jquery-ui.css out=build/css/jquery-ui/black/jquery-ui.css
 node tools/r.js -o cssIn=src/css/jquery-ui/blue/jquery-ui.css out=build/css/jquery-ui/blue/jquery-ui.css
 node tools/r.js -o cssIn=src/css/jquery-ui/dark/jquery-ui.css out=build/css/jquery-ui/dark/jquery-ui.css
 node tools/r.js -o cssIn=src/css/jquery-ui/gray/jquery-ui.css out=build/css/jquery-ui/gray/jquery-ui.css
+
+node tools/r.js -o cssIn=src/css/jquery-pnotify/jquery.pnotify.default.css out=build/css/css/jquery-pnotify/jquery.pnotify.default.css
+node tools/r.js -o cssIn=src/css/jquery-slickgrid/slick.grid.css out=build/css/css/jquery-slickgrid/slick.grid.css
+node tools/r.js -o cssIn=src/css/jquery-minicolors/jquery.miniColors.css out=build/css/css/jquery-minicolors/jquery.miniColors.css
+
+node tools/r.js -o cssIn=src/js/ext/jstree/themes/default/style.css out=build/themes/default/style.css
 
 # MINIFY LESS
 lessc src/css/main.less build/css/reportgrid-builder.css

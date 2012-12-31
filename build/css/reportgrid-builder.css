@@ -1,6 +1,304 @@
-@import "css/jquery-pnotify/jquery.pnotify.default.css";
-@import "css/jquery-minicolors/jquery.miniColors.css";
-@import "css/jquery-slickgrid/slick.grid.css";
+
+.ui-pnotify {
+	top: 18px;
+	right: 18px;
+	position: absolute;
+	height: auto;
+	
+	z-index: 9999;
+}
+html > body .ui-pnotify {
+	position: fixed;
+}
+.ui-pnotify .ui-pnotify-shadow {
+	margin: 0;
+	position: absolute;
+	top: .1em;
+	left: .1em;
+	bottom: -.2em;
+	right: -.2em;
+	z-index: -1;
+}
+.ui-pnotify-container {
+	background-position: 0 0;
+	padding: .8em;
+	height: 100%;
+}
+.ui-pnotify-closer, .ui-pnotify-sticker {
+	float: right;
+	margin-left: .2em;
+}
+.ui-pnotify-title {
+	display: block;
+	font-size: 1.2em;
+	line-height: 1;
+	font-weight: bold;
+	margin-bottom: .4em;
+}
+.ui-pnotify-text {
+	display: block;
+}
+.ui-pnotify-icon, .ui-pnotify-icon span {
+	display: block;
+	float: left;
+	margin-right: .2em;
+}
+.ui-pnotify-history-container {
+	position: absolute;
+	top: 0;
+	right: 18px;
+	width: 70px;
+	border-top: none;
+	
+	z-index: 10000;
+}
+.ui-pnotify-history-container .ui-pnotify-history-header {
+	padding: 2px;
+}
+.ui-pnotify-history-container button {
+	cursor: pointer;
+	display: block;
+	width: 100%;
+}
+.ui-pnotify-history-container .ui-pnotify-history-pulldown {
+	display: block;
+	margin: 0 auto;
+}
+INPUT.miniColors {
+	margin-right: 4px;
+}
+.miniColors-selector {
+	position: absolute;
+	width: 175px;
+	height: 150px;
+	background: white;
+	border: solid 1px #bababa;
+	-moz-box-shadow: 0 0 6px rgba(0, 0, 0, .25);
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, .25);
+	box-shadow: 0 0 6px rgba(0, 0, 0, .25);
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	z-index: 999999;
+}
+.miniColors.opacity.miniColors-selector {
+	width: 200px;
+}
+.miniColors-selector.black {
+	background: black;
+	border-color: black;
+}
+.miniColors-colors {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 150px;
+	height: 150px;
+	background: url(css/jquery-minicolors/images/colors.png) -40px 0 no-repeat;
+	cursor: crosshair;
+}
+.miniColors.opacity .miniColors-colors {
+	left: 30px;
+}
+.miniColors-hues {
+	position: absolute;
+	top: 5px;
+	left: 160px;
+	width: 20px;
+	height: 150px;
+	background: url(css/jquery-minicolors/images/colors.png) 0 0 no-repeat;
+	cursor: crosshair;
+}
+.miniColors.opacity .miniColors-hues {
+	left: 185px;
+}
+.miniColors-opacity {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 20px;
+	height: 150px;
+	background: url(css/jquery-minicolors/images/colors.png) -20px 0 no-repeat;
+	cursor: crosshair;
+}
+.miniColors-colorPicker {
+	position: absolute;
+	width: 11px;
+	height: 11px;
+	border: 1px solid black;
+	-moz-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+}
+.miniColors-colorPicker-inner {
+	position: absolute;
+	top: 0;
+	left: 0; 
+	width: 7px;
+	height: 7px;
+	border: 2px solid white;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	border-radius: 9px;
+}
+.miniColors-huePicker,
+.miniColors-opacityPicker {
+	position: absolute;
+	left: -2px;
+	width: 22px;
+	height: 2px;
+	border: 1px solid black;
+	background: white;
+	margin-top: -1px;
+	border-radius: 2px;
+}
+.miniColors-trigger, 
+.miniColors-triggerWrap {
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+}
+.miniColors-triggerWrap {
+	background: url(css/jquery-minicolors/images/trigger.png) -22px 0 no-repeat;
+}
+.miniColors-triggerWrap.disabled {
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+.miniColors-trigger {
+	vertical-align: middle;
+	outline: none;
+	background: url(css/jquery-minicolors/images/trigger.png) 0 0 no-repeat;
+}
+.miniColors-triggerWrap.disabled .miniColors-trigger {
+	cursor: default;
+}
+.slick-header.ui-state-default, .slick-headerrow.ui-state-default {
+  width: 100%;
+  overflow: hidden;
+  border-left: 0px;
+}
+.slick-header-columns, .slick-headerrow-columns {
+  position: relative;
+  white-space: nowrap;
+  cursor: default;
+  overflow: hidden;
+}
+.slick-header-column.ui-state-default {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 16px;
+  line-height: 16px;
+  margin: 0;
+  padding: 4px;
+  border-right: 1px solid silver;
+  border-left: 0px;
+  border-top: 0px;
+  border-bottom: 0px;
+  float: left;
+}
+.slick-headerrow-column.ui-state-default {
+  padding: 4px;
+}
+.slick-header-column-sorted {
+  font-style: italic;
+}
+.slick-sort-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 5px;
+  margin-left: 4px;
+}
+.slick-sort-indicator-desc {
+  background: url(css/jquery-slickgrid/images/sort-desc.gif);
+}
+.slick-sort-indicator-asc {
+  background: url(css/jquery-slickgrid/images/sort-asc.gif);
+}
+.slick-resizable-handle {
+  position: absolute;
+  font-size: 0.1px;
+  display: block;
+  cursor: col-resize;
+  width: 4px;
+  right: 0px;
+  top: 0;
+  height: 100%;
+}
+.slick-sortable-placeholder {
+  background: silver;
+}
+.grid-canvas {
+  position: relative;
+  outline: 0;
+}
+.slick-row.ui-widget-content, .slick-row.ui-state-active {
+  position: absolute;
+  border: 0px;
+  width: 100%;
+}
+.slick-cell, .slick-headerrow-column {
+  position: absolute;
+  border: 1px solid transparent;
+  border-right: 1px dotted silver;
+  border-bottom-color: silver;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  z-index: 1;
+  padding: 1px 2px 2px 1px;
+  margin: 0;
+  white-space: nowrap;
+  cursor: default;
+}
+.slick-group {
+}
+.slick-group-toggle {
+  display: inline-block;
+}
+.slick-cell.highlighted {
+  background: lightskyblue;
+  background: rgba(0, 0, 255, 0.2);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.slick-cell.flashing {
+  border: 1px solid red !important;
+}
+.slick-cell.editable {
+  z-index: 11;
+  overflow: visible;
+  background: white;
+  border-color: black;
+  border-style: solid;
+}
+.slick-cell:focus {
+  outline: none;
+}
+.slick-reorder-proxy {
+  display: inline-block;
+  background: blue;
+  opacity: 0.15;
+  filter: alpha(opacity = 15);
+  cursor: move;
+}
+.slick-reorder-guide {
+  display: inline-block;
+  height: 2px;
+  background: blue;
+  opacity: 0.7;
+  filter: alpha(opacity = 70);
+}
+.slick-selection {
+  z-index: 10;
+  position: absolute;
+  border: 2px dashed black;
+}
 .ui-pnotify,
 .ui-pnotify-history-container,
 .rg-el,
@@ -275,8 +573,14 @@
 .rg-el .toolbar-main button,
 .rg-builder .toolbar-context button,
 .rg-el .toolbar-context button {
-  width: 2.4em;
+  width: 24px;
   height: 24px;
+}
+.rg-builder .toolbar-main .ui-buttonset .ui-button,
+.rg-el .toolbar-main .ui-buttonset .ui-button,
+.rg-builder .toolbar-context .ui-buttonset .ui-button,
+.rg-el .toolbar-context .ui-buttonset .ui-button {
+  margin-right: -2px;
 }
 .rg-builder .tabs-container.ui-tabs,
 .rg-el .tabs-container.ui-tabs {
@@ -459,7 +763,8 @@
 }
 .rg-builder .options-container .option-editor .option input.color,
 .rg-el .options-container .option-editor .option input.color {
-  width: 60px;
+  width: 52px;
+  font-family: monospace;
 }
 .rg-builder .options-container .option-editor .option input[type="text"],
 .rg-el .options-container .option-editor .option input[type="text"],
@@ -481,6 +786,13 @@
 .rg-builder .options-container .option-editor .option .subeditor,
 .rg-el .options-container .option-editor .option .subeditor {
   float: left;
+}
+.rg-builder .options-container .option-editor .option .error,
+.rg-el .options-container .option-editor .option .error {
+  position: absolute;
+  margin-top: 2px;
+  width: 100px;
+  right: 2px;
 }
 .rg-builder .options-container .option-editor .multi,
 .rg-el .options-container .option-editor .multi {
@@ -516,6 +828,23 @@
 .rg-builder .options-container .option-editor select.with-editor,
 .rg-el .options-container .option-editor select.with-editor {
   max-width: 105px;
+}
+.rg-builder .options-container .option-editor.multiline .option,
+.rg-el .options-container .option-editor.multiline .option {
+  float: none;
+}
+.rg-builder .options-container .option-editor.multiline .option .control-container,
+.rg-el .options-container .option-editor.multiline .option .control-container {
+  float: none;
+}
+.rg-builder .options-container .option-editor.multiline .option .subeditor,
+.rg-el .options-container .option-editor.multiline .option .subeditor {
+  float: none;
+  margin-left: 90px;
+}
+.rg-builder .options-container .option-editor.multiline .option .subeditor input[type="text"],
+.rg-el .options-container .option-editor.multiline .option .subeditor input[type="text"] {
+  width: 170px;
 }
 .rg-builder .options-container .fields .option-editor.inline,
 .rg-el .options-container .fields .option-editor.inline {
@@ -630,15 +959,31 @@
 .rg-el dd.error {
   padding: 4px;
 }
+.rg-builder .chart_container .outer-center,
+.rg-el .chart_container .outer-center {
+  float: right;
+  right: 50%;
+  position: relative;
+}
+.rg-builder .chart_container .inner-center,
+.rg-el .chart_container .inner-center {
+  float: right;
+  right: -50%;
+  position: relative;
+}
+.rg-builder .chart_container .clear,
+.rg-el .chart_container .clear {
+  clear: both;
+}
 .minipalette {
   width: 12px;
   height: 12px;
-  margin-left: 2px;
+  margin-left: 0px;
 }
 .rg-builder .chart-icon,
 .ui-pnotify-text .chart-icon {
   display: inline-block;
-  width: 26px;
+  width: 24px;
   height: 24px;
   background-image: url("../images/sprites-chart.png");
 }
@@ -650,57 +995,41 @@
 .ui-pnotify-text .chart-icon.icon-linechart {
   background-position: 0 -24px;
 }
-.rg-builder .chart-icon.icon-areachart,
-.ui-pnotify-text .chart-icon.icon-areachart {
-  background-position: 0 -48px;
-}
-.rg-builder .chart-icon.icon-stacked-percent-areachart,
-.ui-pnotify-text .chart-icon.icon-stacked-percent-areachart {
-  background-position: 0 -72px;
-}
-.rg-builder .chart-icon.icon-stacked-areachart,
-.ui-pnotify-text .chart-icon.icon-stacked-areachart {
-  background-position: 0 -96px;
-}
 .rg-builder .chart-icon.icon-barchart,
 .ui-pnotify-text .chart-icon.icon-barchart {
-  background-position: 0 -120px;
-}
-.rg-builder .chart-icon.icon-stacked-barchart,
-.ui-pnotify-text .chart-icon.icon-stacked-barchart {
-  background-position: 0 -144px;
+  background-position: 0 -48px;
 }
 .rg-builder .chart-icon.icon-piechart,
 .ui-pnotify-text .chart-icon.icon-piechart {
-  background-position: 0 -168px;
-}
-.rg-builder .chart-icon.icon-donutchart,
-.ui-pnotify-text .chart-icon.icon-donutchart {
-  background-position: 0 -192px;
+  background-position: 0 -72px;
 }
 .rg-builder .chart-icon.icon-leaderboard,
 .ui-pnotify-text .chart-icon.icon-leaderboard {
-  background-position: 0 -216px;
+  background-position: 0 -96px;
 }
 .rg-builder .chart-icon.icon-funnelchart,
 .ui-pnotify-text .chart-icon.icon-funnelchart {
-  background-position: 0 -240px;
+  background-position: 0 -120px;
 }
 .rg-builder .chart-icon.icon-streamgraph,
 .ui-pnotify-text .chart-icon.icon-streamgraph {
-  background-position: 0 -264px;
+  background-position: 0 -144px;
 }
 .rg-builder .chart-icon.icon-heatgrid,
 .ui-pnotify-text .chart-icon.icon-heatgrid {
-  background-position: 0 -288px;
+  background-position: 0 -168px;
 }
 .rg-builder .chart-icon.icon-pivottable,
 .ui-pnotify-text .chart-icon.icon-pivottable {
-  background-position: 0 -312px;
+  background-position: 0 -192px;
 }
 .rg-builder .chart-icon.icon-geochart,
 .ui-pnotify-text .chart-icon.icon-geochart {
-  background-position: 0 -336px;
+  background-position: 0 -216px;
+}
+.rg-builder .chart-icon.icon-scattergraph,
+.ui-pnotify-text .chart-icon.icon-scattergraph {
+  background-position: 0 -240px;
 }
 .ui-pnotify-text .menu {
   cursor: pointer;
@@ -711,6 +1040,9 @@
 }
 .ui-pnotify-text .menu span.text {
   margin-left: 0.5em;
+}
+.ui-pnotify-text .menu .palette-item .palette {
+  float: right;
 }
 .rg-dimension-dragger {
   overflow: visible !important;

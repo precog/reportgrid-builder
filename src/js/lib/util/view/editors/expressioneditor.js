@@ -4,7 +4,7 @@ define([
 ],
 
 function(createEditor, template) {
-  return function(el, options) {
+  return function(el, options, ctx) {
     options = $.extend({default : "" }, options);
 
     var $input = $('<input type="text" class="expression">');
