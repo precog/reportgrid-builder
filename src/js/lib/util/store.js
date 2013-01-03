@@ -48,7 +48,7 @@ function() {
         try {
           storage.setItem(name, JSON.stringify(data));
         } catch(e) {
-          ctx.log("error", "failed to commit to localStorage", data);
+          ctx.log("error", "failed to commit to localStorage for " + name, data);
         }
       },
       delayedCommit : function(delay) {
