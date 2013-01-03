@@ -14,7 +14,8 @@ function(debugObject) {
         request : "#fef",
         respond : "#ffe",
         provide : "#efe",
-        chart   : "#9fd"
+        chart   : "#9fd",
+        error   : "#f93"
       });
 
     ctx.log = dbg.log;
