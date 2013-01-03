@@ -8,29 +8,29 @@ define([
 function($, uiconfig, charts, ui) {
   return function(ctx) {
     var el,
-        $fields,
+        $dimensions,
         $closer,
-        fields,
-        fieldsmap,
+        variables,
+        variables_map,
         axeslist,
         axesmap,
         dimensionsmap = {},
-        currentDimensions = {};
+        current_variables = {};
 
-    function update_chart_type(type) {
-      $fields.children("div.pair").remove();
+    function chart_type_change(type) {
+      $dimensions.children("div.pair").remove();
+      current_variables = {};
       var chart = charts.map[type];
-      dimensionsInfo = {};
       for(var i = 0; i < chart.dimensions.length; i++) {
         append_dimension(chart.dimensions[i]);
       }
-      if(fields)
+      if(variables)
         setTimeout(function() {
-          update_fields(fields);
+          update_variables(variables);
         }, 200);
     }
 
-    function update_fields(fields) {
+    function update_variables(vars) {
       if(axeslist) {
         $(axeslist).each(function() {
           var name = this.name;
@@ -41,7 +41,7 @@ function($, uiconfig, charts, ui) {
         });
       }
       axesmap = {};
-      axeslist = fields.map(function(field) {
+      axeslist = vars.map(function(field) {
         var axis = {
           type : field.type,
           name : field.field,
@@ -54,22 +54,23 @@ function($, uiconfig, charts, ui) {
     }
 
     function update_data_source(source) {
-      fieldsmap = {};
+      variables_map = {};
+      current_variables = {};
       if(source) {
-        fields = source.fields;
-        for(var i = 0; i < fields.length; i++) {
-          fieldsmap[fields[i].field] = fields[i];
+        variables = source.fields;
+        for(var i = 0; i < variables.length; i++) {
+          variables_map[variables[i].field] = variables[i];
         }
       } else {
-        fields = [];
+        variables = [];
       }
-      update_fields(fields);
+      update_variables(variables);
     }
 
     function fill_selects() {
-      $fields.find("select.secondary").remove();
+      $dimensions.find("select.secondary").remove();
       
-      var $select = $fields.find("select");
+      var $select = $dimensions.find("select");
       $select.find(".value").remove();
       fill_select($select);
     }
@@ -79,7 +80,7 @@ function($, uiconfig, charts, ui) {
         var $current = $(this),
             name  = $current.attr("data-id"),
             pos   = $current.index(),
-            value = (currentDimensions[name] || [])[pos],
+            value = (current_variables[name] || [])[pos],
             dimension = dimensionsmap[name];
         $(axeslist).each(function() {
           if(dimension.accept && dimension.accept.indexOf(this.type) < 0)
@@ -149,11 +150,11 @@ function($, uiconfig, charts, ui) {
           return $(this).val() !== "";
         })
         .each(function() {
-          types.push(fieldsmap[$(this).val()]);
+          types.push(variables_map[$(this).val()]);
         });
-      ctx.off("chart.axis.change", axis_change);
+      ctx.off("chart.axis.change", chart_axis_change);
       ctx.trigger("chart.axis.change", types, dimension);
-      ctx.on("chart.axis.change", axis_change);
+      ctx.on("chart.axis.change", chart_axis_change);
     }
 
     function create_select_change($container, $select, multiple, dimension) {
@@ -210,17 +211,17 @@ function($, uiconfig, charts, ui) {
     function init(container) {
       el = container;
 
-      $fields = $('<div class="fields"></div>').appendTo(el);
-      $closer = $('<div class="clr"></div>').appendTo($fields);
+      $dimensions = $('<div class="variables"></div>').appendTo(el);
+      $closer = $('<div class="clr"></div>').appendTo($dimensions);
 
-      ctx.on("chart.type.change", update_chart_type);
+      ctx.on("chart.type.change", chart_type_change);
 //      ctx.on("chart.dimension.add", append_dimension);
       ctx.on("chart.datasource.change", update_data_source);
     }
 
-    function axis_change(types, dimension) {
+    function chart_axis_change(types, dimension) {
       var t = types.slice(0),
-        info = dimension_info(dimension);
+          info = dimension_info(dimension);
       function dequeue(rep) {
         if(t.length === 0) return;
         var field = t.shift().field;
@@ -236,10 +237,10 @@ function($, uiconfig, charts, ui) {
       }
 
       setTimeout(function() { dequeue(0); }, 20);
-      currentDimensions[dimension.name] = types.map(function(v) { return v.field; });
+      current_variables[dimension.name] = types.map(function(v) { return v.field; });
     }
 
-    ctx.on("chart.axis.change", axis_change);
+    ctx.on("chart.axis.change", chart_axis_change);
 
     ctx.one("view.editor.dimensions", init);
   };

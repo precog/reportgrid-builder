@@ -13,7 +13,8 @@ function(debugObject) {
         trigger : "#eff",
         request : "#fef",
         respond : "#ffe",
-        provide : "#efe"
+        provide : "#efe",
+        chart   : "#9fd"
       });
 
     ctx.log = dbg.log;
