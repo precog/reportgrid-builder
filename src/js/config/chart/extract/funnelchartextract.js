@@ -26,5 +26,5 @@ function(ensure) {
 
     if("undefined" !== typeof options["funnelchart.sort"] && options["funnelchart.sort"])
       o.sort = options["funnelchart.sort"];
-  }
+  };
 });

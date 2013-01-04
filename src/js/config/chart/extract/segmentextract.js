@@ -9,5 +9,5 @@ function(ensure) {
       var segment = o.segment || (o.segment = {});
       segment.on = dimensions.segment[0].name;
     }
-  }
+  };
 });

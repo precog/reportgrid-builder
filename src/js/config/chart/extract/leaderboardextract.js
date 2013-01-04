@@ -31,5 +31,5 @@ function(ensure) {
         ensure('label',o).value = options['label.value'];
       }
     }
-  }
+  };
 });

@@ -67,5 +67,5 @@ function(ensure) {
     if(options["pivottable.endcolor"] && "#007fff" !== options["pivottable.endcolor"]) {
       o.endcolor = options["pivottable.endcolor"];
     }
-  }
+  };
 });

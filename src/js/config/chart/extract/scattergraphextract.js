@@ -19,5 +19,5 @@ function(ensure) {
     if(options["scattergraph.symbolstyle"]) {
       o.symbolstyle = options["scattergraph.symbolstyle"];
     }
-  }
+  };
 });

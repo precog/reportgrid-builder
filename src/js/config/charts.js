@@ -9,6 +9,7 @@ define([
   , "config/chart/pivottable"
   , "config/chart/scattergraph"
   , "config/chart/piechart"
+  , "config/chart/sankey"
 ],
 
   // geo

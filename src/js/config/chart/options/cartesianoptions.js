@@ -406,5 +406,5 @@ function() {
      labelAnchor = function(_) return null;
      labelAngle = function(_) return null;
      */
-  }
+  };
 });

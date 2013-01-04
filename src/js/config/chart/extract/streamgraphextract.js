@@ -12,5 +12,5 @@ function(ensure) {
     if("undefined" !== typeof options["streamgraph.lineinterpolation"] && options["streamgraph.lineinterpolation"] != "linear") {
       o.interpolation = options["streamgraph.lineinterpolation"];
     }
-  }
+  };
 });

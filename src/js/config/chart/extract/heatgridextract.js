@@ -8,5 +8,5 @@ function(ensure) {
 //      o.stacked = options["barchart.stacked"];
     if("css:1" !== options["heatgrid.color"])
       o.color = options["heatgrid.color"];
-  }
+  };
 });

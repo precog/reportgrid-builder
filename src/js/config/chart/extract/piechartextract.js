@@ -30,5 +30,5 @@ function(ensure) {
 
     if("undefined" !== typeof options["piechart.sort"] && options["piechart.sort"])
       o.sort = options["piechart.sort"];
-  }
+  };
 });

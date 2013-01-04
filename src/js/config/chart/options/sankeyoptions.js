@@ -5,6 +5,8 @@ define([
 function() {
   return function(options, preferences) {
     preferences = preferences || {};
+
+    /*
     options.push({
       name  : "horizontal",
       group : "barchart",
@@ -109,5 +111,6 @@ function() {
         }
       }]
     });
+    */
   };
 });
