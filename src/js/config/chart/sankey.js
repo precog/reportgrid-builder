@@ -5,25 +5,15 @@ define([
 
 function(extractor, applyOptions) {
   var chart = {
-      type  : "barchart"
-    , method : "barChart"
-    , label : "Bar Chart"
+      type   : "sankey"
+    , method : "sankey"
+    , label  : "Sankey"
     , extractOptions : extractor()
     , dimensions : [{
-      name : "x",
+      name   : "value",
       isaxis : true,
-      min  : 1,
-      max  : 1
-    }, {
-      name : "y",
-      isaxis : true,
-      min  : 1,
-      max  : null
-    }, {
-      name : "segment",
-      min  : 0,
-      max  : 1,
-      accept : ["category"]
+      min    : 1,
+      max    : 1
     }],
     options : []
   };
