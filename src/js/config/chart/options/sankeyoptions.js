@@ -23,6 +23,7 @@ function() {
     });
     options.push({
       name  : "stackbackedges",
+      label  : "stack back-edges",
       group : "sankey",
       event : "options.chart.sankey.stackbackedges",
       editors : [{
@@ -44,6 +45,7 @@ function() {
     //imageheight      48
     //imagespacing      0
     //labelnodespacing  4
+    //chunkwidth  4
     options.push({
       name : "layerwidth",
       label : "layer width",
@@ -194,6 +196,21 @@ function() {
         }
       }]
     });
+    options.push({
+      name : "chunkwidth",
+      label : "chunk width",
+      group : "sankey",
+      weight : 0,
+      event : "options.chart.sankey.chunkwidth",
+      editors : [{
+        type : "float",
+        options : {
+          default : 10,
+          step : 1,
+          min : 0
+        }
+      }]
+    });
 
     //EXPRESSION
     //imagepath
@@ -339,7 +356,7 @@ function() {
       label : "edge",
       event : "options.chart.label.edge",
       group : "label",
-      weight : -10,
+      weight : 8,
       editors : [{
         type  : "boolean",
         options : {
@@ -358,10 +375,10 @@ function() {
     //edgeover
     options.push({
       name  : "edgeover",
-      label : "edge over",
+      label : "edge tooltip",
       event : "options.chart.label.edgeover",
       group : "label",
-      weight : -10,
+      weight : 10,
       editors : [{
         type  : "boolean",
         options : {
@@ -383,7 +400,7 @@ function() {
       label : "node",
       event : "options.chart.label.node",
       group : "label",
-      weight : -10,
+      weight : 5,
       editors : [{
         type  : "boolean",
         options : {

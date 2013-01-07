@@ -10,7 +10,7 @@ function(ensure) {
     if("undefined" !== typeof options["sankey.thinbackedges"] && options["sankey.thinbackedges"] !== false)
       o.thinbackedges = options["sankey.thinbackedges"];
 
-    if("undefined" !== typeof options["sankey.stackbackedges"] && options["sankey.thinbackedges"] !== true)
+    if("undefined" !== typeof options["sankey.stackbackedges"] && options["sankey.stackbackedges"] !== true)
       o.stackbackedges = options["sankey.stackbackedges"];
 
     //FLOAT
@@ -44,6 +44,9 @@ function(ensure) {
       o.imagespacing = options["sankey.imagespacing"];
     if("undefined" !== typeof options["sankey.labelnodespacing"] && options["sankey.labelnodespacing"] !== 4)
       o.labelnodespacing = options["sankey.labelnodespacing"];
+
+    if("undefined" !== typeof options["sankey.chunkwidth"] && options["sankey.chunkwidth"] !== 10)
+      o.chunkwidth = options["sankey.chunkwidth"];
 
 
 

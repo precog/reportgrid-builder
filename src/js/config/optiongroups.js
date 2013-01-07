@@ -16,6 +16,7 @@ function() {
     , { group : "pivottable",       label : "pivot table" }
     , { group : "scattergraph",     label : "scatter graph" }
     , { group : "streamgraph",      label : "stream graph" }
+    , { group : "sankey",           label : "sankey" }
     , { group : "aesthetic",        label : "aesthetic" }
 
     , { group : "barpadding",       label : "spacing" }
