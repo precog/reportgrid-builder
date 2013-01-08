@@ -8,7 +8,6 @@ function() {
       o.condition = {
         event : event + (index-1),
         visible : function(value) {
-console.log(index, value)
           return value && value != "-";
         }
       };
@@ -22,7 +21,7 @@ console.log(index, value)
     for(var i = 0; i < 5; i++) {
       options.push(injectCondition({
         name : "template"+i,
-        label : "geo map",
+        label : "map",
         group : "map"+i,
         weight : -5,
         event : "options.chart.geo.template" + i,
@@ -49,6 +48,20 @@ console.log(index, value)
           }
         }]
       }, "options.chart.geo.template", i));
+
+      //classname string container
+      //color css/css:int/i:/s:/f:
+      //label object
+      //mapping url/json object
+      //mode orthographic/stereogrphic
+      //origin double x/y value to map to an array
+      //parallels (only for albers projection) array of float
+      //projection mercator/albers/albersusa/azimuthal
+      //property null/string
+      //radius float/function(dp,stats)
+      //scale float
+      //translate array float
+      //url string
     }
 
 /*

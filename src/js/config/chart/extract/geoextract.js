@@ -3,7 +3,24 @@ define([
 ],
 
 function(ensure) {
+  function ensureMap(o, i) {
+    var map = o.map || (o.map = []);
+    return map[i] || (map[i] = {});
+  }
   return function(o, dimensions, options) {
+    for(var i = 0; i < 5; i++) {
+      var value = options["geo.template"+i];
+      if(value && value !== '-')
+        ensureMap(o, i).template = value;
+    }
+    console.log(dimensions);
+    if(dimensions.feature) {
+
+      ensureMap(o, 0).property = dimensions.feature[0].field.field;
+    }
+console.log(o);
+    if(o.map && o.map.length === 1)
+      o.map = o.map[0];
 /*
     //BOOL
     //thinbackedges   false
