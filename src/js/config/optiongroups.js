@@ -22,6 +22,7 @@ function() {
     , { group : "barpadding",       label : "spacing" }
     , { group : "piechartposition", label : "positions" }
     , { group : "displaytotals",    label : "display totals" }
+    , { group : "thumbnails",       label : "thumbnails" }
     , { group : "customclasses",    label : "custom classes" }
 
     , { group : "symbol",           label : "symbols" }

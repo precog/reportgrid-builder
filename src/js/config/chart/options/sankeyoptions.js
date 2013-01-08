@@ -12,7 +12,8 @@ function() {
     options.push({
       name  : "thinbackedges",
       label  : "thin back-edges",
-      group : "sankey",
+      group : "aesthetic",
+      weight : 10,
       event : "options.chart.sankey.thinbackedges",
       editors : [{
         type  : "boolean",
@@ -24,7 +25,8 @@ function() {
     options.push({
       name  : "stackbackedges",
       label  : "stack back-edges",
-      group : "sankey",
+      group : "aesthetic",
+      weight : 15,
       event : "options.chart.sankey.stackbackedges",
       editors : [{
         type  : "boolean",
@@ -64,8 +66,8 @@ function() {
     options.push({
       name : "nodespacing",
       label : "node spacing",
-      group : "sankey",
-      weight : 0,
+      group : "aesthetic",
+      weight : 31,
       event : "options.chart.sankey.nodespacing",
       editors : [{
         type : "float",
@@ -79,8 +81,8 @@ function() {
     options.push({
       name : "dummyspacing",
       label : "dummy spacing",
-      group : "sankey",
-      weight : 0,
+      group : "aesthetic",
+      weight : 30,
       event : "options.chart.sankey.dummyspacing",
       editors : [{
         type : "float",
@@ -94,8 +96,8 @@ function() {
     options.push({
       name : "backedgespacing",
       label : "back-edge spacing",
-      group : "sankey",
-      weight : 0,
+      group : "aesthetic",
+      weight : 16,
       event : "options.chart.sankey.backedgespacing",
       editors : [{
         type : "float",
@@ -109,8 +111,8 @@ function() {
     options.push({
       name : "extraheight",
       label : "extra height",
-      group : "sankey",
-      weight : 0,
+      group : "aesthetic",
+      weight : 30,
       event : "options.chart.sankey.extraheight",
       editors : [{
         type : "float",
@@ -124,8 +126,8 @@ function() {
     options.push({
       name : "extraradius",
       label : "extra radius",
-      group : "sankey",
-      weight : 0,
+      group : "aesthetic",
+      weight : 30,
       event : "options.chart.sankey.extraradius",
       editors : [{
         type : "float",
@@ -138,10 +140,16 @@ function() {
     });
     options.push({
       name : "imagewidth",
-      label : "image width",
-      group : "sankey",
-      weight : 0,
+      label : "width",
+      group : "thumbnails",
+      weight : 5,
       event : "options.chart.sankey.imagewidth",
+      condition : {
+        event   : "options.chart.sankey.imagepath",
+        visible : function(value) {
+          return value && (""+value).length > 0;
+        }
+      },
       editors : [{
         type : "float",
         options : {
@@ -153,10 +161,16 @@ function() {
     });
     options.push({
       name : "imageheight",
-      label : "image height",
-      group : "sankey",
-      weight : 0,
+      label : "height",
+      group : "thumbnails",
+      weight : 6,
       event : "options.chart.sankey.imageheight",
+      condition : {
+        event   : "options.chart.sankey.imagepath",
+          visible : function(value) {
+          return value && (""+value).length > 0;
+        }
+      },
       editors : [{
         type : "float",
         options : {
@@ -168,10 +182,16 @@ function() {
     });
     options.push({
       name : "imagespacing",
-      label : "image spacing",
-      group : "sankey",
-      weight : 0,
+      label : "spacing",
+      group : "thumbnails",
+      weight : 8,
       event : "options.chart.sankey.imagespacing",
+      condition : {
+        event   : "options.chart.sankey.imagepath",
+        visible : function(value) {
+          return value && (""+value).length > 0;
+        }
+      },
       editors : [{
         type : "float",
         options : {
@@ -184,8 +204,8 @@ function() {
     options.push({
       name : "labelnodespacing",
       label : "label node spacing",
-      group : "sankey",
-      weight : 0,
+      group : "aesthetic",
+      weight : 32,
       event : "options.chart.sankey.labelnodespacing",
       editors : [{
         type : "float",
@@ -199,9 +219,15 @@ function() {
     options.push({
       name : "chunkwidth",
       label : "chunk width",
-      group : "sankey",
-      weight : 0,
+      group : "aesthetic",
+      weight : 11,
       event : "options.chart.sankey.chunkwidth",
+      condition : {
+        event   : "options.chart.sankey.thinbackedges",
+        visible : function(value) {
+          return !!value;
+        }
+      },
       editors : [{
         type : "float",
         options : {
@@ -216,8 +242,8 @@ function() {
     //imagepath
     options.push({
       name : "imagepath",
-      label : "image path",
-      group : "sankey",
+      label : "image url",
+      group : "thumbnails",
       weight : 0,
       event : "options.chart.sankey.imagepath",
       editors : [{
@@ -236,7 +262,7 @@ function() {
     options.push({
       name : "nodeclass",
       label : "node class",
-      group : "sankey",
+      group : "customclasses",
       weight : 0,
       event : "options.chart.sankey.nodeclass",
       editors : [{
@@ -259,7 +285,7 @@ function() {
     options.push({
       name : "edgeclass",
       label : "edge class",
-      group : "sankey",
+      group : "customclasses",
       weight : 0,
       event : "options.chart.sankey.edgeclass",
       editors : [{
@@ -329,7 +355,7 @@ function() {
       name : "layoutmethod",
       label : "layout method",
       group : "sankey",
-      weight : 0,
+      weight : -5,
       event : "options.chart.sankey.layoutmethod",
       editors : [{
         type : "selection",
