@@ -18,7 +18,7 @@ function(ensure) {
 
       ensureMap(o, 0).property = dimensions.feature[0].field.field;
     }
-console.log(o);
+
     if(o.map && o.map.length === 1)
       o.map = o.map[0];
 /*

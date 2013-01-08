@@ -175,7 +175,7 @@ function($, uiconfig, ui, editors, optiongroups) {
           $fieldset.show();
         } else {
           $container.hide();
-          if($fieldset.children(".option-editor:visible").length == 0) {
+          if($fieldset.find(".option-editor:visible").length == 0) {
             $fieldset.hide();
           }
         }
