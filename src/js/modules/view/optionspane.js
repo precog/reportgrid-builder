@@ -169,10 +169,15 @@ function($, uiconfig, ui, editors, optiongroups) {
 
 
       function condition_visible() {
+        var $fieldset = (groups[info.group] || defaultGroup);
         if(info.condition.visible.apply(info, arguments)) {
           $container.show();
+          $fieldset.show();
         } else {
           $container.hide();
+          if($fieldset.children(".option-editor:visible").length == 0) {
+            $fieldset.hide();
+          }
         }
       }
 

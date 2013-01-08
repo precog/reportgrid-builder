@@ -10,6 +10,7 @@ define([
   , "config/chart/scattergraph"
   , "config/chart/piechart"
   , "config/chart/sankey"
+  , "config/chart/geo"
 ],
 
   // geo
