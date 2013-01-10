@@ -11,7 +11,6 @@ function($, tplChart) {
       var info,
           timer,
           $chart = $(tplChart).appendTo(el).find(".chart");
-//      $(el).css({ width : "600px", height : "400px" });
 
       function execute(newinfo) {
         info = newinfo;

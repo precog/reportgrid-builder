@@ -164,10 +164,6 @@ function($, uiconfig, ui, editors, optiongroups) {
       editor.value.on("value.change", ctx_trigger_handler);
       current_type = info.editors[index].type;
 
-
-//      ctx.on(info.event, ctx_on_handler);
-
-
       function condition_visible() {
         var $fieldset = (groups[info.group] || defaultGroup);
         if(info.condition.visible.apply(info, arguments)) {
@@ -195,7 +191,6 @@ function($, uiconfig, ui, editors, optiongroups) {
           ctx.off(info.condition.event, condition_visible);
         }
         editor.value.off("value.change", ctx_trigger_handler);
-//        ctx.off(info.event, ctx_on_handler);
         ctx.off("chart.option.set", editor_value_set);
         if(info.unlink)
           info.unlink(ctx, editor);

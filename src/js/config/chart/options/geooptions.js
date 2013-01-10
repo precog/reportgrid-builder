@@ -37,11 +37,11 @@ function() {
     for(var i = 0; i < 5; i++) {
       (function(i) {
         options.push(injectPreviousCondition({
-          name : "template",
-          label : "map",
-          group : "map",
-          weight : -5,
-          event : "options.chart.geo.template",
+          name    : "template",
+          label   : "map",
+          group   : "map",
+          weight  : -5,
+          event   : "options.chart.geo.template",
           editors : [{
             type : "selection",
             options : {
@@ -67,21 +67,22 @@ function() {
         }, "options.chart.geo.template", i));
 
         options.push(injectCondition({
-          name : "projection",
-          label : "projection",
-          group : "map",
+          name   : "projection",
+          label  : "projection",
+          group  : "map",
           weight : 5,
-          event : "options.chart.geo.projection",
-          link : function(ctx, editor) {
+          event  : "options.chart.geo.projection",
+          link   : function(ctx, editor) {
             this._handler = function(template) {
-console.log("TEMPLATE", template);
               if(template == "world") {
                 editor.value.set("mercator");
               } else {
                 editor.value.set("albersusa");
               }
             };
-            ctx.on("options.chart.geo.template"+i, this._handler);
+            setTimeout(function() {
+              ctx.on("options.chart.geo.template"+i, this._handler);
+            }, 500); // the delay is required to allow loading to set a different value
           },
           unlink : function(ctx, editor) {
             ctx.off("options.chart.geo.template"+i, this._handler);
@@ -109,12 +110,12 @@ console.log("TEMPLATE", template);
         }, "options.chart.geo.template", i));
 
         options.push(injectCondition({
-          name : "scale",
-          label : "scale",
-          group : "map",
+          name   : "scale",
+          label  : "scale",
+          group  : "map",
           weight : 6,
-          event : "options.chart.geo.scale",
-          link : function(ctx, editor) {
+          event  : "options.chart.geo.scale",
+          link   : function(ctx, editor) {
             this._handler = function(projection) {
               var scale = 1000;
               if(projection === "mercator") {
@@ -123,7 +124,6 @@ console.log("TEMPLATE", template);
                 scale = 200;
               }
               var is_default = editor.value.isDefault();
-console.log(is_default);
               editor.value.setDefault(scale);
               if(is_default)
                 editor.value.reset();
@@ -166,421 +166,5 @@ console.log(is_default);
       //translate array float
       //url string
     }
-
-/*
-    //BOOL
-    //thinbackedges   false
-    //stackbackedges  true
-    options.push({
-      name  : "thinbackedges",
-      label  : "thin back-edges",
-      group : "aesthetic",
-      weight : 10,
-      event : "options.chart.geo.thinbackedges",
-      editors : [{
-        type  : "boolean",
-        options : {
-          default : false
-        }
-      }]
-    });
-    options.push({
-      name  : "stackbackedges",
-      label  : "stack back-edges",
-      group : "aesthetic",
-      weight : 15,
-      event : "options.chart.geo.stackbackedges",
-      editors : [{
-        type  : "boolean",
-        options : {
-          default : true
-        }
-      }]
-    });
-
-    //FLOAT
-    //layerwidth       61
-    //nodespacing      28
-    //dummyspacing     18
-    //backedgespacing   4
-    //extraheight       5
-    //extraradius       5
-    //imagewidth       60
-    //imageheight      48
-    //imagespacing      0
-    //labelnodespacing  4
-    //chunkwidth  4
-    options.push({
-      name : "layerwidth",
-      label : "layer width",
-      group : "geo",
-      weight : 0,
-      event : "options.chart.geo.layerwidth",
-      editors : [{
-        type : "float",
-        options : {
-          default : 61,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "nodespacing",
-      label : "node spacing",
-      group : "aesthetic",
-      weight : 31,
-      event : "options.chart.geo.nodespacing",
-      editors : [{
-        type : "float",
-        options : {
-          default : 28,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "dummyspacing",
-      label : "dummy spacing",
-      group : "aesthetic",
-      weight : 30,
-      event : "options.chart.geo.dummyspacing",
-      editors : [{
-        type : "float",
-        options : {
-          default : 18,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "backedgespacing",
-      label : "back-edge spacing",
-      group : "aesthetic",
-      weight : 16,
-      event : "options.chart.geo.backedgespacing",
-      editors : [{
-        type : "float",
-        options : {
-          default : 4,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "extraheight",
-      label : "extra height",
-      group : "aesthetic",
-      weight : 30,
-      event : "options.chart.geo.extraheight",
-      editors : [{
-        type : "float",
-        options : {
-          default : 5,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "extraradius",
-      label : "extra radius",
-      group : "aesthetic",
-      weight : 30,
-      event : "options.chart.geo.extraradius",
-      editors : [{
-        type : "float",
-        options : {
-          default : 5,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "imagewidth",
-      label : "width",
-      group : "thumbnails",
-      weight : 5,
-      event : "options.chart.geo.imagewidth",
-      condition : {
-        event   : "options.chart.geo.imagepath",
-        visible : function(value) {
-          return value && (""+value).length > 0;
-        }
-      },
-      editors : [{
-        type : "float",
-        options : {
-          default : 60,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "imageheight",
-      label : "height",
-      group : "thumbnails",
-      weight : 6,
-      event : "options.chart.geo.imageheight",
-      condition : {
-        event   : "options.chart.geo.imagepath",
-          visible : function(value) {
-          return value && (""+value).length > 0;
-        }
-      },
-      editors : [{
-        type : "float",
-        options : {
-          default : 48,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "imagespacing",
-      label : "spacing",
-      group : "thumbnails",
-      weight : 8,
-      event : "options.chart.geo.imagespacing",
-      condition : {
-        event   : "options.chart.geo.imagepath",
-        visible : function(value) {
-          return value && (""+value).length > 0;
-        }
-      },
-      editors : [{
-        type : "float",
-        options : {
-          default : 0,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "labelnodespacing",
-      label : "label node spacing",
-      group : "aesthetic",
-      weight : 32,
-      event : "options.chart.geo.labelnodespacing",
-      editors : [{
-        type : "float",
-        options : {
-          default : 4,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-    options.push({
-      name : "chunkwidth",
-      label : "chunk width",
-      group : "aesthetic",
-      weight : 11,
-      event : "options.chart.geo.chunkwidth",
-      condition : {
-        event   : "options.chart.geo.thinbackedges",
-        visible : function(value) {
-          return !!value;
-        }
-      },
-      editors : [{
-        type : "float",
-        options : {
-          default : 10,
-          step : 1,
-          min : 0
-        }
-      }]
-    });
-
-    //EXPRESSION
-    //imagepath
-    options.push({
-      name : "imagepath",
-      label : "image url",
-      group : "thumbnails",
-      weight : 0,
-      event : "options.chart.geo.imagepath",
-      editors : [{
-        type : "expression",
-        options : {
-          default : "",
-          variables : ["id"],
-          useDimensions : true,
-          placeholder : '="http://example.com/"+id+".jpg"'
-        }
-      }]
-    });
-
-    //EXPRESSION OR STRING
-    //nodeclass
-    options.push({
-      name : "nodeclass",
-      label : "node class",
-      group : "customclasses",
-      weight : 0,
-      event : "options.chart.geo.nodeclass",
-      editors : [{
-        type : "string",
-        options : {
-          default : "",
-          placeholder : 'custom-class'
-        }
-      }, {
-        type : "expression",
-        options : {
-          default : "",
-          variables : ["id","stats"],
-          useDimensions : false,
-          placeholder : '="custom-class"'
-        }
-      }]
-    });
-    //edgeclass
-    options.push({
-      name : "edgeclass",
-      label : "edge class",
-      group : "customclasses",
-      weight : 0,
-      event : "options.chart.geo.edgeclass",
-      editors : [{
-        type : "string",
-        options : {
-          default : "",
-          placeholder : 'custom-class'
-        }
-      }, {
-        type : "expression",
-        options : {
-          default : "",
-          variables : ["head", "tail","stats"],
-          useDimensions : false,
-          placeholder : '="custom-class"'
-        }
-      }]
-    });
-    //displayentry
-    options.push({
-      name : "displayentry",
-      label : "display entry",
-      group : "geo",
-      weight : 0,
-      event : "options.chart.geo.displayentry",
-      editors : [{
-        type : "boolean",
-        options : {
-          default : true
-        }
-      }, {
-        type : "expression",
-        options : {
-          default : "",
-          variables : ["head", "tail","stats"],
-          useDimensions : false,
-          placeholder : '=head=="entry"'
-        }
-      }]
-    });
-    //displayexit
-    options.push({
-      name : "displayexit",
-      label : "display exit",
-      group : "geo",
-      weight : 0,
-      event : "options.chart.geo.displayexit",
-      editors : [{
-        type : "boolean",
-        options : {
-          default : true
-        }
-      }, {
-        type : "expression",
-        options : {
-          default : "",
-          variables : ["head", "tail","stats"],
-          useDimensions : false,
-          placeholder : '=tail=="exit"'
-        }
-      }]
-    });
-
-
-    //LAYOUT MAP
-    //layoutmap
-
-    //LABEL
-    //edge
-    options.push({
-      name  : "edge",
-      label : "edge",
-      event : "options.chart.label.edge",
-      group : "label",
-      weight : 8,
-      editors : [{
-        type  : "boolean",
-        options : {
-          default : true
-        }
-      }, {
-        type  : "template",
-        options : {
-          default : "",
-          variables : ["stats"],
-          useDimensions : true
-        }
-      }]
-    });
-
-    //edgeover
-    options.push({
-      name  : "edgeover",
-      label : "edge tooltip",
-      event : "options.chart.label.edgeover",
-      group : "label",
-      weight : 10,
-      editors : [{
-        type  : "boolean",
-        options : {
-          default : true
-        }
-      }, {
-        type  : "template",
-        options : {
-          default : "",
-          variables : ["stats"],
-          useDimensions : true
-        }
-      }]
-    });
-
-    //node
-    options.push({
-      name  : "node",
-      label : "node",
-      event : "options.chart.label.node",
-      group : "label",
-      weight : 5,
-      editors : [{
-        type  : "boolean",
-        options : {
-          default : true
-        }
-      }, {
-        type  : "template",
-        options : {
-          default : "",
-          variables : ["stats"],
-          useDimensions : true
-        }
-      }]
-    });
-*/
   };
 });

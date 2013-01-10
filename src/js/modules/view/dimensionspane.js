@@ -215,7 +215,6 @@ function($, uiconfig, charts, ui) {
       $closer = $('<div class="clr"></div>').appendTo($dimensions);
 
       ctx.on("chart.type.change", chart_type_change);
-//      ctx.on("chart.dimension.add", append_dimension);
       ctx.on("chart.datasource.change", update_data_source);
     }
 
@@ -229,7 +228,7 @@ function($, uiconfig, charts, ui) {
           var select = el.find('select[data-id="'+dimension.name+'"]'),
             $sel = $(select.get(rep));
           $sel.val(field);
-          if(info.multiple) // && $sel.parent().find("select.secondary").length + 1 < axeslist.length)
+          if(info.multiple)
             create_secondary_dimension_selector($sel.parent(), dimension);
         }
         rep++;
