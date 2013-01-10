@@ -12,8 +12,11 @@ function(ensure) {
       var value = options["geo.template"+i];
       if(value && value !== '-')
         ensureMap(o, i).template = value;
+
+      var value = options["geo.scale"+i];
+      if(value && value !== 1)
+        ensureMap(o, i).scale = value;
     }
-    console.log(dimensions);
     if(dimensions.feature) {
 
       ensureMap(o, 0).property = dimensions.feature[0].field.field;

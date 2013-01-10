@@ -186,6 +186,10 @@ function($, uiconfig, ui, editors, optiongroups) {
         $container.hide();
       }
 
+      if(info.link) {
+        info.link(ctx, editor);
+      }
+
       options.push(function() {
         if(info.condition) {
           ctx.off(info.condition.event, condition_visible);
@@ -193,6 +197,8 @@ function($, uiconfig, ui, editors, optiongroups) {
         editor.value.off("value.change", ctx_trigger_handler);
 //        ctx.off(info.event, ctx_on_handler);
         ctx.off("chart.option.set", editor_value_set);
+        if(info.unlink)
+          info.unlink(ctx, editor);
         editor.destroy();
       });
 

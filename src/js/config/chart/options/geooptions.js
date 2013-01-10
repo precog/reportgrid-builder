@@ -12,6 +12,9 @@ function() {
         }
       };
     }
+    o.name  += index;
+    o.group += index;
+    o.event += index;
     return o;
   }
 
@@ -19,47 +22,90 @@ function() {
     preferences = preferences || {};
 
     for(var i = 0; i < 5; i++) {
-      options.push(injectCondition({
-        name : "template"+i,
-        label : "map",
-        group : "map"+i,
-        weight : -5,
-        event : "options.chart.geo.template" + i,
-        editors : [{
-          type : "selection",
-          options : {
-            default : i == 0 ? "world" : "",
-            values : [{
-              value : "-",
-              label : "[select a template]"
-            }, {
-              value : "world",
-              label : "world"
-            }, {
-              value : "usa-states",
-              label : "USA states"
-            }, {
-              value : "usa-state-centroids",
-              label : "USA state centroids"
-            }, {
-              value : "usa-counties",
-              label : "USA counties"
-            }]
-          }
-        }]
-      }, "options.chart.geo.template", i));
+      (function(i) {
+        options.push(injectCondition({
+          name : "template",
+          label : "map",
+          group : "map",
+          weight : -5,
+          event : "options.chart.geo.template",
+          editors : [{
+            type : "selection",
+            options : {
+              default : i == 0 ? "world" : "",
+              values : [{
+                value : "-",
+                label : "[select a template]"
+              }, {
+                value : "world",
+                label : "world"
+              }, {
+                value : "usa-states",
+                label : "USA states"
+              }, {
+                value : "usa-state-centroids",
+                label : "USA state centroids"
+              }, {
+                value : "usa-counties",
+                label : "USA counties"
+              }]
+            }
+          }]
+        }, "options.chart.geo.template", i));
+
+        options.push(injectCondition({
+          name : "scale",
+          label : "scale",
+          group : "map",
+          weight : -5,
+          event : "options.chart.geo.scale",
+          link : function(ctx, editor) {
+            this._scale_handler = function(template) {
+              var scale = 500;
+              if(template === "usa-states")
+              {
+                scale = 1000;
+              }
+              var is_default = editor.value.isDefault();
+console.log(is_default);
+              editor.value.setDefault(scale);
+              if(is_default)
+                editor.value.reset();
+            };
+            ctx.on("options.chart.geo.template"+i, this._scale_handler);
+          },
+          unlink : function(ctx, editor) {
+            ctx.off("options.chart.geo.template"+i, this._scale_handler);
+          },
+          editors : [{
+            type : "float",
+            options : {
+              default: 1.0,
+              min : 0.1,
+              step : 0.1
+            }
+          }]
+        }, "options.chart.geo.template", i));
+      })(i);
+
+      //mercator 500
+      //albers 1000
+      //azimuthal 200
+
+      //			"labeloutline".toBool(["labelOutline"]),
+      //"labelshadow".toBool(["labelShadow"])
+      //scale float
+      //color css/css:int/i:/s:/f:
+      //mode orthographic/stereogrphic
+      //projection mercator/albers/albersusa/azimuthal
+      //radius float/function(dp,stats)
 
       //classname string container
-      //color css/css:int/i:/s:/f:
       //label object
       //mapping url/json object
-      //mode orthographic/stereogrphic
       //origin double x/y value to map to an array
       //parallels (only for albers projection) array of float
-      //projection mercator/albers/albersusa/azimuthal
       //property null/string
-      //radius float/function(dp,stats)
-      //scale float
       //translate array float
       //url string
     }
