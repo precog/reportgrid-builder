@@ -34,7 +34,7 @@ function($, createDispatcher) {
                   if(v instanceof Date)
                     out = v + " (date)";
                   else
-                    out = JSON.stringify(v)
+                    out = JSON.stringify(v) + " (object)"
               }
             } catch(e) {
               out = v;

@@ -9,18 +9,48 @@ function(ensure) {
   }
   return function(o, dimensions, options) {
     for(var i = 0; i < 5; i++) {
-      var value = options["geo.template"+i];
-      if(value && value !== '-')
-        ensureMap(o, i).template = value;
+      var template = options["geo.template"+i];
+      if(template && template !== '-')
+        ensureMap(o, i).template = template;
 
-      var value = options["geo.scale"+i];
-      if(value && value !== 1)
-        ensureMap(o, i).scale = value;
+      var value = options["geo.scale"+i],
+          projection = options["geo.projection"+i];
+      if(projection) {
+        if(
+             (template == 'world' && projection !== 'mercator')
+          || (template == 'usa-states' && projection !== 'albersusa')
+          || (template == 'usa-states-centroids' && projection !== 'albersusa')
+          || (template == 'usa-counties' && projection !== 'albersusa')
+        ) {
+          ensureMap(o, i).projection = projection;
+        }
+      }
+      if(value) {
+        if(
+             (projection == "mercator" && value !== 500)
+          || ((projection == "albers" || projection == "albersusa") && value !== 1000)
+          || (projection == "azimuthal" && value !== 200)
+        ) {
+          ensureMap(o, i).scale = value;
+        }
+      }
+//      if(value && value !== 1)
+//        ensureMap(o, i).scale = value;
     }
     if(dimensions.feature) {
 
       ensureMap(o, 0).property = dimensions.feature[0].field.field;
     }
+console.log(JSON.stringify(o.map));
+    if(o.map && o.map.length > 0) {
+      for(var i = o.map.length-1; i >= 0; i--) {
+        if(!o.map[i]) continue;
+console.log(i, o.map[i].template, o.map[i].url, !(o.map[i].template || o.map[i].url));
+        if(!(o.map[i].template || o.map[i].url))
+          o.map.splice(i, 1);
+      }
+    }
+console.log(JSON.stringify(o.map));
 
     if(o.map && o.map.length === 1)
       o.map = o.map[0];

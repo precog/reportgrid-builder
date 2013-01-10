@@ -3,7 +3,7 @@ define([
 ],
 
 function() {
-  function injectCondition(o, event, index) {
+  function injectPreviousCondition(o, event, index) {
     if(index > 0) {
       o.condition = {
         event : event + (index-1),
@@ -18,12 +18,25 @@ function() {
     return o;
   }
 
+  function injectCondition(o, event, index) {
+    o.condition = {
+      event : event + index,
+      visible : function(value) {
+        return value && value != "-";
+      }
+    };
+    o.name  += index;
+    o.group += index;
+    o.event += index;
+    return o;
+  }
+
   return function(options, preferences) {
     preferences = preferences || {};
 
     for(var i = 0; i < 5; i++) {
       (function(i) {
-        options.push(injectCondition({
+        options.push(injectPreviousCondition({
           name : "template",
           label : "map",
           group : "map",
@@ -54,17 +67,60 @@ function() {
         }, "options.chart.geo.template", i));
 
         options.push(injectCondition({
+          name : "projection",
+          label : "projection",
+          group : "map",
+          weight : 5,
+          event : "options.chart.geo.projection",
+          link : function(ctx, editor) {
+            this._handler = function(template) {
+console.log("TEMPLATE", template);
+              if(template == "world") {
+                editor.value.set("mercator");
+              } else {
+                editor.value.set("albersusa");
+              }
+            };
+            ctx.on("options.chart.geo.template"+i, this._handler);
+          },
+          unlink : function(ctx, editor) {
+            ctx.off("options.chart.geo.template"+i, this._handler);
+            delete this._handler;
+          },
+          editors : [{
+            type : "selection",
+            options : {
+              default : "mercator",
+              values : [{
+                value : "mercator",
+                label : "Mercator"
+              }, {
+                value : "albers",
+                label : "Albers"
+              }, {
+                value : "albersusa",
+                label : "Albers USA"
+              }, {
+                value : "azimuthal",
+                label : "azimuthal"
+              }]
+            }
+          }]
+        }, "options.chart.geo.template", i));
+
+        options.push(injectCondition({
           name : "scale",
           label : "scale",
           group : "map",
-          weight : -5,
+          weight : 6,
           event : "options.chart.geo.scale",
           link : function(ctx, editor) {
-            this._scale_handler = function(template) {
-              var scale = 500;
-              if(template === "usa-states")
-              {
-                scale = 1000;
+            this._handler = function(projection) {
+              var scale = 1000;
+              if(projection === "mercator") {
+                scale = 500;
+              } else if(projection === "azimuthal") {
+                scale = 200;
               }
               var is_default = editor.value.isDefault();
 console.log(is_default);
@@ -72,17 +128,18 @@ console.log(is_default);
               if(is_default)
                 editor.value.reset();
             };
-            ctx.on("options.chart.geo.template"+i, this._scale_handler);
+            ctx.on("options.chart.geo.projection"+i, this._handler);
           },
           unlink : function(ctx, editor) {
-            ctx.off("options.chart.geo.template"+i, this._scale_handler);
+            ctx.off("options.chart.geo.projection"+i, this._handler);
+            delete this._handler;
           },
           editors : [{
             type : "float",
             options : {
-              default: 1.0,
-              min : 0.1,
-              step : 0.1
+              default: 0,
+              min : 0,
+              step : 50
             }
           }]
         }, "options.chart.geo.template", i));
