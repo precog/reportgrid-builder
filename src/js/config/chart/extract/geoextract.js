@@ -30,6 +30,11 @@ function(ensure) {
       )) {
         ensureMap(o, i).scale = value;
       }
+
+      var mode = options["geo.mode"+i];
+      if(mode) {
+        ensureMap(o, i).mode = mode;
+      }
     }
 
     if(dimensions.feature) {

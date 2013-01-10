@@ -143,28 +143,53 @@ function() {
             }
           }]
         }, "options.chart.geo.template", i));
+
+        options.push({
+          name   : "mode"+i,
+          label  : "mode",
+          group  : "map"+i,
+          weight : 6,
+          event  : "options.chart.geo.mode"+i,
+          condition : {
+            event : "options.chart.geo.projection"+i,
+            visible : function(value) {
+              return value && value === "azimuthal";
+            }
+          },
+          editors : [{
+            type : "selection",
+            options : {
+              default: "orthographic",
+              values : [{
+                value : "orthographic",
+                label : "orthographic"
+              }, {
+                value : "stereographic",
+                label : "stereographic"
+              }]
+            }
+          }]
+        });
+
+
+
+        //mode orthographic/stereogrphic
+        //color css/css:int/i:/s:/f:
+        //projection mercator/albers/albersusa/azimuthal
+        //radius float/function(dp,stats)
+
+        //classname string container
+        //label object
+        //"labeloutline".toBool(["labelOutline"]),
+        //"labelshadow".toBool(["labelShadow"])
+        //mapping url/json object
+        //origin double x/y value to map to an array
+        //parallels (only for albers projection) array of float
+        //property null/string
+        //translate array float
+        //url string
+
       })(i);
-
-      //mercator 500
-      //albers 1000
-      //azimuthal 200
-
-      //			"labeloutline".toBool(["labelOutline"]),
-      //"labelshadow".toBool(["labelShadow"])
-      //scale float
-      //color css/css:int/i:/s:/f:
-      //mode orthographic/stereogrphic
-      //projection mercator/albers/albersusa/azimuthal
-      //radius float/function(dp,stats)
-
-      //classname string container
-      //label object
-      //mapping url/json object
-      //origin double x/y value to map to an array
-      //parallels (only for albers projection) array of float
-      //property null/string
-      //translate array float
-      //url string
     }
   };
 });
