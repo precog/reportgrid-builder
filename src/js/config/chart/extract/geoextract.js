@@ -35,10 +35,17 @@ function(ensure) {
       if(mode) {
         ensureMap(o, i).mode = mode;
       }
+
+      var color = options["geo.color"+i];
+      if("css:1" !== color)
+        ensureMap(o, i).color = color;
+
+      if(dimensions.feature) {
+        ensureMap(o, i).property = dimensions.feature[0].field.field;
+      }
     }
 
     if(dimensions.feature) {
-
       ensureMap(o, 0).property = dimensions.feature[0].field.field;
     }
 
@@ -55,5 +62,6 @@ function(ensure) {
 
     if(!o.map || o.map.length === 0)
       throw "at least a map declaration is required to render a geo chart";
+
   };
 });

@@ -171,14 +171,27 @@ function() {
           }]
         });
 
-
-
-        //mode orthographic/stereogrphic
-        //color css/css:int/i:/s:/f:
-        //projection mercator/albers/albersusa/azimuthal
-        //radius float/function(dp,stats)
+        options.push(injectCondition({
+          name : "color",
+          group : "map",
+          event : "options.chart.geo.color",
+          className : "multiline",
+          editors : [{
+            type  : "selection",
+            options : {
+              default : "css",
+              values : [
+                { value : "css", label : "from css" },
+                { value : "css:1", label : "first css color" },
+                { value : "interpolated:", label : "interpolated", editor : { type : "colorlist", options : { default : "#fff,#000" } } },
+                { value : "sequence:", label : "sequence", editor : { type : "colorlist", options : { default : "#fff,#777,#000" } } }
+              ]
+            }
+          }]
+        }, "options.chart.geo.template", i));
 
         //classname string container
+        //radius float/function(dp,stats)
         //label object
         //"labeloutline".toBool(["labelOutline"]),
         //"labelshadow".toBool(["labelShadow"])
@@ -191,5 +204,40 @@ function() {
 
       })(i);
     }
+/*
+    for(var i = 1; i < 5; i++) {
+      (function(i) {
+        options.push(injectCondition({
+          name    : "property",
+          label   : "property",
+          group   : "map",
+          weight  : -5,
+          event   : "options.chart.geo.property",
+          editors : [{
+            type : "variable"
+          }]
+        }, "options.chart.geo.template", i));
+      })(i);
+    }
+*/
+    options.push({
+      name  : "css",
+      group : "aesthetic",
+      event : "options.chart.css.palette.set",
+      /*
+      condition : {
+        event : "options.chart.geo.color",
+        visible : function(value) {
+          return value && value.substr(0, 3) === "css";
+        }
+      },
+      */
+      editors : [{
+        type  : "rgcss",
+        options : {
+          default : ""
+        }
+      }]
+    });
   };
 });
