@@ -7,7 +7,7 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name : "sort",
+      label : "sort",
       group : "leaderboard",
       weight : 2,
       event : "options.chart.leaderboard.sort",
@@ -23,7 +23,6 @@ function() {
     });
 
     options.push({
-      name : "colorscale",
       label : "use colors",
       group : "aesthetic",
       weight : 0,
@@ -37,7 +36,6 @@ function() {
     });
 
     options.push({
-      name : "usemax",
       label : "use max",
       group : "leaderboard",
       weight : 1,
@@ -57,7 +55,6 @@ function() {
     });
 
     options.push({
-      name : "displaybar",
       label : "display meter",
       group : "leaderboard",
       weight : 0,
@@ -71,7 +68,7 @@ function() {
     });
 
     options.push({
-      name  : "rank",
+      label : "rank",
       event : "options.chart.label.rank",
       group : "label",
       weight : -10,
@@ -91,7 +88,7 @@ function() {
     });
 
     options.push({
-      name  : "value",
+      label : "value",
       event : "options.chart.label.value",
       group : "label",
       weight : -10,

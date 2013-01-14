@@ -15,7 +15,6 @@ function() {
         values.unshift({ value : "alternating" });
       }
       options.push({
-        name : "yscaleposition",
         label : "y position",
         group : "axis",
         event : "options.chart.cartesian.yscaleposition",
@@ -31,7 +30,7 @@ function() {
     }
 
     options.push({
-      name  : "axis",
+      label  : "axis",
       event : "options.chart.label.axis",
       group : "label",
       weight : -10,
@@ -50,7 +49,7 @@ function() {
     });
 
     options.push({
-      name  : "tickmark",
+      label  : "tickmark",
       event : "options.chart.label.tickmark",
       group : "label",
       weight : -10,
@@ -69,7 +68,6 @@ function() {
     });
 
     options.push({
-      name  : "labelhorizontal",
       group : "label",
       label : "horizontal",
       event : "options.chart.labelhorizontal",
@@ -82,7 +80,6 @@ function() {
     });
 
     options.push({
-      name  : "displayrulemajor",
       label : "major",
       group : "rules",
       event : "options.chart.cartesian.displayrulemajor",
@@ -103,7 +100,6 @@ function() {
     });
 
     options.push({
-      name  : "displayruleminor",
       label : "minor",
       group : "rules",
       event : "options.chart.cartesian.displayruleminor",
@@ -124,7 +120,6 @@ function() {
     });
 
     options.push({
-      name  : "displaytickmajor",
       label : "major",
       group : "tickmarks",
       event : "options.chart.cartesian.displaytickmajor",
@@ -145,7 +140,6 @@ function() {
     });
 
     options.push({
-      name  : "displaytickminor",
       label : "minor",
       group : "tickmarks",
       event : "options.chart.cartesian.displaytickminor",
@@ -166,7 +160,6 @@ function() {
     });
 
     options.push({
-      name  : "displayticklabel",
       label : "display label",
       group : "axis",
       event : "options.chart.cartesian.displayticklabel",
@@ -187,7 +180,6 @@ function() {
     });
 
     options.push({
-      name  : "displayanchorlinetick",
       label : "border",
       group : "tickmarks",
       event : "options.chart.cartesian.displayanchorlinetick",
@@ -208,7 +200,6 @@ function() {
     });
 /*
     options.push({
-      name  : "displayanchorlinerule",
       label : "display anchor line rule",
       group : "tickmarks",
       event : "options.chart.cartesian.displayanchorlinerule",
@@ -228,7 +219,6 @@ function() {
     });
 */
     options.push({
-      name  : "lengthtickminor",
       label : "minor tickmarks",
       className : "inline first",
       group : "tickmarks",
@@ -245,7 +235,6 @@ function() {
     });
 
     options.push({
-      name  : "paddingtickminor",
       label : "",
       className : "inline last",
       group : "tickmarks",
@@ -263,7 +252,6 @@ function() {
 
 
     options.push({
-      name  : "lengthtickmajor",
       label : "major tickmarks",
       group : "tickmarks",
       className : "inline first",
@@ -280,7 +268,6 @@ function() {
     });
 
     options.push({
-      name  : "paddingtickmajor",
       label : "",
       group : "tickmarks",
       className : "inline last",
@@ -297,7 +284,6 @@ function() {
     });
 
     options.push({
-      name  : "paddingticklabel",
       label : "margin label",
       group : "axis",
       event : "options.chart.cartesian.paddingticklabel",
@@ -312,7 +298,6 @@ function() {
 
 
     options.push({
-      name  : "paddingleft",
       label : "padding",
       group : "aesthetic",
       className : "inline first reduce",
@@ -333,7 +318,6 @@ function() {
     });
 
     options.push({
-      name  : "paddingright",
       label : "",
       group : "aesthetic",
       className : "inline reduce",
@@ -354,7 +338,6 @@ function() {
     });
 
     options.push({
-      name  : "paddingtop",
       label : "",
       group : "aesthetic",
       className : "inline reduce",
@@ -375,7 +358,6 @@ function() {
     });
 
     options.push({
-      name  : "paddingbottom",
       label : "",
       group : "aesthetic",
       className : "inline last reduce",

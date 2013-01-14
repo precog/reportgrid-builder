@@ -7,7 +7,7 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name : "datapoint",
+      label : "datapoint",
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{
@@ -21,7 +21,7 @@ function() {
     });
 
     options.push({
-      name  : "css",
+      label : "css",
       group : "aesthetic",
       event : "options.chart.css.palette.set",
       condition : {
@@ -39,7 +39,7 @@ function() {
     });
 
     options.push({
-      name : "color",
+      label : "color",
       group : "aesthetic",
       event : "options.chart.heatgrid.color",
       className : "multiline",

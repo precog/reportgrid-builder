@@ -6,7 +6,7 @@ function() {
   return function(options, preferences) {
     preferences = preferences || {};
     options.push({
-      name : "datapoint",
+      label : "datapoint",
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{
@@ -21,7 +21,6 @@ function() {
 
     var sizeeditor = { type : "expression", options : { default : "=64", unit : "px²", className : "small" }};
     options.push({
-      name : "symbol",
       label : "shape",
       group : "symbol",
       event : "options.chart.scattergraph.symbol",
@@ -54,7 +53,6 @@ function() {
     });
 
     options.push({
-      name : "symbolstyle",
       label : "style",
       group : "symbol",
       event : "options.chart.scattergraph.symbolstyle",

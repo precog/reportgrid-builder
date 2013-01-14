@@ -43,6 +43,13 @@ function(ensure) {
       if(dimensions.feature) {
         ensureMap(o, i).property = dimensions.feature[0].field.field;
       }
+
+
+
+      var classname = options["geo.classname"+i];
+      if(classname) {
+        ensureMap(o, i).classname = classname;
+      }
     }
 
     if(dimensions.feature) {

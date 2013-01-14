@@ -7,7 +7,7 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name : "datapoint",
+      label : "datapoint",
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{
@@ -26,7 +26,6 @@ function() {
     });
 
     options.push({
-      name : "labelradius",
       label : "label",
       group : "piechartposition",
       event : "options.chart.piechart.labelradius",
@@ -42,7 +41,6 @@ function() {
     });
 
     options.push({
-      name : "outerradius",
       label : "external",
       group : "piechartposition",
       event : "options.chart.piechart.outerradius",
@@ -58,7 +56,6 @@ function() {
     });
 
     options.push({
-      name : "innerradius",
       label : "internal",
       group : "piechartposition",
       event : "options.chart.piechart.innerradius",
@@ -74,7 +71,6 @@ function() {
     });
 
     options.push({
-      name : "tooltipradius",
       label : "tooltip",
       group : "piechartposition",
       event : "options.chart.piechart.tooltipradius",
@@ -90,7 +86,6 @@ function() {
     });
 
     options.push({
-      name : "dontfliplabel",
       label : "don't flip",
       group : "label",
       event : "options.chart.piechart.dontfliplabel",
@@ -103,7 +98,6 @@ function() {
     });
 
     options.push({
-      name : "labelorientation",
       label : "orientantion",
       group : "label",
       event : "options.chart.piechart.labelorientation",
@@ -121,7 +115,7 @@ function() {
     });
 
     options.push({
-      name  : "effect",
+      label : "effect",
       group : "aesthetic",
       weight : 0,
       event : "options.chart.piechart.effect",
@@ -139,7 +133,7 @@ function() {
     });
 
     options.push({
-      name : "sort",
+      label : "sort",
       group : "piechart",
       weight : 0,
       event : "options.chart.piechart.sort",

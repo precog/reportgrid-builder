@@ -6,7 +6,7 @@ function() {
   return function(options, preferences) {
     preferences = preferences || {};
     options.push({
-      name  : "horizontal",
+      label  : "horizontal",
       group : "barchart",
       event : "options.chart.barchart.horizontal",
       editors : [{
@@ -18,7 +18,7 @@ function() {
     });
 
     options.push({
-      name  : "stacked",
+      label  : "stacked",
       group : "barchart",
       weight : -10,
       event : "options.chart.barchart.stacked",
@@ -31,7 +31,6 @@ function() {
     });
 
     options.push({
-      name  : "startat",
       label : "start at",
       group : "barchart",
       weight : -10,
@@ -45,7 +44,7 @@ function() {
     });
 
     options.push({
-      name  : "effect",
+      label  : "effect",
       group : "aesthetic",
       weight : 0,
       event : "options.chart.barchart.effect",
@@ -63,7 +62,6 @@ function() {
     });
 
     options.push({
-      name : "barpadding",
       label : "for bars",
       group : "barpadding",
       weight : 0,
@@ -79,7 +77,6 @@ function() {
     });
 
     options.push({
-      name : "barpaddingdatapoint",
       label : "for data",
       group : "barpadding",
       weight : 0,
@@ -95,7 +92,6 @@ function() {
     });
 
     options.push({
-      name : "barpaddingaxis",
       label : "for axes",
       group : "barpadding",
       weight : 0,

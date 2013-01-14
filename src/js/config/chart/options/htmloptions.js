@@ -4,7 +4,7 @@ function() {
   return function(options, preferences) {
     preferences = preferences || {};
     options.push({
-      name  : "tooltip",
+      label : "tooltip",
       event : "options.chart.label.datapointover",
       group : "label",
       weight : -10,
@@ -24,7 +24,7 @@ function() {
     });
 
     options.push({
-      name : "datapoint",
+      label : "datapoint",
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{

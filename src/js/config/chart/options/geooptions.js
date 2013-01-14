@@ -12,7 +12,6 @@ function() {
         }
       };
     }
-    o.name  += index;
     o.group += index;
     o.event += index;
     return o;
@@ -25,7 +24,6 @@ function() {
         return value && value != "-";
       }
     };
-    o.name  += index;
     o.group += index;
     o.event += index;
     return o;
@@ -37,7 +35,6 @@ function() {
     for(var i = 0; i < 5; i++) {
       (function(i) {
         options.push(injectPreviousCondition({
-          name    : "template",
           label   : "map",
           group   : "map",
           weight  : -5,
@@ -67,7 +64,6 @@ function() {
         }, "options.chart.geo.template", i));
 
         options.push(injectCondition({
-          name   : "projection",
           label  : "projection",
           group  : "map",
           weight : 5,
@@ -110,10 +106,9 @@ function() {
         }, "options.chart.geo.template", i));
 
         options.push(injectCondition({
-          name   : "scale",
           label  : "scale",
           group  : "map",
-          weight : 6,
+          weight : 7,
           event  : "options.chart.geo.scale",
           link   : function(ctx, editor) {
             this._handler = function(projection) {
@@ -145,7 +140,6 @@ function() {
         }, "options.chart.geo.template", i));
 
         options.push({
-          name   : "mode"+i,
           label  : "mode",
           group  : "map"+i,
           weight : 6,
@@ -172,10 +166,10 @@ function() {
         });
 
         options.push(injectCondition({
-          name : "color",
+          label : "color",
           group : "map",
           event : "options.chart.geo.color",
-          className : "multiline",
+          
           editors : [{
             type  : "selection",
             options : {
@@ -190,16 +184,42 @@ function() {
           }]
         }, "options.chart.geo.template", i));
 
-        //classname string container
-        //radius float/function(dp,stats)
-        //label object
-        //"labeloutline".toBool(["labelOutline"]),
-        //"labelshadow".toBool(["labelShadow"])
-        //mapping url/json object
+        options.push(injectCondition({
+          label  : "container class",
+          group : "map",
+          event : "options.chart.geo.classname",
+          weight : 20,
+          editors : [{
+            type  : "string",
+            options : {
+              default : ""
+            }
+          }]
+        }, "options.chart.geo.template", i));
+/*
+        options.push(injectCondition({
+          label  : "origin",
+          group  : "map",
+          event  : "options.chart.geo.origin",
+          weight : 8,
+          editors : [{
+
+          }]
+        }, "options.chart.geo.template", i));
+*/
         //origin double x/y value to map to an array
         //parallels (only for albers projection) array of float
-        //property null/string
         //translate array float
+
+        //label object
+
+        //labeloutline bool
+        //labelshadow bool
+
+        //radius float/function(dp,stats)
+
+        //mapping url/json object
+        //property null/string
         //url string
 
       })(i);
@@ -208,7 +228,6 @@ function() {
     for(var i = 1; i < 5; i++) {
       (function(i) {
         options.push(injectCondition({
-          name    : "property",
           label   : "property",
           group   : "map",
           weight  : -5,
@@ -221,7 +240,7 @@ function() {
     }
 */
     options.push({
-      name  : "css",
+      label : "css",
       group : "aesthetic",
       event : "options.chart.css.palette.set",
       /*

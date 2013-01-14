@@ -4,7 +4,7 @@ function() {
   return function(options, preferences) {
     preferences = preferences || {};
     options.push({
-      name  : "title",
+      label : "title",
       event : "options.chart.label.title",
       group : "general",
       weight : -10,
@@ -19,7 +19,7 @@ function() {
     });
 
     options.push({
-      name  : "tooltip",
+      label : "tooltip",
       event : "options.chart.label.datapointover",
       group : "label",
       weight : -10,
@@ -39,7 +39,6 @@ function() {
     });
 
     options.push({
-      name  : "titleontop",
       label : "title on top",
       event : "options.chart.titleontop",
       group : "label",
@@ -58,7 +57,6 @@ function() {
     });
 
     options.push({
-      name  : "width",
       label : "size",
       group : "general",
       className : "inline first",
@@ -75,7 +73,6 @@ function() {
     });
 
     options.push({
-      name  : "height",
       label : " x ",
       group : "general",
       className : "inline last",

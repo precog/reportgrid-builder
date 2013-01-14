@@ -7,7 +7,7 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name : "sort",
+      label : "sort",
       group : "funnelchart",
       weight : 0,
       event : "options.chart.funnelchart.sort",
@@ -23,7 +23,6 @@ function() {
     });
 
     options.push({
-      name : "arrowsize",
       label : "arrow size",
       group : "funnelchart",
       event : "options.chart.funnelchart.arrowsize",
@@ -38,7 +37,6 @@ function() {
     });
 
     options.push({
-      name : "segmentpadding",
       label : "spacing",
       group : "funnelchart",
       event : "options.chart.funnelchart.segmentpadding",
@@ -52,7 +50,6 @@ function() {
     });
 
     options.push({
-      name : "flatness",
       label : "flatness",
       group : "funnelchart",
       event : "options.chart.funnelchart.flatness",
@@ -68,7 +65,7 @@ function() {
     });
 
     options.push({
-      name  : "effect",
+      label  : "effect",
       group : "aesthetic",
       weight : 0,
       event : "options.chart.funnelchart.effect",
@@ -86,7 +83,7 @@ function() {
     });
 
     options.push({
-      name : "datapoint",
+      label : "datapoint",
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{
@@ -105,7 +102,7 @@ function() {
     });
 
     options.push({
-      name : "arrow",
+      label : "arrow",
       group : "label",
       event : "options.chart.label.arrow",
       editors : [{

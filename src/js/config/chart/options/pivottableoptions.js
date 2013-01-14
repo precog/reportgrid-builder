@@ -7,7 +7,6 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name  : "displaytotalcolumns",
       label : "columns",
       group : "displaytotals",
       event : "options.chart.pivottable.displaytotalcolumns",
@@ -20,7 +19,6 @@ function() {
     });
 
     options.push({
-      name  : "displaytotalrows",
       label : "rows",
       group : "displaytotals",
       event : "options.chart.pivottable.displaytotalrows",
@@ -33,7 +31,6 @@ function() {
     });
 
     options.push({
-      name  : "displayheatmap",
       label : "display colors",
       group : "aesthetic",
       event : "options.chart.pivottable.displayheatmap",
@@ -53,7 +50,6 @@ function() {
       };
 
     options.push({
-      name : "startcolor",
       label : "start color",
       group : "aesthetic",
       event : "options.chart.pivottable.startcolor",
@@ -68,7 +64,6 @@ function() {
     });
 
     options.push({
-      name : "endcolor",
       label : "end color",
       group : "aesthetic",
       event : "options.chart.pivottable.endcolor",
@@ -83,7 +78,6 @@ function() {
     });
 
     options.push({
-      name  : "cellclass",
       label : "cell",
       group : "customclasses",
       event : "options.chart.pivottable.cellclass",
@@ -98,7 +92,6 @@ function() {
     });
 
     options.push({
-      name  : "valueclass",
       label : "value",
       group : "customclasses",
       event : "options.chart.pivottable.valueclass",
@@ -113,7 +106,6 @@ function() {
     });
 
     options.push({
-      name  : "headerclass",
       label : "header",
       group : "customclasses",
       event : "options.chart.pivottable.headerclass",
@@ -128,7 +120,6 @@ function() {
     });
 
     options.push({
-      name  : "totalclass",
       label : "total",
       group : "customclasses",
       event : "options.chart.pivottable.totalclass",
@@ -143,7 +134,6 @@ function() {
     });
 
     options.push({
-      name  : "axisvalue",
       label : "axis",
       event : "options.chart.label.axisvalue",
       group : "label",
@@ -163,7 +153,6 @@ function() {
     });
 
     options.push({
-      name  : "total",
       label : "total",
       event : "options.chart.label.total",
       group : "label",
@@ -183,7 +172,6 @@ function() {
     });
 
     options.push({
-      name  : "totalover",
       label : "total tooltip",
       event : "options.chart.label.totalover",
       group : "label",
@@ -203,7 +191,6 @@ function() {
     });
 
     options.push({
-      name  : "axis",
       label : "header",
       event : "options.chart.label.axis",
       group : "label",

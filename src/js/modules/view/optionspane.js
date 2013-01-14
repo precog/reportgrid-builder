@@ -35,7 +35,7 @@ function($, uiconfig, ui, editors, optiongroups) {
       el.find('fieldset').hide().find('div.fields').children("*").remove();
     }
 
-    function findRef(container, weight, name) {
+    function findRef(container, weight, event) {
       var list = container.find(".option-editor"), t;
       for(var i = 0; i < list.length; i++) {
         var el = $(list[i]);
@@ -45,8 +45,8 @@ function($, uiconfig, ui, editors, optiongroups) {
         if(weight > t)
           continue;
 
-        t = el.attr("data-name");
-        if(name < t)
+        t = el.attr("data-event");
+        if(event < t)
           return el;
       }
       return null;
@@ -58,8 +58,8 @@ function($, uiconfig, ui, editors, optiongroups) {
           $fieldset = (groups[info.group] || defaultGroup).show(),
           $fields = $fieldset.find(".fields:first"),
           weight = info.weight || 0,
-          $ref = findRef($fields, weight, info.name),
-          $container = $('<div class="option-editor" data-weight="'+weight+'" data-name="'+info.name+'"></div>'),
+          $ref = findRef($fields, weight, info.event),
+          $container = $('<div class="option-editor" data-weight="'+weight+'" data-event="'+info.event+'"></div>'),
           eventName = info.event.split(".").slice(2).join("."),
           current_type,
           menu;
@@ -71,7 +71,7 @@ function($, uiconfig, ui, editors, optiongroups) {
       }
 
       if(ctx.debug && !groups[info.group]) {
-        console.warn("UNMATCHED GROUP " + info.group + " for " + info.name);
+        console.warn("UNMATCHED GROUP " + info.group + " for " + info.event);
       }
 
       function ctx_on_handler(v) {
@@ -152,7 +152,7 @@ function($, uiconfig, ui, editors, optiongroups) {
         }
       }
 
-      var $label = $('<div class="name">'+(("undefined" !== typeof info.label) ? info.label : info.name)+'</div>');
+      var $label = $('<div class="name">'+(("undefined" !== typeof info.label) ? info.label : info.event.split(".").pop())+'</div>');
       $container.append($label);
       var $option = $('<div class="option"></div>');
       if(info.className) {

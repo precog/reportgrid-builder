@@ -5,7 +5,7 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name  : "css",
+      label : "css",
       group : "aesthetic",
 //      event : "chart.rgcss.load",
       event : "options.chart.css.palette.set",

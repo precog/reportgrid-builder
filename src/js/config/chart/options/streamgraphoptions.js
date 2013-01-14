@@ -7,7 +7,7 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name : "datapoint",
+      label : "datapoint",
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{
@@ -21,7 +21,6 @@ function() {
     });
 
     options.push({
-      name : "streameffect",
       label : "effect",
       group : "aesthetic",
       event : "options.chart.streamgraph.effect",
@@ -40,7 +39,6 @@ function() {
     });
 
     options.push({
-      name : "lineinterpolation",
       label : "interpolation",
       group : "streamgraph",
       event : "options.chart.streamgraph.lineinterpolation",

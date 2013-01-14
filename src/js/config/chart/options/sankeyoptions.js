@@ -6,11 +6,7 @@ function() {
   return function(options, preferences) {
     preferences = preferences || {};
 
-    //BOOL
-    //thinbackedges   false
-    //stackbackedges  true
     options.push({
-      name  : "thinbackedges",
       label  : "thin back-edges",
       group : "aesthetic",
       weight : 10,
@@ -23,7 +19,6 @@ function() {
       }]
     });
     options.push({
-      name  : "stackbackedges",
       label  : "stack back-edges",
       group : "aesthetic",
       weight : 15,
@@ -36,20 +31,7 @@ function() {
       }]
     });
 
-    //FLOAT
-    //layerwidth       61
-    //nodespacing      28
-    //dummyspacing     18
-    //backedgespacing   4
-    //extraheight       5
-    //extraradius       5
-    //imagewidth       60
-    //imageheight      48
-    //imagespacing      0
-    //labelnodespacing  4
-    //chunkwidth  4
     options.push({
-      name : "layerwidth",
       label : "layer width",
       group : "sankey",
       weight : 0,
@@ -64,7 +46,6 @@ function() {
       }]
     });
     options.push({
-      name : "nodespacing",
       label : "node spacing",
       group : "aesthetic",
       weight : 31,
@@ -79,7 +60,6 @@ function() {
       }]
     });
     options.push({
-      name : "dummyspacing",
       label : "dummy spacing",
       group : "aesthetic",
       weight : 30,
@@ -94,7 +74,6 @@ function() {
       }]
     });
     options.push({
-      name : "backedgespacing",
       label : "back-edge spacing",
       group : "aesthetic",
       weight : 16,
@@ -109,7 +88,6 @@ function() {
       }]
     });
     options.push({
-      name : "extraheight",
       label : "extra height",
       group : "aesthetic",
       weight : 30,
@@ -124,7 +102,6 @@ function() {
       }]
     });
     options.push({
-      name : "extraradius",
       label : "extra radius",
       group : "aesthetic",
       weight : 30,
@@ -139,7 +116,6 @@ function() {
       }]
     });
     options.push({
-      name : "imagewidth",
       label : "width",
       group : "thumbnails",
       weight : 5,
@@ -160,7 +136,6 @@ function() {
       }]
     });
     options.push({
-      name : "imageheight",
       label : "height",
       group : "thumbnails",
       weight : 6,
@@ -181,7 +156,6 @@ function() {
       }]
     });
     options.push({
-      name : "imagespacing",
       label : "spacing",
       group : "thumbnails",
       weight : 8,
@@ -202,7 +176,6 @@ function() {
       }]
     });
     options.push({
-      name : "labelnodespacing",
       label : "label node spacing",
       group : "aesthetic",
       weight : 32,
@@ -217,7 +190,6 @@ function() {
       }]
     });
     options.push({
-      name : "chunkwidth",
       label : "chunk width",
       group : "aesthetic",
       weight : 11,
@@ -238,10 +210,7 @@ function() {
       }]
     });
 
-    //EXPRESSION
-    //imagepath
     options.push({
-      name : "imagepath",
       label : "image url",
       group : "thumbnails",
       weight : 0,
@@ -257,10 +226,7 @@ function() {
       }]
     });
 
-    //EXPRESSION OR STRING
-    //nodeclass
     options.push({
-      name : "nodeclass",
       label : "node class",
       group : "customclasses",
       weight : 0,
@@ -281,9 +247,8 @@ function() {
         }
       }]
     });
-    //edgeclass
+
     options.push({
-      name : "edgeclass",
       label : "edge class",
       group : "customclasses",
       weight : 0,
@@ -304,9 +269,8 @@ function() {
         }
       }]
     });
-    //displayentry
+
     options.push({
-      name : "displayentry",
       label : "display entry",
       group : "sankey",
       weight : 0,
@@ -326,9 +290,8 @@ function() {
         }
       }]
     });
-    //displayexit
+
     options.push({
-      name : "displayexit",
       label : "display exit",
       group : "sankey",
       weight : 0,
@@ -349,10 +312,7 @@ function() {
       }]
     });
 
-    //SELECT
-    //layoutmethod   sugiyama  weightbalance
     options.push({
-      name : "layoutmethod",
       label : "layout method",
       group : "sankey",
       weight : -5,
@@ -372,13 +332,7 @@ function() {
       }]
     });
 
-    //LAYOUT MAP
-    //layoutmap
-
-    //LABEL
-    //edge
     options.push({
-      name  : "edge",
       label : "edge",
       event : "options.chart.label.edge",
       group : "label",
@@ -398,9 +352,7 @@ function() {
       }]
     });
 
-    //edgeover
     options.push({
-      name  : "edgeover",
       label : "edge tooltip",
       event : "options.chart.label.edgeover",
       group : "label",
@@ -420,9 +372,7 @@ function() {
       }]
     });
 
-    //node
     options.push({
-      name  : "node",
       label : "node",
       event : "options.chart.label.node",
       group : "label",

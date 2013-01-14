@@ -7,7 +7,7 @@ function() {
     preferences = preferences || {};
 
     options.push({
-      name : "datapoint",
+      label : "datapoint",
       group : "label",
       event : "options.chart.label.datapoint",
       editors : [{
@@ -22,7 +22,6 @@ function() {
 
     var sizeeditor = { type : "expression", options : { default : "=64", unit : "px²", className : "small", variables : ["stats"], useDimensions : true }};
     options.push({
-      name : "symbol",
       label : "shape",
       group : "symbol",
       event : "options.chart.linechart.symbol",
@@ -58,7 +57,6 @@ function() {
     });
 
     options.push({
-      name : "symbolstyle",
       label : "style",
       group : "symbol",
       event : "options.chart.linechart.symbolstyle",
@@ -80,7 +78,6 @@ function() {
     });
 
     options.push({
-      name : "displayarea",
       label : "area chart",
       group : "linechart",
       event : "options.chart.linechart.displayarea",
@@ -93,7 +90,6 @@ function() {
     });
 
     options.push({
-      name : "y0property",
       label : "field for y0",
       group : "linechart",
       event : "options.chart.linechart.y0property",
@@ -112,7 +108,6 @@ function() {
     });
 
     options.push({
-      name  : "sensibleradius",
       label : "sensible radius",
       group : "linechart",
       weight : 10,
@@ -129,7 +124,6 @@ function() {
     });
 
     options.push({
-      name : "lineeffect",
       label : "effect",
       group : "aesthetic",
       event : "options.chart.linechart.lineeffect",
@@ -148,7 +142,6 @@ function() {
     });
 
     options.push({
-      name : "lineinterpolation",
       label : "interpolation",
       group : "linechart",
       event : "options.chart.linechart.lineinterpolation",
