@@ -56,11 +56,8 @@ function($, download, upload) {
           ctx.trigger("reports.report.add", path, content);
         } else {
           var result = window.prompt("A report with name '"+name+"' already exists, please try a different name:", name);
-          if(result === null) return;
-          result = result.trim();
-          if(result === "") {
-            alert("invalid empty name");
-          }
+          if(!result || !(result = result.trim()))
+            return;
           ctx.trigger("reports.report.import", opath, result, content);
         }
       });

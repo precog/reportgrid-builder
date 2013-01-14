@@ -1,5 +1,5 @@
 define([
-  "lib/model/typeguesser"
+  "lib/model/guesser_valuetype"
 ],
 function(type) {
   function appendField(ob, key, value) {

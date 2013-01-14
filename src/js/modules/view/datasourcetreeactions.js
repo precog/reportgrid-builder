@@ -33,24 +33,20 @@ function($, ui) {
       function create_folder(path) {
         return function() {
           var name = window.prompt("Create a new folder at: \"" + path + "\"");
-          if(name === null)
+          if(!name || !(name = name.trim()))
             return;
-          name = name.trim();
-          if(!name) {
-            alert("the new folder cannot have an empty name");
-          } else {
-            var npath = path;
-            if(npath.substr(-1) !== "/") npath += "/";
-            npath += name;
 
-            ctx.on("datasource.path.validate", function(response) {
-              if(response.valid) {
-                ctx.trigger("data.folder.add", npath);
-              } else {
-                alert("Unable to create the folder \""+name+"\": " + response.reason);
-              }
-            });
-          }
+          var npath = path;
+          if(npath.substr(-1) !== "/") npath += "/";
+          npath += name;
+
+          ctx.on("datasource.path.validate", function(response) {
+            if(response.valid) {
+              ctx.trigger("data.folder.add", npath);
+            } else {
+              alert("Unable to create the folder \""+name+"\": " + response.reason);
+            }
+          });
         }
       }
 

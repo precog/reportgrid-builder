@@ -2,7 +2,7 @@ define([
     "jquery"
   , "lib/util/view/editors/editors"
   , "lib/model/dataloader"
-  , "lib/model/modelguesser"
+  , "lib/model/guesser_modeltype"
   , "lib/util/ui"
   , "text!templates/form.datasource.html"
 ],

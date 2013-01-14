@@ -68,23 +68,19 @@ function($, ui) {
       function create_folder(path) {
         return function() {
           var name = window.prompt("Create a new folder at: \"" + path + "\"");
-          if(name === null)
+          if(!name || !(name = name.trim()))
             return;
-          name = name.trim();
-          if(!name) {
-            alert("the new folder cannot have an empty name");
-          } else {
-            var npath = path;
-            if(npath.substr(-1) !== "/") npath += "/";
-            npath += name;
 
-            ctx.request("report.path.validate", npath, function(response) {
-              if(response.valid) {
-                ctx.trigger("reports.folder.add", npath);
-              } else
-                alert("Unable to create the folder \""+name+"\": " + response.reason);
-            });
-          }
+          var npath = path;
+          if(npath.substr(-1) !== "/") npath += "/";
+          npath += name;
+
+          ctx.request("report.path.validate", npath, function(response) {
+            if(response.valid) {
+              ctx.trigger("reports.folder.add", npath);
+            } else
+              alert("Unable to create the folder \""+name+"\": " + response.reason);
+          });
         }
       }
 
@@ -163,9 +159,9 @@ function($, ui) {
               if(!currentState)
                 return;
               var name = window.prompt("Please input a name for the current chart");
-              if(null === name) {
+              if(!name || !(name = name.trim()))
                 return;
-              }
+
               working = true;
               ctx.request("report.path.validate", path, function(response) {
                 working = false;
@@ -220,9 +216,9 @@ function($, ui) {
         $save.on("click", function() {
           if(!currentPath) {
             var name = window.prompt("Please input a name for the current chart");
-            if(null === name) {
+            if(!name || !(name = name.trim()))
               return;
-            }
+
             $save.button("disable");
             $saveas.button("enable");
             working = true;
