@@ -882,6 +882,20 @@ INPUT.miniColors {
 .rg-el .options-container fieldset:first-child {
   border-top: 0;
 }
+.rg-builder .options-container ::-webkit-input-placeholder,
+.rg-el .options-container ::-webkit-input-placeholder {
+  font-size: 83%;
+}
+.rg-builder .options-container :-moz-placeholder,
+.rg-el .options-container :-moz-placeholder,
+.rg-builder .options-container ::-moz-placeholder,
+.rg-el .options-container ::-moz-placeholder {
+  font-size: 83%;
+}
+.rg-builder .options-container :-ms-input-placeholder,
+.rg-el .options-container :-ms-input-placeholder {
+  font-size: 83%;
+}
 .rg-builder .datasource-form textarea,
 .rg-el .datasource-form textarea,
 .rg-builder .datasource-form input[type="text"],
@@ -1023,8 +1037,8 @@ INPUT.miniColors {
 .ui-pnotify-text .chart-icon.icon-pivottable {
   background-position: 0 -192px;
 }
-.rg-builder .chart-icon.icon-geochart,
-.ui-pnotify-text .chart-icon.icon-geochart {
+.rg-builder .chart-icon.icon-geo,
+.ui-pnotify-text .chart-icon.icon-geo {
   background-position: 0 -216px;
 }
 .rg-builder .chart-icon.icon-scattergraph,
