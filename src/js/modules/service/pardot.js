@@ -3,22 +3,20 @@ define([
 ],
 
 function(pardot) {
-  var states = {
-    IDLE : 0,
-    IMPORTING : 1
+  var import_done = function import_done() {
+    pardot.track_page("upload_chart");
   };
+
   return function(ctx) {
-    var import_status = states.IDLE;
+    // FILE UPLOAD / IMPORT
     ctx.on("reports.report.import", function() {
-      import_status = states.IMPORTING;
+      ctx.off("reports.report.add", import_done); // remove in case it has been invalidated by a previous validation
+      ctx.one("reports.report.add", import_done);
     });
 
-    ctx.on("reports.report.add", function() {
-      if(import_status === states.IMPORTING) {
-        pardot.track_page("")
-      }
-
-      import_status = states.IDLE;
+    // FILE DOWNLOAD
+    ctx.on("reports.report.export", function() {
+      pardot.track_page("download_chart");
     });
   };
 });

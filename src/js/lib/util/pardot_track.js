@@ -7,22 +7,22 @@ define([
 
 function($, submit, displaySupport) {
   var COOKIE_EMAIL = "Precog_eMail",
-      PAGE_ACTION = "actions/",
+      PAGE_ACTION = "https://builder.reportgrid.com/actions/",
       FORM_ACTION = "http://www2.precog.com/l/",
       wrapper,
       queue = [],
       email = $.cookie(COOKIE_EMAIL),
       action_map = {
-        "quirrel_failure_default" : "17892/2013-01-14/29k3q",
-        "quirrel_failure_custom"  : "17892/2013-01-14/29k52",
-        "generic_error"           : "17892/2013-01-14/29k5d"
+//        "quirrel_failure_default" : "17892/2013-01-14/29k3q",
+//        "quirrel_failure_custom"  : "17892/2013-01-14/29k52",
+//        "generic_error"           : "17892/2013-01-14/29k5d"
       };
 
 
   return wrapper = {
     track_page : function(action) {
       submit({
-        action : (action_map[action] || action),
+        action : PAGE_ACTION + (action_map[action] || action),
         method : "get",
         complete : function() {
           console.log("Page Action: " + action);

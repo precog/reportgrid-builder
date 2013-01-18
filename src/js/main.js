@@ -24,6 +24,7 @@ require([
   , "modules/model/reportsfilesystem"
   , "modules/model/reportslocalstorage"
   , "modules/model/chartstate"
+  , "modules/service/pardot"
   , "modules/view/brand"
   , "modules/view/theme"
   , "modules/view/datasourcewindow"
@@ -45,7 +46,6 @@ require([
   , "modules/view/reportstree"
   , "modules/view/exporthtml"
   , "modules/view/reportname"
-  , "modules/service/pardot"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);
