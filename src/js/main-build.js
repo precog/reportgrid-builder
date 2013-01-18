@@ -44,6 +44,7 @@ require([
   , "modules/view/reportstree"
   , "modules/view/exporthtml"
   , "modules/view/reportname"
+//  , "modules/service/pardot"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);

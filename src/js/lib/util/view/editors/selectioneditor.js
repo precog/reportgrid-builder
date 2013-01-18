@@ -21,7 +21,7 @@ function($, createEditor) {
     editors.create(el, info.type, info.options);
   }
 */
-  return function(el, options) {
+  return function(el, options, ctx) {
     options = $.extend({ default : null, selectiontext : false, values : [] }, options);
 
     var subeditor,
@@ -69,7 +69,7 @@ function($, createEditor) {
         }
         $input.addClass("with-editor");
         var eoptions = $.extend({}, einfo.options, { default : value.split(":").pop() || einfo.options.default });
-        subeditor = editors.create($subeditor, einfo.type, eoptions);
+        subeditor = editors.create($subeditor, einfo.type, eoptions, ctx);
         function setSubValue() {
           var $o = $input.find('option[data-index="'+index+'"]'),
             value = $o.attr("value");

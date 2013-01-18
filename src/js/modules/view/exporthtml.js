@@ -1,7 +1,7 @@
 define([
     "jquery"
   , "lib/util/ui"
-  , "lib/util/view/widgets/dialogexport"
+  , "lib/util/view/widgets/dialog_export"
   , "lib/model/exports/chart2html"
 ],
 

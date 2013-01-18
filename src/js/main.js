@@ -45,6 +45,7 @@ require([
   , "modules/view/reportstree"
   , "modules/view/exporthtml"
   , "modules/view/reportname"
+  , "modules/service/pardot"
 ],
 function($, createContext) {
   var modules = $(arguments).slice(2);
@@ -56,13 +57,19 @@ function($, createContext) {
       this(ctx);
     });
 
+    // TODO add module for global error handling (window.onerror or $(window).error)
+    // TODO remove this
     ctx.trigger("modules.ready");
+
+    // TODO move this to a module
     ctx.trigger("view.container.ready", $(this));
+    // TODO remove this
     ctx.trigger("app.ready");
 
     window.ReportGrid.builder = ctx;
   }
 
+  // TODO move this to a module
   $(function() {
     var selection = $("body");
     selection.each(builder);
