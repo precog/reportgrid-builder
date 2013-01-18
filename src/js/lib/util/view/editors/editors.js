@@ -26,7 +26,13 @@ function() {
     create : function(el, type, options, ctx){
       if(!map[type])
         throw "There is no editor for '" + type + "'";
-      return map[type](el, options, ctx);
+      var editor = map[type](el, options, ctx);
+      if(ctx) {
+        $(editor).on("user_change", function(value) {
+          ctx.trigger("user.chart.option", options, value);
+        });
+      }
+      return editor;
     }
   };
 });

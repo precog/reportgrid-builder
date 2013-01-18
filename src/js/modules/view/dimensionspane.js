@@ -181,6 +181,7 @@ function($, uiconfig, charts, ui) {
         else
           update_single_select($container, dimension);
         trigger_change_axis($container, dimension);
+        ctx.trigger("user.chart.dimension", dimension);
       };
     }
 

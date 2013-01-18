@@ -56,7 +56,9 @@ function($, createValue) {
 
     var value = createValue(options.default, params.validate, params.filter);
     function input_change() {
-      value.set(params.get());
+      var v = params.get();
+      $(editor).trigger("user_change", v);
+      value.set(v);
     }
 
     function value_change(value) {

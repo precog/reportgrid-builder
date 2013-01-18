@@ -28,7 +28,7 @@ function($, editors, createLoader, guess, ui, tplForm) {
             validate : function(value) {
               if(!value) return "name cannot be empty";
               var deferred = $.Deferred(),
-                path = $path.text();
+                  path = $path.text();
               if(path.substr(-1) !== "/") path += "/";
               path += value;
 
@@ -88,14 +88,16 @@ function($, editors, createLoader, guess, ui, tplForm) {
           change_save_state();
           var path = $path.text();
           if(path.substr(-1) !== "/") path += "/";
-          var name = ename.value.get();
-          ctx.trigger("data.datasource.add", $.extend({
-            path   : path + name,
-            name   : name,
-            type   : type,
-            src    : stype.value.get(),
-            fields : fields
-          }, opt));
+          var name = ename.value.get(),
+              ds = $.extend({
+                path   : path + name,
+                name   : name,
+                type   : type,
+                src    : stype.value.get(),
+                fields : fields
+              }, opt);
+          ctx.trigger("data.datasource.add", ds);
+          ctx.trigger("user.datasource.add", ds);
         });
         dataready = true;
         change_save_state();

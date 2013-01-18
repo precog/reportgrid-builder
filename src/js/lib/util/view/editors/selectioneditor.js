@@ -16,11 +16,7 @@ function($, createEditor) {
       $el.attr("data-index", index);
     return $el;
   }
-/*
-  function createSubEditor(el, info) {
-    editors.create(el, info.type, info.options);
-  }
-*/
+
   return function(el, options, ctx) {
     options = $.extend({ default : null, selectiontext : false, values : [] }, options);
 

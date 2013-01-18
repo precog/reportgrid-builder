@@ -21,7 +21,11 @@ function($, ui, openExportDialog, chart2html) {
             options : {
               filename : current_name
             },
-            handler : chart2html
+            handler : function(chart, options) {
+              var html = chart2html(chart, options);
+              ctx.trigger("chart.export.html", html);
+              return html;
+            }
           }], current_chart);
         }
       });

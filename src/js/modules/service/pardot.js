@@ -21,11 +21,44 @@ function(pardot) {
 
     // OPEN REPORT
     ctx.on("reports.report.openpath", function(path) {
-      setTimeout(function() {
-
-        console.log(path)
-
-      },1500);
+      pardot.track_page("load_report_"+((/^\/examples\//).test(path)?"default":"custom"));
     });
+
+    // DOWNLOAD HTML
+    ctx.on("chart.export.html", function() {
+      pardot.track_page("export_html");
+    });
+
+    // CHANGE CHART TYPE
+    ctx.on("user.chart.type", function() {
+      pardot.track_page("choose_chart_type");
+    });
+
+    // CHOOSE CHART DATASOURCE
+    ctx.on("user.chart.datasource", function() {
+      pardot.track_page("choose_datasource");
+    });
+
+    // CHOOSE CHART DIMENSION
+    ctx.on("user.chart.dimension", function() {
+      pardot.track_page("choose_dimension");
+    });
+
+    // CHANGE CHART OPTION
+    ctx.on("user.chart.option", function() {
+      pardot.track_page("change_option");
+    });
+
+
+    // ADD DATASOURCE
+    ctx.on("user.datasource.add", function() {
+      pardot.track_page("add_datasource");
+    });
+
+    // FORM HANDLERS
+    ctx.on("application.error", function(e) {
+      alert("application.error");
+      console.log(e);
+    })
   };
 });

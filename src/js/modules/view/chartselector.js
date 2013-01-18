@@ -30,6 +30,9 @@ function($, ui, charts) {
 
       setTimeout(function() {
         ctx.provide("chart.type.change", "barchart");
+        $(menu).on("select", function(e, data) {
+          ctx.trigger("user.chart.type", data.type);
+        });
       }, 100);
     }
 

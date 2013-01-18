@@ -35,6 +35,7 @@ function($, ui) {
       });
       $(menu).on("select", function(e, data) {
         ctx.provide("chart.datasource.change", data);
+        ctx.trigger("user.chart.datasource", data);
       });
 
       dequeue();
