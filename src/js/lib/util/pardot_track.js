@@ -7,7 +7,7 @@ define([
 
 function($, submit, displaySupport) {
   var COOKIE_EMAIL = "Precog_eMail",
-      PAGE_ACTION = "https://builder.reportgrid.com/actions/",
+      PAGE_ACTION = "https://labcoat.precog.com/actions/",
       FORM_ACTION = "http://www2.precog.com/l/",
       wrapper,
       queue = [],

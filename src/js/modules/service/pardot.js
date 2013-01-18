@@ -18,5 +18,14 @@ function(pardot) {
     ctx.on("reports.report.export", function() {
       pardot.track_page("download_chart");
     });
+
+    // OPEN REPORT
+    ctx.on("reports.report.openpath", function(path) {
+      setTimeout(function() {
+
+        console.log(path)
+
+      },1500);
+    });
   };
 });
