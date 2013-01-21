@@ -12,7 +12,6 @@ function() {
         url : url,
         lineNumber : lineNumber
       });
-console.log(old);
       if(old)
         return old(msg, url, lineNumber);
       return false;
