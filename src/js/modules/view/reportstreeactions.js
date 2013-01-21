@@ -162,6 +162,8 @@ function($, ui) {
               if(!name || !(name = name.trim()))
                 return;
 
+              var path = currentFolder + name;
+
               working = true;
               ctx.request("report.path.validate", path, function(response) {
                 working = false;

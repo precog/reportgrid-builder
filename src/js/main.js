@@ -25,6 +25,7 @@ require([
   , "modules/model/reportslocalstorage"
   , "modules/model/chartstate"
   , "modules/service/pardot"
+  , "modules/view/error_catcher"
   , "modules/view/brand"
   , "modules/view/theme"
   , "modules/view/datasourcewindow"

@@ -57,8 +57,7 @@ function(pardot) {
 
     // FORM HANDLERS
     ctx.on("application.error", function(e) {
-      alert("application.error");
-      console.log(e);
-    })
+      pardot.track_error("generic_error", { error_message : JSON.stringify(e) }, "Uh oh, an error occurred in ReportGrid Builder. Can you please help our team by notifying us of your error? Please enter your email below.")
+    });
   };
 });
