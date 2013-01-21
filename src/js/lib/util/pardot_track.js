@@ -24,7 +24,6 @@ function($, submit, displaySupport) {
         action : PAGE_ACTION + (action_map[action] || action),
         method : "get",
         complete : function() {
-          console.log("Page Action: " + action);
         }
       });
     },
@@ -44,7 +43,6 @@ function($, submit, displaySupport) {
           method : "post",
           data : params,
           complete : function() {
-            console.log("Form Submit: " + action);
           }
         });
       }
