@@ -5,6 +5,21 @@ define([
 function() {
   return function(options, preferences) {
     preferences = preferences || {};
+
+    options.push({
+      label : "datapoint",
+      group : "label",
+      event : "options.chart.label.datapoint",
+      editors : [{
+        type  : "template",
+        options : {
+          default : "",
+          variables : ["stats"],
+          useDimensions : true
+        }
+      }]
+    });
+    
     options.push({
       label  : "horizontal",
       group : "barchart",

@@ -79,7 +79,7 @@ function(ensure) {
       o.paddingticklabel = options["cartesian.paddingticklabel"];
     }
 
-    if("undefined" !== typeof options["label.datapointverticaloffset"] && options["label.datapointverticaloffset"] !== 5) {
+    if("undefined" !== typeof options["label.datapointverticaloffset"] && options["label.datapointverticaloffset"] !== "" && options["label.datapointverticaloffset"] !== 5) {
       ensure('label',o).datapointverticaloffset = options['label.datapointverticaloffset'];
     }
 
