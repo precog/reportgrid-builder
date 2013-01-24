@@ -78,6 +78,20 @@ function(ensure) {
     if("undefined" !== typeof options["cartesian.paddingticklabel"] && options["cartesian.paddingticklabel"] !== 10) {
       o.paddingticklabel = options["cartesian.paddingticklabel"];
     }
+
+    if("undefined" !== typeof options["label.datapointverticaloffset"] && options["label.datapointverticaloffset"] !== 5) {
+      ensure('label',o).datapointverticaloffset = options['label.datapointverticaloffset'];
+    }
+
+    if("undefined" !== typeof options["label.datapointoutline"] && options["label.datapointoutline"] !== false) {
+      ensure('label',o).datapointoutline = options['label.datapointoutline'];
+    }
+
+    if("undefined" !== typeof options["label.datapointshadow"] && options["label.datapointshadow"] !== false) {
+      ensure('label',o).datapointshadow = options['label.datapointshadow'];
+    }
+
+
     // displayruleminor false
     // displayrulemajor false
     // displaytickminor true

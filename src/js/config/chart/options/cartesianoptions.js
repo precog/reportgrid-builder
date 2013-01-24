@@ -377,6 +377,62 @@ function() {
       }]
     });
 
+    options.push({
+      label : "vertical offset",
+      group : "label",
+      event : "options.chart.label.datapointverticaloffset",
+      condition : {
+        event   : "options.chart.label.datapoint",
+        visible : function(value) {
+          return !!value;
+        }
+      },
+      editors: [{
+        type : "float",
+        options : {
+          step : 1,
+          allowEmpty : true,
+          default : ""
+        }
+      }]
+    });
+
+    options.push({
+      label : "add outline",
+      group : "label",
+      event : "options.chart.label.datapointoutline",
+      condition : {
+        event   : "options.chart.label.datapoint",
+        visible : function(value) {
+          return !!value;
+        }
+      },
+      editors: [{
+        type : "boolean",
+        options : {
+          default : false
+        }
+      }]
+    });
+
+    options.push({
+      label : "add shadow",
+      group : "label",
+      event : "options.chart.label.datapointshadow",
+      condition : {
+        event   : "options.chart.label.datapoint",
+        visible : function(value) {
+          return !!value;
+        }
+      },
+      editors: [{
+        type  : "boolean",
+        options : {
+          default : false
+        }
+      }]
+    });
+
     // displayticklabel true
     // displayanchorlinetick false
     // displayanchorlinerule false
