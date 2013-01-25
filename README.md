@@ -1,6 +1,2 @@
-reportgrid-builder
-==================
-
-TODO
-+ drag UI
-- drop UI
+version 0.9.X
+- removed "modules.ready" event

@@ -6,8 +6,11 @@ define([
 
 function($, createTree) {
   return function(ctx) {
+    var container, fs;
 
-    function init(container, fs) {
+    function init() {
+      if(!container || !fs)
+        return;
       var map = {
             folder : "/"
           },
@@ -79,8 +82,14 @@ function($, createTree) {
       });
     }
 
-    $.when(ctx.one("view.reports.tree"), ctx.one("reports.system.ready")).then(function(viewargs, systemargs) {
-      init(viewargs[0], systemargs[0]);
+    ctx.one("view.reports.tree", function(view) {
+      container = view;
+      init();
+    });
+
+    ctx.one("reports.system.ready", function(filesystem) {
+      fs = filesystem;
+      init();
     });
   };
 });

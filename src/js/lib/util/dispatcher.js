@@ -53,6 +53,7 @@ function($, uid) {
               return bind(this, "one", filter(type), handler);
             }
           },
+          // DOESN'T WORK WITH PROVIDE
           when : function() {
             var types = [];
             for(var i = 0; i < arguments.length; i++) {

@@ -41,10 +41,6 @@ function(createfs, variables, arrays) {
       fs.remove(path, type);
     }
 
-    ctx.on("modules.ready", function() {
-      ctx.trigger("data.system.ready", fs);
-    });
-
     ctx.on("data.datasource.add", function(item) {
       queue.push(item);
       dequeue();
@@ -63,5 +59,7 @@ function(createfs, variables, arrays) {
         return;
       removeItem(item.path, "datasource");
     });
+
+    ctx.provide("data.system.ready", fs);
   };
 });

@@ -166,16 +166,7 @@ function($) {
             , { field : "population", type : "continuous" }
             , { field : "area", type : "continuous" }
           ]
-        }
-
-          /*, {
-          name : "",
-          src  : "",
-          fields : [
-              { field : "", type : "" }
-            , { field : "", type : "" }
-          ]
-        }*/]
+        }]
       root = "/examples", // in the form of /path or empty
       datapath = "data";
 
@@ -197,7 +188,7 @@ function($) {
   }
 
   return function(ctx) {
-    ctx.one("modules.ready", function() {
+    ctx.one("datasource.localstorage.ready", function() {
       ctx.request("datasource.localstorage.hasdata", function(hasdata) {
         if(!hasdata)
           load_examples(ctx);

@@ -31,5 +31,6 @@ function(createStore) {
       });
       return !initiallyEmpty;
     });
+    ctx.provide("datasource.localstorage.ready", true);
   };
 });

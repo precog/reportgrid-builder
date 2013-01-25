@@ -30,10 +30,6 @@ function(createfs, arrays) {
       fs.remove(path, type);
     }
 
-    ctx.on("modules.ready", function() {
-      ctx.trigger("reports.system.ready", fs);
-    });
-
     ctx.on("reports.report.add", function(path) {
       queue.push(path);
       dequeue();
@@ -52,5 +48,7 @@ function(createfs, arrays) {
         return;
       removeItem(path, "report");
     });
+
+    ctx.provide("reports.system.ready", fs);
   };
 });
