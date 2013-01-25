@@ -59,5 +59,9 @@ function(pardot) {
     ctx.on("application.error", function(e) {
       pardot.track_error("generic_error", { error_message : JSON.stringify(e) }, "Uh oh, an error occurred in ReportGrid Builder. Can you please help our team by notifying us of your error? Please enter your email below.")
     });
+
+    ctx.on("chart.error", function(e) {
+      pardot.track_error("chart_error", { error_message : JSON.stringify(e) }, "Uh oh, an error occurred rendering your chart. Can you please help our team by notifying us of your error? Please enter your email below.")
+    });
   };
 });

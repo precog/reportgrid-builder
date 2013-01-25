@@ -59,6 +59,10 @@ function(charts, createLoader) {
         if(axes === null)
           throw "not enough axes to feed the chart";
 
+        options.error = function(e) {
+          ctx.trigger("chart.error", e);
+        }
+
         charts.map[current.type].extractOptions(options, current.variables, current.options);
         ctx.log("chart", "options", options);
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, datasource : current.datasource, axes : axes, options : options, customcss : current.options["css.palette.set"] });

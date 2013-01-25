@@ -19,7 +19,7 @@ function() {
         }
       }]
     });
-    
+
     options.push({
       label  : "horizontal",
       group : "barchart",

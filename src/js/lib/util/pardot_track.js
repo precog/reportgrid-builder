@@ -14,7 +14,7 @@ function($, submit, displaySupport) {
       email = $.cookie(COOKIE_EMAIL),
       action_map = {
         generic_error : "17892/2013-01-14/29l32",
-        chart_fail : "17892/2013-01-14/29l1q"
+        chart_error : "17892/2013-01-14/29l1q"
       };
 
 
