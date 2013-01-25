@@ -14,6 +14,7 @@ require([
   , "modules/context"
   , "http://localhost/rg/js/reportgrid-charts.js?authCode=QWWwKQIBDTBblBgGtgUCgQjS4MM%2BR%2B2oSOfdekNAM2xxE0E98ZLtdwaVfrMjShf51Ou3NsUtkv9yvqWH0pbyH0IRc6kvJ7HDZCyA3ObMouvdcyNxmyDS%2FEUcjCIZqxkGrCLcj9w43gMjWBHndW1Pk9429QaRI4voWSvZQMd4boE%3D"
   , "modules/view/debugger"
+  , "modules/model/version"
   , "modules/model/config"
   , "modules/model/examples"
   , "modules/model/dimensionstyper"
