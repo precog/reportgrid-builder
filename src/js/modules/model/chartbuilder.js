@@ -61,6 +61,7 @@ function(charts, createLoader) {
 
         options.error = function(e) {
           ctx.trigger("chart.error", e);
+          ctx.trigger("chart.render.clear", e);
         }
 
         charts.map[current.type].extractOptions(options, current.variables, current.options);
