@@ -1,4 +1,5 @@
 define([
+    "modules/view/main_view"
   , "modules/model/version"
   , "modules/model/config"
   , "modules/model/examples"

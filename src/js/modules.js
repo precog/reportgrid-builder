@@ -1,4 +1,5 @@
 define([
+    "modules/view/main_view"
   , "modules/view/debugger"
   , "modules/model/version"
   , "modules/model/config"
@@ -39,7 +40,7 @@ define([
 
 function() {
   var modules = [];
-  for(var i = 1; i < arguments.length; i++) {
+  for(var i = 0; i < arguments.length; i++) {
     modules.push(arguments[i]);
   }
   return modules;
