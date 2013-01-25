@@ -24,8 +24,6 @@ function($, createContext, modules) {
 
     // TODO move this to a module
     ctx.trigger("view.container.ready", $(this));
-    // TODO remove this
-    ctx.trigger("app.ready");
 
     window.ReportGrid.builder = ctx;
   }
