@@ -116,5 +116,7 @@ function(charts, createLoader) {
     ctx.on("chart.type.change", chart_type);
     ctx.on("chart.axis.change", set_axis);
     ctx.on("chart.option.set", chart_option_set);
+
+    ctx.provide("reportgrid.charts.version", window.ReportGrid.info.charts.version);
   };
 });
