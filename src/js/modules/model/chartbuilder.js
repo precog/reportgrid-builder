@@ -25,6 +25,7 @@ function(charts, createLoader) {
     function extract_axes(type) {
       var axes = [],
           chart_dimensions = charts.map[type].dimensions;
+
       for(var i = 0; i < chart_dimensions.length; i++) {
         var dimension = chart_dimensions[i],
             counter   = 0;
@@ -65,7 +66,11 @@ function(charts, createLoader) {
         }
 
         charts.map[current.type].extractOptions(options, current.variables, current.options);
-        ctx.log("chart", "options", options);
+        ctx.log("chart", "params", {
+          type : current.type,
+          axes : axes,
+          options : options
+        });
         ctx.trigger("chart.render.execute", { type : current.type, loader : loader, datasource : current.datasource, axes : axes, options : options, customcss : current.options["css.palette.set"] });
       } catch(e) {
         ctx.trigger("chart.render.clear", e);

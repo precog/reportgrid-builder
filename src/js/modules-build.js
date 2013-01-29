@@ -17,7 +17,7 @@ define([
   , "modules/view/brand"
   , "modules/view/theme"
   , "modules/view/datasourcewindow"
-  , "modules/view/thememenu"
+//  , "modules/view/thememenu"
   , "modules/view/layout"
   , "modules/view/editorpane"
   , "modules/view/chartselector"

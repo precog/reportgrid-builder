@@ -35,5 +35,9 @@ function(createStore) {
         }
       });
     }, 200);
+
+    ctx.on("datasource.localstorage.clear", function() {
+      store.destroy();
+    });
   };
 });

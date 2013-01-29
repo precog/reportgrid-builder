@@ -40,6 +40,7 @@ function($, uiconfig, charts, ui) {
           }
         });
       }
+
       axesmap = {};
       axeslist = vars.map(function(field) {
         var axis = {
@@ -167,6 +168,9 @@ function($, uiconfig, charts, ui) {
           axesmap[lastval].$select = null;
         }
         if(val) {
+          if(!axesmap[val]) {
+            console.log(axesmap, val);
+          }
           if(axesmap[val].$select) {
             axesmap[val].$select.val(lastval || "");
             axesmap[val].$select.change();

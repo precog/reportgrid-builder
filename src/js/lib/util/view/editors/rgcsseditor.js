@@ -23,7 +23,7 @@ function($, ui, createEditor, rgcolors) {
         return '<div class="text palette-item" data-css="'+item.name+'">'+label+'</div>';
       },
       width : 320,
-      labelWidth : 148
+      labelWidth : 146
     });
     var $input = $('<input type="hidden" class="string">');
 

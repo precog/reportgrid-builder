@@ -152,7 +152,7 @@ function($, ui) {
             description : "save chart"
           }),
           $saveas = ui.button($saveset, {
-            icon : "ui-icon-arrowrefresh-1-w",
+            icon : "ui-icon-disk-pen",
             disabled : true,
             description : "save chart as ...",
             handler : function() {

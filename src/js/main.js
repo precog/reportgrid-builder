@@ -7,6 +7,7 @@ requirejs.config({
     , 'ext/jstree/jstree.themes'        : ['ext/jstree/jstree']
     , 'ext/jstree/jstree.ui'            : ['ext/jstree/jstree']
     , 'ext/jstree/jstree.dnd'           : ['ext/jstree/jstree']
+    , 'ext/jquery-slickgrid/slick.grid' : ['ext/jquery-slickgrid/jquery.event.drag-2.0.min', 'ext/jquery-slickgrid/slick.core']
   }
 });
 require([

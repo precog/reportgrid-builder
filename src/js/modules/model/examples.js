@@ -6,10 +6,8 @@ function($) {
   var examples = [{
           name : "Olympic Medals 2011",
           src  : "olympic-medals-2011.json",
-          fields : [{
-              name : "country",
-              type : "category" // continuous, discrete, category, time
-            }
+          fields : [
+              { field : "country", type : "category" }
             , { field : "code", type : "category" }
             , { field : "summers", type : "discrete" }
             , { field : "summerGold", type : "discrete" }
@@ -121,7 +119,7 @@ function($) {
           name : "USA - Death Rate by Gender and Race",
           src  : "usa-deathrate-by-gender-and-race.json",
           fields : [
-            { field : "year", type : "discrete" }
+              { field : "year", type : "discrete" }
             , { field : "gender", type : "category" }
             , { field : "deathRate", type : "continuous" }
             , { field : "race", type : "category" }
@@ -130,7 +128,7 @@ function($) {
           name : "USA - Death Rate by Gender",
           src  : "usa-deathrate-by-gender.json",
           fields : [
-            { field : "year", type : "discrete" }
+              { field : "year", type : "discrete" }
             , { field : "gender", type : "category" }
             , { field : "deathRate", type : "continuous" }
           ]
@@ -138,7 +136,7 @@ function($) {
           name : "USA - Death Rate by Race",
           src  : "usa-deathrate-by-race.json",
           fields : [
-            { field : "year", type : "discrete" }
+              { field : "year", type : "discrete" }
             , { field : "deathRate", type : "continuous" }
             , { field : "race", type : "category" }
           ]
@@ -191,7 +189,9 @@ function($) {
     ctx.one("datasource.localstorage.ready", function() {
       ctx.request("datasource.localstorage.hasdata", function(hasdata) {
         if(!hasdata)
-          load_examples(ctx);
+          setTimeout(function() {
+            load_examples(ctx);
+          }, 500);
       });
     });
   };

@@ -61,6 +61,7 @@ function($, tplChart) {
         if(ReportGrid.tooltip)
           ReportGrid.tooltip.hide();
         $chart.children("*").remove();
+        $loader.hide();
       }
       
       ctx.on("chart.render.execute", execute);
@@ -71,6 +72,8 @@ function($, tplChart) {
 
       ctx.on("chart.render.start", render_start);
       ctx.on("chart.render.end", render_end);
+
+      ctx.on("application.error", clear);
     };
 
     ctx.one("view.editor.chart", init);
