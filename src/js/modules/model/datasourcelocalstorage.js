@@ -7,10 +7,15 @@ function(createStore) {
       store = createStore(STORE_NAME, { list : [] });
 
   return function(ctx) {
+    var list = store.get("list"),
+      initiallyEmpty = list.length === 0;
     ctx.respond("datasource.localstorage.hasdata", function() {
+      return !initiallyEmpty;
+    });
+    ctx.provide("datasource.localstorage.ready", true);
+
+    setTimeout(function(){
       // TODO the loading code should not be here
-      var list = store.get("list"),
-          initiallyEmpty = list.length === 0;
       for(var i = 0; i < list.length; i++) {
         ctx.trigger("data.datasource.add", list[i]);
       }
@@ -29,8 +34,6 @@ function(createStore) {
           }
         }
       });
-      return !initiallyEmpty;
-    });
-    ctx.provide("datasource.localstorage.ready", true);
+    }, 200);
   };
 });
