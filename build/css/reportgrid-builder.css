@@ -534,6 +534,10 @@ INPUT.miniColors {
 .rg-el .mainbar {
   height: 38px;
 }
+.rg-builder .mainbar .toolbar-main img,
+.rg-el .mainbar .toolbar-main img {
+  margin-top: 7px;
+}
 .rg-builder .ui-widget-content.support,
 .rg-el .ui-widget-content.support {
   border-top: 0;
@@ -988,6 +992,14 @@ INPUT.miniColors {
 .rg-builder .chart_container .clear,
 .rg-el .chart_container .clear {
   clear: both;
+}
+.rg-builder .selectmenu,
+.rg-el .selectmenu {
+  margin-left: 2px;
+}
+.rg-builder .selectmenu .tiny,
+.rg-el .selectmenu .tiny {
+  display: none;
 }
 .minipalette {
   width: 12px;
