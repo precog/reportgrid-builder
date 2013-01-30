@@ -35,6 +35,7 @@ define([
   , "modules/view/reportstree"
   , "modules/view/exporthtml"
   , "modules/view/reportname"
+  , "modules/view/datasource_from_url"
 ],
 
 function() {

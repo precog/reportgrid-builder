@@ -1,4 +1,5 @@
 version 0.9.x
+- added module to inject a new datasource from the url
 
 version 0.9.4
 - moved datasource ro main view

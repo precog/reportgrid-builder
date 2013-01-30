@@ -19,7 +19,6 @@ function() {
     ctx.on("data.folder.remove", function(path) {
       if(path.substr(-1) !== '/') path += '/';
       var len = path.length;
-      console.log("REMOVE FOLDER", path);
       for(var key in map) {
         if(!map.hasOwnProperty(key)) continue;
         if(key.length >  len && key.substr(0, len) === path) {
@@ -40,6 +39,10 @@ function() {
     ctx.on("data.datasource.deselect", function(path) {
       if(map[path])
         ctx.trigger("data.datasource.deselected", map[path]);
+    });
+
+    ctx.respond("data.datasource.request", function(path) {
+      return map[path] || false;
     });
   }
 });
