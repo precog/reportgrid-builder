@@ -461,7 +461,9 @@ INPUT.miniColors {
 .rg-builder .data,
 .rg-el .data,
 .rg-builder .reports,
-.rg-el .reports {
+.rg-el .reports,
+.rg-builder .datasources,
+.rg-el .datasources {
   border: 0;
 }
 .rg-builder .builder,
@@ -469,9 +471,17 @@ INPUT.miniColors {
   border-top: 0;
   border-bottom: 0;
 }
-.rg-builder .reports .tree,
-.rg-el .reports .tree {
+.rg-builder .reports .toolbar,
+.rg-el .reports .toolbar {
+  border-top: 0;
+}
+.rg-builder .datasources .tree,
+.rg-el .datasources .tree {
   border-bottom: 0;
+}
+.rg-builder .dataviewer,
+.rg-el .dataviewer {
+  height: 340px;
 }
 .rg-builder .editor.pane,
 .rg-el .editor.pane {
