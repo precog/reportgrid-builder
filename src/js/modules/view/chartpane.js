@@ -74,6 +74,11 @@ function($, tplChart) {
       ctx.on("chart.render.end", render_end);
 
       ctx.on("application.error", clear);
+
+      ctx.on("view.overlay", function() {
+        if(ReportGrid.tooltip)
+          ReportGrid.tooltip.hide();
+      });
     };
 
     ctx.one("view.editor.chart", init);

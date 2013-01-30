@@ -4,12 +4,12 @@ define([
   , "lib/model/dataloader"
 ],
 
-function($, createGrid, createLoader) {
+function($, create_grid, create_loader) {
   return function(ctx) {
     var $el,
         grid;
 
-    function createColumns(fields) {
+    function create_columns(fields) {
       var columns = [];
 
       return fields.map(function(field) {
@@ -17,7 +17,7 @@ function($, createGrid, createLoader) {
       });
     }
 
-    function createOptions() {
+    function create_options() {
       return {
           enableCellNavigation: false
         , enableColumnReorder: true
@@ -25,11 +25,12 @@ function($, createGrid, createLoader) {
       };
     }
 
-    function createLoadedHandler(datasource) {
+    function create_loaded_handler(datasource) {
       return function(data) {
-        var columns = createColumns(datasource.fields),
-            options = createOptions();
-        grid = createGrid($el, data, columns, options);
+console.log(data);
+        var columns = create_columns(datasource.fields),
+            options = create_options();
+        grid = create_grid($el, data, columns, options);
       };
     }
 
@@ -38,8 +39,8 @@ function($, createGrid, createLoader) {
     }
 
     ctx.on("data.datasource.preview.render", function(datasource) {
-      var loader = createLoader(datasource);
-      loader.on("success", createLoadedHandler(datasource));
+      var loader = create_loader(datasource);
+      loader.on("success", create_loaded_handler(datasource));
       loader.on("error", dataError);
       loader.load();
     });
@@ -50,7 +51,7 @@ function($, createGrid, createLoader) {
         grid = null;
       }
     });
-
+/*
     ctx.on("data.datasource.selected", function(datasource) {
       ctx.trigger("data.datasource.preview.render", datasource);
     });
@@ -58,7 +59,7 @@ function($, createGrid, createLoader) {
     ctx.on("data.datasource.deselected", function(datasource) {
       ctx.trigger("data.datasource.preview.clear");
     });
-
+*/
     ctx.one("view.data.dataviewer", function(container) {
       $el = $('<div class="datasource-preview"></div>').appendTo(container);
     });

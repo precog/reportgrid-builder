@@ -203,7 +203,7 @@
   .main,
 //    .builder,
   .data,
-  .reports {
+  .reports, .datasources {
     border: 0;
   }
 
@@ -213,9 +213,19 @@
   }
 
   .reports {
+    .toolbar {
+      border-top: 0;
+    }
+  }
+
+  .datasources {
     .tree {
       border-bottom: 0;
     }
+  }
+
+  .dataviewer {
+    height: 340px;
   }
 
   .editor.pane {

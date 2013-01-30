@@ -96,7 +96,17 @@ function($, tplLayout) {
         }
       });
 
+      create($container.find('.system'), {
+        north : {
+          size: "50%"
+        }
+      });
+
       create($container.find('.reports'), {
+        north : toolbarDouble
+      });
+
+      create($container.find('.datasources'), {
         north : toolbarDouble
       });
 
@@ -129,6 +139,11 @@ function($, tplLayout) {
       ctx.provide("view.reports.toolbar-description", $container.find(".reports .toolbar-description"));
       ctx.provide("view.reports.toolbar-main", $container.find(".reports .toolbar-main"));
       ctx.provide("view.reports.toolbar-context", $container.find(".reports .toolbar-context"));
+
+      ctx.provide("view.data.tree", $container.find(".datasources .tree"));
+      ctx.provide("view.data.toolbar-description", $container.find(".datasources .toolbar-description"));
+      ctx.provide("view.data.toolbar-main", $container.find(".datasources .toolbar-main"));
+      ctx.provide("view.data.toolbar-context", $container.find(".datasources .toolbar-context"));
 
       ctx.provide("view.support.pane", $container.find(".main .support"));
 
