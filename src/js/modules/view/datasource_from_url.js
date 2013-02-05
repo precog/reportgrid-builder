@@ -59,21 +59,18 @@ function(qs, auto_increment, create_loader, guess, value_equality) {
   return function(ctx) {
     setTimeout(function() {
 
+      var src = qs.get("data-source");
+      if(!src) return;
 
+      var name = qs.get("data-name") || "unnamed",
+          type = qs.get("data-type") || "url";
 
-    var src = qs.get("data-source");
+      if(name.substr(0, 1) !== "/")
+        name = "/" + name;
 
-    if(!src) return;
-
-    var name = qs.get("data-name") || "unnamed",
-        type = qs.get("data-type") || "url";
-
-    if(name.substr(0, 1) !== "/")
-      name = "/" + name;
-
-    process_datasource(ctx, name, type, src);
-
-
+      ctx.request("datasource.path.sanitize", name, function(path) {
+        process_datasource(ctx, path, type, src);
+      });
 
     }, 0);
   };

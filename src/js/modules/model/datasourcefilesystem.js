@@ -54,6 +54,10 @@ function(createfs, variables, arrays) {
       };
     });
 
+    ctx.respond("datasource.path.sanitize", function(path) {
+      return (/([\s]|[a-z0-9 _.-])+/ig).replace(path, " ");
+    });
+
     ctx.on("data.datasource.remove", function(item) {
       if(arrays.remove(queue, item))
         return;
