@@ -27,7 +27,6 @@ function($, create_grid, create_loader) {
 
     function create_loaded_handler(datasource) {
       return function(data) {
-console.log(data);
         var columns = create_columns(datasource.fields),
             options = create_options();
         grid = create_grid($el, data, columns, options);
@@ -51,15 +50,7 @@ console.log(data);
         grid = null;
       }
     });
-/*
-    ctx.on("data.datasource.selected", function(datasource) {
-      ctx.trigger("data.datasource.preview.render", datasource);
-    });
 
-    ctx.on("data.datasource.deselected", function(datasource) {
-      ctx.trigger("data.datasource.preview.clear");
-    });
-*/
     ctx.one("view.data.dataviewer", function(container) {
       $el = $('<div class="datasource-preview"></div>').appendTo(container);
     });
