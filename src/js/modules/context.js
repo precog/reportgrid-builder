@@ -1,8 +1,7 @@
 define([
-    "jquery"
-  , "lib/util/dispatcher"
+  "lib/util/dispatcher"
 ],
-function($, createDispatcher) {
+function(createDispatcher) {
   return function(modules) {
     var ctx = createDispatcher(true);
 
@@ -14,8 +13,8 @@ function($, createDispatcher) {
     };
     ctx.addModules = function(modules) {
       modules = modules || [];
-      $(modules).each(function() {
-        this(ctx);
+      modules.forEach(function(f) {
+        f(ctx);
       });
     };
 

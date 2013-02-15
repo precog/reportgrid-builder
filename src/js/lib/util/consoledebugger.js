@@ -1,8 +1,7 @@
 define([
-  "jquery"
-  , "lib/util/dispatcher"
+  "lib/util/dispatcher"
 ],
-function($, createDispatcher) {
+function(createDispatcher) {
   var logger = window.console || {log:function(){}};
 
   return function(obj, methods, colors) {
@@ -16,7 +15,7 @@ function($, createDispatcher) {
 
       logger.groupCollapsed("%c "+arguments[0]+": "+arguments[1]+" ", 'color: '+c[1]+'; font-weight: normal; background-color: ' + c[0]);
       logger.log("%c"+new Date().toLocaleTimeString(),"color:#bbb;font-size:85%");
-      $.makeArray(arguments).slice(2).forEach(function(v) {
+      Array.prototype.slice.call(arguments, 2).forEach(function(v) {
         var out;
         try {
           switch(typeof v) {
@@ -60,7 +59,7 @@ function($, createDispatcher) {
             extract  = method.extract || generic_extractor,
             original = obj[name];
         obj[name] = function() {
-          var args = extract(name, $.makeArray(arguments));
+          var args = extract(name, Array.prototype.slice.call(arguments));
           var type = (obj.counter[args[0]] || (obj.counter[args[0]] = {}));
           type[args[1]] = (type[args[1]] || 0) + 1;
           log.apply(window, args);
