@@ -482,6 +482,8 @@ INPUT.miniColors {
 .rg-builder .dataviewer,
 .rg-el .dataviewer {
   height: 340px;
+  clear: left;
+  padding-top: 10px;
 }
 .rg-builder .editor.pane,
 .rg-el .editor.pane {
