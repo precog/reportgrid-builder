@@ -8,6 +8,7 @@ function($, createDispatcher) {
 
     ctx.debug = false;
     ctx.log = function() {};
+    ctx.assert = function() {};
     ctx.addModule = function(module) {
       module(ctx);
     };

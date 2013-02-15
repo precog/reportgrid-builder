@@ -8,45 +8,50 @@ function($, createDispatcher) {
   return function(obj, methods, colors) {
     methods = methods || [];
     colors = colors || {};
+
     var log = function() {
-          logger.groupCollapsed("%c"+arguments[0]+": "+arguments[1], 'color: #999; font-weight: normal; background-color: ' + (colors[arguments[0]] || "#fff"));
-          logger.log("%c"+new Date().toLocaleTimeString(),"color:#bbb;font-size:85%");
-          $.makeArray(arguments).slice(2).forEach(function(v) {
-            var out;
-            try {
-              switch(typeof v) {
-                case "function":
-                  out = v;
-                  break;
-                case "string":
-                  out = v + " (string)";
-                  break;
-                case "number":
-                  out = v + " (number)";
-                  break;
-                case "bool":
-                  out = v + " (bool)";
-                  break;
-                case "undefined":
-                  out = "(undefined)";
-                  break;
-                default:
-                  if(v instanceof Date)
-                    out = v + " (date)";
-                  else
-                    out = JSON.stringify(v) + " (object)"
-              }
-            } catch(e) {
+      var c = colors[arguments[0]] || ["#fff", "#999"];
+      if("string" === typeof c)
+        c = [c, "#999"];
+
+      logger.groupCollapsed("%c "+arguments[0]+": "+arguments[1]+" ", 'color: '+c[1]+'; font-weight: normal; background-color: ' + c[0]);
+      logger.log("%c"+new Date().toLocaleTimeString(),"color:#bbb;font-size:85%");
+      $.makeArray(arguments).slice(2).forEach(function(v) {
+        var out;
+        try {
+          switch(typeof v) {
+            case "function":
               out = v;
-            }
-            logger.log(out);
-          });
-          logger.groupEnd();
-        },
-        counter = {},
-        generic_extractor = function(name, args) {
-          return [name, args[0]].concat(args.slice(1));
-        };
+              break;
+            case "string":
+              out = v + " (string)";
+              break;
+            case "number":
+              out = v + " (number)";
+              break;
+            case "bool":
+              out = v + " (bool)";
+              break;
+            case "undefined":
+              out = "(undefined)";
+              break;
+            default:
+              if(v instanceof Date)
+                out = v + " (date)";
+              else
+                out = JSON.stringify(v) + " (object)"
+          }
+        } catch(e) {
+          out = v;
+        }
+        logger.log(out);
+      });
+      logger.groupEnd();
+      },
+      counter = {},
+      generic_extractor = function(name, args) {
+        return [name, args[0]].concat(args.slice(1));
+      };
 
     for(var i = 0; i < methods.length; i++) {
       (function(method) {
