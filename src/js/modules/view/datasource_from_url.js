@@ -72,6 +72,6 @@ function(qs, auto_increment, create_loader, guess, value_equality) {
         process_datasource(ctx, path, type, src);
       });
 
-    }, 0);
+    }, 1000);
   };
 });

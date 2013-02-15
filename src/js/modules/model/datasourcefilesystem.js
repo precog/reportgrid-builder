@@ -55,7 +55,7 @@ function(createfs, variables, arrays) {
     });
 
     ctx.respond("datasource.path.sanitize", function(path) {
-      return (/([\s]|[a-z0-9 _.-])+/ig).replace(path, " ");
+      return path.replace((/([\s]|[^a-z0-9 _.\/-])+/ig), " ");
     });
 
     ctx.on("data.datasource.remove", function(item) {
